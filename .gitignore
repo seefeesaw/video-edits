@@ -1,6 +1,3 @@
-# Claude Code internals
-.agents/
-.claude/
 
 # Render outputs and frame captures
 renders/
