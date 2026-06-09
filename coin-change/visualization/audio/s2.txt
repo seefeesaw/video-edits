@@ -1,0 +1,1 @@
+Define dp of i as the minimum coins to make amount i. For each amount, try subtracting every coin. If the coin fits, check whether dp of i minus coin, plus 1, beats the current best. The recurrence is dp of i equals the minimum over all valid coins of dp of i minus coin plus 1. We trade a big problem for a smaller one, then add one coin.

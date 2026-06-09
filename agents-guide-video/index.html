@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #FFFFFF; }
+      body { font-family: "Schibsted Grotesk", sans-serif; }
+      .mono { font-family: "IBM Plex Mono", monospace; }
+
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+      .scene-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 120px 160px;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+      }
+
+      /* ---------- shared atoms ---------- */
+      .eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 22px;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #E8A99D;
+      }
+      .eyebrow.on-coral { color: #8a5246; }
+      .hairline {
+        height: 1px;
+        width: 100%;
+        background: #141414;
+        opacity: 0.14;
+        transform-origin: left center;
+      }
+      .hairline.on-coral { opacity: 0.22; }
+      .page-mark {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 24px;
+        letter-spacing: 0.12em;
+        color: #141414;
+        opacity: 0.45;
+      }
+      .badge {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 30px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        color: #8a5246;
+        width: 96px;
+        flex-shrink: 0;
+      }
+      .ghost-numeral {
+        position: absolute;
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 500;
+        color: #141414;
+        opacity: 0.05;
+        line-height: 1;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .bloom {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(90px);
+        pointer-events: none;
+      }
+
+      /* ===================================================================
+         SCENE 1 — Cover / Title
+      =================================================================== */
+      #scene-1 { background: #F9D8D2; z-index: 70; }
+      #scene-1 .scene-content {
+        justify-content: space-between;
+      }
+      #scene-1 .top-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      #scene-1 .bloom-a { width: 620px; height: 620px; top: -180px; right: -120px;
+        background: radial-gradient(circle at 40% 40%, #6FB6E0 0%, #3DAA52 45%, transparent 75%);
+        opacity: 0.4; }
+      #scene-1 .bloom-b { width: 460px; height: 460px; bottom: -160px; left: -100px;
+        background: radial-gradient(circle at 60% 60%, #E85FA0 0%, #6FB6E0 50%, transparent 75%);
+        opacity: 0.32; }
+      #scene-1 .title-block {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      #scene-1 .title-line {
+        font-size: 7.4rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        line-height: 1.04;
+        color: #141414;
+      }
+      #scene-1 .index-strip {
+        display: flex;
+        gap: 48px;
+        align-items: baseline;
+      }
+      #scene-1 .index-item {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 21px;
+        letter-spacing: 0.05em;
+        color: #5a4540;
+        opacity: 0.7;
+      }
+      #scene-1 .index-item b { color: #141414; opacity: 1; font-weight: 500; }
+      #scene-1 .bottom-row {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      /* ===================================================================
+         SCENE 2 — What is an agent?
+      =================================================================== */
+      #scene-2 { background: #FFFFFF; z-index: 60; opacity: 0; }
+      #scene-2 .ghost-numeral { font-size: 620px; right: 40px; top: -100px; }
+      #scene-2 .scene-content { justify-content: center; gap: 56px; }
+      #scene-2 .head-row {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+      #scene-2 .headline {
+        font-size: 5.2rem;
+        font-weight: 600;
+        letter-spacing: -0.015em;
+        color: #141414;
+        max-width: 1180px;
+        line-height: 1.08;
+      }
+      #scene-2 .quote-card {
+        position: relative;
+        background: #F9D8D2;
+        border-radius: 4px;
+        padding: 52px 64px;
+        max-width: 1180px;
+      }
+      #scene-2 .quote-card p {
+        font-size: 2.05rem;
+        font-weight: 500;
+        line-height: 1.4;
+        color: #141414;
+        letter-spacing: -0.01em;
+      }
+      #scene-2 .quote-mark {
+        position: absolute;
+        top: 8px;
+        left: 28px;
+        font-size: 5rem;
+        font-weight: 600;
+        color: #8a5246;
+        opacity: 0.7;
+        line-height: 1;
+      }
+      #scene-2 .row-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      #scene-2 .row {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        padding: 26px 0;
+      }
+      #scene-2 .row-text strong {
+        font-size: 1.7rem;
+        font-weight: 600;
+        color: #141414;
+        display: block;
+        margin-bottom: 6px;
+      }
+      #scene-2 .row-text span {
+        font-size: 1.25rem;
+        font-weight: 400;
+        color: #141414;
+        opacity: 0.62;
+      }
+
+      /* ===================================================================
+         SCENE 3 — When should you build an agent?
+      =================================================================== */
+      #scene-3 { background: #F9D8D2; z-index: 50; opacity: 0; }
+      #scene-3 .scene-content { justify-content: center; gap: 0; }
+      #scene-3 .headline {
+        font-size: 4.6rem;
+        font-weight: 600;
+        letter-spacing: -0.015em;
+        color: #141414;
+        max-width: 1300px;
+        line-height: 1.1;
+        margin-bottom: 64px;
+      }
+      #scene-3 .criteria-list {
+        display: flex;
+        flex-direction: column;
+      }
+      #scene-3 .criterion {
+        display: flex;
+        gap: 48px;
+        padding: 30px 0;
+        align-items: flex-start;
+      }
+      #scene-3 .criterion-text strong {
+        display: block;
+        font-size: 1.85rem;
+        font-weight: 600;
+        color: #141414;
+        margin-bottom: 8px;
+      }
+      #scene-3 .criterion-text span {
+        font-size: 1.25rem;
+        font-weight: 400;
+        color: #141414;
+        opacity: 0.64;
+      }
+      #scene-3 .accent-bar {
+        position: absolute;
+        width: 6px;
+        border-radius: 3px;
+        background: #E8A99D;
+        left: 160px;
+      }
+
+      /* ===================================================================
+         SCENE 4 — Agent design foundations
+      =================================================================== */
+      #scene-4 { background: #FFFFFF; z-index: 40; opacity: 0; }
+      #scene-4 .scene-content { justify-content: center; gap: 56px; }
+      #scene-4 .headline {
+        font-size: 4.6rem;
+        font-weight: 600;
+        letter-spacing: -0.015em;
+        color: #141414;
+        max-width: 1100px;
+        line-height: 1.1;
+      }
+      #scene-4 .panels {
+        display: flex;
+        gap: 40px;
+      }
+      #scene-4 .panel {
+        flex: 1;
+        background: #FFFFFF;
+        border: 2px solid rgba(20,20,20,0.14);
+        border-radius: 4px;
+        padding: 48px 44px;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        min-height: 380px;
+      }
+      #scene-4 .glyph {
+        width: 76px;
+        height: 76px;
+      }
+      #scene-4 .panel h3 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #141414;
+        letter-spacing: -0.01em;
+      }
+      #scene-4 .panel p {
+        font-size: 1.2rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #141414;
+        opacity: 0.62;
+      }
+      #scene-4 .panel .tag {
+        margin-top: auto;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.95rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #8a5246;
+      }
+      #scene-4 .glyph-rings { border-radius: 50%; border: 4px solid #3DAA52; position: relative; }
+      #scene-4 .glyph-rings::after {
+        content: ""; position: absolute; inset: 16px; border-radius: 50%; border: 4px solid #3DAA52; opacity: 0.5;
+      }
+      #scene-4 .glyph-grid {
+        display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px;
+      }
+      #scene-4 .glyph-grid span { background: #6FB6E0; border-radius: 3px; }
+      #scene-4 .glyph-bars { display: flex; flex-direction: column; gap: 10px; justify-content: center; height: 100%; }
+      #scene-4 .glyph-bars span { display: block; height: 11px; border-radius: 3px; background: #E85FA0; }
+      #scene-4 .glyph-bars span:nth-child(1) { width: 100%; }
+      #scene-4 .glyph-bars span:nth-child(2) { width: 68%; }
+      #scene-4 .glyph-bars span:nth-child(3) { width: 84%; }
+
+      /* ===================================================================
+         SCENE 5 — Orchestration (PEAK)
+      =================================================================== */
+      #scene-5 { background: #141414; z-index: 30; opacity: 0; }
+      #scene-5 .eyebrow { color: #E85FA0; }
+      #scene-5 .ghost-numeral { color: #FFFFFF; opacity: 0.04; font-size: 600px; left: -60px; bottom: -160px; }
+      #scene-5 .scene-content { justify-content: space-between; }
+      #scene-5 .headline {
+        font-size: 4.2rem;
+        font-weight: 600;
+        letter-spacing: -0.015em;
+        color: #FFFFFF;
+        max-width: 1200px;
+        line-height: 1.12;
+      }
+      #scene-5 .diagram-row {
+        display: flex;
+        gap: 64px;
+        align-items: stretch;
+        flex: 1;
+        margin-top: 48px;
+      }
+      #scene-5 .diagram-panel {
+        flex: 1;
+        border: 1px solid rgba(255,255,255,0.16);
+        border-radius: 4px;
+        padding: 44px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+      #scene-5 .diagram-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.95rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.66);
+        margin-bottom: 36px;
+      }
+      #scene-5 .node {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 1.05rem;
+        color: #FFFFFF;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.22);
+        border-radius: 4px;
+        padding: 16px 26px;
+        text-align: center;
+      }
+      #scene-5 .loop-nodes {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+      }
+      #scene-5 .loop-svg { position: absolute; inset: 0; z-index: 1; }
+      #scene-5 .manager-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+        position: relative;
+      }
+      #scene-5 .manager-node {
+        background: rgba(232,95,160,0.18);
+        border-color: rgba(232,95,160,0.5);
+      }
+      #scene-5 .satellites {
+        display: flex;
+        gap: 22px;
+      }
+      #scene-5 .satellites .node { font-size: 0.92rem; padding: 14px 20px; opacity: 0.85; }
+      #scene-5 .connector-svg { position: absolute; inset: 0; z-index: 0; }
+      #scene-5 .caption-strip {
+        margin-top: 40px;
+        display: flex;
+        gap: 56px;
+        align-items: baseline;
+      }
+      #scene-5 .caption-strip span {
+        font-size: 1.18rem;
+        color: rgba(255,255,255,0.6);
+        font-weight: 400;
+      }
+      #scene-5 .caption-strip b { color: #FFFFFF; font-weight: 600; }
+
+      /* ===================================================================
+         SCENE 6 — Guardrails
+      =================================================================== */
+      #scene-6 { background: #FFFFFF; z-index: 20; opacity: 0; }
+      #scene-6 .scene-content { flex-direction: row; gap: 100px; align-items: center; }
+      #scene-6 .left-col {
+        width: 600px;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        flex-shrink: 0;
+      }
+      #scene-6 .headline {
+        font-size: 4.4rem;
+        font-weight: 600;
+        letter-spacing: -0.015em;
+        color: #141414;
+        line-height: 1.12;
+      }
+      #scene-6 .left-col p {
+        font-size: 1.3rem;
+        line-height: 1.55;
+        color: #141414;
+        opacity: 0.6;
+        max-width: 480px;
+      }
+      #scene-6 .spine-wrap {
+        position: relative;
+        flex: 1;
+        height: 760px;
+        display: flex;
+        align-items: center;
+      }
+      #scene-6 .spine {
+        position: absolute;
+        left: 50px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #141414;
+        opacity: 0.14;
+        transform-origin: top center;
+      }
+      #scene-6 .layer-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        width: 100%;
+      }
+      #scene-6 .layer-row {
+        display: flex;
+        align-items: center;
+        gap: 36px;
+        background: #FFFFFF;
+        border: 2px solid rgba(20,20,20,0.12);
+        border-radius: 4px;
+        padding: 26px 36px;
+        margin-left: 20px;
+      }
+      #scene-6 .layer-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      #scene-6 .layer-row:nth-child(1) .layer-dot { background: #3DAA52; }
+      #scene-6 .layer-row:nth-child(2) .layer-dot { background: #6FB6E0; }
+      #scene-6 .layer-row:nth-child(3) .layer-dot { background: #E85FA0; }
+      #scene-6 .layer-row:nth-child(4) .layer-dot { background: #E8A99D; }
+      #scene-6 .layer-row:nth-child(5) .layer-dot { background: #141414; }
+      #scene-6 .layer-row strong {
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: #141414;
+        display: block;
+      }
+      #scene-6 .layer-row span {
+        font-size: 1.05rem;
+        color: #141414;
+        opacity: 0.55;
+      }
+
+      /* ===================================================================
+         SCENE 7 — Conclusion
+      =================================================================== */
+      #scene-7 { background: #F9D8D2; z-index: 10; opacity: 0; }
+      #scene-7 .bloom-a { width: 760px; height: 760px; top: -260px; left: -200px;
+        background: radial-gradient(circle at 50% 50%, #E85FA0 0%, #6FB6E0 40%, #3DAA52 75%, transparent 85%);
+        opacity: 0.42; }
+      #scene-7 .scene-content { justify-content: space-between; }
+      #scene-7 .closing-block {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+      #scene-7 .closing-line {
+        font-size: 5.6rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        color: #141414;
+        line-height: 1.1;
+      }
+      #scene-7 .recap-strip {
+        display: flex;
+        gap: 44px;
+        flex-wrap: wrap;
+      }
+      #scene-7 .recap-strip span {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 1.05rem;
+        letter-spacing: 0.05em;
+        color: #5a4540;
+      }
+      #scene-7 .wordmark {
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: #141414;
+        letter-spacing: -0.01em;
+      }
+      #scene-7 .fade-overlay {
+        position: absolute;
+        inset: 0;
+        background: #000000;
+        opacity: 0;
+        z-index: 100;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="80" data-width="1920" data-height="1080">
+
+      <!-- ============================== SCENE 1 — Cover ============================== -->
+      <div class="scene" id="scene-1">
+        <div class="bloom bloom-a"></div>
+        <div class="bloom bloom-b"></div>
+        <div class="scene-content">
+          <div class="top-row">
+            <span class="eyebrow on-coral" id="s1-eyebrow">OpenAI — Practical Guide</span>
+            <span class="page-mark" id="s1-page">01 — 07</span>
+          </div>
+          <div class="title-block">
+            <span class="title-line" id="s1-line1">A practical</span>
+            <span class="title-line" id="s1-line2">guide to</span>
+            <span class="title-line" id="s1-line3">building agents</span>
+          </div>
+          <div class="bottom-row">
+            <div class="hairline on-coral" id="s1-rule"></div>
+            <div class="index-strip" id="s1-index">
+              <span class="index-item"><b>01</b> What is an agent</span>
+              <span class="index-item"><b>02</b> When to build one</span>
+              <span class="index-item"><b>03</b> Foundations</span>
+              <span class="index-item"><b>04</b> Orchestration</span>
+              <span class="index-item"><b>05</b> Guardrails</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================== SCENE 2 — What is an agent? ============================== -->
+      <div class="scene" id="scene-2">
+        <span class="ghost-numeral" id="s2-ghost">01</span>
+        <div class="scene-content">
+          <div class="head-row">
+            <span class="eyebrow" id="s2-eyebrow">Section 01</span>
+            <h2 class="headline" id="s2-headline">What is an agent?</h2>
+          </div>
+          <div class="quote-card" id="s2-quote">
+            <span class="quote-mark">&ldquo;</span>
+            <p>Agents are systems that independently accomplish tasks on your behalf.</p>
+          </div>
+          <div class="row-list">
+            <div class="row" id="s2-row1">
+              <span class="badge">01</span>
+              <div class="row-text">
+                <strong>Runs the workflow</strong>
+                <span>Manages multi-step tasks end to end, with autonomy over the path it takes</span>
+              </div>
+            </div>
+            <div class="hairline" id="s2-rule"></div>
+            <div class="row" id="s2-row2">
+              <span class="badge">02</span>
+              <div class="row-text">
+                <strong>Acts through tools</strong>
+                <span>Uses software, data, and other agents to take real actions in the world</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================== SCENE 3 — When should you build an agent? ============================== -->
+      <div class="scene" id="scene-3">
+        <div class="accent-bar" id="s3-bar1" style="top: 396px; height: 88px;"></div>
+        <div class="accent-bar" id="s3-bar2" style="top: 514px; height: 88px;"></div>
+        <div class="accent-bar" id="s3-bar3" style="top: 632px; height: 88px;"></div>
+        <div class="scene-content">
+          <span class="eyebrow on-coral" id="s3-eyebrow">Section 02</span>
+          <h2 class="headline" id="s3-headline">When should you build an agent?</h2>
+          <div class="criteria-list">
+            <div class="criterion" id="s3-c1">
+              <span class="badge">01</span>
+              <div class="criterion-text">
+                <strong>Complex decision-making</strong>
+                <span>Nuanced judgment calls — like approving a refund request</span>
+              </div>
+            </div>
+            <div class="criterion" id="s3-c2">
+              <span class="badge">02</span>
+              <div class="criterion-text">
+                <strong>Difficult-to-maintain rules</strong>
+                <span>Rulesets so unwieldy they're costly to update — like vendor security reviews</span>
+              </div>
+            </div>
+            <div class="criterion" id="s3-c3">
+              <span class="badge">03</span>
+              <div class="criterion-text">
+                <strong>Heavy reliance on unstructured data</strong>
+                <span>Interpreting natural language and documents — like processing insurance claims</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================== SCENE 4 — Agent design foundations ============================== -->
+      <div class="scene" id="scene-4">
+        <div class="scene-content">
+          <span class="eyebrow" id="s4-eyebrow">Section 03</span>
+          <h2 class="headline" id="s4-headline" style="margin-top: 28px; margin-bottom: 64px;">Agent design foundations</h2>
+          <div class="panels">
+            <div class="panel" id="s4-p1">
+              <div class="glyph glyph-rings"></div>
+              <h3>Model</h3>
+              <p>The reasoning engine that decides actions and works through tasks</p>
+              <span class="tag">Foundation 01</span>
+            </div>
+            <div class="panel" id="s4-p2">
+              <div class="glyph glyph-grid"><span></span><span></span><span></span><span></span></div>
+              <h3>Tools</h3>
+              <p>External functions and APIs the agent uses to take action in the world</p>
+              <span class="tag">Foundation 02</span>
+            </div>
+            <div class="panel" id="s4-p3">
+              <div class="glyph glyph-bars"><span></span><span></span><span></span></div>
+              <h3>Instructions</h3>
+              <p>Clear guidelines that shape behavior, boundaries, and how it handles tasks</p>
+              <span class="tag">Foundation 03</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================== SCENE 5 — Orchestration (PEAK) ============================== -->
+      <div class="scene" id="scene-5">
+        <span class="ghost-numeral" id="s5-ghost">04</span>
+        <div class="scene-content">
+          <div>
+            <span class="eyebrow" id="s5-eyebrow">Section 04 — Orchestration</span>
+            <h2 class="headline" id="s5-headline" style="margin-top: 24px;">From a single loop to a network of agents</h2>
+          </div>
+          <div class="diagram-row">
+            <div class="diagram-panel" id="s5-panel-loop">
+              <span class="diagram-label">Single-agent loop</span>
+              <div class="loop-nodes">
+                <span class="node" id="s5-node-input">Input</span>
+                <span class="node" id="s5-node-agent">Agent</span>
+                <span class="node" id="s5-node-output">Output</span>
+              </div>
+              <svg class="loop-svg" viewBox="0 0 760 420" preserveAspectRatio="none">
+                <path id="s5-loop-arc" d="M 110 90 C 260 24, 520 24, 660 90" fill="none" stroke="#6FB6E0" stroke-width="2.5" stroke-dasharray="640" stroke-dashoffset="640" />
+              </svg>
+            </div>
+            <div class="diagram-panel" id="s5-panel-manager">
+              <span class="diagram-label">Manager pattern</span>
+              <div class="manager-wrap">
+                <span class="node manager-node" id="s5-manager">Manager agent</span>
+                <div class="satellites">
+                  <span class="node" id="s5-sat1">Spanish agent</span>
+                  <span class="node" id="s5-sat2">French agent</span>
+                  <span class="node" id="s5-sat3">Italian agent</span>
+                </div>
+                <svg class="connector-svg" viewBox="0 0 640 280" preserveAspectRatio="none">
+                  <path id="s5-conn-1" d="M 320 70 L 110 220" stroke="rgba(232,95,160,0.5)" stroke-width="2" stroke-dasharray="280" stroke-dashoffset="280" />
+                  <path id="s5-conn-2" d="M 320 70 L 320 220" stroke="rgba(232,95,160,0.5)" stroke-width="2" stroke-dasharray="160" stroke-dashoffset="160" />
+                  <path id="s5-conn-3" d="M 320 70 L 530 220" stroke="rgba(232,95,160,0.5)" stroke-width="2" stroke-dasharray="280" stroke-dashoffset="280" />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="caption-strip" id="s5-caption">
+            <span><b>Manager pattern</b> — a central agent coordinates specialists through tool calls</span>
+            <span><b>Decentralized pattern</b> — peer agents hand off tasks to one another directly</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================== SCENE 6 — Guardrails ============================== -->
+      <div class="scene" id="scene-6">
+        <div class="scene-content">
+          <div class="left-col">
+            <span class="eyebrow" id="s6-eyebrow">Section 05</span>
+            <h2 class="headline" id="s6-headline">Guardrails: a layered defense</h2>
+            <p id="s6-copy">No single safeguard is enough. Layered, overlapping checks catch what any one alone would miss.</p>
+          </div>
+          <div class="spine-wrap">
+            <div class="spine" id="s6-spine"></div>
+            <div class="layer-list">
+              <div class="layer-row" id="s6-l1">
+                <span class="layer-dot"></span>
+                <div><strong>Relevance classifier</strong><span>Flags off-topic queries before they reach the agent</span></div>
+              </div>
+              <div class="layer-row" id="s6-l2">
+                <span class="layer-dot"></span>
+                <div><strong>Safety classifier</strong><span>Detects prompt injection and manipulation attempts</span></div>
+              </div>
+              <div class="layer-row" id="s6-l3">
+                <span class="layer-dot"></span>
+                <div><strong>PII filter</strong><span>Prevents exposure of personally identifiable information</span></div>
+              </div>
+              <div class="layer-row" id="s6-l4">
+                <span class="layer-dot"></span>
+                <div><strong>Moderation</strong><span>Flags harmful or inappropriate content in either direction</span></div>
+              </div>
+              <div class="layer-row" id="s6-l5">
+                <span class="layer-dot"></span>
+                <div><strong>Tool safeguards</strong><span>Rates tool calls by risk and gates the dangerous ones</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================== SCENE 7 — Conclusion ============================== -->
+      <div class="scene" id="scene-7">
+        <div class="bloom bloom-a"></div>
+        <div class="scene-content">
+          <div class="top-row" style="display:flex; justify-content: space-between; align-items: center;">
+            <span class="eyebrow on-coral" id="s7-eyebrow">In closing</span>
+            <span class="page-mark" id="s7-page">07 — 07</span>
+          </div>
+          <div class="closing-block">
+            <span class="closing-line" id="s7-line1">Start small.</span>
+            <span class="closing-line" id="s7-line2">Validate with real users.</span>
+            <span class="closing-line" id="s7-line3">Grow capabilities over time.</span>
+          </div>
+          <div class="bottom-row" style="display:flex; flex-direction: column; gap: 28px;">
+            <div class="hairline on-coral" id="s7-rule"></div>
+            <div style="display:flex; justify-content: space-between; align-items: baseline;">
+              <span class="wordmark" id="s7-wordmark">OpenAI — A Practical Guide to Building Agents</span>
+              <div class="recap-strip" id="s7-recap">
+                <span>Model</span><span>Tools</span><span>Instructions</span><span>Orchestration</span><span>Guardrails</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fade-overlay" id="s7-fade"></div>
+      </div>
+
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // ===================================================================
+      // TRANSITION TIMES
+      // T1 = 7.2   (Scene 1 -> 2, Blur Crossfade — medium)
+      // T2 = 18.6  (Scene 2 -> 3, Focus Pull — medium)
+      // T3 = 29.8  (Scene 3 -> 4, Crossfade)
+      // T4 = 41.0  (Scene 4 -> 5, Zoom Through — peak energy)
+      // T5 = 54.4  (Scene 5 -> 6, Blur Crossfade — medium)
+      // T6 = 66.6  (Scene 6 -> 7, Crossfade)
+      // END = 80.0
+      // ===================================================================
+      const T1 = 7.2, T2 = 18.6, T3 = 29.8, T4 = 41.0, T5 = 54.4, T6 = 66.6, END = 80.0;
+
+      // ---------------------------------------------------------------
+      // SCENE 1 — Cover (0 - T1)
+      // ---------------------------------------------------------------
+      tl.from("#s1-eyebrow", { x: -36, opacity: 0, duration: 0.6, ease: "power3.out" }, 0.15);
+      tl.from("#s1-page", { opacity: 0, duration: 0.5, ease: "sine.out" }, 0.35);
+      tl.from("#s1-line1", { y: 70, opacity: 0, duration: 0.8, ease: "expo.out" }, 0.5);
+      tl.from("#s1-line2", { y: 70, opacity: 0, duration: 0.8, ease: "expo.out" }, 0.66);
+      tl.from("#s1-line3", { y: 70, opacity: 0, duration: 0.8, ease: "expo.out" }, 0.82);
+      tl.from("#s1-rule", { scaleX: 0, duration: 0.9, ease: "power2.inOut" }, 1.5);
+      tl.from("#s1-index", { y: 24, opacity: 0, duration: 0.7, ease: "back.out(1.4)" }, 1.8);
+      tl.from(".bloom-a", { scale: 0.7, opacity: 0, duration: 1.6, ease: "sine.out" }, 0.2);
+      tl.from(".bloom-b", { scale: 0.7, opacity: 0, duration: 1.6, ease: "sine.out" }, 0.5);
+      tl.to(".bloom-a", { x: 30, y: 24, duration: 4, ease: "sine.inOut", repeat: Math.floor(80 / 8) - 1, yoyo: true }, 1.0);
+      tl.to(".bloom-b", { x: -24, y: -18, duration: 4.6, ease: "sine.inOut", repeat: Math.floor(80 / 9.2) - 1, yoyo: true }, 1.4);
+
+      // ---------------------------------------------------------------
+      // TRANSITION T1 — Blur Crossfade (medium): scene1 -> scene2
+      // ---------------------------------------------------------------
+      tl.to("#scene-1", { filter: "blur(28px)", duration: 0.6, ease: "power1.in" }, T1);
+      tl.to("#scene-1", { opacity: 0, duration: 0.6, ease: "power1.in" }, T1 + 0.05);
+      tl.set("#scene-1", { visibility: "hidden" }, T1 + 0.65);
+      tl.fromTo("#scene-2", { opacity: 0, filter: "blur(28px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.7, ease: "power1.out" }, T1 + 0.2);
+
+      // ---------------------------------------------------------------
+      // SCENE 2 — What is an agent? (T1 - T2)
+      // ---------------------------------------------------------------
+      tl.from("#s2-ghost", { opacity: 0, scale: 0.85, duration: 1.4, ease: "sine.out" }, T1 + 0.2);
+      tl.from("#s2-eyebrow", { x: -36, opacity: 0, duration: 0.6, ease: "power3.out" }, T1 + 0.45);
+      tl.from("#s2-headline", { y: 50, opacity: 0, duration: 0.75, ease: "expo.out" }, T1 + 0.62);
+      tl.from("#s2-quote", { scale: 0.92, opacity: 0, duration: 0.7, ease: "back.out(1.3)" }, T1 + 1.1);
+      tl.from("#s2-rule", { scaleX: 0, duration: 0.7, ease: "power2.inOut" }, T1 + 1.7);
+      tl.from("#s2-row1", { x: -50, opacity: 0, duration: 0.6, ease: "power2.out" }, T1 + 1.95);
+      tl.from("#s2-row2", { x: -50, opacity: 0, duration: 0.6, ease: "power2.out" }, T1 + 2.2);
+      tl.to("#s2-ghost", { y: -20, duration: 5, ease: "sine.inOut", repeat: Math.floor((T2 - T1) / 10) - 1, yoyo: true }, T1 + 0.6);
+
+      // ---------------------------------------------------------------
+      // TRANSITION T2 — Focus Pull (medium): scene2 -> scene3
+      // ---------------------------------------------------------------
+      tl.to("#scene-2", { filter: "blur(22px)", scale: 1.04, duration: 0.65, ease: "power1.in" }, T2);
+      tl.to("#scene-2", { opacity: 0, duration: 0.55, ease: "power1.in" }, T2 + 0.1);
+      tl.set("#scene-2", { visibility: "hidden" }, T2 + 0.7);
+      tl.fromTo("#scene-3", { opacity: 0, filter: "blur(22px)", scale: 0.97 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.75, ease: "power2.out" }, T2 + 0.25);
+
+      // ---------------------------------------------------------------
+      // SCENE 3 — When should you build an agent? (T2 - T3)
+      // ---------------------------------------------------------------
+      tl.from("#s3-eyebrow", { x: -36, opacity: 0, duration: 0.6, ease: "power3.out" }, T2 + 0.45);
+      tl.from("#s3-headline", { y: 56, opacity: 0, duration: 0.8, ease: "expo.out" }, T2 + 0.62);
+      tl.from("#s3-c1", { x: -60, opacity: 0, duration: 0.65, ease: "power3.out" }, T2 + 1.25);
+      tl.from("#s3-bar1", { scaleY: 0, transformOrigin: "top center", duration: 0.5, ease: "power2.out" }, T2 + 1.45);
+      tl.from("#s3-c2", { x: -60, opacity: 0, duration: 0.65, ease: "power2.out" }, T2 + 1.55);
+      tl.from("#s3-bar2", { scaleY: 0, transformOrigin: "top center", duration: 0.5, ease: "power2.out" }, T2 + 1.75);
+      tl.from("#s3-c3", { x: -60, opacity: 0, duration: 0.65, ease: "sine.out" }, T2 + 1.85);
+      tl.from("#s3-bar3", { scaleY: 0, transformOrigin: "top center", duration: 0.5, ease: "power2.out" }, T2 + 2.05);
+
+      // ---------------------------------------------------------------
+      // TRANSITION T3 — Crossfade: scene3 -> scene4
+      // ---------------------------------------------------------------
+      tl.to("#scene-3", { opacity: 0, duration: 0.6, ease: "power1.inOut" }, T3);
+      tl.set("#scene-3", { visibility: "hidden" }, T3 + 0.6);
+      tl.fromTo("#scene-4", { opacity: 0 }, { opacity: 1, duration: 0.7, ease: "power1.inOut" }, T3 + 0.05);
+
+      // ---------------------------------------------------------------
+      // SCENE 4 — Agent design foundations (T3 - T4)
+      // ---------------------------------------------------------------
+      tl.from("#s4-eyebrow", { x: -36, opacity: 0, duration: 0.6, ease: "power3.out" }, T3 + 0.4);
+      tl.from("#s4-headline", { y: 50, opacity: 0, duration: 0.75, ease: "expo.out" }, T3 + 0.58);
+      tl.from("#s4-p1", { y: 70, opacity: 0, duration: 0.7, ease: "back.out(1.5)" }, T3 + 1.15);
+      tl.from("#s4-p2", { y: 70, opacity: 0, duration: 0.7, ease: "back.out(1.5)" }, T3 + 1.35);
+      tl.from("#s4-p3", { y: 70, opacity: 0, duration: 0.7, ease: "back.out(1.5)" }, T3 + 1.55);
+      tl.from(".glyph-rings", { rotation: -90, opacity: 0, duration: 0.8, ease: "power2.out" }, T3 + 1.55);
+      tl.from(".glyph-grid span", { scale: 0, opacity: 0, duration: 0.5, stagger: 0.08, ease: "back.out(2)" }, T3 + 1.75);
+      tl.from(".glyph-bars span", { scaleX: 0, transformOrigin: "left center", duration: 0.5, stagger: 0.1, ease: "power2.out" }, T3 + 1.95);
+
+      // ---------------------------------------------------------------
+      // TRANSITION T4 — Zoom Through (PEAK): scene4 -> scene5
+      // ---------------------------------------------------------------
+      tl.to("#scene-4", { scale: 1.5, opacity: 0, duration: 0.7, ease: "power2.in" }, T4);
+      tl.set("#scene-4", { visibility: "hidden" }, T4 + 0.7);
+      tl.fromTo("#scene-5", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: "power3.out" }, T4 + 0.35);
+
+      // ---------------------------------------------------------------
+      // SCENE 5 — Orchestration (PEAK) (T4 - T5)
+      // ---------------------------------------------------------------
+      tl.from("#s5-ghost", { opacity: 0, scale: 0.8, duration: 1.4, ease: "sine.out" }, T4 + 0.4);
+      tl.from("#s5-eyebrow", { x: -36, opacity: 0, duration: 0.55, ease: "power3.out" }, T4 + 0.55);
+      tl.from("#s5-headline", { y: 46, opacity: 0, duration: 0.7, ease: "expo.out" }, T4 + 0.72);
+      tl.from("#s5-panel-loop", { x: -70, opacity: 0, duration: 0.7, ease: "power3.out" }, T4 + 1.3);
+      tl.from("#s5-panel-manager", { x: 70, opacity: 0, duration: 0.7, ease: "power3.out" }, T4 + 1.45);
+      tl.from("#s5-node-input", { scale: 0.6, opacity: 0, duration: 0.45, ease: "back.out(2)" }, T4 + 1.95);
+      tl.from("#s5-node-agent", { scale: 0.6, opacity: 0, duration: 0.45, ease: "back.out(2)" }, T4 + 2.08);
+      tl.from("#s5-node-output", { scale: 0.6, opacity: 0, duration: 0.45, ease: "back.out(2)" }, T4 + 2.21);
+      tl.fromTo("#s5-loop-arc", { strokeDashoffset: 640 }, { strokeDashoffset: 0, duration: 1.0, ease: "power2.inOut" }, T4 + 2.35);
+      tl.from("#s5-manager", { scale: 0.6, opacity: 0, duration: 0.5, ease: "back.out(2)" }, T4 + 2.55);
+      tl.from("#s5-sat1", { y: 30, opacity: 0, duration: 0.4, ease: "power2.out" }, T4 + 2.85);
+      tl.from("#s5-sat2", { y: 30, opacity: 0, duration: 0.4, ease: "power2.out" }, T4 + 2.95);
+      tl.from("#s5-sat3", { y: 30, opacity: 0, duration: 0.4, ease: "power2.out" }, T4 + 3.05);
+      tl.fromTo("#s5-conn-1", { strokeDashoffset: 280 }, { strokeDashoffset: 0, duration: 0.6, ease: "power1.out" }, T4 + 3.2);
+      tl.fromTo("#s5-conn-2", { strokeDashoffset: 160 }, { strokeDashoffset: 0, duration: 0.5, ease: "power1.out" }, T4 + 3.28);
+      tl.fromTo("#s5-conn-3", { strokeDashoffset: 280 }, { strokeDashoffset: 0, duration: 0.6, ease: "power1.out" }, T4 + 3.36);
+      tl.from("#s5-caption", { y: 26, opacity: 0, duration: 0.6, ease: "sine.out" }, T4 + 3.7);
+      tl.to("#s5-ghost", { y: 22, duration: 5.2, ease: "sine.inOut", repeat: Math.floor((T5 - T4) / 10.4) - 1, yoyo: true }, T4 + 0.6);
+
+      // ---------------------------------------------------------------
+      // TRANSITION T5 — Blur Crossfade (medium): scene5 -> scene6
+      // ---------------------------------------------------------------
+      tl.to("#scene-5", { filter: "blur(28px)", duration: 0.6, ease: "power1.in" }, T5);
+      tl.to("#scene-5", { opacity: 0, duration: 0.6, ease: "power1.in" }, T5 + 0.05);
+      tl.set("#scene-5", { visibility: "hidden" }, T5 + 0.65);
+      tl.fromTo("#scene-6", { opacity: 0, filter: "blur(28px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.7, ease: "power1.out" }, T5 + 0.2);
+
+      // ---------------------------------------------------------------
+      // SCENE 6 — Guardrails (T5 - T6)
+      // ---------------------------------------------------------------
+      tl.from("#s6-eyebrow", { x: -36, opacity: 0, duration: 0.6, ease: "power3.out" }, T5 + 0.45);
+      tl.from("#s6-headline", { y: 48, opacity: 0, duration: 0.7, ease: "expo.out" }, T5 + 0.62);
+      tl.from("#s6-copy", { y: 30, opacity: 0, duration: 0.6, ease: "sine.out" }, T5 + 1.05);
+      tl.from("#s6-spine", { scaleY: 0, transformOrigin: "top center", duration: 1.0, ease: "power2.inOut" }, T5 + 1.0);
+      tl.from("#s6-l1", { x: 60, opacity: 0, duration: 0.55, ease: "power3.out" }, T5 + 1.55);
+      tl.from("#s6-l2", { x: 60, opacity: 0, duration: 0.55, ease: "power2.out" }, T5 + 1.72);
+      tl.from("#s6-l3", { x: 60, opacity: 0, duration: 0.55, ease: "power2.out" }, T5 + 1.89);
+      tl.from("#s6-l4", { x: 60, opacity: 0, duration: 0.55, ease: "power2.out" }, T5 + 2.06);
+      tl.from("#s6-l5", { x: 60, opacity: 0, duration: 0.55, ease: "back.out(1.4)" }, T5 + 2.23);
+
+      // ---------------------------------------------------------------
+      // TRANSITION T6 — Crossfade: scene6 -> scene7
+      // ---------------------------------------------------------------
+      tl.to("#scene-6", { opacity: 0, duration: 0.6, ease: "power1.inOut" }, T6);
+      tl.set("#scene-6", { visibility: "hidden" }, T6 + 0.6);
+      tl.fromTo("#scene-7", { opacity: 0 }, { opacity: 1, duration: 0.7, ease: "power1.inOut" }, T6 + 0.05);
+
+      // ---------------------------------------------------------------
+      // SCENE 7 — Conclusion (T6 - END) — bookends scene 1 (coral bg)
+      // ---------------------------------------------------------------
+      tl.from(".bloom-a", { scale: 0.65, opacity: 0, duration: 1.7, ease: "sine.out" }, T6 + 0.15);
+      tl.from("#s7-eyebrow", { x: -36, opacity: 0, duration: 0.6, ease: "power3.out" }, T6 + 0.4);
+      tl.from("#s7-page", { opacity: 0, duration: 0.5, ease: "sine.out" }, T6 + 0.55);
+      tl.from("#s7-line1", { y: 60, opacity: 0, duration: 0.7, ease: "expo.out" }, T6 + 0.75);
+      tl.from("#s7-line2", { y: 60, opacity: 0, duration: 0.7, ease: "expo.out" }, T6 + 0.95);
+      tl.from("#s7-line3", { y: 60, opacity: 0, duration: 0.7, ease: "expo.out" }, T6 + 1.15);
+      tl.from("#s7-rule", { scaleX: 0, duration: 0.8, ease: "power2.inOut" }, T6 + 1.85);
+      tl.from("#s7-wordmark", { x: -30, opacity: 0, duration: 0.6, ease: "power2.out" }, T6 + 2.15);
+      tl.from("#s7-recap", { x: 30, opacity: 0, duration: 0.6, ease: "sine.out" }, T6 + 2.3);
+      tl.to(".bloom-a", { x: 26, y: 20, duration: 4.4, ease: "sine.inOut", repeat: Math.floor((END - T6) / 8.8) - 1, yoyo: true }, T6 + 0.6);
+
+      // FINAL EXIT — only allowed on the final scene: fade to black
+      tl.to("#s7-fade", { opacity: 1, duration: 2.0, ease: "power2.in" }, END - 2.0);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

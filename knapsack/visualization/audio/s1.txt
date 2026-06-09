@@ -1,0 +1,1 @@
+Let's solve the zero one Knapsack problem: given items with weights and values, and a knapsack with a weight limit, pick a subset of items to maximize total value without exceeding the capacity.

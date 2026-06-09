@@ -1,0 +1,1 @@
+Initialize dp with total plus 1 as infinity — no answer needs more coins than the total itself. Set dp of 0 to 0: zero coins make amount zero. That single anchor drives everything else.

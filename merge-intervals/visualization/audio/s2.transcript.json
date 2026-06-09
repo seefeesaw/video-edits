@@ -1,0 +1,182 @@
+[
+  {
+    "id": "w0",
+    "text": "Step",
+    "start": 0.12,
+    "end": 0.391
+  },
+  {
+    "id": "w1",
+    "text": "one:",
+    "start": 0.391,
+    "end": 0.731
+  },
+  {
+    "id": "w2",
+    "text": "sort",
+    "start": 0.731,
+    "end": 1.002
+  },
+  {
+    "id": "w3",
+    "text": "the",
+    "start": 1.002,
+    "end": 1.206
+  },
+  {
+    "id": "w4",
+    "text": "intervals",
+    "start": 1.206,
+    "end": 1.816
+  },
+  {
+    "id": "w5",
+    "text": "by",
+    "start": 1.816,
+    "end": 1.952
+  },
+  {
+    "id": "w6",
+    "text": "their",
+    "start": 1.952,
+    "end": 2.291
+  },
+  {
+    "id": "w7",
+    "text": "starting",
+    "start": 2.291,
+    "end": 2.834
+  },
+  {
+    "id": "w8",
+    "text": "point.",
+    "start": 2.834,
+    "end": 3.309
+  },
+  {
+    "id": "w9",
+    "text": "Once",
+    "start": 3.309,
+    "end": 3.58
+  },
+  {
+    "id": "w10",
+    "text": "they're",
+    "start": 3.58,
+    "end": 4.055
+  },
+  {
+    "id": "w11",
+    "text": "in",
+    "start": 4.055,
+    "end": 4.191
+  },
+  {
+    "id": "w12",
+    "text": "order,",
+    "start": 4.191,
+    "end": 4.666
+  },
+  {
+    "id": "w13",
+    "text": "any",
+    "start": 4.666,
+    "end": 4.869
+  },
+  {
+    "id": "w14",
+    "text": "two",
+    "start": 4.869,
+    "end": 5.073
+  },
+  {
+    "id": "w15",
+    "text": "ranges",
+    "start": 5.073,
+    "end": 5.48
+  },
+  {
+    "id": "w16",
+    "text": "that",
+    "start": 5.48,
+    "end": 5.751
+  },
+  {
+    "id": "w17",
+    "text": "could",
+    "start": 5.751,
+    "end": 6.091
+  },
+  {
+    "id": "w18",
+    "text": "overlap",
+    "start": 6.091,
+    "end": 6.565
+  },
+  {
+    "id": "w19",
+    "text": "are",
+    "start": 6.565,
+    "end": 6.769
+  },
+  {
+    "id": "w20",
+    "text": "guaranteed",
+    "start": 6.769,
+    "end": 7.447
+  },
+  {
+    "id": "w21",
+    "text": "to",
+    "start": 7.447,
+    "end": 7.583
+  },
+  {
+    "id": "w22",
+    "text": "sit",
+    "start": 7.583,
+    "end": 7.787
+  },
+  {
+    "id": "w23",
+    "text": "right",
+    "start": 7.787,
+    "end": 8.126
+  },
+  {
+    "id": "w24",
+    "text": "beside",
+    "start": 8.126,
+    "end": 8.533
+  },
+  {
+    "id": "w25",
+    "text": "each",
+    "start": 8.533,
+    "end": 8.804
+  },
+  {
+    "id": "w26",
+    "text": "other",
+    "start": 8.804,
+    "end": 9.144
+  },
+  {
+    "id": "w27",
+    "text": "in",
+    "start": 9.144,
+    "end": 9.279
+  },
+  {
+    "id": "w28",
+    "text": "the",
+    "start": 9.279,
+    "end": 9.483
+  },
+  {
+    "id": "w29",
+    "text": "list.",
+    "start": 9.483,
+    "end": 9.89
+  }
+]

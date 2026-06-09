@@ -1,0 +1,1 @@
+Now we process the first item, value one. For each target sum j, we can either skip this item and inherit the previous row's value, or include it and check if j minus one was achievable before. Since dp zero zero was true, sum one becomes true. All other sums from two through eleven stay false. After processing value one, only sums zero and one are reachable.

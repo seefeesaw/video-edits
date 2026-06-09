@@ -1,0 +1,140 @@
+[
+  {
+    "id": "w0",
+    "text": "We",
+    "start": 0.12,
+    "end": 0.254
+  },
+  {
+    "id": "w1",
+    "text": "start",
+    "start": 0.254,
+    "end": 0.589
+  },
+  {
+    "id": "w2",
+    "text": "the",
+    "start": 0.589,
+    "end": 0.791
+  },
+  {
+    "id": "w3",
+    "text": "result",
+    "start": 0.791,
+    "end": 1.193
+  },
+  {
+    "id": "w4",
+    "text": "with",
+    "start": 1.193,
+    "end": 1.461
+  },
+  {
+    "id": "w5",
+    "text": "the",
+    "start": 1.461,
+    "end": 1.663
+  },
+  {
+    "id": "w6",
+    "text": "first",
+    "start": 1.663,
+    "end": 1.998
+  },
+  {
+    "id": "w7",
+    "text": "sorted",
+    "start": 1.998,
+    "end": 2.4
+  },
+  {
+    "id": "w8",
+    "text": "interval,",
+    "start": 2.4,
+    "end": 3.071
+  },
+  {
+    "id": "w9",
+    "text": "one",
+    "start": 3.071,
+    "end": 3.272
+  },
+  {
+    "id": "w10",
+    "text": "to",
+    "start": 3.272,
+    "end": 3.406
+  },
+  {
+    "id": "w11",
+    "text": "three.",
+    "start": 3.406,
+    "end": 3.876
+  },
+  {
+    "id": "w12",
+    "text": "It",
+    "start": 3.876,
+    "end": 4.01
+  },
+  {
+    "id": "w13",
+    "text": "becomes",
+    "start": 4.01,
+    "end": 4.479
+  },
+  {
+    "id": "w14",
+    "text": "our",
+    "start": 4.479,
+    "end": 4.681
+  },
+  {
+    "id": "w15",
+    "text": "anchor,",
+    "start": 4.681,
+    "end": 5.217
+  },
+  {
+    "id": "w16",
+    "text": "the",
+    "start": 5.217,
+    "end": 5.418
+  },
+  {
+    "id": "w17",
+    "text": "range",
+    "start": 5.418,
+    "end": 5.754
+  },
+  {
+    "id": "w18",
+    "text": "we",
+    "start": 5.754,
+    "end": 5.888
+  },
+  {
+    "id": "w19",
+    "text": "compare",
+    "start": 5.888,
+    "end": 6.357
+  },
+  {
+    "id": "w20",
+    "text": "everything",
+    "start": 6.357,
+    "end": 7.028
+  },
+  {
+    "id": "w21",
+    "text": "else",
+    "start": 7.028,
+    "end": 7.296
+  },
+  {
+    "id": "w22",
+    "text": "against.",
+    "start": 7.296,
+    "end": 7.9
+  }
+]

@@ -1,0 +1,176 @@
+[
+  {
+    "id": "w0",
+    "text": "Here's",
+    "start": 0.12,
+    "end": 0.534
+  },
+  {
+    "id": "w1",
+    "text": "the",
+    "start": 0.534,
+    "end": 0.741
+  },
+  {
+    "id": "w2",
+    "text": "complete",
+    "start": 0.741,
+    "end": 1.294
+  },
+  {
+    "id": "w3",
+    "text": "solution.",
+    "start": 1.294,
+    "end": 1.984
+  },
+  {
+    "id": "w4",
+    "text": "Sort",
+    "start": 1.984,
+    "end": 2.261
+  },
+  {
+    "id": "w5",
+    "text": "by",
+    "start": 2.261,
+    "end": 2.399
+  },
+  {
+    "id": "w6",
+    "text": "start",
+    "start": 2.399,
+    "end": 2.744
+  },
+  {
+    "id": "w7",
+    "text": "time,",
+    "start": 2.744,
+    "end": 3.158
+  },
+  {
+    "id": "w8",
+    "text": "seed",
+    "start": 3.158,
+    "end": 3.435
+  },
+  {
+    "id": "w9",
+    "text": "the",
+    "start": 3.435,
+    "end": 3.642
+  },
+  {
+    "id": "w10",
+    "text": "result",
+    "start": 3.642,
+    "end": 4.056
+  },
+  {
+    "id": "w11",
+    "text": "with",
+    "start": 4.056,
+    "end": 4.332
+  },
+  {
+    "id": "w12",
+    "text": "the",
+    "start": 4.332,
+    "end": 4.539
+  },
+  {
+    "id": "w13",
+    "text": "first",
+    "start": 4.539,
+    "end": 4.885
+  },
+  {
+    "id": "w14",
+    "text": "interval,",
+    "start": 4.885,
+    "end": 5.575
+  },
+  {
+    "id": "w15",
+    "text": "then",
+    "start": 5.575,
+    "end": 5.851
+  },
+  {
+    "id": "w16",
+    "text": "sweep:",
+    "start": 5.851,
+    "end": 6.335
+  },
+  {
+    "id": "w17",
+    "text": "each",
+    "start": 6.335,
+    "end": 6.611
+  },
+  {
+    "id": "w18",
+    "text": "overlap",
+    "start": 6.611,
+    "end": 7.094
+  },
+  {
+    "id": "w19",
+    "text": "gets",
+    "start": 7.094,
+    "end": 7.371
+  },
+  {
+    "id": "w20",
+    "text": "stretched,",
+    "start": 7.371,
+    "end": 8.13
+  },
+  {
+    "id": "w21",
+    "text": "each",
+    "start": 8.13,
+    "end": 8.406
+  },
+  {
+    "id": "w22",
+    "text": "gap",
+    "start": 8.406,
+    "end": 8.614
+  },
+  {
+    "id": "w23",
+    "text": "starts",
+    "start": 8.614,
+    "end": 9.028
+  },
+  {
+    "id": "w24",
+    "text": "a",
+    "start": 9.028,
+    "end": 9.166
+  },
+  {
+    "id": "w25",
+    "text": "new",
+    "start": 9.166,
+    "end": 9.373
+  },
+  {
+    "id": "w26",
+    "text": "group.",
+    "start": 9.373,
+    "end": 9.856
+  },
+  {
+    "id": "w27",
+    "text": "That's",
+    "start": 9.856,
+    "end": 10.271
+  },
+  {
+    "id": "w28",
+    "text": "it.",
+    "start": 10.271,
+    "end": 10.547
+  }
+]

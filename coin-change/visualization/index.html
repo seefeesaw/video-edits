@@ -1,0 +1,1118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #101316;
+      }
+      body { font-family: "Hanken Grotesk", sans-serif; color: #ecedf0; }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        background: #101316;
+        overflow: hidden;
+      }
+      .scene-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 80px 140px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        box-sizing: border-box;
+        z-index: 2;
+      }
+      .grid-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background-image:
+          linear-gradient(rgba(236,237,240,0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(236,237,240,0.05) 1px, transparent 1px);
+        background-size: 96px 96px;
+        opacity: 0.5;
+      }
+      .eyebrow {
+        font-family: "Martian Mono", monospace;
+        font-size: 0.95rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: #5dd2d6;
+      }
+      .headline {
+        font-family: "Hanken Grotesk", sans-serif;
+        font-size: 4rem;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        line-height: 1.08;
+        max-width: 1500px;
+      }
+      .body-text {
+        font-family: "Hanken Grotesk", sans-serif;
+        font-size: 1.35rem;
+        font-weight: 300;
+        line-height: 1.5;
+        color: #ecedf0;
+        max-width: 980px;
+      }
+      .body-text strong { font-weight: 700; color: #ffb454; }
+      .mono-tag {
+        display: inline-flex;
+        align-items: center;
+        font-family: "Martian Mono", monospace;
+        font-size: 0.95rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: #ecedf0;
+        background: rgba(236,237,240,0.06);
+        border: 1px solid rgba(236,237,240,0.16);
+        border-radius: 6px;
+        padding: 10px 18px;
+      }
+
+      /* code panel */
+      .code-panel {
+        position: relative;
+        background: #1a1f24;
+        border: 1px solid rgba(236,237,240,0.12);
+        border-radius: 12px;
+        padding: 28px 32px;
+        font-family: "Martian Mono", monospace;
+        font-size: 1.06rem;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+        line-height: 2.05;
+        color: #8b96a6;
+        overflow: hidden;
+      }
+      .code-highlight {
+        position: absolute;
+        left: 14px; right: 14px;
+        height: 43px;
+        background: rgba(255,180,84,0.12);
+        border-left: 3px solid #ffb454;
+        border-radius: 4px;
+        z-index: 0;
+      }
+      .code-line {
+        position: relative;
+        z-index: 1;
+        white-space: pre;
+        padding-left: 18px;
+      }
+      .code-line .kw  { color: #5dd2d6; }
+      .code-line .num { color: #ffb454; }
+      .code-line .cm  { color: #647082; font-style: italic; }
+      .code-line.is-bright { color: #ecedf0; }
+
+      /* verdict card */
+      .verdict-card {
+        background: #1a1f24;
+        border: 1px solid rgba(236,237,240,0.12);
+        border-radius: 12px;
+        padding: 22px 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .verdict-label {
+        font-family: "Martian Mono", monospace;
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: #8b96a6;
+      }
+      .verdict-text {
+        font-family: "Hanken Grotesk", sans-serif;
+        font-size: 1.26rem;
+        font-weight: 300;
+        line-height: 1.45;
+        color: #ecedf0;
+      }
+      .verdict-text strong { font-weight: 700; }
+      .verdict-text .c-amber { color: #ffb454; font-weight: 700; }
+      .verdict-text .c-cyan  { color: #5dd2d6; font-weight: 700; }
+      .verdict-text .c-green { color: #6ee7a8; font-weight: 700; }
+      .verdict-text .c-dim   { color: #8b96a6; }
+
+      /* two-col layout */
+      .two-col { display: flex; gap: 64px; align-items: flex-start; }
+      .col-left  { flex: 1; display: flex; flex-direction: column; gap: 24px; }
+      .col-right { flex: 0 0 680px; display: flex; flex-direction: column; gap: 20px; }
+
+      /* coin pills */
+      .coin-pills { display: flex; gap: 20px; align-items: center; }
+      .coin-pill {
+        width: 80px; height: 80px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-family: "Martian Mono", monospace; font-size: 1.5rem; font-weight: 700;
+        color: #ffb454;
+        border: 2px solid rgba(255,180,84,0.45);
+        background: rgba(255,180,84,0.08);
+      }
+      .coins-label {
+        font-family: "Martian Mono", monospace;
+        font-size: 0.85rem; font-weight: 500; text-transform: uppercase;
+        letter-spacing: 0.16em; color: #8b96a6;
+        margin-bottom: 12px;
+      }
+      .target-box {
+        display: inline-flex; align-items: center; gap: 18px;
+        background: #1a1f24; border: 1px solid rgba(236,237,240,0.12);
+        border-radius: 12px; padding: 18px 28px;
+        font-family: "Martian Mono", monospace;
+      }
+      .target-label {
+        font-size: 0.82rem; font-weight: 500; text-transform: uppercase;
+        letter-spacing: 0.16em; color: #8b96a6;
+      }
+      .target-value {
+        font-size: 2.4rem; font-weight: 700; color: #6ee7a8;
+      }
+
+      /* compare table */
+      .compare-row { display: flex; gap: 20px; }
+      .compare-card {
+        flex: 1; background: #1a1f24; border: 1px solid rgba(236,237,240,0.12);
+        border-radius: 12px; padding: 22px 24px;
+        display: flex; flex-direction: column; gap: 12px;
+      }
+      .compare-card.bad  { border-color: rgba(255,180,84,0.25); }
+      .compare-card.good { border-color: rgba(110,231,168,0.35); }
+      .compare-card-label {
+        font-family: "Martian Mono", monospace; font-size: 0.78rem; font-weight: 500;
+        text-transform: uppercase; letter-spacing: 0.16em; color: #8b96a6;
+      }
+      .compare-steps {
+        font-family: "Martian Mono", monospace; font-size: 1.6rem; font-weight: 700;
+        color: #ecedf0; letter-spacing: 0.04em;
+      }
+      .compare-steps .c-amber { color: #ffb454; }
+      .compare-steps .c-green { color: #6ee7a8; }
+      .compare-result {
+        font-family: "Hanken Grotesk", sans-serif; font-size: 1.1rem; font-weight: 600;
+      }
+      .compare-result.bad  { color: #ffb454; }
+      .compare-result.good { color: #6ee7a8; }
+
+      /* recurrence formula block */
+      .formula-block {
+        background: #1a1f24; border: 1px solid rgba(93,210,214,0.25);
+        border-radius: 12px; padding: 28px 32px;
+        font-family: "Martian Mono", monospace; line-height: 2.0;
+      }
+      .formula-line { font-size: 1.1rem; color: #8b96a6; white-space: pre; }
+      .formula-line .f-var   { color: #5dd2d6; font-weight: 600; }
+      .formula-line .f-op    { color: #ecedf0; }
+      .formula-line .f-val   { color: #ffb454; }
+      .formula-line .f-green { color: #6ee7a8; font-weight: 600; }
+
+      /* dependency breakdown */
+      .dep-block {
+        background: #1a1f24; border: 1px solid rgba(236,237,240,0.1);
+        border-radius: 12px; padding: 24px 28px;
+        font-family: "Martian Mono", monospace; font-size: 1.05rem;
+        line-height: 2.1; color: #8b96a6;
+      }
+      .dep-block .d-cyan  { color: #5dd2d6; }
+      .dep-block .d-amber { color: #ffb454; }
+      .dep-block .d-green { color: #6ee7a8; font-weight: 700; }
+      .dep-block .d-win   { color: #6ee7a8; }
+      .dep-note {
+        font-family: "Martian Mono", monospace; font-size: 0.8rem;
+        text-transform: uppercase; letter-spacing: 0.14em;
+        color: #8b96a6; margin-top: 6px;
+      }
+
+      /* dp 1-D array */
+      .dp-row {
+        display: flex;
+        gap: 10px;
+        align-items: flex-end;
+      }
+      .dp-cell-wrap {
+        display: flex; flex-direction: column; align-items: center; gap: 8px;
+      }
+      .dp-amt {
+        font-family: "Martian Mono", monospace; font-size: 0.82rem;
+        font-weight: 500; color: #8b96a6; letter-spacing: 0.06em;
+      }
+      .dp-val {
+        width: 116px; height: 72px;
+        border: 1px solid rgba(100,112,130,0.3);
+        border-radius: 8px;
+        display: flex; align-items: center; justify-content: center;
+        font-family: "Martian Mono", monospace; font-size: 1.35rem; font-weight: 600;
+        color: #647082; background: rgba(100,112,130,0.06);
+        transition: none;
+      }
+      .dp-val.is-resolved {
+        border-color: #6ee7a8;
+        background: rgba(110,231,168,0.1);
+        color: #6ee7a8;
+      }
+      .dp-val.is-anchor {
+        border-color: #5dd2d6;
+        background: rgba(93,210,214,0.2);
+        color: #5dd2d6;
+      }
+      .dp-val.is-candidate {
+        border-color: #ffb454;
+        background: rgba(255,180,84,0.22);
+        color: #ffb454;
+      }
+      .dp-val.is-dim {
+        color: #647082; border-color: rgba(100,112,130,0.2);
+        background: rgba(100,112,130,0.04);
+      }
+      .dp-section-label {
+        font-family: "Martian Mono", monospace; font-size: 0.82rem; font-weight: 500;
+        text-transform: uppercase; letter-spacing: 0.14em; color: #8b96a6;
+        margin-bottom: 6px;
+      }
+      .dp-array-center {
+        display: flex; flex-direction: column; align-items: center; gap: 8px;
+      }
+
+      /* traceback chain */
+      .traceback {
+        display: flex; align-items: center; gap: 12px;
+        font-family: "Martian Mono", monospace;
+      }
+      .tb-cell {
+        width: 116px; height: 72px; border-radius: 8px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.35rem; font-weight: 600;
+        border: 1px solid #6ee7a8; background: rgba(110,231,168,0.1); color: #6ee7a8;
+      }
+      .tb-arrow {
+        font-size: 1.5rem; color: #5dd2d6;
+      }
+      .tb-coin {
+        font-size: 0.85rem; font-weight: 500; color: #ffb454;
+        text-align: center; margin-top: 4px;
+      }
+
+      /* caption track */
+      .caption-track {
+        position: absolute; inset: 0;
+        display: flex; align-items: flex-end; justify-content: center;
+        padding-bottom: 68px; pointer-events: none; z-index: 50;
+      }
+      .caption-stage { position: relative; width: 1440px; height: 92px; }
+      .caption-text {
+        position: absolute; inset: 0;
+        display: flex; align-items: center; justify-content: center;
+        text-align: center;
+        font-family: "Hanken Grotesk", sans-serif;
+        font-weight: 500; font-size: 2.05rem; line-height: 1.35; color: #eceef0;
+        background: rgba(16,19,22,0.76); border: 1px solid rgba(236,237,240,0.1);
+        border-radius: 14px; padding: 16px 40px; box-sizing: border-box; opacity: 0;
+      }
+
+      /* virality overlays */
+      #vrl-progress {
+        position: absolute; inset: 0; pointer-events: none;
+      }
+      #vrl-bar-bg {
+        position: absolute; bottom: 0; left: 0; right: 0;
+        height: 3px; background: rgba(236,237,240,0.12);
+      }
+      #vrl-bar-fill {
+        position: absolute; bottom: 0; left: 0;
+        height: 3px; background: #5dd2d6; width: 0%;
+      }
+      .vrl-step {
+        position: absolute; top: 28px; right: 140px;
+        font-family: "Martian Mono", monospace;
+        font-size: 0.85rem; font-weight: 500;
+        text-transform: uppercase; letter-spacing: 0.18em;
+        color: #5dd2d6;
+        background: rgba(16,19,22,0.82);
+        border: 1px solid rgba(93,210,214,0.25);
+        border-radius: 6px; padding: 8px 16px;
+      }
+      .vrl-step .vrl-n { color: #ffb454; }
+      #vrl-cta {
+        position: absolute; bottom: 80px; left: 50%;
+        font-family: "Hanken Grotesk", sans-serif; font-size: 1.15rem; font-weight: 600;
+        color: #ecedf0;
+        background: rgba(16,19,22,0.88); border: 1px solid rgba(236,237,240,0.2);
+        border-radius: 10px; padding: 14px 28px; white-space: nowrap;
+      }
+      #vrl-cta-icon { margin-right: 10px; color: #5dd2d6; }
+      #vrl-challenge {
+        position: absolute; bottom: 80px; left: 50%;
+        font-family: "Hanken Grotesk", sans-serif; font-size: 1.1rem; font-weight: 500;
+        color: #ecedf0;
+        background: rgba(16,19,22,0.88); border: 1px solid rgba(110,231,168,0.25);
+        border-radius: 10px; padding: 14px 28px; white-space: nowrap;
+      }
+      #vrl-challenge-icon { margin-right: 10px; color: #6ee7a8; }
+    </style>
+  </head>
+  <body>
+
+    <!-- ROOT COMPOSITION -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="180"
+         data-width="1920" data-height="1080">
+
+      <!-- ═══════════════════════════════════════════════════════════ SCENE 1 -->
+      <div id="scene-1" class="scene clip" data-start="0" data-duration="25" data-track-index="1">
+        <div class="grid-bg"></div>
+        <div class="scene-content">
+          <div id="s1-eyebrow" class="eyebrow">LeetCode &middot; Medium &middot; Dynamic Programming</div>
+          <h1 id="s1-headline" class="headline">Coin Change</h1>
+
+          <div class="two-col" style="margin-top:8px;">
+            <!-- left: coins + target -->
+            <div id="s1-left" class="col-left">
+              <div>
+                <div class="coins-label">Denominations</div>
+                <div class="coin-pills">
+                  <div id="s1-coin1" class="coin-pill">1</div>
+                  <div id="s1-coin3" class="coin-pill">3</div>
+                  <div id="s1-coin4" class="coin-pill">4</div>
+                </div>
+              </div>
+              <div class="target-box" id="s1-target">
+                <div class="target-label">Target</div>
+                <div class="target-value">6</div>
+              </div>
+              <div id="s1-body" class="body-text">
+                Find the <strong>minimum coins</strong> to reach the target.<br>
+                Unlimited coins of each denomination.
+              </div>
+            </div>
+
+            <!-- right: greedy vs DP comparison -->
+            <div id="s1-right" class="col-right">
+              <div class="verdict-label" style="margin-bottom:8px;">Strategy comparison</div>
+              <div class="compare-row">
+                <div id="s1-bad" class="compare-card bad">
+                  <div class="compare-card-label">Greedy</div>
+                  <div class="compare-steps">
+                    <span class="c-amber">4</span>&thinsp;+&thinsp;<span class="c-amber">1</span>&thinsp;+&thinsp;<span class="c-amber">1</span>
+                  </div>
+                  <div class="compare-result bad">3 coins &mdash; suboptimal</div>
+                </div>
+                <div id="s1-good" class="compare-card good">
+                  <div class="compare-card-label">Dynamic Programming</div>
+                  <div class="compare-steps">
+                    <span class="c-green">3</span>&thinsp;+&thinsp;<span class="c-green">3</span>
+                  </div>
+                  <div class="compare-result good">2 coins &mdash; optimal &#x2713;</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════ SCENE 2 -->
+      <div id="scene-2" class="scene clip" data-start="24.5" data-duration="27" data-track-index="2">
+        <div class="grid-bg"></div>
+        <div class="scene-content">
+          <div id="s2-eyebrow" class="eyebrow">Step 1 &mdash; The DP Insight</div>
+          <h2 id="s2-headline" class="headline">Build from smaller subproblems</h2>
+
+          <div class="two-col" style="margin-top:8px;">
+            <!-- left: formula -->
+            <div id="s2-left" class="col-left">
+              <div class="formula-block">
+                <div class="formula-line"><span class="f-var">dp[i]</span> <span class="f-op">=</span> min&nbsp;over all coins:</div>
+                <div class="formula-line">&nbsp;&nbsp;<span class="f-op">(</span> <span class="f-var">dp[i &minus; coin]</span> <span class="f-op">+</span> <span class="f-val">1</span> <span class="f-op">)</span></div>
+                <div class="formula-line" style="margin-top:8px; color:#647082; font-size:0.92rem;">where  coin &le; i</div>
+              </div>
+              <div id="s2-body" class="body-text">
+                Each amount builds on previously solved amounts.<br>
+                We subtract a coin and look up the stored result.
+              </div>
+            </div>
+
+            <!-- right: dp[6] breakdown -->
+            <div id="s2-right" class="col-right">
+              <div class="verdict-label" style="margin-bottom:6px;">Example &mdash; computing dp[6]</div>
+              <div class="dep-block">
+                <div id="s2-dep1" class="formula-line"><span class="d-cyan">dp[6]</span> <span class="f-op">=</span> min(</div>
+                <div id="s2-dep2" class="formula-line">&nbsp;&nbsp;dp[5] + 1&nbsp;&nbsp;<span style="color:#647082; font-size:0.88rem;">&larr; coin 1</span></div>
+                <div id="s2-dep3" class="formula-line">&nbsp;&nbsp;<span class="d-win">dp[3] + 1</span>&nbsp;&nbsp;<span style="color:#6ee7a8; font-size:0.88rem;">&larr; coin 3 &check;</span></div>
+                <div id="s2-dep4" class="formula-line">&nbsp;&nbsp;dp[2] + 1&nbsp;&nbsp;<span style="color:#647082; font-size:0.88rem;">&larr; coin 4</span></div>
+                <div id="s2-dep5" class="formula-line">)</div>
+                <div id="s2-dep6" class="formula-line" style="margin-top:4px;"><span class="d-cyan">dp[6]</span> <span class="f-op">=</span> min(3, <span class="d-green">2</span>, 3) = <span class="d-green">2</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════ SCENE 3 -->
+      <div id="scene-3" class="scene clip" data-start="51.0" data-duration="17" data-track-index="1">
+        <div class="grid-bg"></div>
+        <div class="scene-content">
+          <div id="s3-eyebrow" class="eyebrow">Step 2 &mdash; Initialization</div>
+          <h2 id="s3-headline" class="headline">Anchor: dp[0] = 0</h2>
+
+          <div style="margin-top:20px;">
+            <div class="dp-section-label" id="s3-arr-label">dp array &mdash; amounts 0 to 6</div>
+            <div id="s3-dp-row" class="dp-row" style="margin-top:12px;">
+              <div class="dp-cell-wrap">
+                <div class="dp-amt">0</div>
+                <div id="s3-dv0" class="dp-val is-resolved" style="opacity:0;">0</div>
+              </div>
+              <div class="dp-cell-wrap">
+                <div class="dp-amt">1</div>
+                <div id="s3-dv1" class="dp-val is-dim" style="opacity:0;">&infin;</div>
+              </div>
+              <div class="dp-cell-wrap">
+                <div class="dp-amt">2</div>
+                <div id="s3-dv2" class="dp-val is-dim" style="opacity:0;">&infin;</div>
+              </div>
+              <div class="dp-cell-wrap">
+                <div class="dp-amt">3</div>
+                <div id="s3-dv3" class="dp-val is-dim" style="opacity:0;">&infin;</div>
+              </div>
+              <div class="dp-cell-wrap">
+                <div class="dp-amt">4</div>
+                <div id="s3-dv4" class="dp-val is-dim" style="opacity:0;">&infin;</div>
+              </div>
+              <div class="dp-cell-wrap">
+                <div class="dp-amt">5</div>
+                <div id="s3-dv5" class="dp-val is-dim" style="opacity:0;">&infin;</div>
+              </div>
+              <div class="dp-cell-wrap">
+                <div class="dp-amt">6</div>
+                <div id="s3-dv6" class="dp-val is-dim" style="opacity:0;">&infin;</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="s3-verdict" class="verdict-card" style="max-width:760px; margin-top:12px;">
+            <div class="verdict-label">Initialization rule</div>
+            <div class="verdict-text">
+              <span class="c-green">dp[0] = 0</span> &mdash; zero coins for amount zero.<br>
+              <span class="c-amber">dp[1..6] = total + 1</span> &mdash; sentinel for &ldquo;not yet reachable&rdquo;.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════ SCENE 4 -->
+      <div id="scene-4" class="scene clip" data-start="68.0" data-duration="23" data-track-index="2">
+        <div class="grid-bg"></div>
+        <div class="scene-content">
+          <div id="s4-eyebrow" class="eyebrow">Step 3 &mdash; Fill amounts 1 to 3</div>
+          <h2 id="s4-headline" class="headline">Try every coin</h2>
+
+          <div class="two-col" style="margin-top:12px; align-items:flex-start;">
+            <!-- left: dp array -->
+            <div id="s4-left" class="col-left">
+              <div class="dp-section-label">dp[0..6]</div>
+              <div class="dp-row">
+                <!-- dp[0] visible from start -->
+                <div class="dp-cell-wrap">
+                  <div class="dp-amt">0</div>
+                  <div class="dp-val is-resolved">0</div>
+                </div>
+                <!-- dp[1] revealed during scene -->
+                <div class="dp-cell-wrap">
+                  <div class="dp-amt">1</div>
+                  <div id="s4-dv1" class="dp-val" style="opacity:0;">1</div>
+                </div>
+                <!-- dp[2] revealed during scene -->
+                <div class="dp-cell-wrap">
+                  <div class="dp-amt">2</div>
+                  <div id="s4-dv2" class="dp-val" style="opacity:0;">2</div>
+                </div>
+                <!-- dp[3] revealed during scene -->
+                <div class="dp-cell-wrap">
+                  <div class="dp-amt">3</div>
+                  <div id="s4-dv3" class="dp-val" style="opacity:0;">1</div>
+                </div>
+                <!-- dp[4-6] shown as unrevealed (dim) -->
+                <div class="dp-cell-wrap">
+                  <div class="dp-amt">4</div>
+                  <div class="dp-val is-dim">&infin;</div>
+                </div>
+                <div class="dp-cell-wrap">
+                  <div class="dp-amt">5</div>
+                  <div class="dp-val is-dim">&infin;</div>
+                </div>
+                <div class="dp-cell-wrap">
+                  <div class="dp-amt">6</div>
+                  <div class="dp-val is-dim">&infin;</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- right: code snippet -->
+            <div id="s4-right" class="col-right">
+              <div class="code-panel">
+                <div class="code-highlight" id="s4-hi" style="top:14px; opacity:0;"></div>
+                <div class="code-line"><span class="kw">for</span> amount <span class="kw">in</span> <span class="kw">range</span>(<span class="num">1</span>, total + <span class="num">1</span>):</div>
+                <div class="code-line is-bright">&nbsp;&nbsp;<span class="kw">for</span> coin <span class="kw">in</span> coins:</div>
+                <div class="code-line is-bright">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> coin &lt;= amount:</div>
+                <div class="code-line is-bright">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dp[amount] = <span class="kw">min</span>(</div>
+                <div class="code-line is-bright">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dp[amount],</div>
+                <div class="code-line is-bright">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dp[amount &minus; coin] + <span class="num">1</span></div>
+                <div class="code-line is-bright">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════ SCENE 5 -->
+      <div id="scene-5" class="scene clip" data-start="91.0" data-duration="26" data-track-index="1">
+        <div class="grid-bg"></div>
+        <div class="scene-content">
+          <div id="s5-eyebrow" class="eyebrow">Step 4 &mdash; Fill amounts 4 to 6</div>
+          <h2 id="s5-headline" class="headline">Greedy breaks down here</h2>
+
+          <div class="two-col" style="margin-top:12px; align-items:flex-start;">
+            <!-- left: dp array -->
+            <div id="s5-left" class="col-left">
+              <div class="dp-section-label">dp[0..6]</div>
+              <div class="dp-row">
+                <!-- dp[0-3] already resolved -->
+                <div class="dp-cell-wrap">
+                  <div class="dp-amt">0</div>
+                  <div class="dp-val is-resolved">0</div>
+                </div>
+                <div class="dp-cell-wrap">
+                  <div class="dp-amt">1</div>
+                  <div class="dp-val is-resolved">1</div>
+                </div>
+                <div class="dp-cell-wrap">
+                  <div class="dp-amt">2</div>
+                  <div class="dp-val is-resolved">2</div>
+                </div>
+                <div class="dp-cell-wrap">
+                  <div class="dp-amt">3</div>
+                  <div class="dp-val is-resolved">1</div>
+                </div>
+                <!-- dp[4-6] revealed during scene -->
+                <div class="dp-cell-wrap">
+                  <div class="dp-amt">4</div>
+                  <div id="s5-dv4" class="dp-val" style="opacity:0;">1</div>
+                </div>
+                <div class="dp-cell-wrap">
+                  <div class="dp-amt">5</div>
+                  <div id="s5-dv5" class="dp-val" style="opacity:0;">2</div>
+                </div>
+                <div class="dp-cell-wrap">
+                  <div class="dp-amt">6</div>
+                  <div id="s5-dv6" class="dp-val" style="opacity:0;">2</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- right: greedy vs DP for amount 6 -->
+            <div id="s5-right" class="col-right">
+              <div class="verdict-card">
+                <div class="verdict-label">Amount 6 &mdash; greedy vs DP</div>
+                <div class="verdict-text">
+                  <span class="c-amber">Greedy</span>: picks coin 4 &rarr; remaining 2 &rarr; coin 1+1
+                  <span class="c-dim">&nbsp;=&nbsp;3 coins</span><br><br>
+                  <span class="c-green">DP</span>: coin 3 &rarr; dp[3]+1 = 1+1 = <strong>2 coins</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════ SCENE 6 -->
+      <div id="scene-6" class="scene clip" data-start="116.5" data-duration="24" data-track-index="2">
+        <div class="grid-bg"></div>
+        <div class="scene-content">
+          <div id="s6-eyebrow" class="eyebrow">Step 5 &mdash; Result &amp; Traceback</div>
+          <h2 id="s6-headline" class="headline">dp[6] = 2 &mdash; return 2</h2>
+
+          <div style="margin-top:16px;">
+            <div class="dp-section-label" id="s6-arr-label">Final dp array</div>
+            <div id="s6-dp-row" class="dp-row" style="margin-top:12px;">
+              <div class="dp-cell-wrap">
+                <div class="dp-amt">0</div>
+                <div class="dp-val is-resolved">0</div>
+              </div>
+              <div class="dp-cell-wrap">
+                <div class="dp-amt">1</div>
+                <div class="dp-val is-resolved">1</div>
+              </div>
+              <div class="dp-cell-wrap">
+                <div class="dp-amt">2</div>
+                <div class="dp-val is-resolved">2</div>
+              </div>
+              <div class="dp-cell-wrap">
+                <div class="dp-amt">3</div>
+                <div id="s6-dv3" class="dp-val is-resolved">1</div>
+              </div>
+              <div class="dp-cell-wrap">
+                <div class="dp-amt">4</div>
+                <div class="dp-val is-resolved">1</div>
+              </div>
+              <div class="dp-cell-wrap">
+                <div class="dp-amt">5</div>
+                <div class="dp-val is-resolved">2</div>
+              </div>
+              <div class="dp-cell-wrap">
+                <div class="dp-amt">6</div>
+                <div id="s6-dv6" class="dp-val is-resolved">2</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:20px;" id="s6-traceback">
+            <div class="dp-section-label">Traceback &mdash; recovering the coins</div>
+            <div class="traceback" style="margin-top:14px;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+                <div class="tb-cell" id="s6-tb6">2</div>
+                <div class="tb-coin">dp[6]</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+                <span class="tb-arrow" id="s6-tba1">&#x2192;</span>
+                <span style="font-family:'Martian Mono',monospace; font-size:0.78rem; color:#ffb454;">coin 3</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+                <div class="tb-cell" id="s6-tb3">1</div>
+                <div class="tb-coin">dp[3]</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+                <span class="tb-arrow" id="s6-tba2">&#x2192;</span>
+                <span style="font-family:'Martian Mono',monospace; font-size:0.78rem; color:#ffb454;">coin 3</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+                <div class="tb-cell" id="s6-tb0">0</div>
+                <div class="tb-coin">dp[0]</div>
+              </div>
+              <div style="margin-left:32px;" id="s6-answer">
+                <div class="verdict-card" style="min-width:260px;">
+                  <div class="verdict-label">Answer</div>
+                  <div class="verdict-text">
+                    Coins: <span class="c-green">[3, 3]</span><br>
+                    Count: <span class="c-green">2</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════ SCENE 7 -->
+      <div id="scene-7" class="scene clip" data-start="140.0" data-duration="40" data-track-index="1">
+        <div class="grid-bg"></div>
+        <div class="scene-content">
+          <div id="s7-eyebrow" class="eyebrow">Step 6 &mdash; Complete Solution</div>
+          <h2 id="s7-headline" class="headline" style="font-size:3rem;">O(total &times; coins) time &nbsp;&middot;&nbsp; O(total) space</h2>
+
+          <div style="margin-top:16px; max-width:900px;">
+            <div class="code-panel">
+              <div class="code-highlight" id="s7-hi" style="top:14px; opacity:0;"></div>
+              <div id="s7-l0"  class="code-line"><span class="kw">def</span> coin_change(coins, total):</div>
+              <div id="s7-l1"  class="code-line is-bright">&nbsp;&nbsp;dp = [total + <span class="num">1</span>] * (total + <span class="num">1</span>)</div>
+              <div id="s7-l2"  class="code-line is-bright">&nbsp;&nbsp;dp[<span class="num">0</span>] = <span class="num">0</span></div>
+              <div id="s7-l3"  class="code-line"><span class="kw">&nbsp;&nbsp;for</span> amount <span class="kw">in</span> <span class="kw">range</span>(<span class="num">1</span>, total + <span class="num">1</span>):</div>
+              <div id="s7-l4"  class="code-line"><span class="kw">&nbsp;&nbsp;&nbsp;&nbsp;for</span> coin <span class="kw">in</span> coins:</div>
+              <div id="s7-l5"  class="code-line"><span class="kw">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> coin &lt;= amount:</div>
+              <div id="s7-l6"  class="code-line is-bright">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dp[amount] = <span class="kw">min</span>(</div>
+              <div id="s7-l7"  class="code-line is-bright">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dp[amount],</div>
+              <div id="s7-l8"  class="code-line is-bright">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dp[amount &minus; coin] + <span class="num">1</span></div>
+              <div id="s7-l9"  class="code-line is-bright">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</div>
+              <div id="s7-l10" class="code-line"><span class="kw">&nbsp;&nbsp;return</span> dp[total] <span class="kw">if</span> dp[total] &lt;= total <span class="kw">else</span> &minus;<span class="num">1</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════ CAPTIONS -->
+      <div id="captions" class="caption-track clip"
+           data-start="1.0" data-duration="178" data-track-index="3">
+        <div class="caption-stage">
+          <div id="cap-a" class="caption-text"></div>
+          <div id="cap-b" class="caption-text"></div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════ PROGRESS BAR -->
+      <div id="vrl-progress" class="clip"
+           data-start="0" data-duration="180" data-track-index="4" data-layout-ignore>
+        <div id="vrl-bar-bg"></div>
+        <div id="vrl-bar-fill"></div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════ STEP COUNTERS -->
+      <div id="vrl-step-1" class="clip vrl-step"
+           data-start="24.5" data-duration="26" data-track-index="5" data-layout-ignore>
+        <span class="vrl-n">STEP 1/5</span>&nbsp;&middot;&nbsp;INSIGHT
+      </div>
+      <div id="vrl-step-2" class="clip vrl-step"
+           data-start="51.0" data-duration="17" data-track-index="5" data-layout-ignore>
+        <span class="vrl-n">STEP 2/5</span>&nbsp;&middot;&nbsp;BASE CASE
+      </div>
+      <div id="vrl-step-3" class="clip vrl-step"
+           data-start="68.0" data-duration="23" data-track-index="5" data-layout-ignore>
+        <span class="vrl-n">STEP 3/5</span>&nbsp;&middot;&nbsp;FILL 1&ndash;3
+      </div>
+      <div id="vrl-step-4" class="clip vrl-step"
+           data-start="91.0" data-duration="25" data-track-index="5" data-layout-ignore>
+        <span class="vrl-n">STEP 4/5</span>&nbsp;&middot;&nbsp;FILL 4&ndash;6
+      </div>
+      <div id="vrl-step-5" class="clip vrl-step"
+           data-start="116.5" data-duration="24" data-track-index="5" data-layout-ignore>
+        <span class="vrl-n">STEP 5/5</span>&nbsp;&middot;&nbsp;RESULT
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════ CTA + CHALLENGE -->
+      <div id="vrl-cta" class="clip"
+           data-start="168.5" data-duration="6.0" data-track-index="6" data-layout-ignore>
+        <span id="vrl-cta-icon">&#x2191;</span>Like &amp; Subscribe for more Python breakdowns
+      </div>
+      <div id="vrl-challenge" class="clip"
+           data-start="174.5" data-duration="4.5" data-track-index="6" data-layout-ignore>
+        <span id="vrl-challenge-icon">&#x2192;</span>coins = [2], total = 3 &mdash; what does dp return?
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════ AUDIO -->
+      <audio id="narration" class="clip" src="audio/narration.wav"
+             data-start="0" data-duration="180" data-track-index="0" data-volume="1"></audio>
+
+    </div><!-- /root -->
+
+    <script>
+    window.__timelines = window.__timelines || {};
+    var tl = gsap.timeline({ paused: true });
+
+    // ── Scene start positions ────────────────────────────────────────
+    var S1  =   0.0;
+    var S2  =  24.5;
+    var S3  =  51.0;
+    var S4  =  68.0;
+    var S5  =  91.0;
+    var S6  = 116.5;
+    var S7  = 140.0;
+
+    // ── Audio clip start positions ───────────────────────────────────
+    var A1  =   1.0;
+    var A2  =  26.0;
+    var A3  =  52.5;
+    var A4  =  69.5;
+    var A5  =  92.5;
+    var A6  = 118.0;
+    var A7  = 141.5;
+
+    // ── Transition times (0.8s before incoming scene audio) ──────────
+    var T12 = S2 - 0.4;   // 24.1
+    var T23 = S3 - 0.4;   // 50.6
+    var T34 = S4 - 0.4;   // 67.6
+    var T45 = S5 - 0.4;   // 90.6
+    var T56 = S6 - 0.4;  // 116.1
+    var T67 = S7 - 0.4;  // 139.6
+
+    // ════════════════════════════════════════════════════════════════
+    // SCENE 1: Problem Statement
+    // ════════════════════════════════════════════════════════════════
+    tl.from("#s1-eyebrow",  { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, S1 + 0.3);
+    tl.from("#s1-headline", { y: 40, opacity: 0, duration: 0.65, ease: "power3.out" }, S1 + 0.5);
+    tl.from("#s1-left",     { x: -40, opacity: 0, duration: 0.65, ease: "power2.out" }, S1 + 0.85);
+    tl.from("#s1-right",    { x: 40,  opacity: 0, duration: 0.65, ease: "power2.out" }, S1 + 1.1);
+    // coin pills stagger
+    tl.from("#s1-coin1, #s1-coin3, #s1-coin4",
+      { y: 20, opacity: 0, scale: 0.8, duration: 0.4, stagger: 0.12, ease: "back.out(1.5)" }, S1 + 1.4);
+    // target box
+    tl.from("#s1-target", { opacity: 0, scale: 0.9, duration: 0.4, ease: "back.out(1.4)" }, S1 + 1.8);
+    // comparison cards
+    tl.from("#s1-bad",  { y: 20, opacity: 0, duration: 0.4, ease: "power2.out" }, A1 + 3.0);
+    tl.from("#s1-good", { y: 20, opacity: 0, duration: 0.4, ease: "power2.out" }, A1 + 5.0);
+
+    // transition S1 → S2
+    tl.to("#scene-1",   { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, T12);
+    tl.fromTo("#scene-2", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, T12);
+
+    // ════════════════════════════════════════════════════════════════
+    // SCENE 2: Key Insight
+    // ════════════════════════════════════════════════════════════════
+    tl.from("#s2-eyebrow",  { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, S2 + 0.3);
+    tl.from("#s2-headline", { y: 40, opacity: 0, duration: 0.65, ease: "power3.out" }, S2 + 0.5);
+    tl.from("#s2-left",     { x: -40, opacity: 0, duration: 0.65, ease: "power2.out" }, S2 + 0.85);
+    tl.from("#s2-right",    { x: 40,  opacity: 0, duration: 0.65, ease: "power2.out" }, S2 + 1.1);
+    tl.from("#s2-body",     { y: 20, opacity: 0, duration: 0.5, ease: "sine.out" }, S2 + 1.4);
+    // dep lines stagger in during narration
+    tl.from("#s2-dep1", { x: -20, opacity: 0, duration: 0.4, ease: "power2.out" }, A2 + 3.5);
+    tl.from("#s2-dep2", { x: -20, opacity: 0, duration: 0.4, ease: "power2.out" }, A2 + 5.5);
+    tl.from("#s2-dep3", { x: -20, opacity: 0, duration: 0.4, ease: "power2.out" }, A2 + 7.5);
+    tl.from("#s2-dep4", { x: -20, opacity: 0, duration: 0.4, ease: "power2.out" }, A2 + 9.0);
+    tl.from("#s2-dep5", { x: -20, opacity: 0, duration: 0.4, ease: "power2.out" }, A2 + 10.5);
+    tl.from("#s2-dep6", { x: -20, opacity: 0, duration: 0.45, ease: "back.out(1.4)" }, A2 + 12.0);
+
+    // transition S2 → S3
+    tl.to("#scene-2",   { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, T23);
+    tl.fromTo("#scene-3", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, T23);
+
+    // ════════════════════════════════════════════════════════════════
+    // SCENE 3: Base Case / Initialization
+    // ════════════════════════════════════════════════════════════════
+    tl.from("#s3-eyebrow",  { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, S3 + 0.3);
+    tl.from("#s3-headline", { y: 40, opacity: 0, duration: 0.65, ease: "power3.out" }, S3 + 0.5);
+    tl.from("#s3-arr-label",{ y: 16, opacity: 0, duration: 0.4, ease: "sine.out" }, S3 + 0.9);
+
+    // dp[0] = 0 pops in (anchor)
+    tl.fromTo("#s3-dv0",
+      { opacity: 0, scale: 0.6 },
+      { opacity: 1, scale: 1, duration: 0.55, ease: "elastic.out(1, 0.55)" }, A3 + 0.5);
+    // infinity cells fade in with stagger (dim)
+    tl.to(["#s3-dv1","#s3-dv2","#s3-dv3","#s3-dv4","#s3-dv5","#s3-dv6"],
+      { opacity: 0.4, duration: 0.4, stagger: 0.07, ease: "sine.out" }, A3 + 1.2);
+
+    tl.from("#s3-verdict",  { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, A3 + 4.0);
+
+    // transition S3 → S4
+    tl.to("#scene-3",   { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, T34);
+    tl.fromTo("#scene-4", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, T34);
+
+    // ════════════════════════════════════════════════════════════════
+    // SCENE 4: Fill dp[1] to dp[3]
+    // ════════════════════════════════════════════════════════════════
+    tl.from("#s4-eyebrow",  { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, S4 + 0.3);
+    tl.from("#s4-headline", { y: 40, opacity: 0, duration: 0.65, ease: "power3.out" }, S4 + 0.5);
+    tl.from("#s4-left",     { x: -40, opacity: 0, duration: 0.6, ease: "power2.out" }, S4 + 0.85);
+    tl.from("#s4-right",    { x: 40,  opacity: 0, duration: 0.6, ease: "power2.out" }, S4 + 1.1);
+
+    // code highlight bar fade in
+    tl.fromTo("#s4-hi", { opacity: 0 }, { opacity: 1, duration: 0.3 }, S4 + 1.0);
+
+    // dp[1] = 1 reveal: amber flash → green settle
+    tl.fromTo("#s4-dv1",
+      { opacity: 0, scale: 0.7, color: "#ffb454", borderColor: "#ffb454", background: "rgba(255,180,84,0.22)" },
+      { opacity: 1, scale: 1.1, duration: 0.3, ease: "back.out(1.6)" }, A4 + 1.5);
+    tl.to("#s4-dv1",
+      { scale: 1.0, color: "#6ee7a8", borderColor: "#6ee7a8", background: "rgba(110,231,168,0.1)", duration: 0.4 },
+      A4 + 2.0);
+
+    // dp[2] = 2 reveal
+    tl.fromTo("#s4-dv2",
+      { opacity: 0, scale: 0.7, color: "#ffb454", borderColor: "#ffb454", background: "rgba(255,180,84,0.22)" },
+      { opacity: 1, scale: 1.1, duration: 0.3, ease: "back.out(1.6)" }, A4 + 4.5);
+    tl.to("#s4-dv2",
+      { scale: 1.0, color: "#6ee7a8", borderColor: "#6ee7a8", background: "rgba(110,231,168,0.1)", duration: 0.4 },
+      A4 + 5.0);
+
+    // dp[3] = 1 reveal (amber first to show "trying coin 1 → gets 3", then green for coin 3 → 1)
+    tl.fromTo("#s4-dv3",
+      { opacity: 0, scale: 0.7, color: "#5dd2d6", borderColor: "#5dd2d6", background: "rgba(93,210,214,0.2)" },
+      { opacity: 1, scale: 1.1, duration: 0.3, ease: "back.out(1.6)" }, A4 + 8.5);
+    tl.to("#s4-dv3",
+      { scale: 1.0, color: "#6ee7a8", borderColor: "#6ee7a8", background: "rgba(110,231,168,0.1)", duration: 0.5, ease: "elastic.out(1, 0.55)" },
+      A4 + 9.2);
+
+    // code highlight bar moves through lines
+    tl.to("#s4-hi", { top: 14,  duration: 0.3 }, A4 + 0.2);
+    tl.to("#s4-hi", { top: 53,  duration: 0.5, ease: "power2.inOut" }, A4 + 2.5);
+    tl.to("#s4-hi", { top: 92,  duration: 0.5, ease: "power2.inOut" }, A4 + 5.5);
+    tl.to("#s4-hi", { top: 131, duration: 0.5, ease: "power2.inOut" }, A4 + 8.0);
+
+    // transition S4 → S5
+    tl.to("#scene-4",   { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, T45);
+    tl.fromTo("#scene-5", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, T45);
+
+    // ════════════════════════════════════════════════════════════════
+    // SCENE 5: Fill dp[4] to dp[6]
+    // ════════════════════════════════════════════════════════════════
+    tl.from("#s5-eyebrow",  { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, S5 + 0.3);
+    tl.from("#s5-headline", { y: 40, opacity: 0, duration: 0.65, ease: "power3.out" }, S5 + 0.5);
+    tl.from("#s5-left",     { x: -40, opacity: 0, duration: 0.6, ease: "power2.out" }, S5 + 0.85);
+    tl.from("#s5-right",    { x: 40,  opacity: 0, duration: 0.6, ease: "power2.out" }, S5 + 1.1);
+
+    // dp[4] = 1 reveal
+    tl.fromTo("#s5-dv4",
+      { opacity: 0, scale: 0.6, color: "#ffb454", borderColor: "#ffb454", background: "rgba(255,180,84,0.22)" },
+      { opacity: 1, scale: 1.1, duration: 0.35, ease: "elastic.out(1, 0.5)" }, A5 + 1.5);
+    tl.to("#s5-dv4",
+      { scale: 1.0, color: "#6ee7a8", borderColor: "#6ee7a8", background: "rgba(110,231,168,0.1)", duration: 0.4 },
+      A5 + 2.1);
+
+    // dp[5] = 2 reveal
+    tl.fromTo("#s5-dv5",
+      { opacity: 0, scale: 0.6, color: "#ffb454", borderColor: "#ffb454", background: "rgba(255,180,84,0.22)" },
+      { opacity: 1, scale: 1.1, duration: 0.35, ease: "elastic.out(1, 0.5)" }, A5 + 5.5);
+    tl.to("#s5-dv5",
+      { scale: 1.0, color: "#6ee7a8", borderColor: "#6ee7a8", background: "rgba(110,231,168,0.1)", duration: 0.4 },
+      A5 + 6.1);
+
+    // dp[6] = 2 reveal (highlight source dp[3] first, then reveal)
+    tl.to("#s5-dv5", { borderColor: "#5dd2d6", background: "rgba(93,210,214,0.2)", color: "#5dd2d6", duration: 0.3 }, A5 + 9.5);
+    tl.fromTo("#s5-dv6",
+      { opacity: 0, scale: 0.6, color: "#5dd2d6", borderColor: "#5dd2d6", background: "rgba(93,210,214,0.2)" },
+      { opacity: 1, scale: 1.1, duration: 0.4, ease: "elastic.out(1, 0.5)" }, A5 + 10.2);
+    tl.to(["#s5-dv5","#s5-dv6"],
+      { scale: 1.0, color: "#6ee7a8", borderColor: "#6ee7a8", background: "rgba(110,231,168,0.1)", duration: 0.4 },
+      A5 + 11.0);
+
+    // transition S5 → S6
+    tl.to("#scene-5",   { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, T56);
+    tl.fromTo("#scene-6", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, T56);
+
+    // ════════════════════════════════════════════════════════════════
+    // SCENE 6: Result + Traceback
+    // ════════════════════════════════════════════════════════════════
+    tl.from("#s6-eyebrow",    { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, S6 + 0.3);
+    tl.from("#s6-headline",   { y: 40, opacity: 0, duration: 0.65, ease: "power3.out" }, S6 + 0.5);
+    tl.from("#s6-arr-label",  { y: 16, opacity: 0, duration: 0.4, ease: "sine.out" }, S6 + 0.8);
+    // final dp array slides in
+    tl.from("#s6-dp-row .dp-cell-wrap", { y: 20, opacity: 0, stagger: 0.07, duration: 0.4, ease: "power2.out" }, S6 + 1.0);
+    // dp[6] extra highlight pulse
+    tl.to("#s6-dv6",
+      { borderColor: "#ffb454", background: "rgba(255,180,84,0.22)", color: "#ffb454", duration: 0.3 }, A6 + 1.5);
+    tl.to("#s6-dv6",
+      { borderColor: "#6ee7a8", background: "rgba(110,231,168,0.1)", color: "#6ee7a8", duration: 0.5, ease: "elastic.out(1, 0.6)" }, A6 + 2.2);
+
+    // traceback chain reveals
+    tl.from("#s6-traceback",  { y: 30, opacity: 0, duration: 0.5, ease: "power2.out" }, A6 + 3.5);
+    tl.from("#s6-tb6",   { scale: 0.7, opacity: 0, duration: 0.4, ease: "back.out(1.5)" }, A6 + 4.0);
+    tl.from("#s6-tba1",  { x: -12, opacity: 0, duration: 0.3, ease: "sine.out" }, A6 + 5.0);
+    tl.from("#s6-tb3",   { scale: 0.7, opacity: 0, duration: 0.4, ease: "back.out(1.5)" }, A6 + 5.8);
+    // dp[3] highlight on the row too
+    tl.to("#s6-dv3",
+      { borderColor: "#5dd2d6", background: "rgba(93,210,214,0.2)", color: "#5dd2d6", duration: 0.3 }, A6 + 5.8);
+    tl.from("#s6-tba2",  { x: -12, opacity: 0, duration: 0.3, ease: "sine.out" }, A6 + 7.0);
+    tl.from("#s6-tb0",   { scale: 0.7, opacity: 0, duration: 0.4, ease: "back.out(1.5)" }, A6 + 7.8);
+    tl.from("#s6-answer",{ x: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, A6 + 9.0);
+
+    // transition S6 → S7
+    tl.to("#scene-6",   { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, T67);
+    tl.fromTo("#scene-7", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, T67);
+
+    // ════════════════════════════════════════════════════════════════
+    // SCENE 7: Full Python Solution
+    // ════════════════════════════════════════════════════════════════
+    tl.from("#s7-eyebrow",  { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, S7 + 0.3);
+    tl.from("#s7-headline", { y: 30, opacity: 0, duration: 0.5, ease: "power2.out" }, S7 + 0.5);
+    // code lines stagger in from left
+    tl.from("#s7-l0, #s7-l1, #s7-l2",
+      { x: -32, opacity: 0, duration: 0.45, stagger: 0.14, ease: "power2.out" }, S7 + 0.9);
+    tl.from("#s7-l3, #s7-l4",
+      { x: -24, opacity: 0, duration: 0.4, stagger: 0.1, ease: "power2.out" }, S7 + 1.4);
+    tl.from("#s7-l5, #s7-l6, #s7-l7, #s7-l8",
+      { x: -24, opacity: 0, duration: 0.4, stagger: 0.09, ease: "back.out(1.2)" }, S7 + 1.8);
+    tl.from("#s7-l9, #s7-l10",
+      { x: -24, opacity: 0, duration: 0.4, stagger: 0.09, ease: "back.out(1.2)" }, S7 + 2.2);
+
+    // code highlight bar
+    tl.fromTo("#s7-hi", { opacity: 0 }, { opacity: 1, duration: 0.3 }, S7 + 0.8);
+    tl.to("#s7-hi", { top:  14, duration: 0.0 }, S7 + 0.8);
+    tl.to("#s7-hi", { top:  53, duration: 0.55, ease: "power2.inOut" }, A7 + 0.5);
+    tl.to("#s7-hi", { top:  92, duration: 0.55, ease: "power2.inOut" }, A7 + 2.5);
+    tl.to("#s7-hi", { top: 131, duration: 0.55, ease: "power2.inOut" }, A7 + 5.0);
+    tl.to("#s7-hi", { top: 170, duration: 0.55, ease: "power2.inOut" }, A7 + 7.5);
+    tl.to("#s7-hi", { top: 209, duration: 0.55, ease: "power2.inOut" }, A7 + 10.0);
+    tl.to("#s7-hi", { top: 248, duration: 0.55, ease: "power2.inOut" }, A7 + 12.0);
+    tl.to("#s7-hi", { top: 365, duration: 0.55, ease: "power2.inOut" }, A7 + 16.0);
+
+    // scene 7 final fade out
+    tl.to("#scene-7", { opacity: 0, duration: 1.0, ease: "power2.in" }, 178.8);
+
+    // ════════════════════════════════════════════════════════════════
+    // VIRALITY OVERLAYS
+    // ════════════════════════════════════════════════════════════════
+    tl.fromTo("#vrl-bar-fill", { width: "0%" }, { width: "100%", duration: 180, ease: "none" }, 0);
+
+    // step counters
+    tl.from("#vrl-step-1", { opacity: 0, y: -10, duration: 0.5, ease: "power2.out" }, S2);
+    tl.to("#vrl-step-1",   { opacity: 0, y: -10, duration: 0.3, ease: "power2.in"  }, S2 + 26 - 0.5);
+    tl.from("#vrl-step-2", { opacity: 0, y: -10, duration: 0.5, ease: "power2.out" }, S3);
+    tl.to("#vrl-step-2",   { opacity: 0, y: -10, duration: 0.3, ease: "power2.in"  }, S3 + 17 - 0.5);
+    tl.from("#vrl-step-3", { opacity: 0, y: -10, duration: 0.5, ease: "power2.out" }, S4);
+    tl.to("#vrl-step-3",   { opacity: 0, y: -10, duration: 0.3, ease: "power2.in"  }, S4 + 23 - 0.5);
+    tl.from("#vrl-step-4", { opacity: 0, y: -10, duration: 0.5, ease: "power2.out" }, S5);
+    tl.to("#vrl-step-4",   { opacity: 0, y: -10, duration: 0.3, ease: "power2.in"  }, S5 + 25 - 0.5);
+    tl.from("#vrl-step-5", { opacity: 0, y: -10, duration: 0.5, ease: "power2.out" }, S6);
+    tl.to("#vrl-step-5",   { opacity: 0, y: -10, duration: 0.3, ease: "power2.in"  }, S6 + 24 - 0.5);
+
+    // CTA (xPercent: -50 replaces CSS translateX since GSAP owns the transform)
+    tl.fromTo("#vrl-cta",
+      { xPercent: -50, opacity: 0, y: 18 },
+      { xPercent: -50, opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 168.5);
+    tl.fromTo("#vrl-challenge",
+      { xPercent: -50, opacity: 0, y: 14 },
+      { xPercent: -50, opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 174.5);
+    tl.to("#vrl-challenge",   { xPercent: -50, opacity: 0, y: 8, duration: 0.5, ease: "sine.in" }, 178.5);
+
+    // ════════════════════════════════════════════════════════════════
+    // CAPTIONS  (onStart closure — never tl.call)
+    // ════════════════════════════════════════════════════════════════
+    var CAPTIONS = [
+      // Scene 1
+      { text: "Find the minimum coins to reach the target total.", start:  1.1, end:  5.5 },
+      { text: "Coins: 1, 3, 4  —  Target: 6",                 start:  5.8, end:  9.5 },
+      { text: "Greedy: pick 4 → 1 → 1  =  3 coins",       start:  9.8, end: 14.0 },
+      { text: "Optimal: 3 + 3  =  2 coins",                         start: 14.5, end: 18.5 },
+      { text: "Greedy fails. DP finds the true minimum.",            start: 19.0, end: 23.0 },
+      // Scene 2
+      { text: "dp[i] = minimum coins to make amount i",             start: 26.1, end: 30.5 },
+      { text: "Try subtracting every coin denomination.",            start: 31.0, end: 35.0 },
+      { text: "If coin fits, check if it beats the current best.",   start: 35.5, end: 39.5 },
+      { text: "dp[i] = min( dp[i − coin] + 1 )",               start: 40.0, end: 44.5 },
+      { text: "Reduce to i − coin, then add one coin.",         start: 45.0, end: 50.0 },
+      // Scene 3
+      { text: "Initialize dp with total+1 as infinity.",             start: 52.6, end: 57.0 },
+      { text: "Set dp[0] = 0: zero coins for amount zero.",          start: 57.5, end: 62.0 },
+      { text: "That anchor drives everything else.",                  start: 62.5, end: 66.5 },
+      // Scene 4
+      { text: "Amount 1: coin 1 fits → dp[0]+1 = 1",           start: 69.6, end: 74.0 },
+      { text: "Amount 2: dp[1]+1 = 2",                               start: 74.5, end: 77.5 },
+      { text: "Amount 3: coin 3 gives dp[0]+1 = 1 (beats coin 1’s 3)", start: 78.0, end: 83.5 },
+      { text: "Take the minimum: dp[3] = 1",                         start: 84.0, end: 89.8 },
+      // Scene 5
+      { text: "Amount 4: coin 4 → dp[0]+1 = 1",                start: 92.6, end: 97.0 },
+      { text: "Amount 5: coin 1 and coin 4 both give 2",             start: 97.5, end: 101.5 },
+      { text: "Amount 6: greedy picks 4, then needs 2 more — 3 coins", start: 102.0, end: 107.5 },
+      { text: "Coin 3 → dp[3]+1 = 2.  dp[6] = 2",              start: 108.0, end: 113.0 },
+      { text: "Two 3-coins make 6 perfectly.",                        start: 113.5, end: 115.5 },
+      // Scene 6
+      { text: "dp = [ 0,  1,  2,  1,  1,  2,  2 ]",                 start: 118.1, end: 123.0 },
+      { text: "dp[6] = 2 — return 2",                           start: 123.5, end: 127.5 },
+      { text: "Trace back: dp[6] used coin 3, leaving amount 3",     start: 128.0, end: 132.5 },
+      { text: "dp[3] used coin 3 again, leaving 0",                  start: 133.0, end: 136.5 },
+      { text: "Answer: two 3-coins. Optimal.",                        start: 137.0, end: 139.0 },
+      // Scene 7
+      { text: "Initialize dp with total+1, set dp[0] = 0.",          start: 141.6, end: 146.0 },
+      { text: "Outer loop: each amount from 1 to total.",             start: 146.5, end: 150.5 },
+      { text: "Inner loop: each coin. If it fits, update.",           start: 151.0, end: 155.0 },
+      { text: "dp[amount] = min(dp[amount], dp[amount−coin]+1)",  start: 155.5, end: 160.5 },
+      { text: "If dp[total] > total → impossible → return −1", start: 161.0, end: 165.0 },
+      { text: "O(total × coins) time · O(total) space",    start: 165.5, end: 169.0 },
+    ];
+
+    var capA = document.getElementById("cap-a");
+    var capB = document.getElementById("cap-b");
+
+    CAPTIONS.forEach(function(g, i) {
+      var el = i % 2 === 0 ? capA : capB;
+      tl.to(el, {
+        opacity: 1, duration: 0.16, ease: "sine.out", overwrite: "auto",
+        onStart: (function(e, t) { return function() { e.textContent = t; }; })(el, g.text)
+      }, g.start);
+      tl.to(el, { opacity: 0, duration: 0.16, ease: "sine.in", overwrite: "auto" }, g.end - 0.14);
+      tl.set(el, { opacity: 0 }, g.end);
+    });
+    tl.set([capA, capB], { opacity: 0, visibility: "hidden" }, 177.0);
+
+    window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

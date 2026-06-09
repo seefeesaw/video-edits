@@ -1,0 +1,9 @@
+{
+  "name": "thumbnail",
+  "type": "module",
+  "scripts": {
+    "check": "npx --yes hyperframes@0.6.81 lint && npx --yes hyperframes@0.6.81 validate && npx --yes hyperframes@0.6.81 inspect",
+    "render": "npx --yes hyperframes@0.6.81 render --format png-sequence --fps 1 --output renders/",
+    "dev": "npx --yes hyperframes@0.6.81 preview"
+  }
+}

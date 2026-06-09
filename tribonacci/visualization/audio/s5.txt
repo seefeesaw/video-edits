@@ -1,0 +1,1 @@
+T-6 equals seven plus four plus two, giving thirteen. T-7 equals thirteen plus seven plus four, giving twenty-four. The sequence accelerates quickly because we sum three terms instead of two.

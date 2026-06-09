@@ -1,0 +1,1 @@
+Processing value five. Sum five becomes reachable on its own, and sum six by combining one and five from the previous row. Now we process value eleven. Scanning backwards from j equals eleven, we check if sum zero was reachable before adding this item. It was. So dp eleven becomes true in row three. That is our answer — we have found a subset summing to the target.

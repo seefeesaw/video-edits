@@ -1,0 +1,1 @@
+We start the result with the first sorted interval, one to three. It becomes our anchor, the range we compare everything else against.

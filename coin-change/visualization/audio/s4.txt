@@ -1,0 +1,1 @@
+Fill left to right. Amount 1: coin 1 fits, dp zero plus 1 equals 1. Amount 2: coin 1 again, dp 1 plus 1 equals 2. Amount 3: coin 1 gives 3, but coin 3 gives dp zero plus 1 — just 1. We take the minimum. dp of 3 equals 1: one coin covers it exactly.

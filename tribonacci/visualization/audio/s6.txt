@@ -1,0 +1,1 @@
+The completed array reads zero, one, one, two, four, seven, thirteen, twenty-four. For n equals seven we return twenty-four. In the three-variable version, after n-minus-two iterations c holds the final answer directly.

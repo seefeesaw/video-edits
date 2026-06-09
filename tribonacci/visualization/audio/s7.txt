@@ -1,0 +1,1 @@
+Handle edge cases first: return zero for n-zero, return one for n-one or n-two. Then set a, b, c to zero, one, one. Loop n-minus-two times, shifting the window: a, b, c becomes b, c, a-plus-b-plus-c. Return c. O-n time and O-1 space.

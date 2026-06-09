@@ -1,0 +1,17 @@
+# Claude Code internals
+.agents/
+.claude/
+
+# Render outputs and frame captures
+renders/
+*.mp4
+
+# HyperFrames preview cache
+.thumbnails/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db

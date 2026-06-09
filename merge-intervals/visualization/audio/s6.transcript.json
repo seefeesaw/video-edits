@@ -1,0 +1,230 @@
+[
+  {
+    "id": "w0",
+    "text": "The",
+    "start": 0.12,
+    "end": 0.357
+  },
+  {
+    "id": "w1",
+    "text": "result:",
+    "start": 0.357,
+    "end": 0.988
+  },
+  {
+    "id": "w2",
+    "text": "three",
+    "start": 0.988,
+    "end": 1.383
+  },
+  {
+    "id": "w3",
+    "text": "clean,",
+    "start": 1.383,
+    "end": 1.936
+  },
+  {
+    "id": "w4",
+    "text": "non",
+    "start": 1.936,
+    "end": 2.173
+  },
+  {
+    "id": "w5",
+    "text": "overlapping",
+    "start": 2.173,
+    "end": 3.041
+  },
+  {
+    "id": "w6",
+    "text": "ranges,",
+    "start": 3.041,
+    "end": 3.673
+  },
+  {
+    "id": "w7",
+    "text": "one",
+    "start": 3.673,
+    "end": 3.91
+  },
+  {
+    "id": "w8",
+    "text": "to",
+    "start": 3.91,
+    "end": 4.068
+  },
+  {
+    "id": "w9",
+    "text": "six,",
+    "start": 4.068,
+    "end": 4.462
+  },
+  {
+    "id": "w10",
+    "text": "eight",
+    "start": 4.462,
+    "end": 4.857
+  },
+  {
+    "id": "w11",
+    "text": "to",
+    "start": 4.857,
+    "end": 5.015
+  },
+  {
+    "id": "w12",
+    "text": "ten,",
+    "start": 5.015,
+    "end": 5.41
+  },
+  {
+    "id": "w13",
+    "text": "and",
+    "start": 5.41,
+    "end": 5.647
+  },
+  {
+    "id": "w14",
+    "text": "fifteen",
+    "start": 5.647,
+    "end": 6.199
+  },
+  {
+    "id": "w15",
+    "text": "to",
+    "start": 6.199,
+    "end": 6.357
+  },
+  {
+    "id": "w16",
+    "text": "eighteen.",
+    "start": 6.357,
+    "end": 7.147
+  },
+  {
+    "id": "w17",
+    "text": "Sorting",
+    "start": 7.147,
+    "end": 7.7
+  },
+  {
+    "id": "w18",
+    "text": "costs",
+    "start": 7.7,
+    "end": 8.094
+  },
+  {
+    "id": "w19",
+    "text": "n",
+    "start": 8.094,
+    "end": 8.252
+  },
+  {
+    "id": "w20",
+    "text": "log",
+    "start": 8.252,
+    "end": 8.489
+  },
+  {
+    "id": "w21",
+    "text": "n,",
+    "start": 8.489,
+    "end": 8.805
+  },
+  {
+    "id": "w22",
+    "text": "the",
+    "start": 8.805,
+    "end": 9.042
+  },
+  {
+    "id": "w23",
+    "text": "sweep",
+    "start": 9.042,
+    "end": 9.437
+  },
+  {
+    "id": "w24",
+    "text": "is",
+    "start": 9.437,
+    "end": 9.594
+  },
+  {
+    "id": "w25",
+    "text": "a",
+    "start": 9.594,
+    "end": 9.752
+  },
+  {
+    "id": "w26",
+    "text": "single",
+    "start": 9.752,
+    "end": 10.226
+  },
+  {
+    "id": "w27",
+    "text": "pass,",
+    "start": 10.226,
+    "end": 10.7
+  },
+  {
+    "id": "w28",
+    "text": "so",
+    "start": 10.7,
+    "end": 10.858
+  },
+  {
+    "id": "w29",
+    "text": "the",
+    "start": 10.858,
+    "end": 11.095
+  },
+  {
+    "id": "w30",
+    "text": "whole",
+    "start": 11.095,
+    "end": 11.489
+  },
+  {
+    "id": "w31",
+    "text": "algorithm",
+    "start": 11.489,
+    "end": 12.2
+  },
+  {
+    "id": "w32",
+    "text": "runs",
+    "start": 12.2,
+    "end": 12.516
+  },
+  {
+    "id": "w33",
+    "text": "in",
+    "start": 12.516,
+    "end": 12.674
+  },
+  {
+    "id": "w34",
+    "text": "n",
+    "start": 12.674,
+    "end": 12.832
+  },
+  {
+    "id": "w35",
+    "text": "log",
+    "start": 12.832,
+    "end": 13.068
+  },
+  {
+    "id": "w36",
+    "text": "n",
+    "start": 13.068,
+    "end": 13.226
+  },
+  {
+    "id": "w37",
+    "text": "time.",
+    "start": 13.226,
+    "end": 13.7
+  }
+]

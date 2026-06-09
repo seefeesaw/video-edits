@@ -1,0 +1,1 @@
+The Tribonacci sequence works like Fibonacci but sums the previous three terms instead of two. Base cases: T-zero is zero, T-one is one, T-two is one. Our example is n equals seven, giving the sequence zero, one, one, two, four, seven, thirteen, twenty-four.

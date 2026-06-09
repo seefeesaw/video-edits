@@ -1,0 +1,1 @@
+Given coin denominations and a target total, find the minimum number of coins to reach that total. Coins are unlimited. Our example: coins 1, 3, and 4, target is 6. Greedy always picks the largest coin: 4, then 1, then 1 — three coins. But the optimal is two: 3 plus 3. Greedy fails. Dynamic programming finds the true minimum.

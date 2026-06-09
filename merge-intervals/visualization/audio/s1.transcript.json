@@ -1,0 +1,104 @@
+[
+  {
+    "id": "w0",
+    "text": "Let's",
+    "start": 0.12,
+    "end": 0.486
+  },
+  {
+    "id": "w1",
+    "text": "solve",
+    "start": 0.486,
+    "end": 0.853
+  },
+  {
+    "id": "w2",
+    "text": "Merge",
+    "start": 0.853,
+    "end": 1.219
+  },
+  {
+    "id": "w3",
+    "text": "Intervals:",
+    "start": 1.219,
+    "end": 2.026
+  },
+  {
+    "id": "w4",
+    "text": "given",
+    "start": 2.026,
+    "end": 2.392
+  },
+  {
+    "id": "w5",
+    "text": "a",
+    "start": 2.392,
+    "end": 2.539
+  },
+  {
+    "id": "w6",
+    "text": "list",
+    "start": 2.539,
+    "end": 2.832
+  },
+  {
+    "id": "w7",
+    "text": "of",
+    "start": 2.832,
+    "end": 2.979
+  },
+  {
+    "id": "w8",
+    "text": "ranges,",
+    "start": 2.979,
+    "end": 3.565
+  },
+  {
+    "id": "w9",
+    "text": "combine",
+    "start": 3.565,
+    "end": 4.078
+  },
+  {
+    "id": "w10",
+    "text": "every",
+    "start": 4.078,
+    "end": 4.445
+  },
+  {
+    "id": "w11",
+    "text": "overlapping",
+    "start": 4.445,
+    "end": 5.251
+  },
+  {
+    "id": "w12",
+    "text": "pair",
+    "start": 5.251,
+    "end": 5.544
+  },
+  {
+    "id": "w13",
+    "text": "into",
+    "start": 5.544,
+    "end": 5.837
+  },
+  {
+    "id": "w14",
+    "text": "one",
+    "start": 5.837,
+    "end": 6.057
+  },
+  {
+    "id": "w15",
+    "text": "single",
+    "start": 6.057,
+    "end": 6.497
+  },
+  {
+    "id": "w16",
+    "text": "range.",
+    "start": 6.497,
+    "end": 7.01
+  }
+]

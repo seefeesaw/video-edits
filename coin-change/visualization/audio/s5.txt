@@ -1,0 +1,1 @@
+Amount 4: coin 4 gives dp zero plus 1 — exactly 1. Amount 5: coin 1 and coin 4 both produce 2. dp of 5 is 2. Amount 6 is where greedy breaks down. Greedy picks coin 4, then needs two more — three coins. But coin 3 gives dp 3 plus 1, which is 2. dp of 6 equals 2: two 3-coins make 6 perfectly.

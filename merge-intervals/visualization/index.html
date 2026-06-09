@@ -1,0 +1,1132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #101316;
+      }
+      body {
+        font-family: "Hanken Grotesk", sans-serif;
+        color: #ecedf0;
+      }
+
+      /* ---------- shared scene scaffolding ---------- */
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        background: #101316;
+        overflow: hidden;
+      }
+      .scene-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 96px 160px;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        box-sizing: border-box;
+        z-index: 2;
+      }
+      .grid-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background-image:
+          linear-gradient(rgba(236, 237, 240, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(236, 237, 240, 0.05) 1px, transparent 1px);
+        background-size: 96px 96px;
+        opacity: 0.5;
+      }
+      .eyebrow {
+        font-family: "Martian Mono", monospace;
+        font-size: 0.95rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: #5dd2d6;
+      }
+      .headline {
+        font-family: "Hanken Grotesk", sans-serif;
+        font-size: 4rem;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        line-height: 1.08;
+        max-width: 1400px;
+      }
+      .body-text {
+        font-family: "Hanken Grotesk", sans-serif;
+        font-size: 1.35rem;
+        font-weight: 300;
+        line-height: 1.5;
+        color: #ecedf0;
+        max-width: 980px;
+      }
+      .body-text strong {
+        font-weight: 700;
+        color: #ffb454;
+      }
+      .hairline {
+        border: none;
+        border-top: 1px solid rgba(236, 237, 240, 0.12);
+        width: 100%;
+      }
+      .mono-tag {
+        display: inline-flex;
+        align-items: center;
+        font-family: "Martian Mono", monospace;
+        font-size: 0.95rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: #ecedf0;
+        background: rgba(236, 237, 240, 0.06);
+        border: 1px solid rgba(236, 237, 240, 0.16);
+        border-radius: 6px;
+        padding: 10px 18px;
+      }
+
+      /* ---------- legend ---------- */
+      .legend {
+        display: flex;
+        gap: 36px;
+        align-items: center;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .legend-dot {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+      }
+      .legend-label {
+        font-family: "Martian Mono", monospace;
+        font-size: 0.95rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        color: #ecedf0;
+      }
+      .legend-label span {
+        color: #8b96a6;
+        font-weight: 400;
+      }
+
+      /* ---------- code panel ---------- */
+      .code-panel {
+        position: relative;
+        background: #1a1f24;
+        border: 1px solid rgba(236, 237, 240, 0.12);
+        border-radius: 12px;
+        padding: 28px 32px;
+        width: 660px;
+        font-family: "Martian Mono", monospace;
+        font-size: 1.06rem;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+        line-height: 2.05;
+        color: #8b96a6;
+        overflow: hidden;
+      }
+      .code-highlight {
+        position: absolute;
+        left: 14px;
+        right: 14px;
+        height: 43px;
+        background: rgba(255, 180, 84, 0.12);
+        border-left: 3px solid #ffb454;
+        border-radius: 4px;
+        z-index: 0;
+      }
+      .code-line {
+        position: relative;
+        z-index: 1;
+        white-space: pre;
+        padding-left: 18px;
+      }
+      .code-line .kw { color: #5dd2d6; }
+      .code-line .fn { color: #ecedf0; }
+      .code-line .num { color: #ffb454; }
+      .code-line .str { color: #6ee7a8; }
+      .code-line.is-bright { color: #ecedf0; }
+
+      /* ---------- verdict card ---------- */
+      .verdict-card {
+        background: #1a1f24;
+        border: 1px solid rgba(236, 237, 240, 0.12);
+        border-radius: 12px;
+        padding: 26px 32px;
+        width: 660px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .verdict-label {
+        font-family: "Martian Mono", monospace;
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: #8b96a6;
+      }
+      .verdict-text {
+        font-family: "Hanken Grotesk", sans-serif;
+        font-size: 1.32rem;
+        font-weight: 300;
+        line-height: 1.45;
+        color: #ecedf0;
+      }
+      .verdict-text strong {
+        font-weight: 700;
+      }
+      .verdict-text .c-amber { color: #ffb454; font-weight: 700; }
+      .verdict-text .c-cyan { color: #5dd2d6; font-weight: 700; }
+      .verdict-text .c-green { color: #6ee7a8; font-weight: 700; }
+
+      /* ---------- number-line track ---------- */
+      .track-wrap {
+        position: relative;
+        width: 1400px;
+        height: 252px;
+      }
+      .track-area {
+        position: relative;
+        width: 1400px;
+        height: 252px;
+      }
+      .axis-line {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 218px;
+        height: 1px;
+        background: rgba(100, 112, 130, 0.4);
+      }
+      .tick {
+        position: absolute;
+        top: 218px;
+        width: 1px;
+        height: 12px;
+        background: #647082;
+      }
+      .tick-label {
+        position: absolute;
+        top: 234px;
+        transform: translateX(-50%);
+        font-family: "Martian Mono", monospace;
+        font-size: 0.78rem;
+        color: #8b96a6;
+      }
+      .track-caption {
+        font-family: "Martian Mono", monospace;
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: #8b96a6;
+      }
+      .track-caption .c-cyan { color: #5dd2d6; }
+      .track-caption .c-green { color: #6ee7a8; }
+      .pill {
+        position: absolute;
+        height: 56px;
+        border-radius: 28px;
+        overflow: visible;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Martian Mono", monospace;
+        font-size: 1.02rem;
+        font-weight: 500;
+        border: 2px solid #647082;
+        background: rgba(100, 112, 130, 0.1);
+        color: #8b96a6;
+      }
+      .pill-input { top: 0; }
+      .pill-result { top: 104px; }
+      .pill-tag {
+        position: absolute;
+        top: -34px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: "Martian Mono", monospace;
+        font-size: 0.78rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        white-space: nowrap;
+      }
+
+      /* ---------- comparison cards (scene 2) ---------- */
+      .compare-row {
+        display: flex;
+        gap: 64px;
+        align-items: flex-start;
+      }
+      .compare-col {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .compare-heading {
+        font-family: "Martian Mono", monospace;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: #8b96a6;
+      }
+      .compare-heading.is-active { color: #6ee7a8; }
+      .iv-card {
+        width: 290px;
+        height: 86px;
+        border-radius: 10px;
+        border: 2px solid #647082;
+        background: rgba(100, 112, 130, 0.08);
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 0 26px;
+      }
+      .iv-card.is-sorted {
+        border-color: #6ee7a8;
+        background: rgba(110, 231, 168, 0.08);
+      }
+      .iv-index {
+        font-family: "Martian Mono", monospace;
+        font-size: 0.85rem;
+        color: #8b96a6;
+      }
+      .iv-value {
+        font-family: "Martian Mono", monospace;
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: #ecedf0;
+      }
+      .compare-arrow {
+        align-self: center;
+        font-family: "Martian Mono", monospace;
+        font-size: 2rem;
+        color: #5dd2d6;
+        margin-top: 200px;
+      }
+
+      /* ---------- stat cards (final scene) ---------- */
+      .stat-row {
+        display: flex;
+        gap: 32px;
+      }
+      .stat-card {
+        background: #1a1f24;
+        border: 1px solid rgba(236, 237, 240, 0.12);
+        border-radius: 12px;
+        padding: 28px 36px;
+        width: 320px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .stat-label {
+        font-family: "Martian Mono", monospace;
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: #8b96a6;
+      }
+      .stat-value {
+        font-family: "Martian Mono", monospace;
+        font-size: 2.1rem;
+        font-weight: 500;
+        color: #6ee7a8;
+      }
+      .stat-caption {
+        font-family: "Hanken Grotesk", sans-serif;
+        font-size: 1.05rem;
+        font-weight: 300;
+        color: #ecedf0;
+      }
+      .output-line {
+        font-family: "Martian Mono", monospace;
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: #6ee7a8;
+        letter-spacing: -0.01em;
+      }
+      .output-line span {
+        color: #8b96a6;
+      }
+
+      /* ---------- captions overlay ---------- */
+      .caption-track {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding-bottom: 68px;
+        pointer-events: none;
+        z-index: 50;
+      }
+      .caption-stage {
+        position: relative;
+        width: 1440px;
+        height: 92px;
+      }
+      .caption-text {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-family: "Hanken Grotesk", sans-serif;
+        font-weight: 500;
+        font-size: 2.05rem;
+        line-height: 1.35;
+        color: #eceef0;
+        background: rgba(16, 19, 22, 0.76);
+        border: 1px solid rgba(236, 237, 240, 0.1);
+        border-radius: 14px;
+        padding: 16px 40px;
+        box-sizing: border-box;
+        opacity: 0;
+      }
+      /* ── VIRALITY OVERLAYS ─────────────────────────────── */
+      #vrl-progress { position:absolute; top:0; left:0; right:0; height:5px; z-index:200; pointer-events:none; }
+      #vrl-bar-bg   { position:absolute; inset:0; background:rgba(255,255,255,0.05); }
+      #vrl-bar-fill { position:absolute; top:0; left:0; height:100%; width:0%; background:linear-gradient(90deg,#5dd2d6,#6ee7a8); box-shadow:0 0 10px rgba(110,231,168,0.4); }
+      .vrl-step {
+        position:absolute; top:38px; right:96px; z-index:200; pointer-events:none;
+        display:flex; align-items:center; gap:10px;
+        background:rgba(16,19,22,0.88); border:1px solid rgba(255,255,255,0.1);
+        border-radius:100px; padding:9px 22px;
+        font-family:"Martian Mono","Courier New",monospace; font-size:0.72rem;
+        font-weight:600; letter-spacing:0.09em; text-transform:uppercase; color:#8b96a6;
+      }
+      .vrl-n { color:#6ee7a8; }
+      #vrl-cta, #vrl-challenge {
+        position:absolute; bottom:76px; right:96px; z-index:200; pointer-events:none;
+        background:rgba(16,19,22,0.92);
+        border-radius:16px; padding:20px 36px;
+        font-family:"Hanken Grotesk",sans-serif; font-size:1.1rem; font-weight:500;
+        color:#eceef0; max-width:620px; text-align:center; line-height:1.55;
+      }
+      #vrl-cta { border:1.5px solid rgba(255,180,84,0.32); box-shadow:0 4px 40px rgba(255,180,84,0.1); }
+      #vrl-cta-icon { color:#ffb454; margin-right:6px; }
+      #vrl-challenge { border:1.5px solid rgba(93,210,214,0.32); box-shadow:0 4px 40px rgba(93,210,214,0.08); }
+      #vrl-challenge-icon { color:#5dd2d6; margin-right:6px; }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="119"
+      data-width="1920"
+      data-height="1080"
+    >
+      <!-- ============ SCENE 1 — TITLE / PROBLEM ============ -->
+      <div id="scene-1" class="scene clip" data-start="0" data-duration="11" data-track-index="1">
+        <div class="grid-bg"></div>
+        <div class="scene-content" style="justify-content: center;">
+          <div id="s1-eyebrow" class="eyebrow">LeetCode &middot; Medium &middot; Arrays &amp; Sorting</div>
+          <h1 id="s1-headline" class="headline" style="font-size: 5.6rem;">Merge Intervals</h1>
+          <p id="s1-body" class="body-text">
+            You're given a list of closed intervals <span class="mono-tag" style="padding:4px 10px; font-size:0.85rem;">[start, end]</span>.
+            Whenever two of them overlap, fuse them into one — and return the
+            smallest set of intervals that still covers everything in the input.
+          </p>
+          <div id="s1-tags" style="display:flex; gap:18px; margin-top: 8px;">
+            <span class="mono-tag">1 &le; intervals.length &le; 10&sup3;</span>
+            <span class="mono-tag">0 &le; start &le; end &le; 10&#8308;</span>
+          </div>
+          <div id="s1-preview" style="margin-top: 56px; display:flex; gap:16px; align-items:center;">
+            <span class="eyebrow" style="color:#8b96a6;">Today's example</span>
+            <span class="mono-tag" style="font-size:1.1rem;">[8,10]&nbsp;&nbsp;[1,3]&nbsp;&nbsp;[2,6]&nbsp;&nbsp;[15,18]</span>
+            <span style="color:#5dd2d6; font-family:'Martian Mono',monospace; font-size:1.3rem;">&rarr;</span>
+            <span class="mono-tag" style="font-size:1.1rem; border-color:#6ee7a8; color:#6ee7a8;">[1,6]&nbsp;&nbsp;[8,10]&nbsp;&nbsp;[15,18]</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCENE 2 — SORT BY START TIME ============ -->
+      <div id="scene-2" class="scene clip" data-start="10.4" data-duration="17.2" data-track-index="2">
+        <div class="grid-bg"></div>
+        <div class="scene-content">
+          <div id="s2-eyebrow" class="eyebrow">Step 1 &mdash; Sort by start time</div>
+          <h2 id="s2-headline" class="headline">Overlaps only become<br />visible once the order is right</h2>
+          <p id="s2-body" class="body-text">
+            An overlap could be hiding anywhere in an unsorted list — checking every
+            pair would cost <strong>O(n&sup2;)</strong>. Sort by start time first, and
+            any interval that could overlap the one we're building sits right next to it.
+          </p>
+          <div id="s2-compare" class="compare-row" style="margin-top: 18px;">
+            <div class="compare-col">
+              <div class="compare-heading">Given order</div>
+              <div class="iv-card"><span class="iv-index">#0</span><span class="iv-value">[8, 10]</span></div>
+              <div class="iv-card"><span class="iv-index">#1</span><span class="iv-value">[1, 3]</span></div>
+              <div class="iv-card"><span class="iv-index">#2</span><span class="iv-value">[2, 6]</span></div>
+              <div class="iv-card"><span class="iv-index">#3</span><span class="iv-value">[15, 18]</span></div>
+            </div>
+            <div class="compare-arrow">&rarr;</div>
+            <div class="compare-col">
+              <div id="s2-sort-heading" class="compare-heading">Sorted by start</div>
+              <div class="iv-card is-sorted"><span class="iv-index">#0</span><span class="iv-value">[1, 3]</span></div>
+              <div class="iv-card is-sorted"><span class="iv-index">#1</span><span class="iv-value">[2, 6]</span></div>
+              <div class="iv-card is-sorted"><span class="iv-index">#2</span><span class="iv-value">[8, 10]</span></div>
+              <div class="iv-card is-sorted"><span class="iv-index">#3</span><span class="iv-value">[15, 18]</span></div>
+            </div>
+            <div class="code-panel" style="width: 560px; margin-left: 24px;">
+              <div class="code-highlight" id="s2-code-hi" style="top: 14px;"></div>
+              <div class="code-line is-bright"><span class="kw">def</span> <span class="fn">merge</span>(intervals):</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;ordered = <span class="kw">sorted</span>(intervals,</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key=<span class="kw">lambda</span> iv: iv[<span class="num">0</span>])</div>
+              <div class="code-line">&nbsp;</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;merged = [ordered[<span class="num">0</span>]]</div>
+              <div class="code-line">&nbsp;</div>
+              <div class="code-line"><span class="kw">for</span> start, end <span class="kw">in</span> ordered[<span class="num">1</span>:]:</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;last = merged[-<span class="num">1</span>]</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> start &lt;= last[<span class="num">1</span>]:</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;last[<span class="num">1</span>] = <span class="kw">max</span>(last[<span class="num">1</span>], end)</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">else</span>:</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;merged.append([start, end])</div>
+              <div class="code-line">&nbsp;</div>
+              <div class="code-line"><span class="kw">return</span> merged</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCENE 3 — SEED THE RESULT ============ -->
+      <div id="scene-3" class="scene clip" data-start="26.8" data-duration="13" data-track-index="1">
+        <div class="grid-bg"></div>
+        <div class="scene-content">
+          <div id="s3-eyebrow" class="eyebrow">Step 2 &mdash; Sweep left to right</div>
+          <h2 id="s3-headline" class="headline">Start the answer with the<br />very first interval</h2>
+
+          <div id="s3-legend" class="legend" style="margin-top: 4px;">
+            <div class="legend-item"><span class="legend-dot" style="background:#ffb454;"></span><span class="legend-label">Candidate <span>— looking at this now</span></span></div>
+            <div class="legend-item"><span class="legend-dot" style="background:#5dd2d6;"></span><span class="legend-label">Anchor <span>— comparing against this</span></span></div>
+            <div class="legend-item"><span class="legend-dot" style="background:#6ee7a8;"></span><span class="legend-label">Resolved <span>— locked into the answer</span></span></div>
+          </div>
+
+          <div id="s3-caption" class="track-caption" style="margin-top: 6px;">Top row — sorted input &nbsp;&middot;&nbsp; Bottom row — <span class="c-green">merged result</span></div>
+
+          <div class="track-wrap">
+            <div class="track-area" id="s3-track">
+              <div class="axis-line"></div>
+              <div class="tick" style="left:40px;"></div><div class="tick-label" style="left:40px;">0</div>
+              <div class="tick" style="left:172px;"></div><div class="tick-label" style="left:172px;">2</div>
+              <div class="tick" style="left:304px;"></div><div class="tick-label" style="left:304px;">4</div>
+              <div class="tick" style="left:436px;"></div><div class="tick-label" style="left:436px;">6</div>
+              <div class="tick" style="left:568px;"></div><div class="tick-label" style="left:568px;">8</div>
+              <div class="tick" style="left:700px;"></div><div class="tick-label" style="left:700px;">10</div>
+              <div class="tick" style="left:832px;"></div><div class="tick-label" style="left:832px;">12</div>
+              <div class="tick" style="left:964px;"></div><div class="tick-label" style="left:964px;">14</div>
+              <div class="tick" style="left:1096px;"></div><div class="tick-label" style="left:1096px;">16</div>
+              <div class="tick" style="left:1228px;"></div><div class="tick-label" style="left:1228px;">18</div>
+
+              <div id="s3-in-0" class="pill pill-input" style="left:106px; width:132px;">[1,3]</div>
+              <div id="s3-in-1" class="pill pill-input" style="left:172px; width:264px;">[2,6]</div>
+              <div id="s3-in-2" class="pill pill-input" style="left:568px; width:132px;">[8,10]</div>
+              <div id="s3-in-3" class="pill pill-input" style="left:1030px; width:198px;">[15,18]</div>
+
+              <div id="s3-res-0" class="pill pill-result" style="left:106px; width:132px; opacity:0; border-color:#6ee7a8; background:rgba(110,231,168,0.16); color:#6ee7a8;">[1,3]</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap: 32px; margin-top: 8px;">
+            <div class="verdict-card" style="width: 600px;">
+              <div class="verdict-label">Verdict</div>
+              <div class="verdict-text">First interval after sorting — there's nothing to compare yet. Seed the result list with <span class="c-green">[1, 3]</span> and start sweeping from there.</div>
+            </div>
+            <div class="code-panel" style="width: 600px; line-height: 1.8;">
+              <div class="code-highlight" id="s3-code-hi" style="top: 24px; height: 38px;"></div>
+              <div class="code-line is-bright">merged = [ordered[<span class="num">0</span>]]</div>
+              <div class="code-line">&nbsp;</div>
+              <div class="code-line"><span class="kw">for</span> start, end <span class="kw">in</span> ordered[<span class="num">1</span>:]:</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;last = merged[-<span class="num">1</span>]</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> start &lt;= last[<span class="num">1</span>]:</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;last[<span class="num">1</span>] = <span class="kw">max</span>(last[<span class="num">1</span>], end)</div>
+              <div class="code-line"><span class="kw">else</span>:</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;merged.append([start, end])</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCENE 4 — OVERLAP -> MERGE ============ -->
+      <div id="scene-4" class="scene clip" data-start="39.0" data-duration="20.2" data-track-index="2">
+        <div class="grid-bg"></div>
+        <div class="scene-content">
+          <div id="s4-eyebrow" class="eyebrow">Step 3 &mdash; Compare &amp; merge</div>
+          <h2 id="s4-headline" class="headline">When two ranges touch,<br />fuse them into one</h2>
+
+          <div id="s4-caption" class="track-caption" style="margin-top: 6px;">Top row — sorted input &nbsp;&middot;&nbsp; Bottom row — <span class="c-green">merged result</span></div>
+
+          <div class="track-wrap">
+            <div class="track-area" id="s4-track">
+              <div class="axis-line"></div>
+              <div class="tick" style="left:40px;"></div><div class="tick-label" style="left:40px;">0</div>
+              <div class="tick" style="left:172px;"></div><div class="tick-label" style="left:172px;">2</div>
+              <div class="tick" style="left:304px;"></div><div class="tick-label" style="left:304px;">4</div>
+              <div class="tick" style="left:436px;"></div><div class="tick-label" style="left:436px;">6</div>
+              <div class="tick" style="left:568px;"></div><div class="tick-label" style="left:568px;">8</div>
+              <div class="tick" style="left:700px;"></div><div class="tick-label" style="left:700px;">10</div>
+              <div class="tick" style="left:832px;"></div><div class="tick-label" style="left:832px;">12</div>
+              <div class="tick" style="left:964px;"></div><div class="tick-label" style="left:964px;">14</div>
+              <div class="tick" style="left:1096px;"></div><div class="tick-label" style="left:1096px;">16</div>
+              <div class="tick" style="left:1228px;"></div><div class="tick-label" style="left:1228px;">18</div>
+
+              <div id="s4-in-0" class="pill pill-input" style="left:106px; width:132px; border-color:#6ee7a8; background:rgba(110,231,168,0.1); color:#6ee7a8; opacity:0.55;">[1,3]</div>
+              <div id="s4-in-1" class="pill pill-input" data-layout-allow-overflow style="left:172px; width:264px; border-color:#ffb454; background:rgba(255,180,84,0.18); color:#ffb454;">
+                [2,6]
+                <span class="pill-tag" style="color:#ffb454;">candidate</span>
+              </div>
+              <div id="s4-in-2" class="pill pill-input" style="left:568px; width:132px;">[8,10]</div>
+              <div id="s4-in-3" class="pill pill-input" style="left:1030px; width:198px;">[15,18]</div>
+
+              <div id="s4-res-0" class="pill pill-result" data-layout-allow-overflow style="left:106px; width:132px; border-color:#5dd2d6; background:rgba(93,210,214,0.16); color:#5dd2d6;">
+                [1,3]
+                <span id="s4-res-tag" class="pill-tag" style="color:#5dd2d6;">anchor</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap: 32px; margin-top: 8px;">
+            <div class="verdict-card" style="width: 600px;">
+              <div class="verdict-label">Verdict</div>
+              <div id="s4-verdict" class="verdict-text"><span class="c-amber">[2, 6]</span> starts at <strong>2</strong> — that's &le; <strong>3</strong>, the end of <span class="c-cyan">[1, 3]</span>. They overlap. Stretch the end to <strong>max(3, 6) = 6</strong>.</div>
+            </div>
+            <div class="code-panel" style="width: 600px; line-height: 1.8;">
+              <div class="code-highlight" id="s4-code-hi" style="top: 100px; height: 38px;"></div>
+              <div class="code-line"><span class="kw">for</span> start, end <span class="kw">in</span> ordered[<span class="num">1</span>:]:</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;last = merged[-<span class="num">1</span>]</div>
+              <div class="code-line is-bright">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> start &lt;= last[<span class="num">1</span>]:</div>
+              <div class="code-line is-bright">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;last[<span class="num">1</span>] = <span class="kw">max</span>(last[<span class="num">1</span>], end)</div>
+              <div class="code-line"><span class="kw">else</span>:</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;merged.append([start, end])</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCENE 5 — NO OVERLAP -> APPEND (x2) ============ -->
+      <div id="scene-5" class="scene clip" data-start="58.4" data-duration="22.6" data-track-index="1">
+        <div class="grid-bg"></div>
+        <div class="scene-content">
+          <div id="s5-eyebrow" class="eyebrow">Step 4 &mdash; Compare &amp; append</div>
+          <h2 id="s5-headline" class="headline">When ranges don't touch,<br />start a fresh group</h2>
+
+          <div id="s5-caption" class="track-caption" style="margin-top: 6px;">Top row — sorted input &nbsp;&middot;&nbsp; Bottom row — <span class="c-green">merged result</span></div>
+
+          <div class="track-wrap">
+            <div class="track-area" id="s5-track">
+              <div class="axis-line"></div>
+              <div class="tick" style="left:40px;"></div><div class="tick-label" style="left:40px;">0</div>
+              <div class="tick" style="left:172px;"></div><div class="tick-label" style="left:172px;">2</div>
+              <div class="tick" style="left:304px;"></div><div class="tick-label" style="left:304px;">4</div>
+              <div class="tick" style="left:436px;"></div><div class="tick-label" style="left:436px;">6</div>
+              <div class="tick" style="left:568px;"></div><div class="tick-label" style="left:568px;">8</div>
+              <div class="tick" style="left:700px;"></div><div class="tick-label" style="left:700px;">10</div>
+              <div class="tick" style="left:832px;"></div><div class="tick-label" style="left:832px;">12</div>
+              <div class="tick" style="left:964px;"></div><div class="tick-label" style="left:964px;">14</div>
+              <div class="tick" style="left:1096px;"></div><div class="tick-label" style="left:1096px;">16</div>
+              <div class="tick" style="left:1228px;"></div><div class="tick-label" style="left:1228px;">18</div>
+
+              <div id="s5-in-0" class="pill pill-input" style="left:106px; width:132px; border-color:#6ee7a8; background:rgba(110,231,168,0.1); color:#6ee7a8; opacity:0.55;">[1,3]</div>
+              <div id="s5-in-1" class="pill pill-input" style="left:172px; width:264px; border-color:#6ee7a8; background:rgba(110,231,168,0.1); color:#6ee7a8; opacity:0.55;">[2,6]</div>
+              <div id="s5-in-2" class="pill pill-input" data-layout-allow-overflow style="left:568px; width:132px; border-color:#ffb454; background:rgba(255,180,84,0.18); color:#ffb454;">
+                [8,10]
+                <span id="s5-in2-tag" class="pill-tag" style="color:#ffb454;">candidate</span>
+              </div>
+              <div id="s5-in-3" class="pill pill-input" style="left:1030px; width:198px;">[15,18]</div>
+
+              <div id="s5-res-0" class="pill pill-result" data-layout-allow-overflow style="left:106px; width:330px; border-color:#5dd2d6; background:rgba(93,210,214,0.16); color:#5dd2d6;">
+                [1,6]
+                <span id="s5-res0-tag" class="pill-tag" style="color:#5dd2d6;">anchor</span>
+              </div>
+              <div id="s5-res-1" class="pill pill-result" style="left:568px; width:132px; opacity:0; border-color:#6ee7a8; background:rgba(110,231,168,0.16); color:#6ee7a8;">[8,10]</div>
+              <div id="s5-res-2" class="pill pill-result" style="left:1030px; width:198px; opacity:0; border-color:#6ee7a8; background:rgba(110,231,168,0.16); color:#6ee7a8;">[15,18]</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap: 32px; margin-top: 8px;">
+            <div style="position:relative; width: 600px; height: 178px;">
+              <div id="s5-verdict-a" class="verdict-card" style="position:absolute; top:0; left:0; width:600px;">
+                <div class="verdict-label">Verdict</div>
+                <div class="verdict-text"><span class="c-amber">[8, 10]</span> starts at <strong>8</strong> — that's &gt; <strong>6</strong>, the end of <span class="c-cyan">[1, 6]</span>. No overlap. Append <span class="c-amber">[8, 10]</span> as a brand-new group.</div>
+              </div>
+              <div id="s5-verdict-b" class="verdict-card" style="position:absolute; top:0; left:0; width:600px; opacity:0;">
+                <div class="verdict-label">Verdict</div>
+                <div class="verdict-text"><span class="c-amber">[15, 18]</span> starts at <strong>15</strong> — that's &gt; <strong>10</strong>, the end of <span class="c-cyan">[8, 10]</span>. Same logic, same result: append it as its own group.</div>
+              </div>
+            </div>
+            <div class="code-panel" style="width: 600px; line-height: 1.8;">
+              <div class="code-highlight" id="s5-code-hi" style="top: 85px; height: 38px;"></div>
+              <div class="code-line"><span class="kw">for</span> start, end <span class="kw">in</span> ordered[<span class="num">1</span>:]:</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;last = merged[-<span class="num">1</span>]</div>
+              <div class="code-line"><span class="kw">if</span> start &lt;= last[<span class="num">1</span>]:</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;last[<span class="num">1</span>] = <span class="kw">max</span>(last[<span class="num">1</span>], end)</div>
+              <div class="code-line"><span class="kw">else</span>:</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;merged.append([start, end])</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCENE 6 — RESULT + COMPLEXITY ============ -->
+      <div id="scene-6" class="scene clip" data-start="80.6" data-duration="19.4" data-track-index="2">
+        <div class="grid-bg"></div>
+        <div class="scene-content">
+          <div id="s6-eyebrow" class="eyebrow">Result</div>
+          <h2 id="s6-headline" class="headline">Three intervals.<br />Zero overlaps left.</h2>
+
+          <div id="s6-caption" class="track-caption" style="margin-top: 6px;">Final result — <span class="c-green">three disjoint, non-overlapping intervals</span></div>
+
+          <div class="track-wrap" style="margin-top: 8px;">
+            <div class="track-area" id="s6-track" style="height: 130px;">
+              <div class="axis-line" style="top: 96px;"></div>
+              <div class="tick" style="left:40px; top:96px;"></div><div class="tick-label" style="left:40px; top:112px;">0</div>
+              <div class="tick" style="left:304px; top:96px;"></div><div class="tick-label" style="left:304px; top:112px;">4</div>
+              <div class="tick" style="left:568px; top:96px;"></div><div class="tick-label" style="left:568px; top:112px;">8</div>
+              <div class="tick" style="left:832px; top:96px;"></div><div class="tick-label" style="left:832px; top:112px;">12</div>
+              <div class="tick" style="left:1096px; top:96px;"></div><div class="tick-label" style="left:1096px; top:112px;">16</div>
+
+              <div id="s6-res-0" class="pill" style="top:18px; left:106px; width:330px; border-color:#6ee7a8; background:rgba(110,231,168,0.16); color:#6ee7a8;">[1,6]</div>
+              <div id="s6-res-1" class="pill" style="top:18px; left:568px; width:132px; border-color:#6ee7a8; background:rgba(110,231,168,0.16); color:#6ee7a8;">[8,10]</div>
+              <div id="s6-res-2" class="pill" style="top:18px; left:1030px; width:198px; border-color:#6ee7a8; background:rgba(110,231,168,0.16); color:#6ee7a8;">[15,18]</div>
+            </div>
+          </div>
+
+          <div id="s6-output" class="output-line"><span>merge(intervals) &rarr;</span> [[1, 6], [8, 10], [15, 18]]</div>
+
+          <div id="s6-stats" class="stat-row" style="margin-top: 10px;">
+            <div class="stat-card">
+              <div class="stat-label">Time</div>
+              <div class="stat-value">O(n log n)</div>
+              <div class="stat-caption">The sort dominates — the sweep that follows is a single O(n) pass.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Space</div>
+              <div class="stat-value">O(n)</div>
+              <div class="stat-caption">For the sorted copy and the merged output list.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Key insight</div>
+              <div class="stat-value" style="font-size: 1.5rem; color:#5dd2d6;">Sort first</div>
+              <div class="stat-caption">Ordering turns a tangled overlap search into one clean left-to-right sweep.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCENE 7 — Full Code Solution ============ -->
+      <div id="scene-7" class="scene clip" data-start="99.0" data-duration="20" data-track-index="1">
+        <div class="grid-bg"></div>
+        <div class="scene-content" style="justify-content: center; gap: 20px;">
+          <div id="s7-eyebrow" class="eyebrow">Python &middot; Complete Solution</div>
+          <h2 id="s7-headline" class="headline" style="font-size: 3.2rem;">The full <span style="color:#6ee7a8;">merge()</span> function</h2>
+
+          <div id="s7-code" class="code-panel" style="width: 1400px; line-height: 1.72; font-size: 1.12rem; align-self: flex-start;">
+            <div class="code-line" id="s7-l0"><span class="kw">from</span> typing <span class="kw">import</span> List</div>
+            <div class="code-line" id="s7-l1">&nbsp;</div>
+            <div class="code-line" id="s7-l2"><span class="kw">def</span> <span style="color:#eceef0;">merge</span>(intervals: List[List[<span class="kw">int</span>]]) &rarr; List[List[<span class="kw">int</span>]]:</div>
+            <div class="code-line" id="s7-l3">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if not</span> intervals:</div>
+            <div class="code-line" id="s7-l4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> []</div>
+            <div class="code-line" id="s7-l5">&nbsp;</div>
+            <div class="code-line" id="s7-l6">&nbsp;&nbsp;&nbsp;&nbsp;ordered = <span class="kw">sorted</span>(intervals, key=<span class="kw">lambda</span> iv: iv[<span class="num">0</span>])</div>
+            <div class="code-line" id="s7-l7">&nbsp;&nbsp;&nbsp;&nbsp;merged = [ordered[<span class="num">0</span>][:]]</div>
+            <div class="code-line" id="s7-l8">&nbsp;</div>
+            <div class="code-line" id="s7-l9">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">for</span> start, end <span class="kw">in</span> ordered[<span class="num">1</span>:]:</div>
+            <div class="code-line" id="s7-l10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;last = merged[-<span class="num">1</span>]</div>
+            <div class="code-line" id="s7-l11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> start &lt;= last[<span class="num">1</span>]:</div>
+            <div class="code-line" id="s7-l12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;last[<span class="num">1</span>] = <span class="kw">max</span>(last[<span class="num">1</span>], end)</div>
+            <div class="code-line" id="s7-l13">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">else</span>:</div>
+            <div class="code-line" id="s7-l14">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;merged.append([start, end])</div>
+            <div class="code-line" id="s7-l15">&nbsp;</div>
+            <div class="code-line" id="s7-l16">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> merged</div>
+          </div>
+
+          <div id="s7-footer" style="display:flex; gap:24px; align-self:flex-start;">
+            <div class="verdict-card" style="width:340px; padding:18px 24px;">
+              <div class="verdict-label">Time</div>
+              <div class="verdict-text"><strong style="color:#6ee7a8;">O(n log n)</strong> — sort dominates; sweep is O(n)</div>
+            </div>
+            <div class="verdict-card" style="width:340px; padding:18px 24px;">
+              <div class="verdict-label">Space</div>
+              <div class="verdict-text"><strong style="color:#6ee7a8;">O(n)</strong> — sorted copy + merged output</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ VIRALITY OVERLAYS ============ -->
+
+      <!-- Progress bar: full 119s on track 4, grows left→right -->
+      <div id="vrl-progress" class="clip" data-start="0" data-duration="119" data-track-index="4" data-layout-ignore>
+        <div id="vrl-bar-bg"></div>
+        <div id="vrl-bar-fill"></div>
+      </div>
+
+      <!-- Step counter: one static element per step, non-overlapping on track 5 -->
+      <div id="vrl-step-1" class="clip vrl-step" data-start="11.5" data-duration="17.2" data-track-index="5" data-layout-ignore><span class="vrl-n">STEP 1/5</span><span>&nbsp;&middot;&nbsp;</span>SORT</div>
+      <div id="vrl-step-2" class="clip vrl-step" data-start="28.8" data-duration="12.2" data-track-index="5" data-layout-ignore><span class="vrl-n">STEP 2/5</span><span>&nbsp;&middot;&nbsp;</span>INIT</div>
+      <div id="vrl-step-3" class="clip vrl-step" data-start="41.1" data-duration="20.4" data-track-index="5" data-layout-ignore><span class="vrl-n">STEP 3/5</span><span>&nbsp;&middot;&nbsp;</span>COMPARE</div>
+      <div id="vrl-step-4" class="clip vrl-step" data-start="61.6" data-duration="21.9" data-track-index="5" data-layout-ignore><span class="vrl-n">STEP 4/5</span><span>&nbsp;&middot;&nbsp;</span>MERGE</div>
+      <div id="vrl-step-5" class="clip vrl-step" data-start="83.6" data-duration="14.9" data-track-index="5" data-layout-ignore><span class="vrl-n">STEP 5/5</span><span>&nbsp;&middot;&nbsp;</span>RESULT</div>
+
+      <!-- CTA overlay at payoff moment; challenge card follows immediately after -->
+      <div id="vrl-cta" class="clip" data-start="105.0" data-duration="6.5" data-track-index="6" data-layout-ignore>
+        <span id="vrl-cta-icon">&#x2191;</span>Like &amp; Subscribe for more Python breakdowns
+      </div>
+      <div id="vrl-challenge" class="clip" data-start="111.6" data-duration="5.4" data-track-index="6" data-layout-ignore>
+        <span id="vrl-challenge-icon">&#x2192;</span>Try it: merge([[1,4],[4,5]]) &mdash; what&apos;s the output?
+      </div>
+
+      <!-- ============ NARRATION AUDIO ============
+           Single 119-second WAV with silence built in at the correct
+           offsets — one clip means one play() call, avoiding the
+           browser autoplay re-trigger issue that silences individual clips.
+      -->
+      <audio id="narration" class="clip" src="audio/narration.wav" data-start="0" data-duration="119" data-track-index="0" data-volume="1"></audio>
+
+      <!-- ============ CAPTIONS OVERLAY ============ -->
+      <div id="captions" class="caption-track clip" data-start="1.2" data-duration="117" data-track-index="3">
+        <div class="caption-stage">
+          <div id="cap-a" class="caption-text"></div>
+          <div id="cap-b" class="caption-text"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      /* =========================================================
+         SCENE 1 — Title (0 -> 10.4)
+         ========================================================= */
+      tl.from("#s1-eyebrow", { y: 26, opacity: 0, duration: 0.5, ease: "power2.out" }, 0.3);
+      tl.from("#s1-headline", { y: 50, opacity: 0, duration: 0.7, ease: "power3.out" }, 0.5);
+      tl.from("#s1-body", { y: 34, opacity: 0, duration: 0.6, ease: "power2.out" }, 0.85);
+      tl.from("#s1-tags", { y: 24, opacity: 0, duration: 0.5, ease: "back.out(1.4)" }, 1.2);
+      tl.from("#s1-preview", { y: 28, opacity: 0, duration: 0.6, ease: "sine.out" }, 1.6);
+      // NO exit tweens — transition at 10.4 handles the scene change
+
+      /* =========================================================
+         TRANSITION 1 -> 2  (focus-pull cross-fade, 10.0 -> 10.8)
+         ========================================================= */
+      tl.to("#scene-1", { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, 10.0);
+      tl.fromTo("#scene-2", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, 10.0);
+
+      /* =========================================================
+         SCENE 2 — Sort by start time (10.4 -> 27.6)
+         ========================================================= */
+      tl.from("#s2-eyebrow", { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, 10.7);
+      tl.from("#s2-headline", { x: -46, opacity: 0, duration: 0.65, ease: "power3.out" }, 10.9);
+      tl.from("#s2-body", { y: 30, opacity: 0, duration: 0.6, ease: "sine.out" }, 11.3);
+      tl.from(".compare-col:nth-child(1)", { x: -50, opacity: 0, duration: 0.6, ease: "power2.out" }, 11.9);
+      tl.from(".compare-col:nth-child(1) .iv-card", { y: 24, opacity: 0, duration: 0.45, stagger: 0.12, ease: "back.out(1.5)" }, 12.1);
+      tl.from(".compare-arrow", { scale: 0, opacity: 0, duration: 0.5, ease: "back.out(2)" }, 13.0);
+      tl.from(".compare-col:nth-child(3)", { x: 50, opacity: 0, duration: 0.6, ease: "power2.out" }, 13.3);
+      tl.from(".compare-col:nth-child(3) .iv-card", { y: 24, opacity: 0, duration: 0.45, stagger: 0.12, ease: "back.out(1.5)" }, 13.5);
+      tl.from(".code-panel", { y: 36, opacity: 0, duration: 0.6, ease: "power2.out" }, 14.0);
+      tl.fromTo("#s2-code-hi", { top: 14, opacity: 0 }, { opacity: 1, duration: 0.3 }, 14.5);
+      tl.to("#s2-code-hi", { top: 56, duration: 0.7, ease: "power2.inOut" }, 15.1);
+      tl.to("#s2-code-hi", { top: 98, duration: 0.7, ease: "power2.inOut" }, 16.4);
+      tl.to("#s2-sort-heading", { color: "#6ee7a8", duration: 0.4, ease: "sine.inOut" }, 17.4);
+      // NO exit tweens — transition handles the scene change
+
+      /* =========================================================
+         TRANSITION 2 -> 3  (27.2 -> 28.0)
+         ========================================================= */
+      tl.to("#scene-2", { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, 27.2);
+      tl.fromTo("#scene-3", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, 27.2);
+
+      /* =========================================================
+         SCENE 3 — Seed the result (27.6 -> 39.8)
+         ========================================================= */
+      tl.from("#s3-eyebrow", { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, 27.9);
+      tl.from("#s3-headline", { y: 40, opacity: 0, duration: 0.65, ease: "power3.out" }, 28.1);
+      tl.from("#s3-legend .legend-item", { y: 18, opacity: 0, duration: 0.4, stagger: 0.12, ease: "sine.out" }, 28.7);
+      tl.from("#s3-caption", { x: -22, opacity: 0, duration: 0.4, ease: "power2.out" }, 29.3);
+      tl.from("#s3-track .tick, #s3-track .tick-label, #s3-track .axis-line", { opacity: 0, duration: 0.4, stagger: 0.015, ease: "sine.out" }, 29.4);
+      tl.from("#s3-track .pill-input", { y: 22, opacity: 0, duration: 0.5, stagger: 0.1, ease: "back.out(1.4)" }, 29.8);
+      tl.from("#scene-3 .verdict-card", { x: 40, opacity: 0, duration: 0.55, ease: "power2.out" }, 30.6);
+      tl.from("#scene-3 .code-panel", { x: 40, opacity: 0, duration: 0.55, ease: "power2.out" }, 30.9);
+      tl.fromTo("#s3-code-hi", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 31.4);
+      tl.to("#s3-in-0", {
+        borderColor: "#6ee7a8",
+        backgroundColor: "rgba(110,231,168,0.16)",
+        color: "#6ee7a8",
+        duration: 0.6,
+        ease: "sine.inOut",
+      }, 31.9);
+      tl.fromTo("#s3-res-0", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.55, ease: "back.out(1.6)" }, 32.3);
+      // NO exit tweens — transition handles the scene change
+
+      /* =========================================================
+         TRANSITION 3 -> 4  (39.4 -> 40.2)
+         ========================================================= */
+      tl.to("#scene-3", { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, 39.4);
+      tl.fromTo("#scene-4", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, 39.4);
+
+      /* =========================================================
+         SCENE 4 — Overlap -> merge (39.8 -> 60.0)
+         ========================================================= */
+      tl.from("#s4-eyebrow", { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, 40.1);
+      tl.from("#s4-headline", { y: 40, opacity: 0, duration: 0.65, ease: "power3.out" }, 40.3);
+      tl.from("#s4-caption", { x: -22, opacity: 0, duration: 0.4, ease: "power2.out" }, 41.0);
+      tl.from("#s4-track .tick, #s4-track .tick-label, #s4-track .axis-line", { opacity: 0, duration: 0.4, stagger: 0.012, ease: "sine.out" }, 41.1);
+      tl.from("#s4-in-0, #s4-in-2, #s4-in-3", { y: 20, opacity: 0, duration: 0.45, stagger: 0.1, ease: "back.out(1.4)" }, 41.5);
+      tl.from("#s4-res-0", { opacity: 0, scale: 0.85, duration: 0.5, ease: "back.out(1.4)" }, 41.9);
+      tl.fromTo("#s4-in-1", { y: 26, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.55, ease: "elastic.out(1, 0.6)" }, 42.5);
+      tl.from("#s4-in-1 .pill-tag", { y: -10, opacity: 0, duration: 0.35, ease: "sine.out" }, 43.0);
+      tl.from("#s4-res-tag", { y: -10, opacity: 0, duration: 0.35, ease: "sine.out" }, 43.2);
+      tl.from("#scene-4 .verdict-card", { x: 40, opacity: 0, duration: 0.55, ease: "power2.out" }, 43.6);
+      tl.from("#scene-4 .code-panel", { x: 40, opacity: 0, duration: 0.55, ease: "power2.out" }, 43.9);
+      tl.fromTo("#s4-code-hi", { opacity: 0, top: 85 }, { opacity: 1, duration: 0.3 }, 44.4);
+      tl.to("#s4-code-hi", { top: 116, duration: 0.6, ease: "power2.inOut" }, 45.6);
+      tl.to("#s4-res-0", {
+        width: 330,
+        borderColor: "#6ee7a8",
+        backgroundColor: "rgba(110,231,168,0.16)",
+        color: "#6ee7a8",
+        duration: 0.85,
+        ease: "power3.inOut",
+      }, 46.6);
+      tl.set("#s4-res-tag", { display: "none" }, 47.3);
+      tl.to(["#s4-in-0", "#s4-in-1"], {
+        borderColor: "#6ee7a8",
+        backgroundColor: "rgba(110,231,168,0.1)",
+        color: "#6ee7a8",
+        opacity: 0.55,
+        duration: 0.5,
+        ease: "sine.inOut",
+      }, 47.4);
+      tl.set("#s4-in-1 .pill-tag", { display: "none" }, 47.4);
+      // NO exit tweens — transition handles the scene change
+
+      /* =========================================================
+         TRANSITION 4 -> 5  (59.6 -> 60.4)
+         ========================================================= */
+      tl.to("#scene-4", { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, 59.6);
+      tl.fromTo("#scene-5", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, 59.6);
+
+      /* =========================================================
+         SCENE 5 — No overlap -> append, twice (60.0 -> 82.6)
+         ========================================================= */
+      tl.from("#s5-eyebrow", { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, 60.3);
+      tl.from("#s5-headline", { y: 40, opacity: 0, duration: 0.65, ease: "power3.out" }, 60.5);
+      tl.from("#s5-caption", { x: -22, opacity: 0, duration: 0.4, ease: "power2.out" }, 61.2);
+      tl.from("#s5-track .tick, #s5-track .tick-label, #s5-track .axis-line", { opacity: 0, duration: 0.4, stagger: 0.012, ease: "sine.out" }, 61.3);
+      tl.from("#s5-in-0, #s5-in-1, #s5-in-3", { y: 20, opacity: 0, duration: 0.45, stagger: 0.12, ease: "back.out(1.4)" }, 61.7);
+      tl.from("#s5-res-0", { opacity: 0, scale: 0.92, duration: 0.5, ease: "sine.out" }, 62.1);
+      tl.fromTo("#s5-in-2", { y: 26, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.55, ease: "elastic.out(1, 0.6)" }, 62.7);
+      tl.from("#s5-in2-tag, #s5-res0-tag", { y: -10, opacity: 0, duration: 0.35, stagger: 0.08, ease: "sine.out" }, 63.2);
+      tl.from("#s5-verdict-a", { x: 40, opacity: 0, duration: 0.55, ease: "power2.out" }, 63.6);
+      tl.from("#scene-5 .code-panel", { x: 40, opacity: 0, duration: 0.55, ease: "power2.out" }, 63.9);
+      tl.fromTo("#s5-code-hi", { opacity: 0, top: 85 }, { opacity: 1, duration: 0.3 }, 64.4);
+      tl.to("#s5-code-hi", { top: 146, duration: 0.6, ease: "power2.inOut" }, 65.5);
+      tl.fromTo("#s5-res-1", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.55, ease: "back.out(1.6)" }, 66.6);
+      tl.to(["#s5-in-2"], {
+        borderColor: "#6ee7a8",
+        backgroundColor: "rgba(110,231,168,0.1)",
+        color: "#6ee7a8",
+        opacity: 0.55,
+        duration: 0.5,
+        ease: "sine.inOut",
+      }, 67.2);
+      tl.set("#s5-in2-tag", { display: "none" }, 67.2);
+      tl.to(["#s5-res-0"], { borderColor: "#6ee7a8", backgroundColor: "rgba(110,231,168,0.16)", color: "#6ee7a8", duration: 0.5 }, 67.2);
+      tl.set("#s5-res0-tag", { display: "none" }, 67.2);
+      tl.to("#s5-verdict-a", { opacity: 0, duration: 0.35, ease: "sine.in" }, 70.0);
+      tl.to("#s5-verdict-b", { opacity: 1, duration: 0.35, ease: "sine.out" }, 70.35);
+      tl.to("#s5-in-3", {
+        borderColor: "#ffb454",
+        backgroundColor: "rgba(255,180,84,0.18)",
+        color: "#ffb454",
+        duration: 0.4,
+        ease: "sine.inOut",
+      }, 70.4);
+      tl.to("#s5-res-1", {
+        borderColor: "#5dd2d6",
+        backgroundColor: "rgba(93,210,214,0.16)",
+        color: "#5dd2d6",
+        duration: 0.4,
+        ease: "sine.inOut",
+      }, 70.4);
+      tl.to("#s5-code-hi", { top: 85, duration: 0.4, ease: "power2.inOut" }, 70.6);
+      tl.to("#s5-code-hi", { top: 146, duration: 0.45, ease: "power2.inOut" }, 71.4);
+      tl.fromTo("#s5-res-2", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 72.2);
+      tl.to(["#s5-in-3"], {
+        borderColor: "#6ee7a8",
+        backgroundColor: "rgba(110,231,168,0.1)",
+        color: "#6ee7a8",
+        duration: 0.45,
+        ease: "sine.inOut",
+      }, 72.8);
+      tl.to("#s5-res-1", { borderColor: "#6ee7a8", backgroundColor: "rgba(110,231,168,0.16)", color: "#6ee7a8", opacity: 1, duration: 0.45 }, 72.8);
+      tl.to("#s5-res-2", { borderColor: "#6ee7a8", backgroundColor: "rgba(110,231,168,0.16)", color: "#6ee7a8", duration: 0.45 }, 73.2);
+      // NO exit tweens — transition handles the scene change
+
+      /* =========================================================
+         TRANSITION 5 -> 6  (82.2 -> 83.0)
+         ========================================================= */
+      tl.to("#scene-5", { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, 82.2);
+      tl.fromTo("#scene-6", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, 82.2);
+
+      /* =========================================================
+         SCENE 6 — Final result + complexity (82.6 -> 100)
+         ========================================================= */
+      tl.from("#s6-eyebrow", { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, 82.9);
+      tl.from("#s6-headline", { y: 40, opacity: 0, duration: 0.65, ease: "power3.out" }, 83.1);
+      tl.from("#s6-caption", { x: -22, opacity: 0, duration: 0.4, ease: "power2.out" }, 83.6);
+      tl.from("#s6-track .tick, #s6-track .tick-label, #s6-track .axis-line", { opacity: 0, duration: 0.4, stagger: 0.02, ease: "sine.out" }, 83.8);
+      tl.from("#s6-res-0, #s6-res-1, #s6-res-2", { y: 22, opacity: 0, scale: 0.85, duration: 0.5, stagger: 0.14, ease: "back.out(1.5)" }, 84.3);
+      tl.from("#s6-output", { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, 85.6);
+      tl.from("#s6-stats .stat-card", { y: 30, opacity: 0, duration: 0.5, stagger: 0.15, ease: "power3.out" }, 86.2);
+
+      /* =========================================================
+         TRANSITION 6 -> 7  (98.2 -> 99.0)
+         ========================================================= */
+      tl.to("#scene-6",   { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, 98.2);
+      tl.set("#scene-6", { opacity: 0 }, 99.0);
+      tl.fromTo("#scene-7", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, 98.2);
+
+      /* =========================================================
+         SCENE 7 — Full Code Solution (99.0 -> 119.0)
+         ========================================================= */
+      tl.from("#s7-eyebrow", { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, 99.4);
+      tl.from("#s7-headline", { y: 36, opacity: 0, duration: 0.6, ease: "power3.out" }, 99.6);
+      tl.from("#s7-l0, #s7-l2", { x: -32, opacity: 0, duration: 0.45, stagger: 0.14, ease: "power2.out" }, 100.2);
+      tl.from("#s7-l3, #s7-l4", { x: -24, opacity: 0, duration: 0.4, stagger: 0.1, ease: "power2.out" }, 100.55);
+      tl.from("#s7-l6, #s7-l7", { x: -24, opacity: 0, duration: 0.4, stagger: 0.1, ease: "power2.out" }, 101.0);
+      tl.from("#s7-l9, #s7-l10, #s7-l11, #s7-l12, #s7-l13, #s7-l14", { x: -20, opacity: 0, duration: 0.4, stagger: 0.07, ease: "back.out(1.2)" }, 101.5);
+      tl.from("#s7-l16", { x: -24, opacity: 0, duration: 0.45, ease: "power2.out" }, 102.0);
+      tl.from("#s7-footer", { y: 24, opacity: 0, duration: 0.5, ease: "sine.out" }, 102.6);
+
+      // Final scene only — fade the whole composition to the base canvas at the very end
+      tl.to("#scene-7", { opacity: 0, duration: 1.0, ease: "power2.in" }, 117.8);
+
+      /* =========================================================
+         CAPTIONS — alternating two-element crossfade
+         capA holds even-indexed groups, capB holds odd-indexed.
+         Text is swapped via tl.call() just before each fade-in so
+         the incoming element is never seen with its old text.
+         ========================================================= */
+      var CAPTIONS = [
+        { text: "Let’s solve Merge Intervals:", start: 1.32,  end: 3.226 },
+        { text: "given a list of ranges,",           start: 3.226, end: 4.765 },
+        { text: "combine every overlapping pair into", start: 4.765, end: 7.037 },
+        { text: "one single range.",                  start: 7.037, end: 8.21  },
+        { text: "Step one: sort the intervals",       start: 11.62, end: 13.316 },
+        { text: "by their starting point.",            start: 13.316, end: 14.809 },
+        { text: "Once they’re in order,",          start: 14.809, end: 16.166 },
+        { text: "any two ranges that could",           start: 16.166, end: 17.591 },
+        { text: "overlap are guaranteed to sit",       start: 17.591, end: 19.287 },
+        { text: "right beside each other in",          start: 19.287, end: 20.779 },
+        { text: "the list.",                           start: 20.779, end: 21.39  },
+        { text: "We start the result with",            start: 28.72,  end: 30.061 },
+        { text: "the first sorted interval,",          start: 30.061, end: 31.671 },
+        { text: "one to three.",                       start: 31.671, end: 32.476 },
+        { text: "It becomes our anchor,",              start: 32.476, end: 33.817 },
+        { text: "the range we compare everything",     start: 33.817, end: 35.628 },
+        { text: "else against.",                       start: 35.628, end: 36.5   },
+        { text: "Two to six starts at",                start: 41.12,  end: 42.329 },
+        { text: "two. That’s less than or",        start: 42.329, end: 43.916 },
+        { text: "equal to three,",                     start: 43.916, end: 44.974 },
+        { text: "the end of our anchor,",              start: 44.974, end: 46.41  },
+        { text: "so they overlap.",                    start: 46.41,  end: 47.544 },
+        { text: "We stretch the anchor’s end",    start: 47.544, end: 49.282 },
+        { text: "up to six,",                          start: 49.282, end: 49.963 },
+        { text: "fusing both ranges into one",         start: 49.963, end: 51.701 },
+        { text: "to six.",                             start: 51.701, end: 52.23  },
+        { text: "Eight to ten starts at",              start: 61.62,  end: 62.924 },
+        { text: "eight, past six,",                    start: 62.924, end: 64.083 },
+        { text: "where our group ends.",               start: 64.083, end: 65.459 },
+        { text: "No overlap, so it opens",             start: 65.459, end: 66.907 },
+        { text: "a brand new group.",                  start: 66.907, end: 68.139 },
+        { text: "Fifteen to eighteen follows the",     start: 68.139, end: 70.094 },
+        { text: "same rule: it starts after",          start: 70.094, end: 71.76  },
+        { text: "ten, so it also becomes",             start: 71.76,  end: 73.209 },
+        { text: "its own separate group.",             start: 73.209, end: 74.73  },
+        { text: "The result: three clean,",            start: 83.62,  end: 85.436 },
+        { text: "non-overlapping ranges,",             start: 85.436, end: 87.173 },
+        { text: "one to six,",                         start: 87.173, end: 87.962 },
+        { text: "eight to ten,",                       start: 87.962, end: 88.91  },
+        { text: "and fifteen to eighteen.",            start: 88.91,  end: 90.647 },
+        { text: "Sorting costs O(n log n),",           start: 90.647, end: 92.305 },
+        { text: "the sweep is a single pass,",         start: 92.305, end: 93.726 },
+        { text: "so the whole algorithm",              start: 93.726, end: 95.7   },
+        { text: "runs in O(n log n) time.",            start: 95.7,   end: 97.2   },
+        { text: "Here's the complete solution.",       start: 100.62, end: 102.484 },
+        { text: "Sort by start time,",                 start: 102.484, end: 103.658 },
+        { text: "seed the result with the",            start: 103.658, end: 105.039 },
+        { text: "first interval, then sweep:",         start: 105.039, end: 106.835 },
+        { text: "each overlap gets stretched,",        start: 106.835, end: 108.63  },
+        { text: "each gap starts a new group.",        start: 108.63, end: 111.047 },
+      ];
+
+      var capA = document.getElementById("cap-a");
+      var capB = document.getElementById("cap-b");
+
+      // tl.call() is not available in the HyperFrames render context.
+      // Text is set via onStart on the fade-in tween instead.
+      CAPTIONS.forEach(function (g, i) {
+        var el = i % 2 === 0 ? capA : capB;
+        tl.to(el, {
+          opacity: 1, duration: 0.16, ease: "sine.out", overwrite: "auto",
+          onStart: (function(e, t) { return function() { e.textContent = t; }; })(el, g.text)
+        }, g.start);
+        tl.to(el, { opacity: 0, duration: 0.16, ease: "sine.in", overwrite: "auto" }, g.end - 0.14);
+        tl.set(el, { opacity: 0 }, g.end);
+      });
+      // hard kill both at end
+      tl.set([capA, capB], { opacity: 0, visibility: "hidden" }, 111.2);
+
+      /* =========================================================
+         VIRALITY — progress bar, step counter, CTA + challenge
+         All text is static in HTML — no tl.call() used anywhere.
+         ========================================================= */
+
+      // Progress bar grows linearly across full duration
+      tl.fromTo("#vrl-bar-fill", { width: "0%" }, { width: "100%", duration: 119, ease: "none" }, 0);
+
+      // Step counter: each step is a separate element, fades in at its scene start
+      tl.from("#vrl-step-1", { opacity: 0, y: -10, duration: 0.5, ease: "power2.out" }, 11.5);
+      tl.from("#vrl-step-2", { opacity: 0, y: -10, duration: 0.4, ease: "power2.out" }, 28.8);
+      tl.from("#vrl-step-3", { opacity: 0, y: -10, duration: 0.4, ease: "power2.out" }, 41.1);
+      tl.from("#vrl-step-4", { opacity: 0, y: -10, duration: 0.4, ease: "power2.out" }, 61.6);
+      tl.from("#vrl-step-5", { opacity: 0, y: -10, duration: 0.4, ease: "power2.out" }, 83.6);
+      // Step 5 exits just before the final scene transition
+      tl.to("#vrl-step-5", { opacity: 0, y: -10, duration: 0.3, ease: "power2.in" }, 98.2);
+
+      // CTA fades in at the code payoff (scene 7), challenge card follows
+      tl.from("#vrl-cta",       { opacity: 0, y: 18, duration: 0.6, ease: "power2.out" }, 105.0);
+      tl.from("#vrl-challenge", { opacity: 0, y: 14, duration: 0.5, ease: "power2.out" }, 111.6);
+      tl.to("#vrl-challenge",   { opacity: 0, y: 8,  duration: 0.5, ease: "sine.in"   }, 116.3);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

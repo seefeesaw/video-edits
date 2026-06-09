@@ -1,0 +1,1 @@
+Here's the complete solution. Build the table bottom-up: for each item either skip it and carry forward the previous best, or take it and add its value to whatever was optimal with the remaining capacity. Return dp of n, capacity.

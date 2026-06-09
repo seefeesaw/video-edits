@@ -1,0 +1,1 @@
+The answer is dp of three, five equals seven. Tracing back: we skipped item C, took item B from capacity five, then took item A from the remaining capacity two. Items A and B together weigh five and are worth seven. Time complexity is O of n times W, space is also O of n times W.

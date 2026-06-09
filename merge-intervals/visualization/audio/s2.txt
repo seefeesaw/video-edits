@@ -1,0 +1,1 @@
+Step one: sort the intervals by their starting point. Once they're in order, any two ranges that could overlap are guaranteed to sit right beside each other in the list.

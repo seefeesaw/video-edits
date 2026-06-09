@@ -1,0 +1,1 @@
+The result: three clean, non overlapping ranges, one to six, eight to ten, and fifteen to eighteen. Sorting costs n log n, the sweep is a single pass, so the whole algorithm runs in n log n time.

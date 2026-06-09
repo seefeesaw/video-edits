@@ -1,0 +1,1 @@
+Item A has weight two and value three. For capacities below two we can't fit it, so we inherit zero. At capacity two we compare: skip and keep zero, or take item A and gain three. Three wins. Capacities three, four, and five repeat the same logic.

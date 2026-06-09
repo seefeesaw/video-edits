@@ -1,0 +1,1 @@
+T-3 equals one plus one plus zero, giving two. T-4 equals two plus one plus one, giving four. T-5 equals four plus two plus one, giving seven. The three-cell window slides one step right with every new value we compute.

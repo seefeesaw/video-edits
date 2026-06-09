@@ -1,0 +1,262 @@
+[
+  {
+    "text": "Let's solve Merge Intervals:",
+    "start": 1.32,
+    "end": 3.226
+  },
+  {
+    "text": "given a list of ranges,",
+    "start": 3.226,
+    "end": 4.765
+  },
+  {
+    "text": "combine every overlapping pair into",
+    "start": 4.765,
+    "end": 7.037
+  },
+  {
+    "text": "one single range.",
+    "start": 7.037,
+    "end": 8.21
+  },
+  {
+    "text": "Step one: sort the intervals",
+    "start": 11.62,
+    "end": 13.316
+  },
+  {
+    "text": "by their starting point.",
+    "start": 13.316,
+    "end": 14.809
+  },
+  {
+    "text": "Once they're in order,",
+    "start": 14.809,
+    "end": 16.166
+  },
+  {
+    "text": "any two ranges that could",
+    "start": 16.166,
+    "end": 17.591
+  },
+  {
+    "text": "overlap are guaranteed to sit",
+    "start": 17.591,
+    "end": 19.287
+  },
+  {
+    "text": "right beside each other in",
+    "start": 19.287,
+    "end": 20.779
+  },
+  {
+    "text": "the list.",
+    "start": 20.779,
+    "end": 21.39
+  },
+  {
+    "text": "We start the result with",
+    "start": 28.72,
+    "end": 30.061
+  },
+  {
+    "text": "the first sorted interval,",
+    "start": 30.061,
+    "end": 31.671
+  },
+  {
+    "text": "one to three.",
+    "start": 31.671,
+    "end": 32.476
+  },
+  {
+    "text": "It becomes our anchor,",
+    "start": 32.476,
+    "end": 33.817
+  },
+  {
+    "text": "the range we compare everything",
+    "start": 33.817,
+    "end": 35.628
+  },
+  {
+    "text": "else against.",
+    "start": 35.628,
+    "end": 36.5
+  },
+  {
+    "text": "Two to six starts at",
+    "start": 41.12,
+    "end": 42.329
+  },
+  {
+    "text": "two. That's less than or",
+    "start": 42.329,
+    "end": 43.916
+  },
+  {
+    "text": "equal to three,",
+    "start": 43.916,
+    "end": 44.974
+  },
+  {
+    "text": "the end of our anchor,",
+    "start": 44.974,
+    "end": 46.41
+  },
+  {
+    "text": "so they overlap.",
+    "start": 46.41,
+    "end": 47.544
+  },
+  {
+    "text": "We stretch the anchor's end",
+    "start": 47.544,
+    "end": 49.282
+  },
+  {
+    "text": "up to six,",
+    "start": 49.282,
+    "end": 49.963
+  },
+  {
+    "text": "fusing both ranges into one",
+    "start": 49.963,
+    "end": 51.701
+  },
+  {
+    "text": "to six.",
+    "start": 51.701,
+    "end": 52.23
+  },
+  {
+    "text": "Eight to ten starts at",
+    "start": 61.62,
+    "end": 62.924
+  },
+  {
+    "text": "eight, past six,",
+    "start": 62.924,
+    "end": 64.083
+  },
+  {
+    "text": "where our group ends.",
+    "start": 64.083,
+    "end": 65.459
+  },
+  {
+    "text": "No overlap, so it opens",
+    "start": 65.459,
+    "end": 66.907
+  },
+  {
+    "text": "a brand new group.",
+    "start": 66.907,
+    "end": 68.139
+  },
+  {
+    "text": "Fifteen to eighteen follows the",
+    "start": 68.139,
+    "end": 70.094
+  },
+  {
+    "text": "same rule: it starts after",
+    "start": 70.094,
+    "end": 71.76
+  },
+  {
+    "text": "ten, so it also becomes",
+    "start": 71.76,
+    "end": 73.209
+  },
+  {
+    "text": "its own separate group.",
+    "start": 73.209,
+    "end": 74.73
+  },
+  {
+    "text": "The result: three clean,",
+    "start": 83.62,
+    "end": 85.436
+  },
+  {
+    "text": "non overlapping ranges,",
+    "start": 85.436,
+    "end": 87.173
+  },
+  {
+    "text": "one to six,",
+    "start": 87.173,
+    "end": 87.962
+  },
+  {
+    "text": "eight to ten,",
+    "start": 87.962,
+    "end": 88.91
+  },
+  {
+    "text": "and fifteen to eighteen.",
+    "start": 88.91,
+    "end": 90.647
+  },
+  {
+    "text": "Sorting costs n log n,",
+    "start": 90.647,
+    "end": 92.305
+  },
+  {
+    "text": "the sweep is a single",
+    "start": 92.305,
+    "end": 93.726
+  },
+  {
+    "text": "pass, so the whole algorithm",
+    "start": 93.726,
+    "end": 95.7
+  },
+  {
+    "text": "runs in n log n",
+    "start": 95.7,
+    "end": 96.726
+  },
+  {
+    "text": "time.",
+    "start": 96.726,
+    "end": 97.2
+  },
+  {
+    "text": "Here's the complete solution.",
+    "start": 100.62,
+    "end": 102.484
+  },
+  {
+    "text": "Sort by start time,",
+    "start": 102.484,
+    "end": 103.658
+  },
+  {
+    "text": "seed the result with the",
+    "start": 103.658,
+    "end": 105.039
+  },
+  {
+    "text": "first interval, then sweep:",
+    "start": 105.039,
+    "end": 106.835
+  },
+  {
+    "text": "each overlap gets stretched,",
+    "start": 106.835,
+    "end": 108.63
+  },
+  {
+    "text": "each gap starts a new",
+    "start": 108.63,
+    "end": 109.873
+  },
+  {
+    "text": "group. That's it.",
+    "start": 109.873,
+    "end": 111.047
+  }
+]

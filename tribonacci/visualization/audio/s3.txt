@@ -1,0 +1,1 @@
+Before the loop we seed three base cases from the problem statement: T-zero is zero, T-one is one, T-two is one. These are fixed. Everything from index three onward is computed by the recurrence.

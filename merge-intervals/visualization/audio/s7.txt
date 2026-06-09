@@ -1,0 +1,1 @@
+Here's the complete solution. Sort by start time, seed the result with the first interval, then sweep: each overlap gets stretched, each gap starts a new group. That's it.

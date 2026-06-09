@@ -1,0 +1,1 @@
+Row zero is the base case: with no items available, every capacity yields zero value. Every cell in row zero is zero.

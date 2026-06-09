@@ -1,0 +1,1 @@
+We build a two-dimensional boolean DP table. Rows represent how many items from the array we have processed. Columns represent candidate sums from zero to eleven. A cell holds true if we can form that exact sum using some subset of the items so far. With no items yet processed, only sum zero is achievable. Row zero is our base case, and dp zero zero starts as true.

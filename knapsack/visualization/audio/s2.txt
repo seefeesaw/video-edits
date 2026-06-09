@@ -1,0 +1,1 @@
+The key insight is that every item forces one binary choice: take it, or leave it. We define dp of i, w as the best value reachable using the first i items within weight limit w. Two items, three choices — this table captures all of them.

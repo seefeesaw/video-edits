@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #101316;
+      }
+      body { font-family: "Hanken Grotesk", sans-serif; color: #ecedf0; }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        background: #101316;
+        overflow: hidden;
+      }
+      .scene-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 80px 140px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        box-sizing: border-box;
+        z-index: 2;
+      }
+      .grid-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background-image:
+          linear-gradient(rgba(236,237,240,0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(236,237,240,0.05) 1px, transparent 1px);
+        background-size: 96px 96px;
+        opacity: 0.5;
+      }
+      .eyebrow {
+        font-family: "Martian Mono", monospace;
+        font-size: 0.95rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: #5dd2d6;
+      }
+      .headline {
+        font-family: "Hanken Grotesk", sans-serif;
+        font-size: 4rem;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        line-height: 1.08;
+        max-width: 1500px;
+      }
+      .body-text {
+        font-family: "Hanken Grotesk", sans-serif;
+        font-size: 1.35rem;
+        font-weight: 300;
+        line-height: 1.5;
+        color: #ecedf0;
+        max-width: 980px;
+      }
+      .body-text strong { font-weight: 700; color: #ffb454; }
+      .mono-tag {
+        display: inline-flex;
+        align-items: center;
+        font-family: "Martian Mono", monospace;
+        font-size: 0.95rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: #ecedf0;
+        background: rgba(236,237,240,0.06);
+        border: 1px solid rgba(236,237,240,0.16);
+        border-radius: 6px;
+        padding: 10px 18px;
+      }
+      .legend { display: flex; gap: 36px; align-items: center; }
+      .legend-item { display: flex; align-items: center; gap: 12px; }
+      .legend-dot { width: 18px; height: 18px; border-radius: 50%; }
+      .legend-label {
+        font-family: "Martian Mono", monospace;
+        font-size: 0.95rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        color: #ecedf0;
+      }
+      .legend-label span { color: #8b96a6; font-weight: 400; }
+      .code-panel {
+        position: relative;
+        background: #1a1f24;
+        border: 1px solid rgba(236,237,240,0.12);
+        border-radius: 12px;
+        padding: 28px 32px;
+        font-family: "Martian Mono", monospace;
+        font-size: 1.06rem;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+        line-height: 2.05;
+        color: #8b96a6;
+        overflow: hidden;
+      }
+      .code-highlight {
+        position: absolute;
+        left: 14px; right: 14px;
+        height: 43px;
+        background: rgba(255,180,84,0.12);
+        border-left: 3px solid #ffb454;
+        border-radius: 4px;
+        z-index: 0;
+      }
+      .code-line {
+        position: relative;
+        z-index: 1;
+        white-space: pre;
+        padding-left: 18px;
+      }
+      .code-line .kw { color: #5dd2d6; }
+      .code-line .num { color: #ffb454; }
+      .code-line.is-bright { color: #ecedf0; }
+      .verdict-card {
+        background: #1a1f24;
+        border: 1px solid rgba(236,237,240,0.12);
+        border-radius: 12px;
+        padding: 22px 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .verdict-label {
+        font-family: "Martian Mono", monospace;
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: #8b96a6;
+      }
+      .verdict-text {
+        font-family: "Hanken Grotesk", sans-serif;
+        font-size: 1.26rem;
+        font-weight: 300;
+        line-height: 1.45;
+        color: #ecedf0;
+      }
+      .verdict-text strong { font-weight: 700; }
+      .verdict-text .c-amber { color: #ffb454; font-weight: 700; }
+      .verdict-text .c-cyan  { color: #5dd2d6; font-weight: 700; }
+      .verdict-text .c-green { color: #6ee7a8; font-weight: 700; }
+
+      /* DP table */
+      .dp-table {
+        border-collapse: separate;
+        border-spacing: 6px;
+        font-family: "Martian Mono", monospace;
+      }
+      .dp-table th {
+        font-size: 0.82rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #8b96a6;
+        padding: 0 0 10px 0;
+        text-align: center;
+        min-width: 108px;
+      }
+      .dp-table th.row-header-th {
+        text-align: left;
+        min-width: 218px;
+        padding-right: 12px;
+      }
+      .dp-cell {
+        width: 108px;
+        height: 66px;
+        border: 1px solid rgba(100,112,130,0.3);
+        border-radius: 6px;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: #647082;
+        background: rgba(100,112,130,0.06);
+      }
+      .dp-cell.is-resolved {
+        border-color: #6ee7a8;
+        background: rgba(110,231,168,0.1);
+        color: #6ee7a8;
+      }
+      .row-label {
+        font-family: "Martian Mono", monospace;
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: #8b96a6;
+        padding-right: 12px;
+        white-space: nowrap;
+        vertical-align: middle;
+      }
+      .row-label .item-name { color: #ecedf0; font-size: 1.0rem; }
+      .row-label .item-meta { color: #647082; font-size: 0.76rem; }
+      .item-card {
+        background: #1a1f24;
+        border: 2px solid #647082;
+        border-radius: 10px;
+        padding: 16px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .item-card .item-id {
+        font-family: "Martian Mono", monospace;
+        font-size: 0.76rem;
+        color: #8b96a6;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+      .item-card .item-vals {
+        font-family: "Martian Mono", monospace;
+        font-size: 1.35rem;
+        font-weight: 500;
+        color: #ecedf0;
+      }
+      .item-card .item-vals span { color: #647082; font-size: 0.88rem; }
+      .stat-row { display: flex; gap: 28px; }
+      .stat-card {
+        background: #1a1f24;
+        border: 1px solid rgba(236,237,240,0.12);
+        border-radius: 12px;
+        padding: 24px 32px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .stat-label {
+        font-family: "Martian Mono", monospace;
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: #8b96a6;
+      }
+      .stat-value {
+        font-family: "Martian Mono", monospace;
+        font-size: 2.0rem;
+        font-weight: 500;
+        color: #6ee7a8;
+      }
+      .stat-caption {
+        font-family: "Hanken Grotesk", sans-serif;
+        font-size: 1.0rem;
+        font-weight: 300;
+        color: #ecedf0;
+      }
+      .output-line {
+        font-family: "Martian Mono", monospace;
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: #6ee7a8;
+        letter-spacing: -0.01em;
+      }
+      .output-line span { color: #8b96a6; }
+      .caption-track {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding-bottom: 68px;
+        pointer-events: none;
+        z-index: 50;
+      }
+      .caption-stage { position: relative; width: 1440px; height: 92px; }
+      .caption-text {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-family: "Hanken Grotesk", sans-serif;
+        font-weight: 500;
+        font-size: 2.05rem;
+        line-height: 1.35;
+        color: #eceef0;
+        background: rgba(16,19,22,0.76);
+        border: 1px solid rgba(236,237,240,0.1);
+        border-radius: 14px;
+        padding: 16px 40px;
+        box-sizing: border-box;
+        opacity: 0;
+      }
+      #vrl-progress { position:absolute; top:0; left:0; right:0; height:5px; z-index:200; pointer-events:none; }
+      #vrl-bar-bg   { position:absolute; inset:0; background:rgba(255,255,255,0.05); }
+      #vrl-bar-fill { position:absolute; top:0; left:0; height:100%; width:0%; background:linear-gradient(90deg,#5dd2d6,#6ee7a8); box-shadow:0 0 10px rgba(110,231,168,0.4); }
+      .vrl-step {
+        position:absolute; top:38px; right:96px; z-index:200; pointer-events:none;
+        display:flex; align-items:center; gap:10px;
+        background:rgba(16,19,22,0.88); border:1px solid rgba(255,255,255,0.1);
+        border-radius:100px; padding:9px 22px;
+        font-family:"Martian Mono","Courier New",monospace; font-size:0.72rem;
+        font-weight:600; letter-spacing:0.09em; text-transform:uppercase; color:#8b96a6;
+      }
+      .vrl-n { color:#6ee7a8; }
+      #vrl-cta, #vrl-challenge {
+        position:absolute; bottom:76px; right:96px; z-index:200; pointer-events:none;
+        background:rgba(16,19,22,0.92); border-radius:16px; padding:20px 36px;
+        font-family:"Hanken Grotesk",sans-serif; font-size:1.1rem; font-weight:500;
+        color:#eceef0; max-width:620px; text-align:center; line-height:1.55;
+      }
+      #vrl-cta { border:1.5px solid rgba(255,180,84,0.32); box-shadow:0 4px 40px rgba(255,180,84,0.1); }
+      #vrl-cta-icon { color:#ffb454; margin-right:6px; }
+      #vrl-challenge { border:1.5px solid rgba(93,210,214,0.32); box-shadow:0 4px 40px rgba(93,210,214,0.08); }
+      #vrl-challenge-icon { color:#5dd2d6; margin-right:6px; }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="120"
+      data-width="1920"
+      data-height="1080"
+    >
+
+      <!-- ===== SCENE 1 — TITLE (0 → 14s) ===== -->
+      <div id="scene-1" class="scene clip" data-start="0" data-duration="14" data-track-index="1">
+        <div class="grid-bg"></div>
+        <div class="scene-content" style="justify-content:center;">
+          <div id="s1-eyebrow" class="eyebrow">LeetCode &middot; Medium &middot; Dynamic Programming</div>
+          <h1 id="s1-headline" class="headline" style="font-size:5.4rem;">0/1 Knapsack</h1>
+          <p id="s1-body" class="body-text">
+            You have a knapsack with a fixed <strong>weight capacity</strong>.
+            Each item has a <strong>weight</strong> and a <strong>value</strong>.
+            Select items to maximize total value — without exceeding capacity.
+            Each item is either fully included or excluded; no fractions.
+          </p>
+          <div id="s1-tags" style="display:flex; gap:18px; margin-top:6px;">
+            <span class="mono-tag">1 &le; capacity &le; 1000</span>
+            <span class="mono-tag">1 &le; values.length &le; 500</span>
+            <span class="mono-tag">weights.length == values.length</span>
+          </div>
+          <div id="s1-example" style="margin-top:46px; display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
+            <span class="eyebrow" style="color:#8b96a6;">Today's example &nbsp; capacity = 5</span>
+            <div class="item-card"><div class="item-id">Item A</div><div class="item-vals">w=2 &nbsp;<span>v=</span>3</div></div>
+            <div class="item-card"><div class="item-id">Item B</div><div class="item-vals">w=3 &nbsp;<span>v=</span>4</div></div>
+            <div class="item-card"><div class="item-id">Item C</div><div class="item-vals">w=4 &nbsp;<span>v=</span>5</div></div>
+            <span style="color:#5dd2d6; font-family:'Martian Mono',monospace; font-size:1.3rem;">&rarr;</span>
+            <span class="mono-tag" style="font-size:1.1rem; border-color:#6ee7a8; color:#6ee7a8;">max value = 7</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 2 — DP INSIGHT (13.4 → 33.8s) ===== -->
+      <div id="scene-2" class="scene clip" data-start="13.4" data-duration="20.4" data-track-index="2">
+        <div class="grid-bg"></div>
+        <div class="scene-content">
+          <div id="s2-eyebrow" class="eyebrow">The key insight &mdash; take it or leave it</div>
+          <h2 id="s2-headline" class="headline">One binary choice per item,<br />every subproblem captured once</h2>
+          <p id="s2-body" class="body-text">
+            Define <strong>dp[i][w]</strong> = best value using the first <em>i</em> items within weight limit <em>w</em>.
+            Each cell answers: for this item, take it or skip it?
+          </p>
+          <div id="s2-recurrence" style="display:flex; gap:48px; align-items:flex-start; margin-top:10px;">
+            <div class="code-panel" style="width:860px; line-height:2.1; font-size:1.1rem;">
+              <div class="code-highlight" id="s2-code-hi" style="top:14px; height:44px;"></div>
+              <div class="code-line is-bright"><span class="kw">dp</span>[<span class="num">0</span>][w] = <span class="num">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#647082;"># base: no items</span></div>
+              <div class="code-line">&nbsp;</div>
+              <div class="code-line is-bright"><span class="kw">dp</span>[i][w] = <span class="kw">dp</span>[i<span class="num">-1</span>][w]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#647082;"># skip (can't fit)</span></div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> weights[i] &gt; w</div>
+              <div class="code-line">&nbsp;</div>
+              <div class="code-line is-bright"><span class="kw">dp</span>[i][w] = max(<span class="kw">dp</span>[i<span class="num">-1</span>][w],&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#647082;"># skip</span></div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;values[i] + <span class="kw">dp</span>[i<span class="num">-1</span>][w <span class="num">-</span> weights[i]])</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#647082;"># take it</span></div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:18px; padding-top:10px;">
+              <div id="s2-leg1" class="legend"><div class="legend-item"><span class="legend-dot" style="background:#ffb454;"></span><span class="legend-label">Candidate <span>— cell being computed</span></span></div></div>
+              <div id="s2-leg2" class="legend"><div class="legend-item"><span class="legend-dot" style="background:#5dd2d6;"></span><span class="legend-label">Anchor <span>— source cells referenced</span></span></div></div>
+              <div id="s2-leg3" class="legend"><div class="legend-item"><span class="legend-dot" style="background:#6ee7a8;"></span><span class="legend-label">Resolved <span>— final value locked in</span></span></div></div>
+              <div id="s2-verdict" class="verdict-card" style="margin-top:8px; width:580px;">
+                <div class="verdict-label">Answer</div>
+                <div class="verdict-text"><span class="c-green">dp[n][capacity]</span> — bottom-right of the table — holds the maximum value achievable.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 3 — BASE CASE (32.8 → 43.0s) ===== -->
+      <div id="scene-3" class="scene clip" data-start="32.8" data-duration="10.2" data-track-index="1">
+        <div class="grid-bg"></div>
+        <div class="scene-content">
+          <div id="s3-eyebrow" class="eyebrow">Step 1 &mdash; Base case: row 0</div>
+          <h2 id="s3-headline" class="headline">No items available —<br />every capacity yields zero</h2>
+          <div id="s3-layout" style="display:flex; gap:60px; align-items:flex-start; margin-top:6px;">
+            <div>
+              <div id="s3-caption" style="font-family:'Martian Mono',monospace; font-size:0.82rem; font-weight:500; text-transform:uppercase; letter-spacing:0.12em; color:#8b96a6; margin-bottom:18px;">dp[i][w] &nbsp;&middot;&nbsp; rows = items &nbsp;&middot;&nbsp; cols = capacity</div>
+              <table class="dp-table" id="dp-table-s3">
+                <thead><tr><th class="row-header-th">item</th><th>w=0</th><th>w=1</th><th>w=2</th><th>w=3</th><th>w=4</th><th>w=5</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td class="row-label"><span class="item-name">row 0</span><br><span class="item-meta">no items</span></td>
+                    <td id="s3-r0c0" class="dp-cell is-resolved" style="opacity:0;">0</td>
+                    <td id="s3-r0c1" class="dp-cell is-resolved" style="opacity:0;">0</td>
+                    <td id="s3-r0c2" class="dp-cell is-resolved" style="opacity:0;">0</td>
+                    <td id="s3-r0c3" class="dp-cell is-resolved" style="opacity:0;">0</td>
+                    <td id="s3-r0c4" class="dp-cell is-resolved" style="opacity:0;">0</td>
+                    <td id="s3-r0c5" class="dp-cell is-resolved" style="opacity:0;">0</td>
+                  </tr>
+                  <tr><td class="row-label"><span class="item-name">row 1</span><br><span class="item-meta">item A w=2 v=3</span></td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td></tr>
+                  <tr><td class="row-label"><span class="item-name">row 2</span><br><span class="item-meta">item B w=3 v=4</span></td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td></tr>
+                  <tr><td class="row-label"><span class="item-name">row 3</span><br><span class="item-meta">item C w=4 v=5</span></td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:18px; padding-top:52px;">
+              <div id="s3-verdict" class="verdict-card" style="width:580px;">
+                <div class="verdict-label">Base Case</div>
+                <div class="verdict-text">With zero items to choose from, no capacity limit matters — value is always <span class="c-green">0</span>. Row zero anchors every future computation.</div>
+              </div>
+              <div class="code-panel" style="width:580px; line-height:2.0;">
+                <div class="code-highlight" id="s3-code-hi" style="top:14px; height:44px;"></div>
+                <div class="code-line is-bright"><span class="kw">for</span> w <span class="kw">in</span> range(capacity + <span class="num">1</span>):</div>
+                <div class="code-line is-bright">&nbsp;&nbsp;&nbsp;&nbsp;dp[<span class="num">0</span>][w] = <span class="num">0</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 4 — ITEM A ROW 1 (42.4 → 62.0s) ===== -->
+      <div id="scene-4" class="scene clip" data-start="42.4" data-duration="19.6" data-track-index="2">
+        <div class="grid-bg"></div>
+        <div class="scene-content">
+          <div id="s4-eyebrow" class="eyebrow">Step 2 &mdash; Process item A (w=2, v=3)</div>
+          <h2 id="s4-headline" class="headline">Below capacity 2: skip.<br />At 2 and above: three wins.</h2>
+          <div id="s4-layout" style="display:flex; gap:60px; align-items:flex-start; margin-top:6px;">
+            <div>
+              <div id="s4-caption" style="font-family:'Martian Mono',monospace; font-size:0.82rem; font-weight:500; text-transform:uppercase; letter-spacing:0.12em; color:#8b96a6; margin-bottom:18px;">filling row 1 &nbsp;&middot;&nbsp; item A: <span style="color:#ffb454;">w=2, v=3</span></div>
+              <table class="dp-table" id="dp-table-s4">
+                <thead><tr><th class="row-header-th">item</th><th>w=0</th><th>w=1</th><th>w=2</th><th>w=3</th><th>w=4</th><th>w=5</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td class="row-label"><span class="item-name">row 0</span><br><span class="item-meta">no items</span></td>
+                    <td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">0</td>
+                    <td id="s4-r0c2" class="dp-cell is-resolved">0</td>
+                    <td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">0</td>
+                  </tr>
+                  <tr>
+                    <td class="row-label"><span class="item-name">row 1</span><br><span class="item-meta">item A w=2 v=3</span></td>
+                    <td id="s4-r1c0" class="dp-cell is-resolved" style="opacity:0;">0</td>
+                    <td id="s4-r1c1" class="dp-cell is-resolved" style="opacity:0;">0</td>
+                    <td id="s4-r1c2" class="dp-cell is-resolved" style="opacity:0;">3</td>
+                    <td id="s4-r1c3" class="dp-cell is-resolved" style="opacity:0;">3</td>
+                    <td id="s4-r1c4" class="dp-cell is-resolved" style="opacity:0;">3</td>
+                    <td id="s4-r1c5" class="dp-cell is-resolved" style="opacity:0;">3</td>
+                  </tr>
+                  <tr><td class="row-label"><span class="item-name">row 2</span><br><span class="item-meta">item B w=3 v=4</span></td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td></tr>
+                  <tr><td class="row-label"><span class="item-name">row 3</span><br><span class="item-meta">item C w=4 v=5</span></td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td><td class="dp-cell">—</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:18px; padding-top:52px;">
+              <div style="position:relative; width:580px; height:186px;">
+                <div id="s4-verdict-a" class="verdict-card" style="position:absolute; top:0; left:0; width:580px;">
+                  <div class="verdict-label">w = 0, 1 &nbsp;(can't fit item A)</div>
+                  <div class="verdict-text">Item A needs weight <strong>2</strong> — capacities below that can't hold it. Inherit from row 0: <span class="c-green">dp[1][0] = dp[1][1] = 0</span>.</div>
+                </div>
+                <div id="s4-verdict-b" class="verdict-card" style="position:absolute; top:0; left:0; width:580px; opacity:0;">
+                  <div class="verdict-label">w = 2, 3, 4, 5 &nbsp;(fits — compare)</div>
+                  <div class="verdict-text">At w=2: skip &rarr; 0, take &rarr; 3+0=<span class="c-amber">3</span>. Take wins. Capacities 3–5 hold the same — only item A fits, so value = <span class="c-green">3</span>.</div>
+                </div>
+              </div>
+              <div class="code-panel" style="width:580px; line-height:2.0;">
+                <div class="code-highlight" id="s4-code-hi" style="top:56px; height:44px;"></div>
+                <div class="code-line"><span class="kw">for</span> i <span class="kw">in</span> range(<span class="num">1</span>, n + <span class="num">1</span>):</div>
+                <div class="code-line">&nbsp;&nbsp;<span class="kw">for</span> w <span class="kw">in</span> range(capacity + <span class="num">1</span>):</div>
+                <div class="code-line is-bright">&nbsp;&nbsp;&nbsp;&nbsp;dp[i][w] = dp[i<span class="num">-1</span>][w]</div>
+                <div class="code-line is-bright">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> weights[i] &lt;= w:</div>
+                <div class="code-line is-bright">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dp[i][w] = max(dp[i][w],</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;values[i] + dp[i<span class="num">-1</span>][w <span class="num">-</span> weights[i]])</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 5 — ITEMS B + C (61.4 → 81.0s) ===== -->
+      <div id="scene-5" class="scene clip" data-start="61.4" data-duration="19.6" data-track-index="1">
+        <div class="grid-bg"></div>
+        <div class="scene-content">
+          <div id="s5-eyebrow" class="eyebrow">Steps 3 &amp; 4 &mdash; Items B and C</div>
+          <h2 id="s5-headline" class="headline">Capacity 5 fits A+B together —<br />that's the breakthrough cell.</h2>
+          <div id="s5-layout" style="display:flex; gap:60px; align-items:flex-start; margin-top:6px;">
+            <div>
+              <div id="s5-caption" style="font-family:'Martian Mono',monospace; font-size:0.82rem; font-weight:500; text-transform:uppercase; letter-spacing:0.12em; color:#8b96a6; margin-bottom:18px;">rows 2 &amp; 3 &nbsp;&middot;&nbsp; item B: <span style="color:#5dd2d6;">w=3, v=4</span> &nbsp;&nbsp; item C: <span style="color:#8b96a6;">w=4, v=5</span></div>
+              <table class="dp-table" id="dp-table-s5">
+                <thead><tr><th class="row-header-th">item</th><th>w=0</th><th>w=1</th><th>w=2</th><th>w=3</th><th>w=4</th><th>w=5</th></tr></thead>
+                <tbody>
+                  <tr><td class="row-label"><span class="item-name">row 0</span><br><span class="item-meta">no items</span></td><td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">0</td></tr>
+                  <tr>
+                    <td class="row-label"><span class="item-name">row 1</span><br><span class="item-meta">item A w=2 v=3</span></td>
+                    <td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">0</td>
+                    <td id="s5-r1c2" class="dp-cell is-resolved">3</td>
+                    <td class="dp-cell is-resolved">3</td><td class="dp-cell is-resolved">3</td>
+                    <td id="s5-r1c5" class="dp-cell is-resolved">3</td>
+                  </tr>
+                  <tr>
+                    <td class="row-label"><span class="item-name">row 2</span><br><span class="item-meta">item B w=3 v=4</span></td>
+                    <td id="s5-r2c0" class="dp-cell is-resolved" style="opacity:0;">0</td>
+                    <td id="s5-r2c1" class="dp-cell is-resolved" style="opacity:0;">0</td>
+                    <td id="s5-r2c2" class="dp-cell is-resolved" style="opacity:0;">3</td>
+                    <td id="s5-r2c3" class="dp-cell is-resolved" style="opacity:0;">4</td>
+                    <td id="s5-r2c4" class="dp-cell is-resolved" style="opacity:0;">4</td>
+                    <td id="s5-r2c5" class="dp-cell is-resolved" style="opacity:0;">7</td>
+                  </tr>
+                  <tr>
+                    <td class="row-label"><span class="item-name">row 3</span><br><span class="item-meta">item C w=4 v=5</span></td>
+                    <td id="s5-r3c0" class="dp-cell is-resolved" style="opacity:0;">0</td>
+                    <td id="s5-r3c1" class="dp-cell is-resolved" style="opacity:0;">0</td>
+                    <td id="s5-r3c2" class="dp-cell is-resolved" style="opacity:0;">3</td>
+                    <td id="s5-r3c3" class="dp-cell is-resolved" style="opacity:0;">4</td>
+                    <td id="s5-r3c4" class="dp-cell is-resolved" style="opacity:0;">5</td>
+                    <td id="s5-r3c5" class="dp-cell is-resolved" style="opacity:0;">7</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:18px; padding-top:52px;">
+              <div style="position:relative; width:580px; height:198px;">
+                <div id="s5-verdict-a" class="verdict-card" style="position:absolute; top:0; left:0; width:580px;">
+                  <div class="verdict-label">Key cell: dp[2][5] — item B at w=5</div>
+                  <div class="verdict-text">Skip B: dp[1][5] = <strong>3</strong>.<br>Take B: 4 + dp[1][2] = 4 + 3 = <span class="c-amber">7</span>.<br><span class="c-green">7 wins</span> — items A and B both fit!</div>
+                </div>
+                <div id="s5-verdict-b" class="verdict-card" style="position:absolute; top:0; left:0; width:580px; opacity:0;">
+                  <div class="verdict-label">Row 3 — item C (w=4, v=5)</div>
+                  <div class="verdict-text">At w=5: skip C &rarr; 7. Take C: 5+dp[2][1]=5. Skip wins — <span class="c-green">7 holds</span>. At w=4: take C gives 5 vs skip=4. <span class="c-green">5 wins.</span></div>
+                </div>
+              </div>
+              <div class="code-panel" style="width:580px; line-height:2.0;">
+                <div class="code-highlight" id="s5-code-hi" style="top:98px; height:44px;"></div>
+                <div class="code-line"><span class="kw">for</span> i <span class="kw">in</span> range(<span class="num">1</span>, n + <span class="num">1</span>):</div>
+                <div class="code-line">&nbsp;&nbsp;<span class="kw">for</span> w <span class="kw">in</span> range(capacity + <span class="num">1</span>):</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;dp[i][w] = dp[i<span class="num">-1</span>][w]</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> weights[i] &lt;= w:</div>
+                <div class="code-line is-bright">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dp[i][w] = max(dp[i][w],</div>
+                <div class="code-line is-bright">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;values[i] + dp[i<span class="num">-1</span>][w<span class="num">-</span>weights[i]])</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 6 — RESULT (80.4 → 103.0s) ===== -->
+      <div id="scene-6" class="scene clip" data-start="80.4" data-duration="22.6" data-track-index="2">
+        <div class="grid-bg"></div>
+        <div class="scene-content">
+          <div id="s6-eyebrow" class="eyebrow">Result</div>
+          <h2 id="s6-headline" class="headline">dp[3][5] = 7. Items A + B<br />fill the knapsack exactly.</h2>
+          <div id="s6-layout" style="display:flex; gap:60px; align-items:flex-start; margin-top:6px;">
+            <div>
+              <div id="s6-caption" style="font-family:'Martian Mono',monospace; font-size:0.82rem; font-weight:500; text-transform:uppercase; letter-spacing:0.12em; color:#8b96a6; margin-bottom:18px;">completed table &nbsp;&middot;&nbsp; <span style="color:#ffb454;">traceback path highlighted</span></div>
+              <table class="dp-table" id="dp-table-s6">
+                <thead><tr><th class="row-header-th">item</th><th>w=0</th><th>w=1</th><th>w=2</th><th>w=3</th><th>w=4</th><th>w=5</th></tr></thead>
+                <tbody>
+                  <tr><td class="row-label"><span class="item-name">row 0</span><br><span class="item-meta">no items</span></td><td id="s6-r0c0" class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">0</td></tr>
+                  <tr><td class="row-label"><span class="item-name">row 1</span><br><span class="item-meta">item A w=2 v=3</span></td><td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">0</td><td id="s6-r1c2" class="dp-cell is-resolved">3</td><td class="dp-cell is-resolved">3</td><td class="dp-cell is-resolved">3</td><td class="dp-cell is-resolved">3</td></tr>
+                  <tr><td class="row-label"><span class="item-name">row 2</span><br><span class="item-meta">item B w=3 v=4</span></td><td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">3</td><td class="dp-cell is-resolved">4</td><td class="dp-cell is-resolved">4</td><td id="s6-r2c5" class="dp-cell is-resolved">7</td></tr>
+                  <tr><td class="row-label"><span class="item-name">row 3</span><br><span class="item-meta">item C w=4 v=5</span></td><td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">0</td><td class="dp-cell is-resolved">3</td><td class="dp-cell is-resolved">4</td><td class="dp-cell is-resolved">5</td><td id="s6-r3c5" class="dp-cell is-resolved">7</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:20px; padding-top:52px;">
+              <div id="s6-output" class="output-line"><span>knapsack(5, W, V) &rarr;</span> 7</div>
+              <div id="s6-stats" class="stat-row">
+                <div class="stat-card"><div class="stat-label">Time</div><div class="stat-value">O(n&middot;W)</div><div class="stat-caption">Fill every cell of the n&thinsp;&times;&thinsp;W table once.</div></div>
+                <div class="stat-card"><div class="stat-label">Space</div><div class="stat-value">O(n&middot;W)</div><div class="stat-caption">Reducible to O(W) with a rolling 1-D array.</div></div>
+              </div>
+              <div id="s6-trace" class="verdict-card" style="width:640px;">
+                <div class="verdict-label">Traceback — items selected</div>
+                <div class="verdict-text">
+                  dp[3][5]=7 = dp[2][5] &rarr; skip C.<br>
+                  dp[2][5]=7 &ne; dp[1][5]=3 &rarr; took B (w=3).<br>
+                  dp[1][2]=3 &ne; dp[0][2]=0 &rarr; took A (w=2).<br>
+                  <strong style="color:#6ee7a8;">A + B: weight 2+3=5, value 3+4=7. &#10003;</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 7 — FULL CODE (102.4 → 120s) ===== -->
+      <div id="scene-7" class="scene clip" data-start="102.4" data-duration="17.6" data-track-index="1">
+        <div class="grid-bg"></div>
+        <div class="scene-content" style="justify-content:center; gap:20px;">
+          <div id="s7-eyebrow" class="eyebrow">Python &middot; Complete Solution</div>
+          <h2 id="s7-headline" class="headline" style="font-size:3.2rem;">The full <span style="color:#6ee7a8;">knapsack()</span> function</h2>
+          <div id="s7-code" class="code-panel" style="width:1400px; line-height:1.72; font-size:1.12rem; align-self:flex-start;">
+            <div class="code-line" id="s7-l0"><span class="kw">from</span> typing <span class="kw">import</span> List</div>
+            <div class="code-line" id="s7-l1">&nbsp;</div>
+            <div class="code-line" id="s7-l2"><span class="kw">def</span> <span style="color:#eceef0;">knapsack</span>(capacity: <span class="kw">int</span>, weights: List[<span class="kw">int</span>], values: List[<span class="kw">int</span>]) <span style="color:#8b96a6;">-&gt;</span> <span class="kw">int</span>:</div>
+            <div class="code-line" id="s7-l3">&nbsp;&nbsp;&nbsp;&nbsp;n = len(weights)</div>
+            <div class="code-line" id="s7-l4">&nbsp;&nbsp;&nbsp;&nbsp;dp = [[<span class="num">0</span>] * (capacity + <span class="num">1</span>) <span class="kw">for</span> _ <span class="kw">in</span> range(n + <span class="num">1</span>)]</div>
+            <div class="code-line" id="s7-l5">&nbsp;</div>
+            <div class="code-line" id="s7-l6">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">for</span> i <span class="kw">in</span> range(<span class="num">1</span>, n + <span class="num">1</span>):</div>
+            <div class="code-line" id="s7-l7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w_i = weights[i - <span class="num">1</span>]</div>
+            <div class="code-line" id="s7-l8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_i = values[i - <span class="num">1</span>]</div>
+            <div class="code-line" id="s7-l9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">for</span> w <span class="kw">in</span> range(capacity + <span class="num">1</span>):</div>
+            <div class="code-line" id="s7-l10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dp[i][w] = dp[i - <span class="num">1</span>][w]</div>
+            <div class="code-line" id="s7-l11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> w_i &lt;= w:</div>
+            <div class="code-line" id="s7-l12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dp[i][w] = max(dp[i][w], v_i + dp[i - <span class="num">1</span>][w - w_i])</div>
+            <div class="code-line" id="s7-l13">&nbsp;</div>
+            <div class="code-line" id="s7-l14">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> dp[n][capacity]</div>
+          </div>
+          <div id="s7-footer" style="display:flex; gap:24px; align-self:flex-start;">
+            <div class="verdict-card" style="width:340px; padding:18px 24px;"><div class="verdict-label">Time</div><div class="verdict-text"><strong style="color:#6ee7a8;">O(n&thinsp;&times;&thinsp;W)</strong> — fill every cell of the table</div></div>
+            <div class="verdict-card" style="width:340px; padding:18px 24px;"><div class="verdict-label">Space</div><div class="verdict-text"><strong style="color:#6ee7a8;">O(n&thinsp;&times;&thinsp;W)</strong> — reducible to O(W) with 1-D DP</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== VIRALITY ===== -->
+      <div id="vrl-progress" class="clip" data-start="0" data-duration="120" data-track-index="4" data-layout-ignore>
+        <div id="vrl-bar-bg"></div><div id="vrl-bar-fill"></div>
+      </div>
+      <div id="vrl-step-1" class="clip vrl-step" data-start="15.5" data-duration="17.5" data-track-index="5" data-layout-ignore><span class="vrl-n">STEP 1/5</span><span>&nbsp;&middot;&nbsp;</span>INSIGHT</div>
+      <div id="vrl-step-2" class="clip vrl-step" data-start="34.5" data-duration="8.5" data-track-index="5" data-layout-ignore><span class="vrl-n">STEP 2/5</span><span>&nbsp;&middot;&nbsp;</span>BASE</div>
+      <div id="vrl-step-3" class="clip vrl-step" data-start="44.5" data-duration="17.5" data-track-index="5" data-layout-ignore><span class="vrl-n">STEP 3/5</span><span>&nbsp;&middot;&nbsp;</span>ITEM A</div>
+      <div id="vrl-step-4" class="clip vrl-step" data-start="63.5" data-duration="17.5" data-track-index="5" data-layout-ignore><span class="vrl-n">STEP 4/5</span><span>&nbsp;&middot;&nbsp;</span>ITEMS B+C</div>
+      <div id="vrl-step-5" class="clip vrl-step" data-start="83.0" data-duration="18.0" data-track-index="5" data-layout-ignore><span class="vrl-n">STEP 5/5</span><span>&nbsp;&middot;&nbsp;</span>RESULT</div>
+      <div id="vrl-cta" class="clip" data-start="108.5" data-duration="6.0" data-track-index="6" data-layout-ignore><span id="vrl-cta-icon">&#x2191;</span>Like &amp; Subscribe for more Python breakdowns</div>
+      <div id="vrl-challenge" class="clip" data-start="114.5" data-duration="4.5" data-track-index="6" data-layout-ignore><span id="vrl-challenge-icon">&#x2192;</span>Try it: capacity=6, weights=[1,2,3], values=[1,2,3] &mdash; max value?</div>
+
+      <!-- ===== AUDIO ===== -->
+      <audio id="narration" class="clip" src="audio/narration.wav" data-start="0" data-duration="120" data-track-index="0" data-volume="1"></audio>
+
+      <!-- ===== CAPTIONS ===== -->
+      <div id="captions" class="caption-track clip" data-start="1.0" data-duration="118" data-track-index="3">
+        <div class="caption-stage">
+          <div id="cap-a" class="caption-text"></div>
+          <div id="cap-b" class="caption-text"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+
+      /* === SCENE 1 (0 → 14s) === */
+      tl.from("#s1-eyebrow",  { y: 26, opacity: 0, duration: 0.5, ease: "power2.out" }, 0.3);
+      tl.from("#s1-headline", { y: 50, opacity: 0, duration: 0.7, ease: "power3.out" }, 0.5);
+      tl.from("#s1-body",     { y: 34, opacity: 0, duration: 0.6, ease: "power2.out" }, 0.85);
+      tl.from("#s1-tags",     { y: 24, opacity: 0, duration: 0.5, ease: "back.out(1.4)" }, 1.2);
+      tl.from("#s1-example",  { y: 28, opacity: 0, duration: 0.6, ease: "sine.out" }, 1.6);
+      tl.from("#s1-example .item-card", { y: 20, opacity: 0, scale: 0.9, duration: 0.45, stagger: 0.1, ease: "back.out(1.5)" }, 2.1);
+
+      /* === TRANSITION 1→2 (13.4) === */
+      tl.to("#scene-1", { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, 13.0);
+      tl.fromTo("#scene-2", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, 13.0);
+
+      /* === SCENE 2 (13.4 → 33.8s) === */
+      tl.from("#s2-eyebrow",  { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, 13.7);
+      tl.from("#s2-headline", { x: -46, opacity: 0, duration: 0.65, ease: "power3.out" }, 13.9);
+      tl.from("#s2-body",     { y: 30, opacity: 0, duration: 0.6, ease: "sine.out" }, 14.3);
+      tl.from("#s2-recurrence .code-panel", { x: -40, opacity: 0, duration: 0.6, ease: "power2.out" }, 15.1);
+      tl.fromTo("#s2-code-hi", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 15.7);
+      tl.from("#s2-leg1, #s2-leg2, #s2-leg3", { x: 40, opacity: 0, duration: 0.5, stagger: 0.14, ease: "power2.out" }, 15.5);
+      tl.from("#s2-verdict", { y: 24, opacity: 0, duration: 0.5, ease: "sine.out" }, 16.6);
+      tl.to("#s2-code-hi", { top: 100, duration: 0.6, ease: "power2.inOut" }, 20.0);
+      tl.to("#s2-code-hi", { top: 188, duration: 0.6, ease: "power2.inOut" }, 24.0);
+
+      /* === TRANSITION 2→3 (32.2) === */
+      tl.to("#scene-2", { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, 32.2);
+      tl.fromTo("#scene-3", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, 32.2);
+
+      /* === SCENE 3 (32.8 → 43.0s) === */
+      tl.from("#s3-eyebrow",  { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, 32.9);
+      tl.from("#s3-headline", { y: 40, opacity: 0, duration: 0.65, ease: "power3.out" }, 33.1);
+      tl.from("#s3-caption",  { x: -22, opacity: 0, duration: 0.4, ease: "power2.out" }, 33.7);
+      tl.from("#dp-table-s3", { y: 30, opacity: 0, duration: 0.55, ease: "power2.out" }, 34.0);
+      tl.from("#s3-verdict",  { x: 40, opacity: 0, duration: 0.55, ease: "power2.out" }, 34.4);
+      tl.from("#scene-3 .code-panel", { x: 40, opacity: 0, duration: 0.55, ease: "power2.out" }, 34.7);
+      tl.fromTo("#s3-code-hi", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 35.2);
+      tl.fromTo("#s3-r0c0", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.6)" }, 35.6);
+      tl.fromTo("#s3-r0c1", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.6)" }, 35.9);
+      tl.fromTo("#s3-r0c2", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.6)" }, 36.2);
+      tl.fromTo("#s3-r0c3", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.6)" }, 36.5);
+      tl.fromTo("#s3-r0c4", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.6)" }, 36.8);
+      tl.fromTo("#s3-r0c5", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.6)" }, 37.1);
+
+      /* === TRANSITION 3→4 (41.8) === */
+      tl.to("#scene-3", { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, 41.8);
+      tl.fromTo("#scene-4", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, 41.8);
+
+      /* === SCENE 4 (42.4 → 62.0s) === */
+      tl.from("#s4-eyebrow",  { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, 42.7);
+      tl.from("#s4-headline", { y: 40, opacity: 0, duration: 0.65, ease: "power3.out" }, 42.9);
+      tl.from("#s4-caption",  { x: -22, opacity: 0, duration: 0.4, ease: "power2.out" }, 43.5);
+      tl.from("#dp-table-s4", { y: 30, opacity: 0, duration: 0.55, ease: "power2.out" }, 43.8);
+      tl.from("#s4-verdict-a", { x: 40, opacity: 0, duration: 0.55, ease: "power2.out" }, 44.3);
+      tl.from("#scene-4 .code-panel", { x: 40, opacity: 0, duration: 0.55, ease: "power2.out" }, 44.6);
+      tl.fromTo("#s4-code-hi", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 45.1);
+      // w=0, w=1: skip (inherit 0)
+      tl.fromTo("#s4-r1c0", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.6)" }, 45.5);
+      tl.fromTo("#s4-r1c1", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.6)" }, 45.8);
+      // anchor source cell for w=2
+      tl.to("#s4-r0c2", { borderColor: "#5dd2d6", backgroundColor: "rgba(93,210,214,0.2)", color: "#5dd2d6", duration: 0.3, ease: "sine.inOut" }, 46.5);
+      // pop in w=2 resolved
+      tl.fromTo("#s4-r1c2", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.4, ease: "elastic.out(1, 0.5)" }, 47.1);
+      tl.to("#s4-r0c2", { borderColor: "#6ee7a8", backgroundColor: "rgba(110,231,168,0.1)", color: "#6ee7a8", duration: 0.3 }, 47.8);
+      // w=3,4,5 quickly
+      tl.fromTo("#s4-r1c3", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.28, ease: "back.out(1.4)" }, 48.3);
+      tl.fromTo("#s4-r1c4", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.28, ease: "back.out(1.4)" }, 48.6);
+      tl.fromTo("#s4-r1c5", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.28, ease: "back.out(1.4)" }, 48.9);
+      // swap verdict
+      tl.to("#s4-verdict-a", { opacity: 0, duration: 0.3, ease: "sine.in" }, 52.0);
+      tl.to("#s4-verdict-b", { opacity: 1, duration: 0.3, ease: "sine.out" }, 52.3);
+
+      /* === TRANSITION 4→5 (60.8) === */
+      tl.to("#scene-4", { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, 60.8);
+      tl.fromTo("#scene-5", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, 60.8);
+
+      /* === SCENE 5 (61.4 → 81.0s) === */
+      tl.from("#s5-eyebrow",  { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, 61.7);
+      tl.from("#s5-headline", { y: 40, opacity: 0, duration: 0.65, ease: "power3.out" }, 61.9);
+      tl.from("#s5-caption",  { x: -22, opacity: 0, duration: 0.4, ease: "power2.out" }, 62.5);
+      tl.from("#dp-table-s5", { y: 30, opacity: 0, duration: 0.55, ease: "power2.out" }, 62.8);
+      tl.from("#s5-verdict-a", { x: 40, opacity: 0, duration: 0.55, ease: "power2.out" }, 63.3);
+      tl.from("#scene-5 .code-panel", { x: 40, opacity: 0, duration: 0.55, ease: "power2.out" }, 63.6);
+      tl.fromTo("#s5-code-hi", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 64.1);
+      // Row 2: w=0,1,2 inherit
+      tl.fromTo("#s5-r2c0", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(1.4)" }, 64.5);
+      tl.fromTo("#s5-r2c1", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(1.4)" }, 64.75);
+      tl.fromTo("#s5-r2c2", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(1.4)" }, 65.0);
+      // w=3,4
+      tl.fromTo("#s5-r2c3", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.5)" }, 65.4);
+      tl.fromTo("#s5-r2c4", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.5)" }, 65.75);
+      // KEY CELL: highlight sources
+      tl.to("#s5-r1c5", { borderColor: "#5dd2d6", backgroundColor: "rgba(93,210,214,0.2)", color: "#5dd2d6", duration: 0.4, ease: "sine.inOut" }, 66.5);
+      tl.to("#s5-r1c2", { borderColor: "#5dd2d6", backgroundColor: "rgba(93,210,214,0.2)", color: "#5dd2d6", duration: 0.4, ease: "sine.inOut" }, 66.5);
+      tl.fromTo("#s5-r2c5", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.55, ease: "elastic.out(1, 0.55)" }, 67.4);
+      tl.to(["#s5-r1c5", "#s5-r1c2"], { borderColor: "#6ee7a8", backgroundColor: "rgba(110,231,168,0.1)", color: "#6ee7a8", duration: 0.3 }, 68.2);
+      // swap verdict
+      tl.to("#s5-verdict-a", { opacity: 0, duration: 0.3, ease: "sine.in" }, 70.0);
+      tl.to("#s5-verdict-b", { opacity: 1, duration: 0.3, ease: "sine.out" }, 70.3);
+      // Row 3
+      tl.fromTo("#s5-r3c0", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.22, ease: "back.out(1.4)" }, 71.0);
+      tl.fromTo("#s5-r3c1", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.22, ease: "back.out(1.4)" }, 71.22);
+      tl.fromTo("#s5-r3c2", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.22, ease: "back.out(1.4)" }, 71.44);
+      tl.fromTo("#s5-r3c3", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.22, ease: "back.out(1.4)" }, 71.66);
+      tl.fromTo("#s5-r3c4", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.5)" }, 72.1);
+      tl.fromTo("#s5-r3c5", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.5)" }, 72.5);
+
+      /* === TRANSITION 5→6 (79.8) === */
+      tl.to("#scene-5", { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, 79.8);
+      tl.fromTo("#scene-6", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, 79.8);
+
+      /* === SCENE 6 (80.4 → 103.0s) === */
+      tl.from("#s6-eyebrow",  { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, 80.7);
+      tl.from("#s6-headline", { y: 40, opacity: 0, duration: 0.65, ease: "power3.out" }, 80.9);
+      tl.from("#s6-caption",  { x: -22, opacity: 0, duration: 0.4, ease: "power2.out" }, 81.5);
+      tl.from("#dp-table-s6", { y: 30, opacity: 0, duration: 0.55, ease: "power2.out" }, 81.8);
+      tl.from("#s6-output",   { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, 82.6);
+      tl.from("#s6-stats .stat-card", { y: 30, opacity: 0, duration: 0.5, stagger: 0.15, ease: "power3.out" }, 83.2);
+      tl.from("#s6-trace",    { x: 40, opacity: 0, duration: 0.55, ease: "power2.out" }, 84.0);
+      // traceback path
+      tl.to("#s6-r3c5", { borderColor: "#ffb454", backgroundColor: "rgba(255,180,84,0.22)", color: "#ffb454", boxShadow: "0 0 0 2px rgba(255,180,84,0.4)", duration: 0.5, ease: "back.out(1.4)" }, 86.0);
+      tl.to("#s6-r2c5", { borderColor: "#5dd2d6", backgroundColor: "rgba(93,210,214,0.22)", color: "#5dd2d6", boxShadow: "0 0 0 2px rgba(93,210,214,0.4)", duration: 0.5, ease: "back.out(1.4)" }, 87.2);
+      tl.to("#s6-r1c2", { borderColor: "#5dd2d6", backgroundColor: "rgba(93,210,214,0.22)", color: "#5dd2d6", boxShadow: "0 0 0 2px rgba(93,210,214,0.4)", duration: 0.5, ease: "back.out(1.4)" }, 88.4);
+      tl.to("#s6-r0c0", { borderColor: "#6ee7a8", backgroundColor: "rgba(110,231,168,0.22)", color: "#6ee7a8", boxShadow: "0 0 0 2px rgba(110,231,168,0.4)", duration: 0.5, ease: "back.out(1.4)" }, 89.6);
+
+      /* === TRANSITION 6→7 (101.8) === */
+      tl.to("#scene-6", { opacity: 0, scale: 1.05, duration: 0.8, ease: "power2.inOut" }, 101.8);
+      tl.fromTo("#scene-7", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, 101.8);
+
+      /* === SCENE 7 (102.4 → 120s) === */
+      tl.from("#s7-eyebrow",  { y: 24, opacity: 0, duration: 0.5, ease: "power2.out" }, 102.7);
+      tl.from("#s7-headline", { y: 36, opacity: 0, duration: 0.6, ease: "power3.out" }, 102.9);
+      tl.from("#s7-l0, #s7-l2", { x: -32, opacity: 0, duration: 0.45, stagger: 0.14, ease: "power2.out" }, 103.5);
+      tl.from("#s7-l3, #s7-l4", { x: -24, opacity: 0, duration: 0.4, stagger: 0.1, ease: "power2.out" }, 103.9);
+      tl.from("#s7-l6, #s7-l7, #s7-l8", { x: -24, opacity: 0, duration: 0.4, stagger: 0.09, ease: "back.out(1.2)" }, 104.3);
+      tl.from("#s7-l9, #s7-l10, #s7-l11, #s7-l12", { x: -20, opacity: 0, duration: 0.4, stagger: 0.07, ease: "back.out(1.2)" }, 104.8);
+      tl.from("#s7-l14", { x: -24, opacity: 0, duration: 0.45, ease: "power2.out" }, 105.4);
+      tl.from("#s7-footer", { y: 24, opacity: 0, duration: 0.5, ease: "sine.out" }, 106.0);
+      // final fade
+      tl.to("#scene-7", { opacity: 0, duration: 1.0, ease: "power2.in" }, 118.8);
+
+      /* === CAPTIONS ===
+         Timings offset from each clip's audio placement:
+         s1 @ 1.0s, s2 @ 15.0s, s3 @ 34.0s, s4 @ 44.0s,
+         s5 @ 63.0s, s6 @ 82.0s, s7 @ 104.0s
+      */
+      var CAPTIONS = [
+        /* s1 captions (1.0s offset) — 12.6s total */
+        { text: "Let's solve the zero one Knapsack problem:",  start: 1.1,   end: 3.8   },
+        { text: "given items with weights and values,",         start: 3.8,   end: 5.8   },
+        { text: "and a knapsack with a weight limit,",          start: 5.8,   end: 7.6   },
+        { text: "pick a subset to maximize total value",        start: 7.6,   end: 9.8   },
+        { text: "without exceeding the capacity.",              start: 9.8,   end: 11.2  },
+        /* s2 captions (15.0s offset) — 17.7s total */
+        { text: "The key insight: every item forces",           start: 15.2,  end: 17.2  },
+        { text: "one binary choice — take it, or leave it.",    start: 17.2,  end: 19.5  },
+        { text: "We define dp of i, w",                         start: 19.5,  end: 21.0  },
+        { text: "as the best value reachable",                   start: 21.0,  end: 22.4  },
+        { text: "using the first i items within weight w.",      start: 22.4,  end: 25.0  },
+        { text: "Two items, three choices —",                    start: 25.0,  end: 26.5  },
+        { text: "this table captures all of them.",              start: 26.5,  end: 28.4  },
+        /* s3 captions (34.0s offset) — 8.8s total */
+        { text: "Row zero is the base case:",                    start: 34.1,  end: 36.0  },
+        { text: "with no items available,",                      start: 36.0,  end: 37.4  },
+        { text: "every capacity yields zero value.",             start: 37.4,  end: 39.4  },
+        /* s4 captions (44.0s offset) — 17.3s total */
+        { text: "Item A has weight two and value three.",        start: 44.2,  end: 46.5  },
+        { text: "For capacities below two we can't fit it,",    start: 46.5,  end: 48.7  },
+        { text: "so we inherit zero.",                           start: 48.7,  end: 49.9  },
+        { text: "At capacity two: skip gets zero,",              start: 49.9,  end: 51.7  },
+        { text: "take gets three. Three wins.",                   start: 51.7,  end: 53.5  },
+        { text: "Capacities three through five",                  start: 53.5,  end: 55.1  },
+        { text: "repeat the same logic.",                         start: 55.1,  end: 56.5  },
+        /* s5 captions (63.0s offset) — 17.6s total */
+        { text: "Item B weighs three and is worth four.",         start: 63.2,  end: 65.5  },
+        { text: "The exciting cell is capacity five:",            start: 65.5,  end: 67.4  },
+        { text: "skip B and keep three,",                         start: 67.4,  end: 68.9  },
+        { text: "or take B and also fit item A —",                start: 68.9,  end: 70.8  },
+        { text: "four plus three equals seven.",                   start: 70.8,  end: 72.5  },
+        { text: "Seven wins.",                                     start: 72.5,  end: 73.6  },
+        { text: "Item C fills the last row.",                      start: 73.6,  end: 75.5  },
+        /* s6 captions (82.0s offset) — 20.4s total */
+        { text: "The answer is dp of three, five",                start: 82.2,  end: 84.3  },
+        { text: "equals seven.",                                    start: 84.3,  end: 85.4  },
+        { text: "Tracing back: we skipped C,",                     start: 85.4,  end: 87.1  },
+        { text: "took B from capacity five,",                       start: 87.1,  end: 88.7  },
+        { text: "then took A from the remaining two.",              start: 88.7,  end: 90.6  },
+        { text: "Items A and B: weight 5, value 7.",                start: 90.6,  end: 92.6  },
+        { text: "Time and space: O of n times W.",                   start: 92.6,  end: 94.8  },
+        /* s7 captions (104.0s offset) — 15.3s total */
+        { text: "Here's the complete solution.",                    start: 104.2, end: 106.0 },
+        { text: "Build the table bottom up:",                        start: 106.0, end: 107.5 },
+        { text: "for each item either skip it",                      start: 107.5, end: 109.2 },
+        { text: "and carry forward the previous best,",             start: 109.2, end: 111.2 },
+        { text: "or take it and add its value",                      start: 111.2, end: 112.9 },
+        { text: "to the best with remaining capacity.",              start: 112.9, end: 115.0 },
+        { text: "Return dp of n, capacity.",                         start: 115.0, end: 116.8 },
+      ];
+
+      var capA = document.getElementById("cap-a");
+      var capB = document.getElementById("cap-b");
+
+      CAPTIONS.forEach(function(g, i) {
+        var el = i % 2 === 0 ? capA : capB;
+        tl.to(el, {
+          opacity: 1, duration: 0.16, ease: "sine.out", overwrite: "auto",
+          onStart: (function(e, t) { return function() { e.textContent = t; }; })(el, g.text)
+        }, g.start);
+        tl.to(el, { opacity: 0, duration: 0.16, ease: "sine.in", overwrite: "auto" }, g.end - 0.14);
+        tl.set(el, { opacity: 0 }, g.end);
+      });
+      tl.set([capA, capB], { opacity: 0, visibility: "hidden" }, 117.0);
+
+      /* === VIRALITY === */
+      tl.fromTo("#vrl-bar-fill", { width: "0%" }, { width: "100%", duration: 120, ease: "none" }, 0);
+      tl.from("#vrl-step-1", { opacity: 0, y: -10, duration: 0.5, ease: "power2.out" }, 15.5);
+      tl.from("#vrl-step-2", { opacity: 0, y: -10, duration: 0.4, ease: "power2.out" }, 34.5);
+      tl.from("#vrl-step-3", { opacity: 0, y: -10, duration: 0.4, ease: "power2.out" }, 44.5);
+      tl.from("#vrl-step-4", { opacity: 0, y: -10, duration: 0.4, ease: "power2.out" }, 63.5);
+      tl.from("#vrl-step-5", { opacity: 0, y: -10, duration: 0.4, ease: "power2.out" }, 83.0);
+      tl.to("#vrl-step-5",   { opacity: 0, y: -10, duration: 0.3, ease: "power2.in"  }, 101.8);
+      tl.from("#vrl-cta",       { opacity: 0, y: 18, duration: 0.6, ease: "power2.out" }, 108.5);
+      tl.from("#vrl-challenge", { opacity: 0, y: 14, duration: 0.5, ease: "power2.out" }, 114.5);
+      tl.to("#vrl-challenge",   { opacity: 0, y: 8,  duration: 0.5, ease: "sine.in"   }, 118.8);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

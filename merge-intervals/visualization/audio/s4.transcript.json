@@ -1,0 +1,218 @@
+[
+  {
+    "id": "w0",
+    "text": "Two",
+    "start": 0.12,
+    "end": 0.347
+  },
+  {
+    "id": "w1",
+    "text": "to",
+    "start": 0.347,
+    "end": 0.498
+  },
+  {
+    "id": "w2",
+    "text": "six",
+    "start": 0.498,
+    "end": 0.725
+  },
+  {
+    "id": "w3",
+    "text": "starts",
+    "start": 0.725,
+    "end": 1.178
+  },
+  {
+    "id": "w4",
+    "text": "at",
+    "start": 1.178,
+    "end": 1.329
+  },
+  {
+    "id": "w5",
+    "text": "two.",
+    "start": 1.329,
+    "end": 1.707
+  },
+  {
+    "id": "w6",
+    "text": "That's",
+    "start": 1.707,
+    "end": 2.161
+  },
+  {
+    "id": "w7",
+    "text": "less",
+    "start": 2.161,
+    "end": 2.463
+  },
+  {
+    "id": "w8",
+    "text": "than",
+    "start": 2.463,
+    "end": 2.765
+  },
+  {
+    "id": "w9",
+    "text": "or",
+    "start": 2.765,
+    "end": 2.916
+  },
+  {
+    "id": "w10",
+    "text": "equal",
+    "start": 2.916,
+    "end": 3.294
+  },
+  {
+    "id": "w11",
+    "text": "to",
+    "start": 3.294,
+    "end": 3.445
+  },
+  {
+    "id": "w12",
+    "text": "three,",
+    "start": 3.445,
+    "end": 3.974
+  },
+  {
+    "id": "w13",
+    "text": "the",
+    "start": 3.974,
+    "end": 4.201
+  },
+  {
+    "id": "w14",
+    "text": "end",
+    "start": 4.201,
+    "end": 4.428
+  },
+  {
+    "id": "w15",
+    "text": "of",
+    "start": 4.428,
+    "end": 4.579
+  },
+  {
+    "id": "w16",
+    "text": "our",
+    "start": 4.579,
+    "end": 4.806
+  },
+  {
+    "id": "w17",
+    "text": "anchor,",
+    "start": 4.806,
+    "end": 5.41
+  },
+  {
+    "id": "w18",
+    "text": "so",
+    "start": 5.41,
+    "end": 5.562
+  },
+  {
+    "id": "w19",
+    "text": "they",
+    "start": 5.562,
+    "end": 5.864
+  },
+  {
+    "id": "w20",
+    "text": "overlap.",
+    "start": 5.864,
+    "end": 6.544
+  },
+  {
+    "id": "w21",
+    "text": "We",
+    "start": 6.544,
+    "end": 6.695
+  },
+  {
+    "id": "w22",
+    "text": "stretch",
+    "start": 6.695,
+    "end": 7.224
+  },
+  {
+    "id": "w23",
+    "text": "the",
+    "start": 7.224,
+    "end": 7.451
+  },
+  {
+    "id": "w24",
+    "text": "anchor's",
+    "start": 7.451,
+    "end": 8.056
+  },
+  {
+    "id": "w25",
+    "text": "end",
+    "start": 8.056,
+    "end": 8.282
+  },
+  {
+    "id": "w26",
+    "text": "up",
+    "start": 8.282,
+    "end": 8.434
+  },
+  {
+    "id": "w27",
+    "text": "to",
+    "start": 8.434,
+    "end": 8.585
+  },
+  {
+    "id": "w28",
+    "text": "six,",
+    "start": 8.585,
+    "end": 8.963
+  },
+  {
+    "id": "w29",
+    "text": "fusing",
+    "start": 8.963,
+    "end": 9.416
+  },
+  {
+    "id": "w30",
+    "text": "both",
+    "start": 9.416,
+    "end": 9.718
+  },
+  {
+    "id": "w31",
+    "text": "ranges",
+    "start": 9.718,
+    "end": 10.172
+  },
+  {
+    "id": "w32",
+    "text": "into",
+    "start": 10.172,
+    "end": 10.474
+  },
+  {
+    "id": "w33",
+    "text": "one",
+    "start": 10.474,
+    "end": 10.701
+  },
+  {
+    "id": "w34",
+    "text": "to",
+    "start": 10.701,
+    "end": 10.852
+  },
+  {
+    "id": "w35",
+    "text": "six.",
+    "start": 10.852,
+    "end": 11.23
+  }
+]

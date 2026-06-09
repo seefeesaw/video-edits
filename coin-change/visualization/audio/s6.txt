@@ -1,0 +1,1 @@
+The dp array is complete: 0, 1, 2, 1, 1, 2, 2. dp of 6 equals 2, within valid range — return 2. To recover the coins, trace back. dp of 6 used coin 3, leaving amount 3. dp of 3 used coin 3 again, leaving amount 0. Answer: two 3-coins. That is the optimal solution.

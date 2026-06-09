@@ -1,0 +1,1 @@
+Let's solve Merge Intervals: given a list of ranges, combine every overlapping pair into one single range.
