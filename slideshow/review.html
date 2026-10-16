@@ -72,11 +72,14 @@ async function open(name) {
   if (!refs.length) refs = (await fetch(`/api/ls/posts/${name}/reference`).then((r) => r.json())).filter((f) => /\.(png|jpe?g|webp)$/i.test(f)).sort().map((f) => base + 'reference/' + f);
   const [W, H] = post.size || [1080, 1920];
   S.slides = [];
-  for (let i = 0; i < outs.length; i++) {
-    const mine = await load(base + (post.outDir || 'out') + '/' + outs[i] + '?t=' + Date.now());
+  // References are usable before anything is rendered: slides = max(renders, references), and a
+  // missing render is shown as a blank canvas so show/layout/stats work on a fresh scaffold.
+  const blank = new ImageData(W, H);
+  for (let i = 0; i < Math.max(outs.length, refs.length); i++) {
+    const mine = outs[i] ? pixels(await load(base + (post.outDir || 'out') + '/' + outs[i] + '?t=' + Date.now()), W, H) : blank;
     let ref = null; try { if (refs[i]) ref = await load(refs[i]); } catch (e) { console.warn(e.message); }
-    const a = pixels(mine, W, H), b = ref ? pixels(ref, W, H) : null;
-    S.slides.push({ name: outs[i], mine: a, ref: b, score: b ? score(a, b) : null });
+    const b = ref ? pixels(ref, W, H) : null;
+    S.slides.push({ name: outs[i] || `(not rendered) slide ${i + 1}`, mine, ref: b, score: b && outs[i] ? score(mine, b) : null });
   }
   document.getElementById('status').textContent = S.slides.map((s, i) => `${i + 1}: ${s.score ? s.score.similarity + '%' : 'no ref'}`).join('  ·  ');
   draw();
