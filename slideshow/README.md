@@ -17,7 +17,14 @@ node render.mjs posts/skolify-apply-6-unis            # all slides
 node render.mjs posts/skolify-apply-6-unis --only 2,4 # some slides
 node render.mjs posts/skolify-apply-6-unis --html     # keep generated HTML for debugging
 node serve.mjs                                        # review UI on http://localhost:5179/review.html?post=<name>
+node generate.mjs posts/skolify-apply-6-unis          # create missing photo assets with gpt-image-2
 ```
+
+`generate.mjs` calls the `thuma-image` deployment (gpt-image-2) on our Azure AI Foundry resource
+(`foundry.json`; override with `AZURE_FOUNDRY_IMAGE_ENDPOINT` / `AZURE_FOUNDRY_IMAGE_DEPLOYMENT` /
+`AZURE_FOUNDRY_IMAGE_API_VERSION`). Auth is your `az login` session, no keys. Each `generate` job in
+post.json writes `out` (extra `variants` land beside it as `.v2`, `.v3`…), and existing files are
+skipped unless `--force`.
 
 Rendering uses the locally installed Chrome (`CHROME_PATH` overrides) through `puppeteer-core`, and
 Google Fonts are fetched at render time.
@@ -31,6 +38,8 @@ Google Fonts are fetched at render time.
   "fonts": ["Inter:wght@400;700", "Rammetto One"],   // Google Fonts families
   "css": ["screens/screens.css"],                     // extra stylesheets (post-relative)
   "references": ["https://…/slide1.jpeg", "…"],       // optional; else posts/<name>/reference/*
+  "generate": [{ "id": "hook-photo", "out": "assets/hook-photo.png", "prompt": "…",
+                 "size": "1024x1536", "quality": "high", "variants": 2 }],  // gpt-image-2 jobs
   "background": { "type": "paper", "color": "#e8e9e4", "grain": 0.02 },  // default for slides
   "slides": [
     { "name": "hook", "background": { … }, "elements": [ … ] }
@@ -101,13 +110,15 @@ before the screenshot.
    `review.crop = [x, y, w, h]`, `review.zoom`, and the onion/diff/blink modes help inspect.
 5. **Fonts.** If glyph shapes differ, compare candidate Google Fonts by ink aspect ratio
    (width ÷ height of the same string) and pick the closest, then size/space as above.
-6. **Assets that cannot be rebuilt** (camera photos, third-party logos) use `photo`/`{{img}}` with a
-   drawn fallback, so the slide renders now and becomes exact when the real file is dropped in.
+6. **Photos** that cannot be rebuilt in HTML: describe the shot in a `generate` job (subject,
+   wardrobe, props, setting, and where things sit in the frame as % of height so overlays land
+   on the same spots), run `generate.mjs`, pick the best variant, and reference it from a `photo`
+   background. Third-party logos stay `{{img}}` assets with a drawn fallback.
 
 ## Example: `posts/skolify-apply-6-unis`
 
 Replica of a 5-slide university-application carousel. Slides 2–5 (paper background, badges, rebuilt
 app screens) score ~97% pixel similarity against the originals with every measured element within
 0–3px; the remaining difference is paper grain and the drawn university logos. Slide 1's caption,
-flag and "6" sticker match within 2px; its background is a drawn elevator stand-in until
-`assets/hook-photo.jpg` is provided. Real logos go in `assets/logos/{uj,up,tut,nwu,wits,vut}.png`.
+flag and "6" sticker match within 2px over a gpt-image-2 photo generated to the original's
+composition (~81% similarity; a new photo cannot match pixel-for-pixel). Real logos go in `assets/logos/{uj,up,tut,nwu,wits,vut}.png`.

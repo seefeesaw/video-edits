@@ -1,0 +1,6 @@
+{
+  "endpoint": "https://thumamediauae36d.openai.azure.com",
+  "deployment": "thuma-image",
+  "model": "gpt-image-2",
+  "apiVersion": "2025-04-01-preview"
+}

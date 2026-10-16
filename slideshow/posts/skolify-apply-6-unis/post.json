@@ -10,6 +10,16 @@
       "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/e3d2640da4fd42b087368576ca6f2d69~tplv-photomode-image.jpeg?dr=14555&x-expires=1792353600&x-signature=3xIzcJ9me3N8rTMpvFfWUqvBQ0o%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1",
       "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/e575aca1c864492ea8e7686325dd0ea2~tplv-photomode-image.jpeg?dr=14555&x-expires=1792353600&x-signature=TvCTMgZ5yKCSaSeIn6Bfj3cM2No%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1"
   ],
+  "generate": [
+    {
+      "id": "hook-photo",
+      "out": "assets/hook-photo.png",
+      "size": "1024x1536",
+      "quality": "high",
+      "variants": 2,
+      "prompt": "Candid iPhone mirror selfie taken inside a brushed stainless-steel hospital elevator, vertical 9:16 photo. A young Black South African woman, a medical student, stands centred facing the mirror, holding a phone in a pink textured case up in front of her face so her face is fully hidden by the phone; her right hand with neat nails grips the phone at chest-to-face height. Long sleek black hair pulled into a high ponytail with a black scrunchie. She wears black medical scrubs (V-neck top) with a small embroidered blue-and-white university crest badge on the left chest, and a black stethoscope with burgundy tubing draped around her neck. An off-white leather tote bag hangs on her right shoulder at the lower left of the frame; in her left hand at lower right she holds a black clipboard folder and a small pale sage-green squeeze bottle. Background: reflective brushed steel elevator walls with vertical panel seams, a recessed ceiling with two small round downlights at the very top of the frame, two framed white notices mounted on the right wall, and a button panel at the far right edge. Composition: elevator ceiling occupies the top 12% of the frame, the top of her head is at about 28% from the top, the phone is around 40-50% from the top and slightly right of centre, her body fills the lower half and is cropped at the thighs. Natural warm elevator lighting, slight smartphone wide-angle perspective, realistic photo, sharp focus, no text, no captions, no watermark."
+    }
+  ],
   "size": [1080, 1920],
   "fonts": [
     "TikTok Sans:wght@400;500;600;700",
@@ -29,7 +39,7 @@
       "name": "hook",
       "background": {
         "type": "photo",
-        "src": "assets/hook-photo.jpg",
+        "src": "assets/hook-photo.png",
         "fallback": { "type": "html", "file": "screens/elevator.html" }
       },
       "elements": [
