@@ -1,0 +1,40 @@
+{{include @shared/skolify/kit.html}}
+<div id="s3"></div>
+<script>
+  (() => {
+    const rows = [['Mathematics', 66, 5], ['English', 78, 6], ['Physical Scier', 71, 6], ['Geography', 82, 7], ['Afrikaans', 74, 6]];
+    const ink = [[328, 1209, 451, 1223], [328, 1285, 395, 1303], [328, 1361, 461, 1378], [328, 1437, 432, 1454], [328, 1512, 417, 1527]];
+    const marks = [[559, 1210, 582, 1223], [559, 1286, 581, 1299], [561, 1361, 578, 1375], [559, 1437, 582, 1451], [560, 1513, 581, 1527]];
+    const pts = [[656, 1209, 698, 1224], [655, 1285, 698, 1301], [655, 1361, 698, 1376], [656, 1437, 698, 1452], [655, 1513, 698, 1528]];
+    let h = sk.header({ box: [246, 677, 833, 802], brand: [410, 716, 546, 753], logo: [316, 716, 372, 752], me: [779, 729, 25], tile: true });
+    h += sk.t([414, 877, 684, 905], 'Enter Your Subjects', 'font:800 30px Inter;color:#161616');
+    h += sk.t([308, 981, 789, 1003], 'Enter your final high school marks. Click', 'font:400 22px Inter;color:#444');
+    h += sk.t([293, 1017, 803, 1039], '"Find My Options" to see eligible faculties.', 'font:400 22px Inter;color:#444');
+    h += sk.t([370, 1052, 725, 1072], 'Life Orientation is excluded', 'font:700 22px Inter;color:#333');
+    // table card
+    h += '<div class="sk-card" style="left:276px;top:1123px;width:543px;height:437px;border-radius:14px"></div>';
+    h += '<div class="ska" style="left:277px;top:1124px;width:541px;height:56px;background:#f7f9fb;border-radius:14px 14px 0 0;border-bottom:1px solid #edf0f2"></div>';
+    h += sk.t([313, 1142, 383, 1159], 'Subject', 'font:700 17px Inter;color:#1c1c1c');
+    h += sk.t([532, 1143, 601, 1156], 'Mark %', 'font:700 17px Inter;color:#1c1c1c');
+    h += sk.t([653, 1143, 690, 1156], 'APS', 'font:700 17px Inter;color:#1c1c1c');
+    rows.forEach(([s, m, a], i) => {
+      const cy = 1216 + i * 76;
+      if (i === 4) h += `<div class="ska" style="left:277px;top:${cy - 37}px;width:541px;height:78px;background:#f8f9fa;border-radius:0 0 14px 14px"></div>`;
+      if (i > 0) h += `<div class="ska" style="left:277px;top:${cy - 38}px;width:541px;height:1px;background:#eef0f2"></div>`;
+      h += `<div class="sk-input" style="left:310px;top:${cy - 24}px;width:188px;height:48px"></div>`;
+      h += `<svg class="ska" style="left:472px;top:${cy - 8}px" width="12" height="16" viewBox="0 0 12 16"><path d="M2.5 6 L6 2.5 L9.5 6 M2.5 10 L6 13.5 L9.5 10" stroke="#222" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      h += `<div class="sk-input" style="left:524px;top:${cy - 24}px;width:92px;height:48px"></div>`;
+      h += sk.t(ink[i], s, 'font:700 19px Inter;color:#1e1e1e');
+      h += sk.t(marks[i], String(m), 'font:700 19px Inter;color:#1e1e1e');
+      h += sk.t(pts[i], `${a} pts`, 'font:600 18px Inter;color:#2a2a2a');
+      h += `<svg class="ska" style="left:755px;top:${cy - 5}px" width="12" height="12" viewBox="0 0 12 12"><path d="M1.5 1.5 L10.5 10.5 M10.5 1.5 L1.5 10.5" stroke="#8a8a8a" stroke-width="2" stroke-linecap="round"/></svg>`;
+    });
+    // add subject + APS bar
+    h += '<div class="ska" style="left:276px;top:1594px;width:543px;height:81px;border:2px dashed #cfd5db;border-radius:14px;background:#f6f8fa"></div>';
+    h += sk.t([426, 1624, 669, 1644], '+ Add another subject', 'font:600 21px Inter;color:#4a4a4a');
+    h += '<div class="sk-card" style="left:276px;top:1706px;width:543px;height:160px;border-radius:14px"></div>';
+    h += sk.t([383, 1761, 604, 1780], 'Your Current APS:', 'font:500 22px Inter;color:#444');
+    h += sk.t([634, 1750, 711, 1793], '30', 'font:900 44px Inter;color:#0b5fd9');
+    document.getElementById('s3').outerHTML = h;
+  })();
+</script>

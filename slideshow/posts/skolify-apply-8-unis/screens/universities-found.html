@@ -1,0 +1,46 @@
+{{include @shared/skolify/kit.html}}
+<div id="s5"></div>
+<script>
+  (() => {
+    // small 3D gold emblem (stand-in for each university's crest)
+    const gold = (box, shape) => {
+      const [x0, y0, x1, y1] = box, w = x1 - x0 + 1, hh = y1 - y0 + 1;
+      const paths = {
+        bust: '<path d="M50 8 C62 8 66 22 60 30 C74 36 78 52 76 70 L24 70 C22 52 26 36 40 30 C34 22 38 8 50 8Z"/><rect x="18" y="72" width="64" height="16" rx="4"/>',
+        crest: '<path d="M14 18 L50 6 L86 18 L82 60 C78 78 62 90 50 94 C38 90 22 78 18 60 Z"/>',
+        sun: '<circle cx="50" cy="50" r="26"/><g stroke-width="7"><path d="M50 6 V18 M50 82 V94 M6 50 H18 M82 50 H94 M19 19 L27 27 M73 73 L81 81 M81 19 L73 27 M27 73 L19 81"/></g>',
+        tower: '<rect x="38" y="4" width="24" height="22" rx="3"/><path d="M26 28 H74 L70 70 C66 84 58 92 50 94 C42 92 34 84 30 70 Z"/><rect x="20" y="90" width="60" height="8" rx="4"/>',
+        wheel: '<circle cx="50" cy="50" r="40" fill="none" stroke-width="10"/><circle cx="50" cy="50" r="14"/><path d="M50 16 V84 M16 50 H84" stroke-width="7"/>',
+      };
+      return `<svg class="ska" style="left:${x0}px;top:${y0}px" width="${w}" height="${hh}" viewBox="0 0 100 100" preserveAspectRatio="none"><defs><radialGradient id="g${x0}${y0}" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#fff2a8"/><stop offset=".45" stop-color="#e3b33b"/><stop offset="1" stop-color="#8a5a12"/></radialGradient></defs><g fill="url(#g${x0}${y0})" stroke="url(#g${x0}${y0})">${paths[shape]}</g></svg>`;
+    };
+    const card = (x0, y0, x1, y1) => `<div class="sk-card" style="left:${x0}px;top:${y0}px;width:${x1 - x0}px;height:${y1 - y0}px;border-radius:13px;border-color:#ececec;box-shadow:none"></div>`;
+    const pill = (box, txt) => { const w = box[2] - box[0] + 24, hh = box[3] - box[1] + 16; return `<div class="ska" style="left:${(box[0] + box[2]) / 2 - w / 2}px;top:${(box[1] + box[3]) / 2 - hh / 2}px;width:${w}px;height:${hh}px;border-radius:${hh / 2}px;background:#eef1f5"></div>` + sk.t(box, txt, 'font:600 13px Inter;color:#4a5a6a'); };
+    let h = sk.header({ box: [271, 689, 808, 784], brand: [423, 707, 538, 739], logo: [343, 708, 391, 738], me: [735.5, 717.5, 20] });
+    h += '<div class="ska" style="left:310px;top:828px;width:487px;height:280px;border-radius:16px;background:#f6f7f9;border:1px solid #eceef1"></div>';
+    h += sk.t([392, 848, 687, 879], 'Skolify has found <span style="color:#1557d6">8</span>', 'font:800 31px Inter;color:#111;letter-spacing:-0.8px');
+    h += sk.t([338, 887, 743, 918], 'Universities you can apply', 'font:800 31px Inter;color:#111;letter-spacing:-0.8px');
+    h += sk.t([524, 930, 554, 952], 'to', 'font:800 31px Inter;color:#111');
+    h += sk.t([338, 1020, 742, 1040], 'Select Your Universities &amp; Courses', 'font:800 22px Inter;color:#161616;letter-spacing:-0.5px');
+    // section 1: no application fee
+    h += '<div class="ska" style="left:310px;top:1130px;width:487px;height:400px;border-radius:14px;background:#fbfbfc"></div>';
+    h += sk.t([320, 1159, 502, 1175], 'No Application Fee', 'font:500 18px Inter;color:#555');
+    h += '<svg class="ska" style="left:506px;top:1157px" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#9aa3ad"/><text x="10" y="15" font-family="Inter" font-weight="800" font-size="13" fill="#fff" text-anchor="middle">?</text></svg>';
+    h += '<div class="ska" style="left:731px;top:1150px;width:34px;height:34px;border-radius:50%;background:#eef1f5;font:600 16px/34px Inter;color:#666;text-align:center">3</div>';
+    h += card(350, 1200, 529, 1368) + card(542, 1200, 721, 1368) + card(350, 1384, 529, 1535);
+    h += gold([414, 1227, 437, 1259], 'bust') + gold([607, 1233, 629, 1252], 'crest') + gold([412, 1394, 440, 1421], 'sun');
+    h += sk.t([407, 1283, 444, 1294], 'NMU', 'font:800 16px Inter;color:#111') + sk.t([598, 1283, 637, 1294], 'NWU', 'font:800 16px Inter;color:#111') + sk.t([409, 1448, 442, 1459], 'TUT', 'font:800 16px Inter;color:#111');
+    h += pill([409, 1317, 442, 1325], '2 max') + pill([602, 1317, 634, 1325], '2 max') + pill([409, 1482, 442, 1490], '3 max');
+    // section 2: application fee required
+    h += '<div class="sk-card" style="left:332px;top:1551px;width:441px;height:300px;border-radius:14px;border-color:#eceef1;box-shadow:0 2px 8px rgba(0,0,0,.04)"></div>';
+    h += sk.t([340, 1566, 573, 1582], 'Application Fee Required', 'font:500 18px Inter;color:#555');
+    h += '<svg class="ska" style="left:580px;top:1563px" width="21" height="21" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#f07a1a"/><text x="10" y="15" font-family="Inter" font-weight="800" font-size="13" fill="#fff" text-anchor="middle">?</text></svg>';
+    h += '<div class="ska" style="left:723px;top:1557px;width:32px;height:32px;border-radius:50%;background:#eef1f5;font:600 16px/32px Inter;color:#666;text-align:center">5</div>';
+    h += '<div class="ska" style="left:342px;top:1601px;width:421px;height:1.5px;background:#ececec"></div>';
+    h += card(354, 1632, 546, 1830) + card(560, 1632, 753, 1830);
+    h += gold([420, 1645, 452, 1676], 'sun') + gold([629, 1639, 657, 1684], 'tower');
+    h += sk.t([425, 1705, 446, 1717], 'UL', 'font:800 16px Inter;color:#111') + sk.t([632, 1705, 655, 1717], 'UP', 'font:800 16px Inter;color:#111');
+    h += pill([418, 1741, 453, 1750], '2 max') + pill([625, 1741, 660, 1750], '2 max');
+    document.getElementById('s5').outerHTML = h;
+  })();
+</script>

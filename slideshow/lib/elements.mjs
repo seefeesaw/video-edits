@@ -48,8 +48,11 @@ function font(el, d = {}) {
 }
 
 // Plain text block.
+// `fit: [x0,y0,x1,y1]` (+ optional fitMode) => data attributes picked up by lib/fit.mjs.
+const fitAttr = (el) => (el.fit ? ` data-fit="${el.fit.join(',')}"${el.fitMode ? ` data-fit-mode="${el.fitMode}"` : ''}` : '');
+
 function text(el) {
-  return `<div class="el text ${el.className || ''}" style="${box(el, font(el, { lineHeight: 1.2 }) + 'white-space:pre-wrap;')}">${inline(el.text)}</div>`;
+  return `<div class="el text ${el.className || ''}"${fitAttr(el)} style="${box(el, font(el, { lineHeight: 1.2 }) + `white-space:${el.w ? 'pre-wrap' : 'pre'};`)}">${inline(el.text)}</div>`;
 }
 
 // TikTok native "classic" caption with per-line rounded background (Aa highlight mode).
@@ -68,6 +71,7 @@ function tiktokText(el) {
     minWidths: el.minWidths || [],
     offsets: el.offsets || [],
     textOffsets: el.textOffsets || [],
+    fitLines: el.fitLines || [], // per-line ink boxes for auto-fit
   };
   return `<div class="el tiktok-text" data-spec='${esc(JSON.stringify(data))}' style="position:absolute;left:0;top:0;width:100%;${font({ font: f })}${el.style || ''}"></div>`;
 }
@@ -76,7 +80,7 @@ function tiktokText(el) {
 function badge(el) {
   const f = { family: el.fontFamily || 'Paytone One', size: 90, color: '#fdc904', lineHeight: 1, align: 'center', ...el.font };
   const pad = el.pad ?? [0, 0];
-  return `<div class="el badge" style="${box(el, `background:${el.bg ?? '#000'};border-radius:${px(el.radius ?? 26)};display:flex;align-items:center;justify-content:center;padding:${px(pad[0])} ${px(pad[1])};box-sizing:border-box;`)}"><div style="${font({ font: f })}white-space:pre;${el.textStyle || ''}">${inline(el.text)}</div></div>`;
+  return `<div class="el badge" style="${box(el, `background:${el.bg ?? '#000'};border-radius:${px(el.radius ?? 26)};display:flex;align-items:center;justify-content:center;padding:${px(pad[0])} ${px(pad[1])};box-sizing:border-box;`)}"><div${fitAttr(el)} style="${font({ font: f })}white-space:pre;${el.textStyle || ''}">${inline(el.text)}</div></div>`;
 }
 
 // Hand-drawn arrow: a stroked SVG path plus an open "V" arrowhead at the path end.
@@ -93,7 +97,7 @@ function arrow(el) {
 function image(el, ctx) {
   const src = ctx.asset(el.src);
   if (!src) return el.fallback ? render(el.fallback, ctx) : '';
-  return `<img class="el image" src="${src}" style="${box(el, `object-fit:${el.fit ?? 'cover'};object-position:${el.position ?? 'center'};`)}">`;
+  return `<img class="el image"${fitAttr({ fitMode: 'box', ...el })} src="${src}" style="${box(el, `object-fit:${el.fit ?? 'cover'};object-position:${el.position ?? 'center'};`)}">`;
 }
 
 // Template tokens usable in any screen/html fragment (paths relative to the post dir):
@@ -119,6 +123,12 @@ function phone(el, ctx) {
   const sw = el.screenWidth ?? inner;
   const scale = inner / sw;
   const html = expand(el.screen ? ctx.read(el.screen) : el.html || '', ctx);
+  // slideCoords: the fragment is laid out in slide pixels (positions read straight off the
+  // reference); the frame just clips it.
+  if (el.slideCoords) {
+    return `<div class="el phone" style="${box(el, `border:${bw}px solid ${el.borderColor ?? '#000'};border-radius:${px(el.radius ?? 56)};overflow:hidden;background:${el.bg ?? '#fff'};box-sizing:border-box;`)}">
+    <div class="screen" style="position:absolute;left:${-el.x - bw}px;top:${-el.y - bw}px;width:${ctx.size[0]}px;height:${ctx.size[1]}px;">${html}</div></div>`;
+  }
   return `<div class="el phone" style="${box(el, `border:${bw}px solid ${el.borderColor ?? '#000'};border-radius:${px(el.radius ?? 56)};overflow:hidden;background:${el.bg ?? '#fff'};box-sizing:border-box;`)}">
     <div class="screen" style="position:absolute;left:0;top:0;width:${sw}px;height:${(el.h - bw * 2) / scale}px;transform:scale(${scale});transform-origin:0 0;">${html}</div></div>`;
 }
@@ -126,7 +136,7 @@ function phone(el, ctx) {
 // Raw HTML escape hatch (inline `html` or a `file`).
 function html(el, ctx) {
   const body = expand(el.file ? ctx.read(el.file) : el.html, ctx);
-  return `<div class="el html" style="${box(el)}">${body}</div>`;
+  return `<div class="el html"${fitAttr({ fitMode: 'box', ...el })} style="${box(el)}">${body}</div>`;
 }
 
 const registry = { text, tiktokText, badge, arrow, image, phone, html };

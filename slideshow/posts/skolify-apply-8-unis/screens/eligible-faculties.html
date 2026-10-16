@@ -1,0 +1,33 @@
+{{include @shared/skolify/kit.html}}
+<div id="s4"></div>
+<script>
+  (() => {
+    let h = sk.header({ box: [112, 839, 585, 927], brand: [241, 857, 349, 886], logo: [165, 857, 209, 885], me: [550, 866, 20] });
+    h += sk.t([192, 940, 510, 968], 'Your Eligible Faculties', 'font:800 28px Inter;color:#161616');
+    h += sk.t([153, 995, 549, 1013], '12 faculty(s) found • 1028 eligible courses', 'font:400 19px Inter;color:#5a5a5a');
+    h += sk.t([241, 1070, 461, 1085], 'Showing 6 of 12 faculties', 'font:500 18px Inter;color:#5a5a5a');
+    h += '<div class="ska" style="left:177px;top:1128px;width:291px;height:54px;border:1.5px solid #e2e2e2;border-radius:27px;background:#fff"></div>';
+    h += sk.t([195, 1148, 438, 1161], 'Search for a specific course', 'font:400 17px Inter;color:#a3a3a3');
+    h += '<div class="ska" style="left:479px;top:1126px;width:58px;height:58px;border-radius:50%;background:#1b1b1b;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="9" cy="9" r="6.5" stroke="#fff" stroke-width="3" fill="none"/><path d="M14 14 L19.5 19.5" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/></svg></div>';
+    // faculty cards: [card box, title ink, title html, tag ink, tag html]
+    const cards = [
+      [[207, 1263, 351, 1432], [215, 1277, 318, 1354], 'College of<br>Business<br>and<br>Economics', [220, 1379, 311, 1388], 'COMMERCE'],
+      [[374, 1263, 518, 1432], [387, 1298, 481, 1333], 'Faculty of<br>Science', [399, 1358, 467, 1367], 'SCIENCE'],
+      [[207, 1457, 351, 1603], [209, 1480, 323, 1518], 'Faculty of<br>Engineering', [212, 1540, 320, 1549], 'ENGINEERING'],
+      [[374, 1457, 518, 1603], [374, 1470, 496, 1529], 'Faculty of<br>ICT<br>(Technology)', [397, 1551, 469, 1560], 'GENERAL'],
+      [[207, 1629, 351, 1806], [220, 1641, 313, 1697], 'Faculty of<br>Health<br>Sciences', [226, 1722, 305, 1754], 'HEALTH<br>SCIENCES'],
+      [[374, 1629, 518, 1806], [387, 1663, 481, 1698], 'Faculty of<br>Law', [417, 1723, 449, 1732], 'LAW'],
+    ];
+    for (const [c, ti, th, gi, gh] of cards) {
+      h += `<div class="sk-card" style="left:${c[0]}px;top:${c[1]}px;width:${c[2] - c[0]}px;height:${c[3] - c[1]}px;border-radius:13px;border-color:#ededed"></div>`;
+      const gw = gi[2] - gi[0] + 26, gh2 = gi[3] - gi[1] + 22;
+      h += `<div class="ska" style="left:${(gi[0] + gi[2]) / 2 - gw / 2}px;top:${(gi[1] + gi[3]) / 2 - gh2 / 2}px;width:${gw}px;height:${gh2}px;border-radius:${gh2 / 2}px;background:#f4f4f5"></div>`;
+      h += sk.t(ti, th, 'font:800 19px Inter;color:#111;text-align:center;line-height:1.08');
+      h += sk.t(gi, gh, 'font:700 12px Inter;color:#6b6b6b;letter-spacing:1px;text-align:center;line-height:1.75');
+    }
+    h += '<div class="ska" style="left:127px;top:1506px;width:51px;height:51px;border-radius:50%;background:#c9c9c9;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M9 2 L4 7 L9 12" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>';
+    h += '<div class="ska" style="left:546px;top:1506px;width:51px;height:51px;border-radius:50%;background:#151515;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M5 2 L10 7 L5 12" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>';
+    h += '<div class="ska" style="left:577px;top:1380px;width:4px;height:290px;border-radius:2px;background:#cfcfcf"></div>';
+    document.getElementById('s4').outerHTML = h;
+  })();
+</script>

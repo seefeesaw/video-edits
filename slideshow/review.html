@@ -149,6 +149,75 @@ S.measure = (i, pred, region) => {
 S.measureAll = (list) => list.map(([i, name, p, r]) => { const m = S.measure(i, p, r); return `${i}.${name} ref ${JSON.stringify(m.ref)} mine ${JSON.stringify(m.mine)} d ${m.delta}`; }).join('\n');
 S.pixel = (i, x, y) => { const s = S.slides[i - 1], k = (y * s.mine.width + x) * 4, h = (d) => '#' + [0, 1, 2].map((j) => d.data[k + j].toString(16).padStart(2, '0')).join(''); return { ref: s.ref && h(s.ref), mine: h(s.mine) }; };
 S.reload = () => open(document.getElementById('post').value);
+// review.show(slide, [x,y,w,h]?, zoom?, mode?) – single slide, cropped, for screenshots.
+// mode 'ref' shows the reference alone (reading content), 'side'/'onion'/'diff' compare.
+S.show = (i, crop = null, zoom = 0.3, mode = 'side') => {
+  S.only = i; S.crop = crop; S.zoom = zoom; S.mode = mode === 'ref' ? 'side' : mode; draw();
+  if (mode === 'ref') document.querySelectorAll('.pair canvas:nth-child(2)').forEach((c) => c.remove());
+  document.querySelector('header').style.display = 'none'; document.querySelectorAll('.slide h3').forEach((h) => (h.style.display = 'none'));
+  scrollTo(0, 0); return { viewport: [innerWidth, innerHeight], scale: `1 slide px = ${zoom} css px` };
+};
+// review.rankImages(slide, urls) – rank candidate full-slide renders (e.g. one per generated photo
+// variant) by composition distance to the reference: mean colour difference of 24px blocks, so
+// framing/colour layout counts and fine detail doesn't. Lower is better.
+S.rankImages = async (i, urls) => {
+  const ref = S.slides[i - 1].ref, out = [];
+  for (const u of urls) {
+    const im = await load(u + (u.includes('?') ? '&' : '?') + Date.now());
+    const d = pixels(im, ref.width, ref.height).data; let s = 0, n = 0;
+    for (let by = 0; by < ref.height; by += 24) for (let bx = 0; bx < ref.width; bx += 24) {
+      const a = [0, 0, 0], b = [0, 0, 0];
+      for (let y = by; y < Math.min(by + 24, ref.height); y += 4) for (let x = bx; x < Math.min(bx + 24, ref.width); x += 4) { const k = (y * ref.width + x) * 4; for (let j = 0; j < 3; j++) { a[j] += d[k + j]; b[j] += ref.data[k + j]; } }
+      s += Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]) + Math.abs(a[2] - b[2]); n += 108;
+    }
+    out.push([+(s / n).toFixed(1), u]);
+  }
+  return out.sort((a, b) => a[0] - b[0]).map(([v, u]) => `${v}  ${u}`).join('\n');
+};
+S.scores = () => S.slides.map((s, i) => `${i + 1} ${s.name} ${s.score ? s.score.similarity + '%' : 'no ref'}`).join('\n');
+// review.layout(slide, [x0,y0,x1,y1]?, {src:'ref'|'mine', gapY:6, gapX:36, ink}) -> one row per blob:
+// [x0,y0,x1,y1] w×h and the dominant ink colours. Rows are bands of ink separated by >= gapY empty
+// rows; each band is split at horizontal gaps >= gapX. The default ink predicate is "not near
+// white", so it suits light backgrounds; pass ink: p => … for others.
+S.layout = (i, region, o = {}) => {
+  const s = S.slides[i - 1], img = o.src === 'mine' ? s.mine : s.ref;
+  const [x0, y0, x1, y1] = region || [0, 0, img.width, img.height];
+  const ink = o.ink || ((p) => Math.min(...p) < 200 || Math.max(...p) - Math.min(...p) > 70);
+  const gapY = o.gapY ?? 6, gapX = o.gapX ?? 36;
+  const at = (x, y) => { const k = (y * img.width + x) * 4; return [img.data[k], img.data[k + 1], img.data[k + 2]]; };
+  const rowHas = []; for (let y = y0; y < y1; y++) { let n = 0; for (let x = x0; x < x1; x++) if (ink(at(x, y))) n++; rowHas.push(n > 1); }
+  const bands = []; let start = -1, gap = 0;
+  rowHas.forEach((v, k) => { if (v) { if (start < 0) start = k; gap = 0; } else if (start >= 0 && ++gap >= gapY) { bands.push([start + y0, k - gap + y0]); start = -1; gap = 0; } });
+  if (start >= 0) bands.push([start + y0, y1 - 1]);
+  const out = [];
+  for (const [by0, by1] of bands) {
+    const col = []; for (let x = x0; x < x1; x++) { let n = 0; for (let y = by0; y <= by1; y++) if (ink(at(x, y))) n++; col.push(n > 0); }
+    let sx = -1, g = 0;
+    const flush = (ex) => {
+      let a = 1e9, b = 1e9, c = -1, d = -1; const hist = {};
+      for (let y = by0; y <= by1; y++) for (let x = sx + x0; x <= ex + x0; x++) { const p = at(x, y); if (!ink(p)) continue; a = Math.min(a, x); b = Math.min(b, y); c = Math.max(c, x); d = Math.max(d, y); const q = p.map((v) => Math.round(v / 24) * 24).join(','); hist[q] = (hist[q] || 0) + 1; }
+      const top = Object.entries(hist).sort((u, v) => v[1] - u[1]).slice(0, 3).map(([k]) => '#' + k.split(',').map((v) => Math.min(255, +v).toString(16).padStart(2, '0')).join(''));
+      if (c >= 0) out.push(`[${a},${b},${c},${d}] ${c - a + 1}x${d - b + 1} ${top.join(' ')}`);
+    };
+    col.forEach((v, k) => { if (v) { if (sx < 0) sx = k; g = 0; } else if (sx >= 0 && ++g >= gapX) { flush(k - g); sx = -1; g = 0; } });
+    if (sx >= 0) flush(col.length - 1);
+  }
+  return out.join('\n');
+};
+// review.stats(slide, [x,y,w,h]) -> mean colour, luminance std-dev and lag-4 autocorrelation (grain
+// size) for ref and render; use on a plain background patch to tune paper/crumpled backgrounds.
+S.stats = (i, [x0, y0, w, h]) => {
+  const one = (img) => {
+    if (!img) return null;
+    const L = (x, y) => { const k = (y * img.width + x) * 4; return (img.data[k] + img.data[k + 1] + img.data[k + 2]) / 3; };
+    let s = [0, 0, 0], n = 0, sum = 0, sq = 0;
+    for (let y = y0; y < y0 + h; y++) for (let x = x0; x < x0 + w; x++) { const k = (y * img.width + x) * 4; for (let j = 0; j < 3; j++) s[j] += img.data[k + j]; const l = L(x, y); sum += l; sq += l * l; n++; }
+    const mu = sum / n; let a = 0, b = 0;
+    for (let y = y0; y < y0 + h; y++) for (let x = x0; x < x0 + w - 4; x++) { const p = L(x, y) - mu, q = L(x + 4, y) - mu; a += p * q; b += p * p; }
+    return { rgb: s.map((v) => Math.round(v / n)), sd: +Math.sqrt(sq / n - mu * mu).toFixed(2), corr4: +(a / b).toFixed(2) };
+  };
+  const s = S.slides[i - 1]; return { ref: one(s.ref), mine: one(s.mine) };
+};
 window.draw = draw; window.openPost = open;
 init();
 </script>

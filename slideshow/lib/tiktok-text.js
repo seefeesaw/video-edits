@@ -24,7 +24,7 @@
       const tl = up != null && up >= w ? 0 : r, tr = tl;
       const bl = dn != null && dn >= w ? 0 : r, br = bl;
       const [tdx, tdy] = s.textOffsets[i] || [0, 0];
-      out += `<div style="position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${s.lineHeight}px;background:${s.bg};border-radius:${tl}px ${tr}px ${br}px ${bl}px;display:flex;align-items:center;justify-content:center;white-space:pre;"><span style="transform:translate(${tdx}px,${tdy}px)">${t.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</span></div>`;
+      out += `<div style="position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${s.lineHeight}px;background:${s.bg};border-radius:${tl}px ${tr}px ${br}px ${bl}px;display:flex;align-items:center;justify-content:center;white-space:pre;"><span${s.fitLines[i] ? ` data-fit="${s.fitLines[i].join(',')}"` : ''} style="display:inline-block;transform:translate(${tdx}px,${tdy}px)">${t.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</span></div>`;
       // concave fillets flaring from this (narrower) line into the wider neighbour
       // (cx, cy) is the centre of the transparent quarter-circle, i.e. the corner pointing away
       // from both boxes.

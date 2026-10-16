@@ -1,0 +1,30 @@
+{{include @shared/skolify/kit.html}}
+<div id="s6"></div>
+<script>
+  (() => {
+    // side gutters, white content column, header
+    let h = '<div class="ska" style="left:254px;top:780px;width:572px;height:1040px;background:#f5f9fa"></div>';
+    h += '<div class="ska" style="left:279px;top:780px;width:522px;height:1040px;background:#fff;border-left:2px solid #e4e4e4;border-right:2px solid #e8e8ec"></div>';
+    h += sk.header({ box: [254, 689, 825, 808], brand: [416, 730, 538, 763], logo: [331, 730, 381, 762], me: [748, 741, 21] });
+    const pkg = (top, bottom, name, nameBox, price, priceBox, badge, uaBox, perk, perkBox, n, sel) => {
+      let s = `<div class="ska" style="left:363px;top:${top}px;width:354px;height:${bottom - top}px;border-radius:14px;background:${sel ? '#f3f7ff' : '#fff'};border:${sel ? '3px solid #1a55c6' : '2.5px solid #e4e6e9'};box-shadow:0 2px 8px rgba(0,0,0,.05)"></div>`;
+      s += sk.t(nameBox, name, 'font:800 26px Inter;color:#111');
+      // a price cut off by the frame can't be ink-fitted; place it at R329's size instead
+      s += sel ? `<div class="ska" style="left:${priceBox[0] - 2}px;top:${priceBox[1] - 9}px;font:900 34.5px/1 Inter;color:#118aa6;letter-spacing:0.6px">${price}</div>` : sk.t(priceBox, price, 'font:900 32px Inter;color:#118aa6');
+      if (badge) {
+        s += `<div class="ska" style="left:396px;top:${badge[1] - 36}px;width:290px;height:1.5px;background:#e3edf3"></div>`;
+        s += `<div class="ska" style="left:${badge[0]}px;top:${badge[1]}px;width:${badge[2] - badge[0] + 1}px;height:${badge[3] - badge[1] + 1}px;border-radius:7px;background:#1265e0"></div>`;
+        s += sk.t([badge[0] + 15, badge[1] + 13, badge[2] - 15, badge[3] - 13], String(n), 'font:800 17px Inter;color:#fff');
+        s += sk.t(uaBox, 'University Applications', 'font:400 20px Inter;color:#3a3a3a');
+        s += `<div class="ska" style="left:396px;top:${badge[3] + 12}px;width:290px;height:1.5px;background:#eef1f4"></div>`;
+        s += sk.t(perkBox, perk, 'font:800 20px Inter;color:#1b4fb0');
+      }
+      return s;
+    };
+    h += pkg(816, 1197, 'Basic', [505, 855, 576, 877], 'R169', [496, 918, 583, 944], [396, 1020, 436, 1058], [455, 1031, 682, 1050], 'Standard Processing', [397, 1111, 622, 1131], 2);
+    h += pkg(1254, 1634, 'Standard', [477, 1294, 601, 1314], 'R329', [494, 1356, 585, 1381], [396, 1457, 436, 1495], [455, 1468, 682, 1487], 'Faster Processing', [397, 1548, 591, 1568], 4);
+    h += pkg(1690, 1900, 'Premium', [470, 1731, 608, 1752], 'R499', [494, 1800, 585, 1825], null, null, null, null, 0, true);
+    h += '<div class="ska" style="left:427px;top:1806px;width:220px;height:30px;border-radius:15px;background:#1c1c1c"></div>';
+    document.getElementById('s6').outerHTML = h;
+  })();
+</script>

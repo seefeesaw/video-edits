@@ -1,0 +1,30 @@
+{{include @shared/skolify/kit.html}}
+<div id="s4b"></div>
+<script>
+  (() => {
+    let h = '<div class="ska" style="left:614px;top:1074px;width:377px;height:620px;border:5px solid #f5c518;border-radius:26px;background:#fff;overflow:hidden"></div>';
+    h += '<div class="ska" style="left:667px;top:1079px;width:306px;height:610px;border-left:1.5px solid #ececec;border-right:1.5px solid #ececec;background:#fcfcfd"></div>';
+    h += sk.t([703, 1081, 916, 1094], 'Your Selected Courses', 'font:800 19px Inter;color:#161616');
+    h += sk.t([787, 1110, 832, 1126], '(6/6)', 'font:800 19px Inter;color:#161616');
+    const cards = [
+      [[683, 1140, 935, 1316], [717, 1159, 910, 1263], 'Bachelor of Commerce<br>in Industrial and<br>Organisational<br>Psychology with Labour<br>Relations Management', [716, 1274, 850, 1299], 'College of Business and<br>Economics', 1229],
+      [[683, 1328, 935, 1504], [717, 1347, 886, 1450], 'Bachelor of Arts in<br>Industrial and<br>Organisational<br>Psychology and Labour<br>Relations Management', [716, 1462, 850, 1487], 'College of Business and<br>Economics', 1416],
+      [[683, 1516, 935, 1646], [719, 1534, 884, 1590], 'Bachelor of Commerce<br>in Economic Sciences<br>with Informatics', [718, 1604, 852, 1629], 'College of Business and<br>Economics', 1581],
+      [[683, 1658, 935, 1800], [690, 1676, 895, 1692], 'Bachelor of Information', null, null, 0],
+    ];
+    for (const [c, ti, th, si, sh, cy] of cards) {
+      h += `<div class="ska" style="left:${c[0]}px;top:${c[1]}px;width:${c[2] - c[0]}px;height:${c[3] - c[1]}px;border-radius:12px;background:linear-gradient(120deg,#1574f2 0%,#139cf5 60%,#18c4f6 100%);box-shadow:0 3px 8px rgba(20,110,230,.25)"></div>`;
+      h += sk.t(ti, th, 'font:700 17px Inter;color:#fff;line-height:1.36');
+      if (si) h += sk.t(si, sh, 'font:600 13px Inter;color:#2f7fc0;line-height:1.5;opacity:.85');
+      if (cy) {
+        h += `<div class="ska" style="left:700px;top:${cy - 3}px;width:5px;height:5px;background:#e8f6ff;border-radius:1px"></div>`;
+        h += `<div class="ska" style="left:888px;top:${cy - 19}px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 2 L10 10 M10 2 L2 10" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></div>`;
+      }
+    }
+    // clip everything to the panel's rounded rect (children use slide coordinates)
+    h = `<div class="ska" style="left:0;top:0;width:1080px;height:1920px;clip-path:inset(1074px 89px 226px 614px round 26px)">${h}</div>`;
+    h += '<div class="ska" style="left:614px;top:1074px;width:377px;height:620px;border:5px solid #f5c518;border-radius:26px;pointer-events:none"></div>';
+    h += sk.chat(982, 1662, 34);
+    document.getElementById('s4b').outerHTML = h;
+  })();
+</script>

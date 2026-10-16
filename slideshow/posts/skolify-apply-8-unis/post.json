@@ -1,0 +1,847 @@
+{
+  "title": "Apply to Multiple Universities in 5 Minutes",
+  "source": "https://www.tiktok.com/@skolify.za/photo/7628324597678492949",
+  "caption": "Apply to 8+ Universities in 5 minutes #skolify #uniapplications #university #graduation #southafrica",
+  "music": "",
+  "references_note": "Original slide URLs (signed CDN links expire); used by review.html to diff renders in-browser.",
+  "references": [
+    "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/635120cf808d40b69a5e9338e75c61d0~tplv-photomode-image.jpeg?dr=14555&x-expires=1792357200&x-signature=99ZeBjpw%2BSi1TMTCd2OLnXeGtWQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1",
+    "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/b839ad7685574761a192eb354b6bdc2b~tplv-photomode-image.jpeg?dr=14555&x-expires=1792357200&x-signature=RHKR3brCdVN01HGtbjNh7Zim9j8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1",
+    "https://p19-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/0af2aa0135944856914416860b4c88a9~tplv-photomode-image.jpeg?dr=14555&x-expires=1792357200&x-signature=Lb9mr%2Fx%2B6TxqSEmC55b4UWoP%2Bc4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1",
+    "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/5e3ecb5473d24520bd4b4e51044009a7~tplv-photomode-image.jpeg?dr=14555&x-expires=1792357200&x-signature=zsvbqDmgJvEjhADbMj36nsxLJuE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1",
+    "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/6c7b562bcb014498bf910d5d37b5370c~tplv-photomode-image.jpeg?dr=14555&x-expires=1792357200&x-signature=wf%2BUeg5YzBLVhB9dKyYoJ7r1O4s%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1",
+    "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/2b4f1fe35c3045fb9a3f2d290c4ba6bf~tplv-photomode-image.jpeg?dr=14555&x-expires=1792357200&x-signature=M1Pq%2BsSFGiz9t2t9W452ElI9%2Fqk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1",
+    "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/527d4fcec61d4d84b05aea374b0cc03a~tplv-photomode-image.jpeg?dr=14555&x-expires=1792357200&x-signature=rzk4mm7yqodDlmvnLswTnORmbJ8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1"
+  ],
+  "size": [
+    1080,
+    1920
+  ],
+  "fonts": [
+    "Coiny",
+    "Open Sans:wght@300;400;500;600;700;800",
+    "Inter:wght@400;500;600;700;800;900",
+    "TikTok Sans:wght@500;600;700",
+    "Fredoka:wght@600;700"
+  ],
+  "css": [
+    "@shared/skolify/app.css",
+    "screens/screens.css"
+  ],
+  "background": {
+    "type": "crumpled",
+    "color": "#fdfdff",
+    "relief": 0.37,
+    "surfaceScale": 3,
+    "frequency": 0.08
+  },
+  "slides": [
+    {
+      "name": "hook",
+      "background": {
+        "type": "photo",
+        "src": "assets/hook-photo.png"
+      },
+      "elements": [
+        {
+          "type": "tiktokText",
+          "lines": [
+            "POV: i Applied to    ",
+            "UNIVERSITIES in 4 MINUTES"
+          ],
+          "minWidths": [
+            580,
+            949
+          ],
+          "cx": 522,
+          "y": 395,
+          "lineHeight": 97,
+          "padX": 20,
+          "radius": 22,
+          "fitLines": [
+            [
+              226,
+              420,
+              782,
+              483
+            ],
+            [
+              70,
+              512,
+              966,
+              562
+            ]
+          ],
+          "font": {
+            "family": "TikTok Sans",
+            "size": 66,
+            "weight": 600,
+            "color": "#111"
+          }
+        },
+        {
+          "type": "html",
+          "file": "screens/flag-za.html",
+          "x": 515,
+          "y": 348,
+          "w": 82,
+          "h": 31
+        },
+        {
+          "type": "html",
+          "file": "screens/six-cap.html",
+          "x": 780,
+          "y": 280,
+          "w": 210,
+          "h": 240,
+          "fit": [
+            801,
+            295,
+            964,
+            500
+          ],
+          "fitMode": "stretch"
+        },
+        {
+          "type": "html",
+          "file": "screens/mortarboard.html",
+          "x": 758,
+          "y": 241,
+          "w": 178,
+          "h": 105
+        }
+      ]
+    },
+    {
+      "name": "search",
+      "elements": [
+        {
+          "type": "text",
+          "text": "SEARCH:",
+          "x": 176,
+          "y": 190,
+          "fit": [
+            176,
+            190,
+            884,
+            298
+          ],
+          "font": {
+            "family": "Coiny",
+            "weight": 400,
+            "size": 100,
+            "color": "#5d17e7",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "SKOLIFY.CO.ZA",
+          "x": 381,
+          "y": 362,
+          "fit": [
+            381,
+            362,
+            692,
+            392
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "arrow",
+          "x": 0,
+          "y": 0,
+          "w": 1080,
+          "h": 1920,
+          "path": "M 905 252 C 975 300, 990 470, 930 560 C 890 625, 840 665, 795 688",
+          "head": "M 840 600 L 795 688 L 905 650",
+          "strokeWidth": 13,
+          "headWidth": 13,
+          "color": "#fbc21a"
+        },
+        {
+          "type": "phone",
+          "x": 167,
+          "y": 485,
+          "w": 663,
+          "h": 1204,
+          "border": 4,
+          "radius": 75,
+          "screenWidth": 560,
+          "screen": "@shared/skolify/welcome.html"
+        }
+      ]
+    },
+    {
+      "name": "enter-marks",
+      "elements": [
+        {
+          "type": "text",
+          "text": "ENTER",
+          "x": 320,
+          "y": 206,
+          "fit": [
+            320,
+            206,
+            759,
+            295
+          ],
+          "font": {
+            "family": "Coiny",
+            "weight": 400,
+            "size": 100,
+            "color": "#5d17e7",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "MARKS",
+          "x": 310,
+          "y": 304,
+          "fit": [
+            310,
+            304,
+            768,
+            393
+          ],
+          "font": {
+            "family": "Coiny",
+            "weight": 400,
+            "size": 100,
+            "color": "#fbc21a",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "it will show [color=#fbc21a]you[/color] YOUR [color=#fbc21a]APS[/color],",
+          "x": 215,
+          "y": 504,
+          "fit": [
+            215,
+            504,
+            864,
+            554
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "then you click [color=#5d17e7]“search”[/color]",
+          "x": 250,
+          "y": 574,
+          "fit": [
+            250,
+            574,
+            815,
+            624
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "phone",
+          "x": 242,
+          "y": 673,
+          "w": 596,
+          "h": 1166,
+          "border": 4,
+          "radius": 55,
+          "slideCoords": true,
+          "screen": "screens/enter-subjects.html"
+        },
+        {
+          "type": "html",
+          "x": 0,
+          "y": 0,
+          "w": 1080,
+          "h": 1920,
+          "html": "{{include @shared/skolify/kit.html}}<script>document.write(sk.chat(806,1752,34))</script>"
+        }
+      ]
+    },
+    {
+      "name": "choose-course",
+      "elements": [
+        {
+          "type": "text",
+          "text": "CHOOSE",
+          "x": 242,
+          "y": 177,
+          "fit": [
+            242,
+            177,
+            789,
+            265
+          ],
+          "font": {
+            "family": "Coiny",
+            "weight": 400,
+            "size": 100,
+            "color": "#5d17e7",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "COURSE",
+          "x": 271,
+          "y": 275,
+          "fit": [
+            271,
+            275,
+            808,
+            363
+          ],
+          "font": {
+            "family": "Coiny",
+            "weight": 400,
+            "size": 100,
+            "color": "#5d17e7",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "It will show [color=#5d17e7]YOU[/color] courses [color=#fbc21a]YOU[/color] qualify for",
+          "x": 250,
+          "y": 442,
+          "fit": [
+            250,
+            442,
+            831,
+            471
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "across [color=#fbc21a]ALL[/color] the universities in [color=#5d17e7]SOUTH AFRICA[/color]",
+          "x": 210,
+          "y": 483,
+          "fit": [
+            210,
+            483,
+            862,
+            506
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Pick [color=#5d17e7]6[/color] courses you want to",
+          "x": 178,
+          "y": 599,
+          "fit": [
+            178,
+            599,
+            903,
+            654
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "study & click [color=#fbc21a]“SEARCH”[/color]",
+          "x": 216,
+          "y": 678,
+          "fit": [
+            216,
+            678,
+            862,
+            733
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "phone",
+          "x": 108,
+          "y": 835,
+          "w": 482,
+          "h": 976,
+          "border": 4,
+          "radius": 52,
+          "slideCoords": true,
+          "screen": "screens/eligible-faculties.html"
+        },
+        {
+          "type": "html",
+          "x": 0,
+          "y": 0,
+          "w": 1080,
+          "h": 1920,
+          "file": "screens/selected-courses.html"
+        }
+      ]
+    },
+    {
+      "name": "choose-university",
+      "elements": [
+        {
+          "type": "text",
+          "text": "CHOOSE",
+          "x": 257,
+          "y": 217,
+          "fit": [
+            257,
+            217,
+            804,
+            306
+          ],
+          "font": {
+            "family": "Coiny",
+            "weight": 400,
+            "size": 100,
+            "color": "#5d17e7",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "UNIVERSITY",
+          "x": 110,
+          "y": 315,
+          "fit": [
+            110,
+            315,
+            998,
+            404
+          ],
+          "font": {
+            "family": "Coiny",
+            "weight": 400,
+            "size": 100,
+            "color": "#fbc21a",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "It will show [color=#fbc21a]YOU[/color] all universities with",
+          "x": 179,
+          "y": 496,
+          "fit": [
+            179,
+            496,
+            930,
+            530
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "the courses [color=#5d17e7]YOU[/color] chose !",
+          "x": 302,
+          "y": 556,
+          "fit": [
+            302,
+            556,
+            804,
+            589
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "phone",
+          "x": 267,
+          "y": 685,
+          "w": 546,
+          "h": 1110,
+          "border": 4,
+          "radius": 52,
+          "slideCoords": true,
+          "screen": "screens/universities-found.html"
+        }
+      ]
+    },
+    {
+      "name": "package",
+      "elements": [
+        {
+          "type": "text",
+          "text": "PACKAGE",
+          "x": 224,
+          "y": 244,
+          "fit": [
+            224,
+            244,
+            855,
+            333
+          ],
+          "font": {
+            "family": "Coiny",
+            "weight": 400,
+            "size": 100,
+            "color": "#5d17e7",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Choose a [color=#fbc21a]package[/color] of How many",
+          "x": 211,
+          "y": 442,
+          "fit": [
+            211,
+            442,
+            870,
+            485
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "[color=#5d17e7]UNIVERSITIES[/color] you want it to help [color=#5d17e7]APPLY[/color] to",
+          "x": 94,
+          "y": 503,
+          "fit": [
+            94,
+            503,
+            987,
+            545
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "phone",
+          "x": 250,
+          "y": 685,
+          "w": 580,
+          "h": 1136,
+          "border": 4,
+          "radius": 56,
+          "slideCoords": true,
+          "screen": "screens/packages.html"
+        }
+      ]
+    },
+    {
+      "name": "relax",
+      "elements": [
+        {
+          "type": "text",
+          "text": "RELAX",
+          "x": 217,
+          "y": 329,
+          "fit": [
+            217,
+            329,
+            864,
+            458
+          ],
+          "font": {
+            "family": "Coiny",
+            "weight": 400,
+            "size": 100,
+            "color": "#5d17e7",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "After choosing [color=#fbc21a]YOUR[/color] package, the",
+          "x": 134,
+          "y": 665,
+          "fit": [
+            134,
+            665,
+            932,
+            712
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "site will provide a SECTION for you to",
+          "x": 103,
+          "y": 732,
+          "fit": [
+            103,
+            732,
+            975,
+            779
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "[color=#5d17e7]insert[/color] all needed [color=#fbc21a]Documents[/color] like ID",
+          "x": 124,
+          "y": 799,
+          "fit": [
+            124,
+            799,
+            955,
+            837
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "[color=#5d17e7]copy etc..[/color]",
+          "x": 422,
+          "y": 871,
+          "fit": [
+            422,
+            871,
+            645,
+            913
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Their [color=#fbc21a]TEAM[/color] will contact you with",
+          "x": 248,
+          "y": 1088,
+          "fit": [
+            248,
+            1088,
+            837,
+            1124
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Updates of the application [color=#fbc21a]progress[/color]",
+          "x": 222,
+          "y": 1138,
+          "fit": [
+            222,
+            1138,
+            867,
+            1176
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "until completion",
+          "x": 390,
+          "y": 1191,
+          "fit": [
+            390,
+            1191,
+            687,
+            1226
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#000",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Skolify is commited to protecting your",
+          "x": 300,
+          "y": 1539,
+          "fit": [
+            300,
+            1539,
+            788,
+            1564
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#222",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "personal information and upholding",
+          "x": 315,
+          "y": 1576,
+          "fit": [
+            315,
+            1576,
+            773,
+            1601
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#222",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "your rights to privacy in accordance",
+          "x": 313,
+          "y": 1613,
+          "fit": [
+            313,
+            1613,
+            772,
+            1638
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#222",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "with the [color=#5d17e7]POPIA[/color] act of the constitution",
+          "x": 302,
+          "y": 1649,
+          "fit": [
+            302,
+            1649,
+            783,
+            1669
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#222",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "of the republic of south africa",
+          "x": 355,
+          "y": 1686,
+          "fit": [
+            355,
+            1686,
+            733,
+            1711
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#222",
+            "lineHeight": 1
+          }
+        }
+      ]
+    }
+  ],
+  "generate": [
+    {
+      "id": "hook-photo",
+      "out": "assets/hook-photo.png",
+      "size": "1024x1536",
+      "quality": "high",
+      "variants": 3,
+      "prompt": "Candid smartphone photo, vertical 9:16, sunny South African university graduation on a green lawn, shot from slightly behind her right side. A young Black woman graduate seen in three-quarter back/side view, turning her head to the left with a big smile in profile. Black graduation gown, black mortarboard cap with a bright orange tassel hanging in front of her face, long voluminous dark curly hair over her shoulders, a colourful African print stole (blue, yellow, orange patterns) ending in shiny royal-blue satin. She holds a bouquet of deep red roses wrapped in clear cellophane in front of her on the left. EXACT composition: lots of space above her — a large round green tree against a clear blue sky fills the top 30% of the frame, a few tall city buildings in the far background on the left; the top of her mortarboard is at 31% of the image height, her face at 36-40% height, her head horizontally at 45-55% of the width; the rose bouquet sits at 20-40% of the width and 45-62% of the height; a blurred crowd of graduates in black gowns on the left and right edges at 40-55% height; the frame cuts her at the thighs at the bottom; bright midday sun, realistic, no text, no watermark."
+    }
+  ]
+}

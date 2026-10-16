@@ -1,0 +1,25 @@
+<!-- Skolify UI kit helpers. Include this file (include token + @shared/skolify/kit.html) once per screen, then call sk.* from a
+     <script> to emit markup. All coordinates are slide px (use with phone "slideCoords": true). -->
+<script>
+  window.sk = window.sk || {
+    // mortarboard-with-glasses logo mark
+    logo: (w, h, color = '#111', eye = '#fff') => `<svg width="${w}" height="${h}" viewBox="0 0 50 34" preserveAspectRatio="none"><path d="M25 1 L49 9.5 L25 18 L1 9.5 Z" fill="${color}"/><path d="M11 13 V19 C11 21.5 39 21.5 39 19 V13 L25 18 Z" fill="${color}"/><path d="M45.5 10.5 V22" stroke="${color}" stroke-width="2"/><circle cx="45.5" cy="23.5" r="2.2" fill="${color}"/><circle cx="16.5" cy="26" r="6.6" fill="${eye}" stroke="${color}" stroke-width="3.6"/><circle cx="32.5" cy="26" r="6.6" fill="${eye}" stroke="${color}" stroke-width="3.6"/><path d="M22.5 25 Q24.5 22.5 26.5 25" stroke="${color}" stroke-width="2.6" fill="none"/></svg>`,
+    // header bar: box [x0,y0,x1,y1]; brand = ink box of "Skolify"; logo = ink box of the mark
+    // (optional, else derived from brand); me = [cx,cy,r] profile icon; tile = faint square behind the mark
+    header: ({ box: [x0, y0, x1, y1], brand, logo, me, tile = false }) => {
+      const bh = brand[3] - brand[1];
+      const lw = logo ? logo[2] - logo[0] + 1 : Math.round(bh * 1.45), lh = logo ? logo[3] - logo[1] + 1 : Math.round(bh * 1.15);
+      const lx = logo ? logo[0] : brand[0] - Math.round(bh * 0.95) - lw, ly = logo ? logo[1] : Math.round((brand[1] + brand[3]) / 2 - lh / 2 - bh * 0.05);
+      const pad = Math.round(bh * 0.45);
+      return `<div class="skh" style="left:${x0}px;top:${y0}px;width:${x1 - x0}px;height:${y1 - y0}px"></div>` +
+        (tile ? `<div class="skh-tile" style="position:absolute;left:${lx - pad}px;top:${ly - pad * 1.3}px;width:${lw + pad * 2}px;height:${lh + pad * 2.6}px;background:#f7f7f7;border-radius:4px"></div>` : '') +
+        `<div style="position:absolute;left:${lx}px;top:${ly}px">${sk.logo(lw, lh)}</div>` +
+        `<div class="ska" data-fit="${brand.join(',')}" data-fit-label="Skolify header" style="left:${brand[0]}px;top:${brand[1] - bh * 0.25}px;font:800 ${bh * 1.05}px/1 Inter;color:#111;white-space:nowrap">Skolify</div>` +
+        (me ? `<svg class="ska" style="left:${me[0] - me[2]}px;top:${me[1] - me[2]}px" width="${me[2] * 2}" height="${me[2] * 2}" viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="#2c3046"/><circle cx="20" cy="15.5" r="7" fill="#fff"/><path d="M7.5 31.5 C10 24.5 30 24.5 32.5 31.5 A17 17 0 0 1 7.5 31.5 Z" fill="#fff"/></svg>` : '');
+    },
+    // floating black chat bubble with the logo
+    chat: (cx, cy, r) => `<div class="sk-chat" style="left:${cx - r}px;top:${cy - r}px;width:${r * 2}px;height:${r * 2}px">${sk.logo(r * 0.95, r * 0.76, '#fff', '#111')}</div>`,
+    // text positioned by its reference ink box (auto-fit does the sizing)
+    t: (box, html, style = '', label) => `<div class="ska" data-fit="${box.join(',')}"${label ? ` data-fit-label="${label}"` : ''} style="left:${box[0]}px;top:${box[1]}px;white-space:nowrap;line-height:1;${style}">${html}</div>`,
+  };
+</script>

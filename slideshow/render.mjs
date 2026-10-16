@@ -12,6 +12,7 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import puppeteer from 'puppeteer-core';
 import { render } from './lib/elements.mjs';
 import { renderBackground } from './lib/backgrounds.mjs';
+import { fitAll } from './lib/fit.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const CHROME =
@@ -74,19 +75,25 @@ async function main() {
   const post = JSON.parse(fs.readFileSync(path.join(dir, 'post.json'), 'utf8'));
   const outDir = path.join(dir, post.outDir || 'out');
   fs.mkdirSync(outDir, { recursive: true });
+  // A full render replaces the whole set, so drop slides left over from renamed/removed entries.
+  if (!args.only) for (const f of fs.readdirSync(outDir)) if (/^\d+-.*\.(png|html)$/.test(f)) fs.unlinkSync(path.join(outDir, f));
   const [W, H] = post.size || [1080, 1920];
 
   const warnings = [];
   const ctx = {
     dir,
-    read: (f) => fs.readFileSync(path.join(dir, f), 'utf8'),
+    // "@shared/…" resolves to slideshow/shared (reusable screens, styles, logos); anything else is
+    // relative to the post directory.
+    resolve: (f) => (f.startsWith('@shared/') ? path.join(ROOT, 'shared', f.slice(8)) : path.join(dir, f)),
+    read: (f) => fs.readFileSync(ctx.resolve(f), 'utf8'),
     asset: (f) => {
       if (!f) return null;
       if (/^(https?:|data:)/.test(f)) return f;
-      const p = path.join(dir, f);
+      const p = ctx.resolve(f);
       return fs.existsSync(p) ? pathToFileURL(p).href : null;
     },
     warn: (m) => warnings.push(m),
+    size: post.size || [1080, 1920],
   };
 
   if (!CHROME) throw new Error('Chrome not found; set CHROME_PATH');
@@ -105,6 +112,8 @@ async function main() {
       await page.goto(pathToFileURL(htmlPath).href, { waitUntil: 'networkidle0' });
       await page.evaluate(() => document.fonts.ready);
       await page.evaluate(() => Promise.all([...document.images].map((im) => (im.complete ? 0 : new Promise((r) => (im.onload = im.onerror = r))))));
+      const fits = await fitAll(page, W, H, (m) => warnings.push(`slide ${n}: ${m}`));
+      if (fits.length) console.log(`  fitted ${fits.length} element(s), worst ${Math.max(...fits.map((f) => f.err))}px`);
       const file = path.join(outDir, `${name}.png`);
       const png = await page.screenshot({ clip: { x: 0, y: 0, width: W, height: H } });
       writeWithRetry(file, png);
