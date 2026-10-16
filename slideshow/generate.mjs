@@ -8,7 +8,7 @@
 //
 // post.json:
 //   "generate": [{ "id": "hook-photo", "out": "assets/hook-photo.png", "prompt": "…",
-//                  "size": "1024x1536", "quality": "high", "variants": 1 }]
+//                  "size": "1024x1536", "quality": "high", "variants": 1, "background": "transparent"? }]
 //
 // Auth is Entra ID through the Azure CLI (`az login`); no keys. Endpoint/deployment come from
 // foundry.json, overridable with AZURE_FOUNDRY_IMAGE_ENDPOINT / AZURE_FOUNDRY_IMAGE_DEPLOYMENT /
@@ -31,6 +31,8 @@ function token() {
 async function generate(job, bearer) {
   const url = `${ENDPOINT}/openai/deployments/${encodeURIComponent(DEPLOYMENT)}/images/generations?api-version=${API_VERSION}`;
   const body = { prompt: job.prompt, size: job.size || '1024x1536', quality: job.quality || 'high', n: job.variants || 1, output_format: job.format || 'png' };
+  // "background": "transparent" for cut-out art (stickers, map watermarks); png/webp only
+  if (job.background) body.background = job.background;
   const res = await fetch(url, { method: 'POST', headers: { authorization: `Bearer ${bearer}`, 'content-type': 'application/json' }, body: JSON.stringify(body) });
   const text = await res.text();
   if (!res.ok) throw new Error(`${job.id}: HTTP ${res.status} ${text.slice(0, 400)}`);

@@ -1,0 +1,1014 @@
+{
+  "title": "Apply to 8+ Universities in 3 Minutes for 2026",
+  "source": "https://www.tiktok.com/@skolify.za/photo/7628356066954333461",
+  "caption": "Apply to 8+ universities in 3minutes #skolify #southafrica #application #uni",
+  "music": "",
+  "references_note": "Original slide URLs (signed CDN links expire); used by review.html to diff renders in-browser.",
+  "references": [
+    "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/05b20d4dd61c4c029a2a8d7fe172c138~tplv-photomode-image.jpeg?dr=14555&x-expires=1792360800&x-signature=bZ%2B8Sjlnzo593W23OW2rj8c1Mek%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1",
+    "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/02aff5f0e64640138ce6aa77c97b86b9~tplv-photomode-image.jpeg?dr=14555&x-expires=1792360800&x-signature=fYRJqpwmpsr12E0mt1jXeI1O4qw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1",
+    "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/19d9465bdf834ee6a0459eb82dee9ede~tplv-photomode-image.jpeg?dr=14555&x-expires=1792360800&x-signature=AUhs2bhh3vKJ7c7tjkXhApXiIf4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1",
+    "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/ded0552db10b45ccb6692ca39c12b47c~tplv-photomode-image.jpeg?dr=14555&x-expires=1792360800&x-signature=fkUf490DtlaPuA5T4KK8sp9EVM0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1",
+    "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/d6b7e26e333145419e7810d866e26dcc~tplv-photomode-image.jpeg?dr=14555&x-expires=1792360800&x-signature=zTP9W9BNe8rjYFZsbht00rF6604%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1",
+    "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/f5c7b614dc0c4c6ca98fa9f2241c205f~tplv-photomode-image.jpeg?dr=14555&x-expires=1792360800&x-signature=W8PiDAp0ddKNlXdw6oVEVnwMcwQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1"
+  ],
+  "size": [
+    1080,
+    1920
+  ],
+  "fonts": [
+    "Coiny",
+    "Unbounded:wght@900",
+    "Open Sans:wght@300;400;500;600;700;800",
+    "Inter:wght@400;500;600;700;800;900",
+    "TikTok Sans:wght@500;600;700"
+  ],
+  "css": [
+    "@shared/skolify/app.css",
+    "screens/screens.css"
+  ],
+  "background": {
+    "type": "crumpled",
+    "color": "#fdfdff",
+    "relief": 0.37,
+    "surfaceScale": 3,
+    "frequency": 0.08
+  },
+  "slides": [
+    {
+      "name": "hook",
+      "background": {
+        "type": "photo",
+        "src": "assets/hook-photo.png"
+      },
+      "elements": [
+        {
+          "type": "tiktokText",
+          "lines": [
+            "🎓BEST WEBSITE FOR APPLYING",
+            "TO UNIVERSITY🥹"
+          ],
+          "minWidths": [
+            1044,
+            607
+          ],
+          "cx": 540,
+          "y": 371,
+          "lineHeight": 88,
+          "padX": 20,
+          "radius": 22,
+          "fitLines": [
+            [
+              56,
+              387,
+              1023,
+              451
+            ],
+            [
+              272,
+              464,
+              803,
+              526
+            ]
+          ],
+          "font": {
+            "family": "TikTok Sans, Noto Color Emoji",
+            "size": 60,
+            "weight": 600,
+            "color": "#111"
+          }
+        }
+      ]
+    },
+    {
+      "name": "skolify",
+      "elements": [
+        {
+          "type": "image",
+          "src": "assets/sa-map.png",
+          "x": 90,
+          "y": -10,
+          "w": 905,
+          "h": 770,
+          "style": "opacity:.13;object-fit:contain"
+        },
+        {
+          "type": "text",
+          "text": "SKOLIFY",
+          "x": 218,
+          "y": 186,
+          "fit": [
+            218,
+            186,
+            863,
+            286
+          ],
+          "font": {
+            "family": "Unbounded",
+            "weight": 900,
+            "size": 110,
+            "color": "#fbc21a",
+            "lineHeight": 1
+          },
+          "style": "text-shadow:-3px 4px 0 rgba(150,110,255,.55)"
+        },
+        {
+          "type": "phone",
+          "x": 215,
+          "y": 400,
+          "w": 677,
+          "h": 1234,
+          "border": 4,
+          "radius": 77,
+          "screenWidth": 560,
+          "screen": "@shared/skolify/welcome.html"
+        }
+      ]
+    },
+    {
+      "name": "why",
+      "elements": [
+        {
+          "type": "text",
+          "text": "WHY[color=#5d17e7]?[/color]",
+          "x": 191,
+          "y": 292,
+          "fit": [
+            191,
+            292,
+            884,
+            451
+          ],
+          "font": {
+            "family": "Coiny",
+            "weight": 400,
+            "size": 120,
+            "color": "#fbc21a",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "html",
+          "file": "@shared/stickers/mortarboard.html",
+          "x": 790,
+          "y": 244,
+          "w": 129,
+          "h": 90,
+          "fit": [
+            790,
+            244,
+            919,
+            334
+          ],
+          "fitMode": "stretch",
+          "style": "transform:scaleX(-1)"
+        },
+        {
+          "type": "text",
+          "text": "SKOLIFY",
+          "x": 612,
+          "y": 499,
+          "fit": [
+            612,
+            499,
+            787,
+            529
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Students don’t need to jump between",
+          "x": 150,
+          "y": 755,
+          "fit": [
+            150,
+            755,
+            935,
+            797
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "multiple university websites",
+          "x": 253,
+          "y": 815,
+          "fit": [
+            253,
+            815,
+            836,
+            857
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "[color=#5d17e7]One[/color] submission to [color=#fbc21a]SKOLIFY[/color]→ distributed",
+          "x": 122,
+          "y": 935,
+          "fit": [
+            122,
+            935,
+            964,
+            968
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "to multiple institutions",
+          "x": 305,
+          "y": 995,
+          "fit": [
+            305,
+            995,
+            781,
+            1037
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Outcome:",
+          "x": 361,
+          "y": 1188,
+          "fit": [
+            361,
+            1188,
+            725,
+            1246
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#5d17e7",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Massive time saving",
+          "x": 335,
+          "y": 1397,
+          "fit": [
+            335,
+            1397,
+            745,
+            1439
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "[color=#fbc21a]+[/color]",
+          "x": 535,
+          "y": 1464,
+          "fit": [
+            535,
+            1464,
+            553,
+            1483
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#fbc21a",
+            "lineHeight": 1
+          },
+          "fitMode": "stretch"
+        },
+        {
+          "type": "text",
+          "text": "reduced friction",
+          "x": 378,
+          "y": 1517,
+          "fit": [
+            378,
+            1517,
+            709,
+            1550
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "(especially during [color=#b3121f]deadlines[/color])",
+          "x": 249,
+          "y": 1577,
+          "fit": [
+            249,
+            1577,
+            839,
+            1619
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "match",
+      "elements": [
+        {
+          "type": "text",
+          "text": "M[color=#5d17e7]A[/color]TCH",
+          "x": 153,
+          "y": 318,
+          "fit": [
+            153,
+            318,
+            926,
+            461
+          ],
+          "font": {
+            "family": "Coiny",
+            "weight": 400,
+            "size": 120,
+            "color": "#fbc21a",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "html",
+          "file": "@shared/stickers/mortarboard.html",
+          "x": 310,
+          "y": 275,
+          "w": 129,
+          "h": 75,
+          "fit": [
+            310,
+            275,
+            439,
+            350
+          ],
+          "fitMode": "stretch",
+          "style": ""
+        },
+        {
+          "type": "text",
+          "text": "Perfectly",
+          "x": 676,
+          "y": 276,
+          "fit": [
+            676,
+            276,
+            849,
+            314
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Precision Matching",
+          "x": 358,
+          "y": 646,
+          "fit": [
+            358,
+            646,
+            718,
+            684
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Not Guesswork",
+          "x": 401,
+          "y": 701,
+          "fit": [
+            401,
+            701,
+            686,
+            731
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#5d17e7",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Skolify’s [color=#fbc21a]APS[/color] scanner searches university",
+          "x": 142,
+          "y": 865,
+          "fit": [
+            142,
+            865,
+            931,
+            904
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "prospectuses and filters options based on",
+          "x": 136,
+          "y": 920,
+          "fit": [
+            136,
+            920,
+            937,
+            959
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "what the student actually qualifies for",
+          "x": 172,
+          "y": 975,
+          "fit": [
+            172,
+            975,
+            901,
+            1014
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Instead of applying blindly,",
+          "x": 281,
+          "y": 1030,
+          "fit": [
+            281,
+            1030,
+            793,
+            1069
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "users [color=#fbc21a]ONLY[/color] see realistic acceptance options",
+          "x": 121,
+          "y": 1141,
+          "fit": [
+            121,
+            1141,
+            962,
+            1179
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Outcome:",
+          "x": 363,
+          "y": 1319,
+          "fit": [
+            363,
+            1319,
+            710,
+            1374
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#5d17e7",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Higher acceptance probability",
+          "x": 244,
+          "y": 1518,
+          "fit": [
+            244,
+            1518,
+            821,
+            1556
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "[color=#fbc21a]+[/color]",
+          "x": 523,
+          "y": 1580,
+          "fit": [
+            523,
+            1580,
+            540,
+            1596
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#fbc21a",
+            "lineHeight": 1
+          },
+          "fitMode": "stretch"
+        },
+        {
+          "type": "text",
+          "text": "less wasted applications",
+          "x": 306,
+          "y": 1628,
+          "fit": [
+            306,
+            1628,
+            768,
+            1666
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "errors",
+      "elements": [
+        {
+          "type": "text",
+          "text": "ERR[color=#5d17e7]O[/color]RS",
+          "x": 120,
+          "y": 326,
+          "fit": [
+            120,
+            326,
+            924,
+            463
+          ],
+          "font": {
+            "family": "Coiny",
+            "weight": 400,
+            "size": 120,
+            "color": "#fbc21a",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "html",
+          "file": "@shared/stickers/mortarboard.html",
+          "x": 549,
+          "y": 279,
+          "w": 129,
+          "h": 74,
+          "fit": [
+            549,
+            279,
+            678,
+            353
+          ],
+          "fitMode": "stretch",
+          "style": "transform:scaleX(-1)"
+        },
+        {
+          "type": "text",
+          "text": "NO!!!",
+          "x": 186,
+          "y": 264,
+          "fit": [
+            186,
+            264,
+            301,
+            299
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Skolify handles the application forwarding",
+          "x": 136,
+          "y": 761,
+          "fit": [
+            136,
+            761,
+            944,
+            800
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "process",
+          "x": 468,
+          "y": 825,
+          "fit": [
+            468,
+            825,
+            613,
+            855
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Reduces manual errors, missing",
+          "x": 240,
+          "y": 927,
+          "fit": [
+            240,
+            927,
+            842,
+            965
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "documents, and repeated form filling",
+          "x": 185,
+          "y": 981,
+          "fit": [
+            185,
+            981,
+            895,
+            1020
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "[color=#5d17e7]Outcome[/color]:",
+          "x": 363,
+          "y": 1162,
+          "fit": [
+            363,
+            1162,
+            716,
+            1218
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Cleaner, more efficient application pipeline",
+          "x": 128,
+          "y": 1364,
+          "fit": [
+            128,
+            1364,
+            952,
+            1403
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "tracking",
+      "elements": [
+        {
+          "type": "text",
+          "text": "TRACKIN[color=#5d17e7]G[/color]",
+          "x": 90,
+          "y": 364,
+          "fit": [
+            90,
+            364,
+            988,
+            473
+          ],
+          "font": {
+            "family": "Coiny",
+            "weight": 400,
+            "size": 120,
+            "color": "#fbc21a",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "html",
+          "file": "@shared/stickers/mortarboard.html",
+          "x": 900,
+          "y": 324,
+          "w": 121,
+          "h": 83,
+          "fit": [
+            900,
+            324,
+            1021,
+            407
+          ],
+          "fitMode": "stretch",
+          "style": "transform:scaleX(-1)"
+        },
+        {
+          "type": "text",
+          "text": "EASY",
+          "x": 481,
+          "y": 303,
+          "fit": [
+            481,
+            303,
+            601,
+            338
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 700,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Centralized Tracking & Updates",
+          "x": 252,
+          "y": 828,
+          "fit": [
+            252,
+            828,
+            828,
+            865
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "•  Instead of chasing emails from different universities",
+          "x": 136,
+          "y": 1005,
+          "fit": [
+            136,
+            1005,
+            947,
+            1035
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "•",
+          "x": 136,
+          "y": 1054,
+          "fit": [
+            136,
+            1054,
+            146,
+            1065
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          },
+          "fitMode": "box"
+        },
+        {
+          "type": "text",
+          "text": "Skolify keeps users updated on each application’s",
+          "x": 201,
+          "y": 1047,
+          "fit": [
+            201,
+            1047,
+            930,
+            1077
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "progress IN ONE PLACE",
+          "x": 395,
+          "y": 1091,
+          "fit": [
+            395,
+            1091,
+            738,
+            1119
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "[color=#5d17e7]Outcome[/color]:",
+          "x": 417,
+          "y": 1224,
+          "fit": [
+            417,
+            1224,
+            662,
+            1263
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Clear visibility across all applications in one place",
+          "x": 176,
+          "y": 1364,
+          "fit": [
+            176,
+            1364,
+            903,
+            1393
+          ],
+          "font": {
+            "family": "Open Sans",
+            "weight": 400,
+            "size": 40,
+            "color": "#111",
+            "lineHeight": 1
+          }
+        }
+      ]
+    }
+  ],
+  "generate": [
+    {
+      "id": "hook-photo",
+      "out": "assets/hook-photo.png",
+      "size": "1024x1536",
+      "quality": "high",
+      "variants": 3,
+      "prompt": "Candid iPhone mirror selfie at night inside a dark luxury elevator with black mirrored walls and a mirrored ceiling full of many small warm round downlights reflected into long converging rows (the ceiling lights fill the top 30% of the frame). A young Black South African woman stands centred, holding a white iPhone with a pink MagSafe card wallet on the back up in front of the right side of her face, covering one eye; the other side of her face is visible with a slight smile and closed lips. Very long thin burgundy-red box braids falling past her waist on both sides. She wears an oversized navy-blue hoodie with a large generic white heraldic shield emblem (abstract shapes, no real university crest) and a short line of blocky white letters below it that are mirrored and not readable as any real name, left hand in the hoodie pocket. Dark, moody, warm low light with shiny reflections on the black elevator walls and a brushed steel handrail at the lower left. Composition: the top of her head is at about 34% of the image height, the phone at 38-48%, the hoodie crest at 55-65%, framed from the head to mid-thigh, she is horizontally centred. Realistic photo, no added text, no watermark."
+    },
+    {
+      "id": "sa-map",
+      "out": "assets/sa-map.png",
+      "size": "1536x1024",
+      "quality": "high",
+      "variants": 2,
+      "background": "transparent",
+      "prompt": "Flat graphic map silhouette of the country South Africa (without Lesotho cut out), filled with the South African flag design (red top, blue bottom, green Y-shaped band with white and gold borders, black triangle on the left), clean vector style, no outline, no shadow, no text, isolated on a transparent background, the map fills the frame."
+    }
+  ]
+}

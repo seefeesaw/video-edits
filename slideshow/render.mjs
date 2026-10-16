@@ -35,13 +35,14 @@ function writeWithRetry(file, buf, tries = 20) {
 }
 
 function parseArgs(argv) {
-  const a = { dir: null, only: null, html: false };
+  const a = { dir: null, only: null, html: false, variants: false };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--only') a.only = argv[++i].split(',').map(Number);
     else if (argv[i] === '--html') a.html = true;
+    else if (argv[i] === '--variants') a.variants = true;
     else a.dir = argv[i];
   }
-  if (!a.dir) throw new Error('usage: node render.mjs posts/<name> [--only N[,M]] [--html]');
+  if (!a.dir) throw new Error('usage: node render.mjs posts/<name> [--only N[,M]] [--html] [--variants]');
   return a;
 }
 
@@ -101,6 +102,37 @@ async function main() {
   try {
     const page = await browser.newPage();
     await page.setViewport({ width: W, height: H, deviceScaleFactor: 1 });
+    // --variants: for slides with a photo background, also render every sibling take
+    // (photo.png -> photo.v2.png, photo.v3.png …) to out/candidates/NN-name.<take>.png so
+    // review.rankImages() can pick the one whose composition is closest to the reference.
+    if (args.variants) {
+      const candDir = path.join(outDir, 'candidates');
+      fs.rmSync(candDir, { recursive: true, force: true });
+      fs.mkdirSync(candDir, { recursive: true });
+      for (const [i, slide] of post.slides.entries()) {
+        const n = i + 1, bg = slide.background;
+        if ((args.only && !args.only.includes(n)) || bg?.type !== 'photo') continue;
+        const file = path.basename(bg.src);
+        const ext = path.extname(file);
+        const stem = file.slice(0, -ext.length).replace(/\.v\d+$/, ''); // photo.v3.png -> photo
+        const dirOf = path.dirname(ctx.resolve(bg.src));
+        const isTake = (f) => f.startsWith(`${stem}.v`) && f.endsWith(ext) && /^\d+$/.test(f.slice(stem.length + 2, -ext.length));
+        const takes = fs.readdirSync(dirOf).filter((f) => f === `${stem}${ext}` || isTake(f));
+        for (const take of takes) {
+          const variant = { ...slide, background: { ...bg, src: path.posix.join(path.posix.dirname(bg.src), take) } };
+          const htmlPath = path.join(outDir, `__variant.html`);
+          fs.writeFileSync(htmlPath, buildSlideHtml(post, variant, ctx));
+          await page.goto(pathToFileURL(htmlPath).href, { waitUntil: 'networkidle0' });
+          await page.evaluate(() => document.fonts.ready);
+          await fitAll(page, W, H, () => {});
+          const out = path.join(candDir, `${String(n).padStart(2, '0')}-${slide.name || 'slide'}.${take.replace(/\.\w+$/, '')}.png`);
+          writeWithRetry(out, await page.screenshot({ clip: { x: 0, y: 0, width: W, height: H } }));
+          fs.unlinkSync(htmlPath);
+          console.log(`candidate ${path.relative(process.cwd(), out)}`);
+        }
+      }
+      return;
+    }
     for (const [i, slide] of post.slides.entries()) {
       const n = i + 1;
       if (args.only && !args.only.includes(n)) continue;
@@ -115,6 +147,8 @@ async function main() {
       const fits = await fitAll(page, W, H, (m) => warnings.push(`slide ${n}: ${m}`));
       if (fits.length) console.log(`  fitted ${fits.length} element(s), worst ${Math.max(...fits.map((f) => f.err))}px`);
       const file = path.join(outDir, `${name}.png`);
+      // a renamed slide must not leave its old NN-*.png behind (the review page pairs by order)
+      for (const f of fs.readdirSync(outDir)) if (f.startsWith(`${String(n).padStart(2, '0')}-`) && f.endsWith('.png') && f !== `${name}.png`) fs.unlinkSync(path.join(outDir, f));
       const png = await page.screenshot({ clip: { x: 0, y: 0, width: W, height: H } });
       writeWithRetry(file, png);
       if (!args.html) fs.unlinkSync(htmlPath);
