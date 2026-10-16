@@ -18,6 +18,7 @@ node new-post.mjs <name> capture.json                 # scaffold a post from a c
 node render.mjs posts/<name>                          # all slides (clears old outputs)
 node render.mjs posts/<name> --only 2,4               # some slides
 node render.mjs posts/<name> --html                   # keep generated HTML for debugging
+node render.mjs posts/<name> --only 1 --variants      # render every photo take to out/candidates/ for review.rankImages()
 node serve.mjs                                        # review UI: http://localhost:5179/review.html?post=<name>
 node generate.mjs posts/<name> [--only id] [--force]  # create photo assets with gpt-image-2
 node fontmatch.mjs '[["TEXT",inkW,inkH],…]' --set display|text   # rank Google Fonts by ink aspect
@@ -31,7 +32,8 @@ Fonts are fetched at render time.
 (`foundry.json`; override with `AZURE_FOUNDRY_IMAGE_ENDPOINT` / `AZURE_FOUNDRY_IMAGE_DEPLOYMENT` /
 `AZURE_FOUNDRY_IMAGE_API_VERSION`). Auth is your `az login` session, no keys. Each `generate` job
 writes `out` (extra `variants` land beside it as `.v2`, `.v3`…); existing files are skipped unless
-`--force`.
+`--force`. `"background": "transparent"` gives cut-out art (stickers, map watermarks) to place with
+low `opacity`.
 
 ## post.json
 

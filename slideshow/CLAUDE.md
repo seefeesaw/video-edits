@@ -33,7 +33,12 @@ Read README.md first. Deliverable: `posts/<name>/out/NN-*.png` (1080×1920), one
 6. **Photos** that cannot be rebuilt: add a `generate` job whose prompt states the subject, wardrobe,
    props, setting **and composition as percentages of the frame** (where the head, hands and key
    props sit), run `node generate.mjs posts/<name>`, pick the variant closest to the reference
-   layout; fine-tune with `photo.scale`/`offset`.
+   layout: `node render.mjs posts/<name> --only N --variants`, then in the review page
+   `await review.rankImages(N, [urls of out/candidates/*.png])` (lowest score wins); rename the winner
+   to the job's `out` file and delete the rest. Fine-tune with `photo.scale`/`offset`. Prompts must
+   not ask for real institutions' crests or names; describe a generic emblem instead.
+   Decorative art that isn't a photo (map watermarks, stickers) can also be generated with
+   `"background": "transparent"`.
 7. **Render & verify.** `node render.mjs posts/<name>`, reload the review page, read `scores()` and
    the fit warnings. Targets: non-photo slides ≥95% similarity, every fit ≤2px, no warnings. Then
    look at each slide side by side (`show(n, null, 0.3)`) for missing/extra elements, wrong colours
