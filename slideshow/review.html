@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Slideshow review</title>
+<style>
+  :root { --bg: #111; --fg: #eee; --muted: #888; --accent: #fdc904; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 13px/1.4 system-ui, sans-serif; }
+  header { position: sticky; top: 0; z-index: 2; display: flex; gap: 12px; align-items: center; padding: 8px 12px; background: #1b1b1b; flex-wrap: wrap; }
+  header select, header button, header input { background: #2a2a2a; color: var(--fg); border: 1px solid #444; border-radius: 6px; padding: 4px 8px; font: inherit; }
+  header button.on { border-color: var(--accent); color: var(--accent); }
+  #slides { display: flex; flex-direction: column; gap: 18px; padding: 12px; }
+  .slide h3 { margin: 0 0 6px; font-size: 13px; color: var(--muted); font-weight: 500; }
+  .slide h3 b { color: var(--fg); }
+  .view { position: relative; overflow: hidden; background: #000; }
+  .view canvas { display: block; image-rendering: pixelated; }
+  .pair { display: flex; gap: 8px; }
+  .label { color: var(--muted); font-size: 11px; }
+</style>
+</head>
+<body>
+<header>
+  <select id="post"></select>
+  <span>mode</span>
+  <button data-mode="side" class="on">side by side</button>
+  <button data-mode="onion">onion</button>
+  <button data-mode="diff">diff</button>
+  <button data-mode="blink">blink</button>
+  <label>opacity <input id="alpha" type="range" min="0" max="1" step="0.05" value="0.5"></label>
+  <label>zoom <input id="zoom" type="number" min="0.1" max="4" step="0.05" value="0.3" style="width:60px"></label>
+  <span id="status" class="label"></span>
+</header>
+<div id="slides"></div>
+<script>
+// Compares out/NN-*.png (renders) with references listed in post.json "references" (URLs or
+// paths relative to the post dir) or, failing that, images in posts/<name>/reference/.
+const S = { mode: 'side', alpha: 0.5, zoom: 0.3, crop: null, slides: [], timers: [] };
+window.review = S;
+
+const load = (src) => new Promise((res, rej) => { const i = new Image(); i.crossOrigin = 'anonymous'; i.onload = () => res(i); i.onerror = () => rej(new Error('failed ' + src)); i.src = src; });
+const pixels = (img, w, h) => { const c = new OffscreenCanvas(w, h); const g = c.getContext('2d'); g.drawImage(img, 0, 0, w, h); return g.getImageData(0, 0, w, h); };
+
+function score(a, b) {
+  let sum = 0, off = 0; const n = a.data.length / 4;
+  for (let i = 0; i < a.data.length; i += 4) {
+    const d = (Math.abs(a.data[i] - b.data[i]) + Math.abs(a.data[i + 1] - b.data[i + 1]) + Math.abs(a.data[i + 2] - b.data[i + 2])) / 3;
+    sum += d; if (d > 40) off++;
+  }
+  return { meanDiff: +(sum / n).toFixed(2), pctOff: +(100 * off / n).toFixed(2), similarity: +(100 - (100 * sum / n / 255)).toFixed(2) };
+}
+
+async function init() {
+  const posts = await fetch('/api/posts').then((r) => r.json());
+  const sel = document.getElementById('post');
+  sel.innerHTML = posts.map((p) => `<option>${p}</option>`).join('');
+  const want = new URLSearchParams(location.search).get('post');
+  if (want) sel.value = want;
+  sel.onchange = () => { history.replaceState(null, '', '?post=' + sel.value); open(sel.value); };
+  document.querySelectorAll('[data-mode]').forEach((b) => (b.onclick = () => setMode(b.dataset.mode)));
+  document.getElementById('alpha').oninput = (e) => { S.alpha = +e.target.value; draw(); };
+  document.getElementById('zoom').oninput = (e) => { S.zoom = +e.target.value; draw(); };
+  await open(sel.value);
+}
+
+function setMode(m) { S.mode = m; document.querySelectorAll('[data-mode]').forEach((b) => b.classList.toggle('on', b.dataset.mode === m)); draw(); }
+
+async function open(name) {
+  const base = `/posts/${name}/`;
+  const post = await fetch(base + 'post.json', { cache: 'no-store' }).then((r) => r.json());
+  const outs = (await fetch(`/api/ls/posts/${name}/${post.outDir || 'out'}`).then((r) => r.json())).filter((f) => f.endsWith('.png')).sort();
+  let refs = (post.references || []).map((r) => (/^https?:/.test(r) ? r : base + r));
+  if (!refs.length) refs = (await fetch(`/api/ls/posts/${name}/reference`).then((r) => r.json())).filter((f) => /\.(png|jpe?g|webp)$/i.test(f)).sort().map((f) => base + 'reference/' + f);
+  const [W, H] = post.size || [1080, 1920];
+  S.slides = [];
+  for (let i = 0; i < outs.length; i++) {
+    const mine = await load(base + (post.outDir || 'out') + '/' + outs[i] + '?t=' + Date.now());
+    let ref = null; try { if (refs[i]) ref = await load(refs[i]); } catch (e) { console.warn(e.message); }
+    const a = pixels(mine, W, H), b = ref ? pixels(ref, W, H) : null;
+    S.slides.push({ name: outs[i], mine: a, ref: b, score: b ? score(a, b) : null });
+  }
+  document.getElementById('status').textContent = S.slides.map((s, i) => `${i + 1}: ${s.score ? s.score.similarity + '%' : 'no ref'}`).join('  ·  ');
+  draw();
+}
+
+// Optional crop: review.crop = [x, y, w, h] in slide pixels (e.g. set from the console) then draw().
+function draw() {
+  const root = document.getElementById('slides');
+  S.timers.forEach(clearInterval); S.timers = [];
+  root.innerHTML = '';
+  S.slides.forEach((s, i) => {
+    if (S.only && S.only !== i + 1) return; // review.only = N shows a single slide
+    const [cx, cy, cw, ch] = S.crop || [0, 0, s.mine.width, s.mine.height];
+    const div = document.createElement('div'); div.className = 'slide';
+    div.innerHTML = `<h3><b>${i + 1}. ${s.name}</b> ${s.score ? `similarity ${s.score.similarity}% · mean Δ ${s.score.meanDiff} · ${s.score.pctOff}% px off` : '(no reference)'}</h3>`;
+    const mk = (img, mode) => {
+      const c = document.createElement('canvas'); c.width = cw * S.zoom; c.height = ch * S.zoom;
+      const tmp = new OffscreenCanvas(cw, ch); const g = tmp.getContext('2d');
+      if (mode === 'diff' && s.ref) {
+        const out = g.createImageData(cw, ch);
+        for (let y = 0; y < ch; y++) for (let x = 0; x < cw; x++) {
+          const k = ((cy + y) * s.mine.width + cx + x) * 4, o = (y * cw + x) * 4;
+          const d = Math.min(255, 3 * (Math.abs(s.mine.data[k] - s.ref.data[k]) + Math.abs(s.mine.data[k + 1] - s.ref.data[k + 1]) + Math.abs(s.mine.data[k + 2] - s.ref.data[k + 2])) / 3);
+          const gray = (s.ref.data[k] + s.ref.data[k + 1] + s.ref.data[k + 2]) / 12;
+          out.data[o] = gray + d; out.data[o + 1] = gray; out.data[o + 2] = gray + (d ? 0 : 0); out.data[o + 3] = 255;
+        }
+        g.putImageData(out, 0, 0);
+      } else {
+        g.putImageData(img, -cx, -cy, cx, cy, cw, ch);
+        if (mode === 'onion' && s.ref) { const t2 = new OffscreenCanvas(cw, ch); t2.getContext('2d').putImageData(s.mine, -cx, -cy, cx, cy, cw, ch); g.globalAlpha = S.alpha; g.drawImage(t2, 0, 0); }
+      }
+      const cg = c.getContext('2d'); cg.imageSmoothingEnabled = S.zoom < 1; cg.drawImage(tmp, 0, 0, c.width, c.height);
+      return c;
+    };
+    const pair = document.createElement('div'); pair.className = 'pair';
+    if (S.mode === 'side') { if (s.ref) pair.append(mk(s.ref)); pair.append(mk(s.mine)); }
+    else if (S.mode === 'blink') {
+      const c = mk(s.mine); pair.append(c);
+      if (s.ref) { const r = mk(s.ref); let cur = c; S.timers.push(setInterval(() => { const next = cur === c ? r : c; cur.replaceWith(next); cur = next; }, 600)); }
+    }
+    else pair.append(mk(s.ref || s.mine, S.mode));
+    div.append(pair); root.append(div);
+  });
+}
+// Console/automation helpers. Predicates take [r,g,b]; regions are [x0,y0,x1,y1] in slide px.
+const PRED = {
+  dark: (p) => p[0] < 60 && p[1] < 60 && p[2] < 60,
+  yellow: (p) => p[0] > 190 && p[1] > 140 && p[2] < 110,
+  blue: (p) => p[2] > 180 && p[0] < 120 && p[2] - p[0] > 90,
+  gray: (p) => { const m = (p[0] + p[1] + p[2]) / 3; return m < 150 && Math.max(...p) - Math.min(...p) < 30; },
+  purple: (p) => p[2] > 150 && p[0] > 50 && p[0] < 140 && p[1] < 60,
+  green: (p) => p[1] > 190 && p[0] < 190 && p[2] < 190 && p[1] - p[0] > 40,
+  white: (p) => p[0] > 245 && p[1] > 245 && p[2] > 245,
+};
+function bbox(img, f, [x0, y0, x1, y1]) {
+  let a = 1e9, b = 1e9, c = -1, d = -1, n = 0;
+  for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++) {
+    const k = (y * img.width + x) * 4;
+    if (f([img.data[k], img.data[k + 1], img.data[k + 2]])) { n++; if (x < a) a = x; if (y < b) b = y; if (x > c) c = x; if (y > d) d = y; }
+  }
+  return n ? [a, b, c, d] : null;
+}
+// review.measure(slideIndex1Based, 'dark', [x0,y0,x1,y1]) -> {ref, mine, delta}
+S.measure = (i, pred, region) => {
+  const s = S.slides[i - 1], f = typeof pred === 'function' ? pred : PRED[pred];
+  const ref = s.ref ? bbox(s.ref, f, region) : null, mine = bbox(s.mine, f, region);
+  return { ref, mine, delta: ref && mine ? mine.map((v, k) => v - ref[k]) : null };
+};
+// review.measureAll([[slide, name, pred, region], ...]) -> compact text table
+S.measureAll = (list) => list.map(([i, name, p, r]) => { const m = S.measure(i, p, r); return `${i}.${name} ref ${JSON.stringify(m.ref)} mine ${JSON.stringify(m.mine)} d ${m.delta}`; }).join('\n');
+S.pixel = (i, x, y) => { const s = S.slides[i - 1], k = (y * s.mine.width + x) * 4, h = (d) => '#' + [0, 1, 2].map((j) => d.data[k + j].toString(16).padStart(2, '0')).join(''); return { ref: s.ref && h(s.ref), mine: h(s.mine) }; };
+S.reload = () => open(document.getElementById('post').value);
+window.draw = draw; window.openPost = open;
+init();
+</script>
+</body>
+</html>

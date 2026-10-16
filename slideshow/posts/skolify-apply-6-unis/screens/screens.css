@@ -1,0 +1,60 @@
+/* Skolify app UI, rebuilt. Coordinates inside .screen are local to the phone's inner box. */
+.sk { position: absolute; inset: 0; font-family: 'Inter', sans-serif; color: #151515; background: #fff; overflow: hidden; }
+.sk .a { position: absolute; }
+.sk .c { text-align: center; }
+
+/* welcome */
+.sk-welcome { background: linear-gradient(#fff, #fbfbfb); }
+.sk-welcome .brand { font: 800 33px/1 'Inter'; letter-spacing: 1.4px; }
+.sk-welcome .rating { border-radius: 70px; background: #fff; border: 1.5px solid #e2e2e2; box-shadow: 0 6px 14px rgba(0,0,0,.06), inset 0 -2px 6px rgba(0,0,0,.03); }
+.sk-welcome .stars { color: #f6c60b; font-size: 34px; letter-spacing: 1px; line-height: 1; }
+.sk-welcome .loved { font: 500 21.7px/1 'Inter'; color: #2a2a2a; letter-spacing: 0.5px; }
+.sk-welcome .rule { height: 2px; background: linear-gradient(90deg, transparent, #d9d9d9 20%, #d9d9d9 80%, transparent); }
+.sk-welcome .h1 { font: 700 26px/1 'Inter'; letter-spacing: -0.57px; color: #262626; white-space: nowrap; }
+.sk-welcome .btn { background: linear-gradient(#2c2c2c, #1d1d1d); border-radius: 14px; color: #fff; font: 600 26px/74px 'Inter'; text-align: center; letter-spacing: 0.2px; }
+.sk-welcome .terms { font: 400 19.5px/26px 'Inter'; color: #666; text-align: center; letter-spacing: -0.1px; }
+.sk-welcome .terms b { color: #111; font-weight: 700; }
+.sk-welcome .signin { font: 700 21.2px/1 'Inter'; color: #1a1a1a; text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 2px; letter-spacing: 0.4px; white-space: nowrap; }
+.sk-welcome .start { font: 400 21px/33px 'Inter'; color: #707070; text-align: center; }
+
+/* enter marks */
+.sk-marks { background: radial-gradient(420px 380px at 40px 200px, #eef6fb 0%, rgba(255,255,255,0) 70%), #fbfcfd; }
+.sk-title { font: 900 38px/1 'Inter Tight'; letter-spacing: -2.2px; color: #161616; white-space: nowrap; }
+.sk-marks .aps { width: 78px; height: 78px; border-radius: 50%; background: radial-gradient(circle at 40% 30%, #39b3ff, #0b78ec 70%); color: #fff; font: 700 34px/78px 'Inter'; text-align: center; box-shadow: 0 0 0 7px rgba(150, 205, 255, .55), 0 0 18px 8px rgba(120, 190, 255, .55); }
+.sk-marks .aps::after { content: ''; position: absolute; inset: -9px; border-radius: 50%; border: 2px dashed rgba(110, 170, 240, .8); }
+.sk-desc { font: 400 20.1px/33px 'Inter'; color: #4d4d4d; letter-spacing: -0.1px; }
+.sk-marks .row { position: absolute; left: 50px; width: 472px; height: 85px; border: 2.5px solid #e6e8ec; border-radius: 17px; background: #fff; }
+.sk-marks .row .lbl { position: absolute; left: 19px; top: 0; line-height: 80px; font: 700 20.7px/82px 'Inter'; color: #1a1a1a; letter-spacing: -0.1px; }
+.sk-marks .row .mark { position: absolute; left: 236px; top: 16px; width: 105px; height: 47px; border-radius: 12px; background: #f0f2f6; font: 800 19.5px/51px 'Inter'; letter-spacing: 0.4px; text-align: center; color: #1b1b1b; }
+.sk-marks .row .lvl { position: absolute; left: 354px; top: 16px; width: 47px; height: 47px; border-radius: 50%; background: #e2edf9; font: 800 17.5px/51px 'Inter'; text-align: center; color: #1a7be3; }
+.sk-marks .row .lo { position: absolute; left: 343px; top: 26px; width: 48px; height: 28px; border-radius: 14px; background: #fbefc6; font: 800 13px/28px 'Inter'; text-align: center; color: #8a6a07; letter-spacing: .5px; }
+.sk-marks .row .bin { position: absolute; left: 422px; top: 28px; width: 20px; height: 24px; }
+.sk-marks .add { border: 2.5px dashed #c8d9ee; border-radius: 17px; font: 700 20.3px/62px 'Inter'; color: #1b77d8; text-align: center; letter-spacing: -0.1px; }
+.sk-cta { background: #1c1c1c; border-radius: 40px; color: #fff; font: 800 17.5px/1 'Inter'; letter-spacing: 1.2px; display: flex; align-items: center; justify-content: center; }
+
+/* choose courses */
+.sk-courses { background: radial-gradient(300px 300px at 60px 330px, #eef5fb 0%, rgba(255,255,255,0) 70%), #fbfcfd; }
+.sk-courses .tile { position: absolute; width: 206px; height: 207px; border: 2px solid #e4e4e4; border-radius: 10px; background: #fff; display: flex; align-items: center; justify-content: center; text-align: center; font: 800 16.8px/21px 'Inter'; color: #111; letter-spacing: -0.1px; }
+.sk-courses .tile.sel { border-color: #3d8fdc; background: #eaf3fd; }
+.sk-courses .count { width: 27px; height: 27px; border-radius: 50%; background: #1a7ce6; color: #fff; font: 700 14px/27px 'Inter'; text-align: center; }
+.sk-courses .nav { border-radius: 50%; border: 2px solid #e2e2e2; background: #fff; display: flex; align-items: center; justify-content: center; }
+
+/* popover (slide coordinates) */
+.pop { position: absolute; left: 618px; top: 915px; width: 340px; height: 518px; border: 7px solid #f5c518; background: #fff; overflow: hidden; }
+.pop .item { position: absolute; left: 6px; width: 310px; border-radius: 10px; font-family: 'Inter'; }
+.pop .item.off { background: #f6f6f6; border-left: 3px solid #eadfa9; border-radius: 0 10px 10px 0; }
+.pop .item.on { background: #e4effb; border: 1.5px solid #3c7ec2; }
+.pop .item .t { position: absolute; left: 10px; width: 250px; text-align: center; font: 700 13.9px/20px 'Inter'; color: #161616; letter-spacing: -0.15px; }
+.pop .item .aps { position: absolute; left: 10px; width: 250px; text-align: center; font: 500 12px/14px 'Inter'; color: #6e6e6e; }
+.pop .info { position: absolute; width: 16px; height: 16px; border-radius: 50%; background: #9a9a9a; color: #fff; font: 800 11px/16px 'Inter'; text-align: center; }
+.pop .tick { position: absolute; width: 27px; height: 27px; border-radius: 50%; background: #1b78e6; }
+.pop .plus { position: absolute; width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 1.5px solid #ececec; color: #c4c4c4; font: 500 20px/24px 'Inter'; text-align: center; }
+
+/* congrats */
+.sk-congrats { background: #fff; }
+.sk-congrats .congrats { font: 400 53.4px/1 'Rammetto One'; letter-spacing: -2.25px; color: #0c0c0c; white-space: nowrap; }
+.sk-congrats .lex { font-family: 'Sora'; }
+.sk-congrats .card { position: absolute; width: 173px; height: 173px; border: 3.5px solid #f1cf3a; border-radius: 20px; background: #fff; box-shadow: 7px 9px 9px rgba(0,0,0,.28); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.sk-congrats .card img, .sk-congrats .card svg { width: 100%; height: 100%; object-fit: contain; }
+.sk-congrats .panel { border-radius: 22px; }
+.sk-congrats .knob { position: absolute; border-radius: 50%; background: #fff; box-shadow: 0 7px 12px rgba(80, 60, 140, .22); display: flex; align-items: center; justify-content: center; color: #4b1ad6; font: 700 34px/1 'Lexend'; }

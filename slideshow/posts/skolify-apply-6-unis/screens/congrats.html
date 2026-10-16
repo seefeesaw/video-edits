@@ -1,0 +1,70 @@
+<div class="sk sk-congrats">
+  <!-- clouds (soft 3D puffs, clipped by the frame) -->
+  <svg class="a" style="left:-30px;top:240px" width="270" height="180" viewBox="0 0 270 180">
+    <defs>
+      <radialGradient id="cl" cx="45%" cy="35%" r="70%"><stop offset="0" stop-color="#ffffff"/><stop offset=".65" stop-color="#f6f4ee"/><stop offset="1" stop-color="#e2ded3"/></radialGradient>
+      <filter id="cs" x="-20%" y="-20%" width="140%" height="160%"><feGaussianBlur stdDeviation="1.2"/></filter>
+    </defs>
+    <g filter="url(#cs)" fill="url(#cl)">
+      <ellipse cx="135" cy="128" rx="128" ry="42"/>
+      <circle cx="105" cy="88" r="62"/>
+      <circle cx="180" cy="110" r="44"/>
+      <circle cx="45" cy="118" r="40"/>
+    </g>
+  </svg>
+  <svg class="a" style="left:598px;top:236px" width="270" height="180" viewBox="0 0 270 180">
+    <g filter="url(#cs)" fill="url(#cl)">
+      <ellipse cx="135" cy="128" rx="128" ry="42"/>
+      <circle cx="160" cy="84" r="64"/>
+      <circle cx="85" cy="112" r="44"/>
+      <circle cx="232" cy="118" r="38"/>
+    </g>
+  </svg>
+
+  <!-- confetti -->
+  <div id="confetti"></div>
+  <script>
+    (() => {
+      const P = '#8b5cf0', G = '#21b33a', Y = '#f5c80e';
+      // [x, y, color, rotation] centres in local coords
+      const bits = [[89, 120, P, -30], [160, 112, G, 15], [116, 193, Y, -35], [644, 120, G, 5], [735, 144, Y, -40], [670, 190, P, 40],
+        [163, 432, P, 30], [105, 479, G, -15], [652, 420, G, 15], [746, 466, Y, -40], [667, 505, P, -35]];
+      document.getElementById('confetti').outerHTML = bits.map(([x, y, c, r]) =>
+        `<div class="a" style="left:${x - 6}px;top:${y - 10}px;width:12px;height:20px;background:${c};transform:rotate(${r + 90}deg)"></div>`).join('');
+    })();
+  </script>
+
+  <div class="a c congrats" style="left:0;top:103px;width:831px">Congrats!</div>
+  <div class="a c lex" style="left:0;top:193px;width:831px;font-weight:600;font-size:25px;color:#111;letter-spacing:.8px">Skolify has found</div>
+
+  <div class="a c" style="left:-9px;top:220px;width:831px;font-family:Lexend;font-weight:700;font-size:231px;line-height:1;color:#5c15e5">6</div>
+  <svg class="a" style="left:225px;top:282px" width="380" height="140" viewBox="0 0 380 140">
+    <g stroke="#5c15e5" stroke-width="8" stroke-linecap="round">
+      <path d="M24 28 L64 44"/><path d="M21 72 L62 74"/><path d="M26 106 L64 92"/>
+      <path d="M302 40 L342 21"/><path d="M302 74 L352 68"/><path d="M306 96 L344 108"/>
+    </g>
+  </svg>
+
+  <div class="a c lex" style="left:0;top:456px;width:831px;font-weight:600;font-size:25px;line-height:38px;color:#111;letter-spacing:.9px">Universities you<br>qualify for</div>
+  <div class="a c lex" style="left:9px;top:576px;width:831px;font-weight:300;font-size:26px;color:#6b6b6b;letter-spacing:.7px">click university to see qualifying courses</div>
+
+  <!-- university cards: drop real logos into assets/logos/<id>.png to replace the drawn ones -->
+  <div class="card" style="left:114px;top:628px">{{img assets/logos/uj.png or screens/logos/uj.svg}}</div>
+  <div class="card" style="left:331px;top:628px">{{img assets/logos/up.png or screens/logos/up.svg}}</div>
+  <div class="card" style="left:545px;top:628px">{{img assets/logos/tut.png or screens/logos/tut.svg}}</div>
+  <div class="card" style="left:114px;top:829px">{{img assets/logos/nwu.png or screens/logos/nwu.svg}}</div>
+  <div class="card" style="left:337px;top:835px">{{img assets/logos/wits.png or screens/logos/wits.svg}}</div>
+  <div class="card" style="left:545px;top:829px">{{img assets/logos/vut.png or screens/logos/vut.svg}}</div>
+
+  <div class="a panel" style="left:119px;top:1044px;width:590px;height:251px;background:#e7e2fa"></div>
+  <div class="a c lex" style="left:114px;top:1086px;width:590px;font-weight:600;font-size:22.5px;color:#121212;letter-spacing:.9px">How many do you want to apply to?</div>
+  <div class="knob" style="left:209px;top:1154px;width:84px;height:84px">–</div>
+  <div class="a center lex" style="left:338px;top:1129px;width:139px;height:139px;border-radius:50%;background:#5c15e5;color:#fff;font-weight:600;font-size:72px;box-shadow:0 8px 14px rgba(70,20,180,.25)">1</div>
+  <div class="knob" style="left:511px;top:1154px;width:84px;height:84px;font-size:46px">+</div>
+
+  <div class="a panel" style="left:119px;top:1314px;width:590px;height:105px;background:#a3e3a0"></div>
+  <div class="a c lex" style="left:300px;top:1345px;width:220px;font-weight:600;font-size:17.9px;line-height:23px;color:#111">Want NSFAS<br>application?</div>
+  <div class="a center" style="left:593px;top:1328px;width:80px;height:68px;border-radius:10px;background:#fff;box-shadow:0 4px 8px rgba(0,0,0,.18)">
+    <svg width="58" height="48" viewBox="0 0 58 48"><path d="M8 26 L22 40 L50 8" stroke="#4cba3c" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<svg viewBox="14 10 140 140" xmlns="http://www.w3.org/2000/svg"><g fill="#f26a21">
+<path d="M84 40 C70 30 52 26 30 34 C46 38 54 46 58 56 C46 54 36 58 28 66 C44 64 56 68 66 78 L84 74 Z"/>
+<path d="M84 40 C98 30 116 26 138 34 C122 38 114 46 110 56 C122 54 132 58 140 66 C124 64 112 68 102 78 L84 74 Z"/>
+<path d="M66 72 h36 v14 c0 8 -8 14 -18 16 c-10 -2 -18 -8 -18 -16z" fill="#fff" stroke="#f26a21" stroke-width="3"/>
+<path d="M84 34 l5 -9 l-5 -6 l-5 6z"/></g>
+<rect x="38" y="104" width="92" height="1.5" fill="#666"/>
+<text x="84" y="117" font-family="Inter" font-weight="700" font-size="11" text-anchor="middle" fill="#3b3b3b">UNIVERSITY</text>
+<text x="84" y="125" font-family="Inter" font-weight="600" font-size="5" text-anchor="middle" fill="#3b3b3b">OF</text>
+<text x="84" y="136" font-family="Inter" font-weight="700" font-size="11" text-anchor="middle" fill="#3b3b3b">JOHANNESBURG</text></svg>

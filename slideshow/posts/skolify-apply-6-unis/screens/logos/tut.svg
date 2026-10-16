@@ -1,0 +1,7 @@
+<svg viewBox="14 10 140 140" xmlns="http://www.w3.org/2000/svg">
+<circle cx="84" cy="56" r="20" fill="none" stroke="#1d4f9c" stroke-width="3"/>
+<g fill="#e31b23"><rect x="70" y="40" width="6" height="12"/><rect x="80" y="36" width="6" height="16"/><rect x="90" y="40" width="6" height="12"/></g>
+<g fill="#f5b400"><rect x="72" y="54" width="8" height="8"/></g><g fill="#1d9b4a"><rect x="82" y="54" width="8" height="8"/></g><g fill="#1d4f9c"><rect x="92" y="54" width="6" height="8"/></g>
+<path d="M66 66 q18 12 36 0" stroke="#1d4f9c" stroke-width="3" fill="none"/>
+<g font-family="Inter" font-weight="600" text-anchor="middle" fill="#1d4f9c"><text x="84" y="97" font-size="10">Tshwane University</text><text x="84" y="109" font-size="10">of Technology</text></g>
+<text x="84" y="121" font-family="Inter" font-style="italic" font-size="6.5" text-anchor="middle" fill="#e31b23">We empower people</text></svg>

@@ -1,0 +1,91 @@
+{
+  "title": "How i applied to 6 Universities in 3 minutes",
+  "source": "https://www.tiktok.com/@skolify.za/photo/7664680351352081684",
+  "caption": "Apply in 3 minutes 🎓#university #application ",
+  "references_note": "Original slide URLs (signed CDN links expire); used only by review.html to diff renders in-browser. Local files in reference/ take over when these lapse.",
+  "references": [
+      "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/173e63d55a5047ada167dd376184d293~tplv-photomode-image.jpeg?dr=14555&x-expires=1792353600&x-signature=YpOGmnqB3xscBOd38eV61277rrU%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1",
+      "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/d7ce7d4e80c74a41b8140e556311d804~tplv-photomode-image.jpeg?dr=14555&x-expires=1792353600&x-signature=nRn3M3qV370a%2FVNWoU1zp%2FsSq%2BU%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1",
+      "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/1803730f34e149f1b5c9b315d2a57ced~tplv-photomode-image.jpeg?dr=14555&x-expires=1792353600&x-signature=wPxBO0mHPQpXyFpYhPzqCD%2FKZkc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1",
+      "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/e3d2640da4fd42b087368576ca6f2d69~tplv-photomode-image.jpeg?dr=14555&x-expires=1792353600&x-signature=3xIzcJ9me3N8rTMpvFfWUqvBQ0o%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1",
+      "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/e575aca1c864492ea8e7686325dd0ea2~tplv-photomode-image.jpeg?dr=14555&x-expires=1792353600&x-signature=TvCTMgZ5yKCSaSeIn6Bfj3cM2No%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=9b759fb9&idc=my3&ftpl=1"
+  ],
+  "size": [1080, 1920],
+  "fonts": [
+    "TikTok Sans:wght@400;500;600;700",
+    "Paytone One",
+    "Rammetto One",
+    "Bagel Fat One",
+    "Lexend:wght@300;400;500;600;700;800",
+    "Inter:wght@400;500;600;700;800;900",
+    "Inter Tight:wght@700;800;900",
+    "Sora:wght@300;400;500;600;700",
+    "Fredoka:wght@600;700"
+  ],
+  "css": ["screens/screens.css"],
+  "background": { "type": "paper", "color": "#e8e9e4", "grain": 0.02 },
+  "slides": [
+    {
+      "name": "hook",
+      "background": {
+        "type": "photo",
+        "src": "assets/hook-photo.jpg",
+        "fallback": { "type": "html", "file": "screens/elevator.html" }
+      },
+      "elements": [
+        {
+          "type": "tiktokText",
+          "lines": ["How i applied to    ", "Universities in 3 minutes"],
+          "minWidths": [614, 838],
+          "textOffsets": [[9, 6], [-7, 0]],
+          "cx": 539,
+          "y": 335,
+          "lineHeight": 97,
+          "padX": 20,
+          "radius": 22,
+          "font": { "family": "TikTok Sans", "size": 66.5, "weight": 600, "color": "#111", "letterSpacing": 0.3 }
+        },
+        { "type": "html", "file": "screens/flag-za.html", "x": 542, "y": 311, "w": 54, "h": 36 },
+        { "type": "html", "file": "screens/six-sticker.html", "x": 752, "y": 236, "w": 200, "h": 205 }
+      ]
+    },
+    {
+      "name": "open-skolify",
+      "elements": [
+        { "type": "badge", "fontFamily": "Rammetto One", "text": "OPEN", "x": 157, "y": 368, "w": 283, "h": 123, "radius": 24, "textStyle": "transform:translateY(6px)", "font": { "size": 68, "color": "#fdc904", "letterSpacing": -1 } },
+        { "type": "text", "text": "Skolify.co.za", "x": 449, "y": 401, "font": { "family": "Sora", "size": 47, "weight": 500, "color": "#111", "letterSpacing": 2.2, "lineHeight": 1.2 } },
+        {
+          "type": "arrow", "x": 820, "y": 460, "w": 140, "h": 390,
+          "path": "M 68 6 C 118 60, 140 160, 118 250 C 104 310, 60 352, 10 378",
+          "head": "M 40 352 L 10 378 L 52 380",
+          "strokeWidth": 4.5, "color": "#f3c31a"
+        },
+        { "type": "phone", "x": 235, "y": 560, "w": 567, "h": 1033, "border": 3.5, "radius": 64, "screen": "screens/welcome.html" }
+      ]
+    },
+    {
+      "name": "enter-marks",
+      "elements": [
+        { "type": "badge", "fontFamily": "Rammetto One", "text": "Enter Marks", "x": 196, "y": 254, "w": 688, "h": 159, "radius": 30, "textStyle": "transform:translateY(7px)", "font": { "size": 84, "color": "#fdc904", "letterSpacing": -0.8 } },
+        { "type": "text", "text": "Matric/Grade 11 Marks", "x": -13, "y": 467, "w": 1080, "font": { "family": "Sora", "size": 32, "weight": 500, "letterSpacing": 2, "color": "#111", "align": "center", "lineHeight": 1.2 } },
+        { "type": "phone", "x": 232, "y": 610, "w": 581, "h": 1141, "border": 4.5, "radius": 30, "screen": "screens/enter-marks.html" }
+      ]
+    },
+    {
+      "name": "choose-course",
+      "elements": [
+        { "type": "badge", "fontFamily": "Rammetto One", "text": "[style=letter-spacing:-3.2px;position:relative;left:-10px]Choose[/style]\n[style=letter-spacing:-0.8px;font-size:79px;position:relative;top:2px]COURSE[/style]", "x": 315, "y": 310, "w": 450, "h": 220, "radius": 30, "textStyle": "transform:translateY(7px)", "font": { "size": 76, "color": "#fdc904", "lineHeight": 0.967 } },
+        { "type": "phone", "x": 86, "y": 629, "w": 518, "h": 1088, "border": 4.5, "radius": 30, "screen": "screens/choose-courses.html" },
+        { "type": "html", "file": "screens/course-popover.html", "x": 0, "y": 0, "w": 1080, "h": 1920 }
+      ]
+    },
+    {
+      "name": "congrats",
+      "background": { "type": "color", "color": "#edeee9" },
+      "elements": [
+        { "type": "text", "text": "AND THATS IT!.", "x": 5, "y": 191, "w": 1080, "font": { "family": "Inter", "size": 28.3, "weight": 800, "color": "#111", "align": "center", "lineHeight": 1.2, "letterSpacing": -0.2 } },
+        { "type": "phone", "x": 135, "y": 324, "w": 837, "h": 1487, "border": 3.5, "radius": 46, "screen": "screens/congrats.html" }
+      ]
+    }
+  ]
+}

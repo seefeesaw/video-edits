@@ -1,0 +1,11 @@
+/* Shared primitives available to every slide and screen fragment. */
+*, *::before, *::after { box-sizing: border-box; }
+.el { margin: 0; }
+b { font-weight: 700; }
+
+/* Screen-fragment helpers (app UI rebuilt in HTML). */
+.screen { font-family: 'Inter', sans-serif; color: #111; }
+.row { display: flex; align-items: center; }
+.col { display: flex; flex-direction: column; }
+.center { display: flex; align-items: center; justify-content: center; }
+.abs { position: absolute; }

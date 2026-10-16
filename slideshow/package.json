@@ -1,0 +1,13 @@
+{
+  "name": "slideshow",
+  "private": true,
+  "type": "module",
+  "description": "TikTok photo-mode slideshow pipeline: post.json spec -> HTML -> 1080x1920 PNG slides",
+  "scripts": {
+    "render": "node render.mjs",
+    "review": "node serve.mjs"
+  },
+  "dependencies": {
+    "puppeteer-core": "24.10.0"
+  }
+}
