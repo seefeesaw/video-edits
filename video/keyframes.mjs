@@ -46,7 +46,9 @@ async function edit(prompt, refs, bearer) {
   // the image deployment allows few calls per minute: wait out 429s instead of failing
   let res, text;
   for (let attempt = 0; ; attempt++) {
-    res = await fetch(url, { method: 'POST', headers: { authorization: `Bearer ${bearer}` }, body: fd });
+    // network blips ("fetch failed") are retried like 429s instead of ending the whole run
+    try { res = await fetch(url, { method: 'POST', headers: { authorization: `Bearer ${bearer}` }, body: fd }); }
+    catch (e) { if (attempt >= 5) throw e; console.log(`  ${e.message}; retrying in 15s`); await new Promise((r) => setTimeout(r, 15000)); continue; }
     text = await res.text();
     if (res.status !== 429 || attempt >= 15) break;
     const wait = +(text.match(/retry after (\d+) seconds/i)?.[1] || 30);
