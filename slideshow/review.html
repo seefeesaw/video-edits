@@ -75,11 +75,16 @@ async function open(name) {
   // References are usable before anything is rendered: slides = max(renders, references), and a
   // missing render is shown as a blank canvas so show/layout/stats work on a fresh scaffold.
   const blank = new ImageData(W, H);
-  for (let i = 0; i < Math.max(outs.length, refs.length); i++) {
-    const mine = outs[i] ? pixels(await load(base + (post.outDir || 'out') + '/' + outs[i] + '?t=' + Date.now()), W, H) : blank;
+  // renders pair with references by their NN- prefix (slide number), so a partial render of
+  // slides 2–6 is still compared with references 2–6
+  const byNum = {}; for (const f of outs) { const n = parseInt(f, 10); if (n) byNum[n] = f; }
+  const count = Math.max(refs.length, ...Object.keys(byNum).map(Number), 0);
+  for (let i = 0; i < count; i++) {
+    const outFile = byNum[i + 1];
+    const mine = outFile ? pixels(await load(base + (post.outDir || 'out') + '/' + outFile + '?t=' + Date.now()), W, H) : blank;
     let ref = null; try { if (refs[i]) ref = await load(refs[i]); } catch (e) { console.warn(e.message); }
     const b = ref ? pixels(ref, W, H) : null;
-    S.slides.push({ name: outs[i] || `(not rendered) slide ${i + 1}`, mine, ref: b, score: b && outs[i] ? score(mine, b) : null });
+    S.slides.push({ name: outFile || `(not rendered) slide ${i + 1}`, mine, ref: b, score: b && outFile ? score(mine, b) : null });
   }
   document.getElementById('status').textContent = S.slides.map((s, i) => `${i + 1}: ${s.score ? s.score.similarity + '%' : 'no ref'}`).join('  ·  ');
   draw();
@@ -159,7 +164,8 @@ S.reload = () => open(document.getElementById('post').value);
 S.show = (i, crop = null, zoom = 0.3, mode = 'side', grid = 0) => {
   const W0 = S.slides[i - 1].mine.width;
   const cw = crop ? crop[2] : W0, panes = mode === 'side' ? 2 : 1;
-  zoom = Math.min(zoom, (innerWidth - 24) / (cw * panes));
+  const chh = crop ? crop[3] : S.slides[i - 1].mine.height;
+  zoom = Math.min(zoom, (innerWidth - 24) / (cw * panes), (innerHeight - 8) / chh);
   S.only = i; S.crop = crop; S.zoom = zoom; S.mode = mode === 'ref' ? 'side' : mode; draw();
   if (mode === 'ref') document.querySelectorAll('.pair canvas:nth-child(2)').forEach((c) => c.remove());
   document.querySelector('header').style.display = 'none'; document.querySelectorAll('.slide h3').forEach((h) => (h.style.display = 'none'));
@@ -250,6 +256,9 @@ S.rankImages = async (i, urls) => {
   }
   return out.sort((a, b) => a[0] - b[0]).map(([v, u]) => `${v}  ${u}`).join('\n');
 };
+// review.refresh(): reload renders after a re-render (reload() of the page from the javascript tool
+// cuts the script off; this re-reads files in place).
+S.refresh = () => S.reload();
 S.scores = () => S.slides.map((s, i) => `${i + 1} ${s.name} ${s.score ? s.score.similarity + '%' : 'no ref'}`).join('\n');
 // review.layout(slide, [x0,y0,x1,y1]?, {src:'ref'|'mine', gapY:6, gapX:36, ink}) -> one row per blob:
 // [x0,y0,x1,y1] w×h and the dominant ink colours. Rows are bands of ink separated by >= gapY empty
@@ -257,7 +266,10 @@ S.scores = () => S.slides.map((s, i) => `${i + 1} ${s.name} ${s.score ? s.score.
 // white", so it suits light backgrounds; pass ink: p => … for others.
 S.layout = (i, region, o = {}) => {
   const s = S.slides[i - 1], img = o.src === 'mine' ? s.mine : s.ref;
+  // region is [x0, y0, x1, y1] (corners, like every box this page returns); show/stats crops are
+  // [x, y, w, h]. Reject inverted/empty regions instead of returning silently truncated results.
   const [x0, y0, x1, y1] = region || [0, 0, img.width, img.height];
+  if (!(x1 > x0 && y1 > y0)) throw new Error(`layout region must be [x0,y0,x1,y1] with x1>x0, y1>y0; got ${JSON.stringify(region)} (did you pass [x,y,w,h]?)`);
   const ink = o.ink || ((p) => Math.min(...p) < 200 || Math.max(...p) - Math.min(...p) > 70);
   const gapY = o.gapY ?? 6, gapX = o.gapX ?? 36;
   const at = (x, y) => { const k = (y * img.width + x) * 4; return [img.data[k], img.data[k + 1], img.data[k + 2]]; };

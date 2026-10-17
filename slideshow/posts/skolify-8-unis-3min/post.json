@@ -18,10 +18,10 @@
   ],
   "fonts": [
     "Coiny",
-    "Unbounded:wght@900",
     "Open Sans:wght@300;400;500;600;700;800",
     "Inter:wght@400;500;600;700;800;900",
-    "TikTok Sans:wght@500;600;700"
+    "TikTok Sans:wght@500;600;700",
+    "Lexend:wght@900"
   ],
   "css": [
     "@shared/skolify/app.css",
@@ -104,7 +104,7 @@
             286
           ],
           "font": {
-            "family": "Unbounded",
+            "family": "Lexend",
             "weight": 900,
             "size": 110,
             "color": "#fbc21a",
@@ -161,7 +161,7 @@
             334
           ],
           "fitMode": "stretch",
-          "style": "transform:scaleX(-1)"
+          "flip": true
         },
         {
           "type": "text",
@@ -391,8 +391,7 @@
             439,
             350
           ],
-          "fitMode": "stretch",
-          "style": ""
+          "fitMode": "stretch"
         },
         {
           "type": "text",
@@ -661,7 +660,7 @@
             353
           ],
           "fitMode": "stretch",
-          "style": "transform:scaleX(-1)"
+          "flip": true
         },
         {
           "type": "text",
@@ -834,7 +833,7 @@
             407
           ],
           "fitMode": "stretch",
-          "style": "transform:scaleX(-1)"
+          "flip": true
         },
         {
           "type": "text",

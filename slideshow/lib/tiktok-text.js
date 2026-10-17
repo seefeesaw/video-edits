@@ -17,14 +17,16 @@
       const w = widths[i];
       const off = s.offsets[i] || 0;
       const x = s.cx - w / 2 + off;
-      const y = s.y + i * s.lineHeight;
+      // lineHeights (per line) overrides lineHeight, e.g. a taller first line that holds an emoji
+      const lh = s.lineHeights?.[i] ?? s.lineHeight;
+      const y = s.y + (s.lineHeights ? s.lineHeights.slice(0, i).reduce((a, b) => a + b, 0) : i * s.lineHeight);
       const up = i > 0 ? widths[i - 1] : null;
       const dn = i < n - 1 ? widths[i + 1] : null;
       // corner radius: square where this line touches a line at least as wide
       const tl = up != null && up >= w ? 0 : r, tr = tl;
       const bl = dn != null && dn >= w ? 0 : r, br = bl;
       const [tdx, tdy] = s.textOffsets[i] || [0, 0];
-      out += `<div style="position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${s.lineHeight}px;background:${s.bg};border-radius:${tl}px ${tr}px ${br}px ${bl}px;display:flex;align-items:center;justify-content:center;white-space:pre;"><span${s.fitLines[i] ? ` data-fit="${s.fitLines[i].join(',')}"` : ''} style="display:inline-block;transform:translate(${tdx}px,${tdy}px)">${t.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</span></div>`;
+      out += `<div style="position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${lh}px;background:${s.bg};border-radius:${tl}px ${tr}px ${br}px ${bl}px;display:flex;align-items:center;justify-content:center;white-space:pre;"><span${s.fitLines[i] ? ` data-fit="${s.fitLines[i].join(',')}"` : ''} style="display:inline-block;transform:translate(${tdx}px,${tdy}px)">${t.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</span></div>`;
       // concave fillets flaring from this (narrower) line into the wider neighbour
       // (cx, cy) is the centre of the transparent quarter-circle, i.e. the corner pointing away
       // from both boxes.
@@ -35,8 +37,8 @@
         out += fillet(x + w, y, r, r);
       }
       if (dn != null && dn > w) {
-        out += fillet(x - r, y + s.lineHeight - r, 0, 0);
-        out += fillet(x + w, y + s.lineHeight - r, r, 0);
+        out += fillet(x - r, y + lh - r, 0, 0);
+        out += fillet(x + w, y + lh - r, r, 0);
       }
     });
     host.innerHTML = out;

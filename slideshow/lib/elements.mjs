@@ -65,6 +65,7 @@ function tiktokText(el) {
     cx: el.cx ?? 540,
     y: el.y,
     lineHeight: el.lineHeight ?? 96,
+    lineHeights: el.lineHeights || null, // per-line heights (px) when lines differ
     padX: el.padX ?? 26,
     radius: el.radius ?? 20,
     bg: el.bg ?? '#fff',
@@ -97,7 +98,9 @@ function arrow(el) {
 function image(el, ctx) {
   const src = ctx.asset(el.src);
   if (!src) return el.fallback ? render(el.fallback, ctx) : '';
-  return `<img class="el image"${fitAttr({ fitMode: 'box', ...el })} src="${src}" style="${box(el, `object-fit:${el.fit ?? 'cover'};object-position:${el.position ?? 'center'};`)}">`;
+  // objectFit (cover|contain|fill) is the CSS sizing; `fit` is the auto-fit ink box like elsewhere
+  const img = `<img class="el image"${el.flip ? '' : fitAttr({ fitMode: 'box', ...el })} src="${src}" style="${box(el.flip ? { ...el, x: 0, y: 0 } : el, `object-fit:${el.objectFit ?? 'cover'};object-position:${el.position ?? 'center'};${el.flip ? 'transform:scaleX(-1);' : ''}`)}">`;
+  return el.flip ? flipWrap(el, img) : img;
 }
 
 // Template tokens usable in any screen/html fragment (paths relative to the post dir):
@@ -136,7 +139,15 @@ function phone(el, ctx) {
 // Raw HTML escape hatch (inline `html` or a `file`).
 function html(el, ctx) {
   const body = expand(el.file ? ctx.read(el.file) : el.html, ctx);
+  if (el.flip) return flipWrap(el, `<div style="position:absolute;inset:0;transform:scaleX(-1)">${body}</div>`);
   return `<div class="el html"${fitAttr({ fitMode: 'box', ...el })} style="${box(el)}">${body}</div>`;
+}
+
+// flip: mirror the content horizontally inside a wrapper, so auto-fit (which scales/moves the
+// wrapper) is unaffected by the mirroring transform.
+function flipWrap(el, inner) {
+  const { flip, style, ...rest } = el;
+  return `<div class="el flip"${fitAttr({ fitMode: 'box', ...rest })} style="${box(rest)}">${inner}</div>`;
 }
 
 const registry = { text, tiktokText, badge, arrow, image, phone, html };

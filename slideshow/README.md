@@ -94,12 +94,12 @@ mean colour, std-dev and grain (lag-4 autocorrelation) for reference and render.
 | type         | purpose | keys |
 |--------------|---------|------|
 | `text`       | text block (no `w` ⇒ single line, no wrapping) | `text`, `font`, `fit` |
-| `tiktokText` | TikTok "classic" caption with per-line white bubbles and concave joints | `lines[]`, `cx`, `y`, `lineHeight`, `padX`, `radius`, `bg`, `minWidths[]`, `offsets[]`, `textOffsets[]`, `fitLines[]`, `font` |
+| `tiktokText` | TikTok "classic" caption with per-line white bubbles and concave joints | `lines[]`, `cx`, `y`, `lineHeight`, `lineHeights[]` (per line), `padX`, `radius`, `bg`, `minWidths[]`, `offsets[]`, `textOffsets[]`, `fitLines[]`, `font` |
 | `badge`      | rounded label (black pill + display type) | `text`, `bg`, `radius`, `fontFamily`, `font`, `textStyle`, `pad`, `fit` |
 | `arrow`      | hand-drawn SVG arrow | `path`, `head`, `color`, `strokeWidth`, `headWidth`, `viewBox` |
-| `image`      | photo/logo/sticker | `src`, `fit`, `position`, `fallback` |
+| `image`      | photo/logo/sticker | `src`, `objectFit` (cover/contain), `position`, `fit` (auto-fit box), `flip`, `fallback` |
 | `phone`      | screenshot frame around an HTML screen | `screen`, `border`, `borderColor`, `radius`, `bg`, `screenWidth` (scale a fixed-width screen), `slideCoords` (screen authored in slide px) |
-| `html`       | inline `html` or a `file` | `fit`, `fitMode` |
+| `html`       | inline `html` or a `file` | `fit`, `fitMode`, `flip` (mirror without breaking auto-fit) |
 
 `font` is `{ family, size, weight, lineHeight, letterSpacing, color, align, transform }`. Text markup:
 `**bold**`, `__underline__`, `[color=#hex]…[/color]`, `[style=css]…[/style]`, `\n`.

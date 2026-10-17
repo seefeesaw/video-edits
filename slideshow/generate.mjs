@@ -34,8 +34,17 @@ async function generate(job, bearer) {
   const body = { prompt: job.prompt, size: job.size || '1024x1536', quality: job.quality || 'high', n: job.variants || 1, output_format: job.format || 'png' };
   // "background": "transparent" for cut-out art (stickers, map watermarks); png/webp only
   if (job.background) body.background = job.background;
-  const res = await fetch(url, { method: 'POST', headers: { authorization: `Bearer ${bearer}`, 'content-type': 'application/json' }, body: JSON.stringify(body) });
-  const text = await res.text();
+  // print a heartbeat while the model works (~90–110s per call), and wait out 429s
+  const t0 = Date.now(), beat = setInterval(() => console.log(`  ${job.id}: generating… ${((Date.now() - t0) / 1000).toFixed(0)}s`), 30000);
+  let res, text;
+  try {
+    for (let attempt = 0; ; attempt++) {
+      res = await fetch(url, { method: 'POST', headers: { authorization: `Bearer ${bearer}`, 'content-type': 'application/json' }, body: JSON.stringify(body) });
+      text = await res.text();
+      if (res.status !== 429 || attempt >= 15) break;
+      await new Promise((r) => setTimeout(r, (+(text.match(/retry after (\d+) seconds/i)?.[1] || 30) + 2) * 1000));
+    }
+  } finally { clearInterval(beat); }
   if (!res.ok) throw new Error(`${job.id}: HTTP ${res.status} ${text.slice(0, 400)}`);
   return JSON.parse(text).data.map((d) => Buffer.from(d.b64_json, 'base64'));
 }
@@ -50,8 +59,11 @@ async function main() {
   const jobs = (post.generate || []).filter((j) => (!only || only.includes(j.id)) && (force || more || !fs.existsSync(path.join(dir, j.out))));
   if (!jobs.length) return console.log('nothing to generate');
   const bearer = token();
-  for (const job of jobs) {
+  // two jobs at a time (the deployment's rate limit); each prints a heartbeat while it waits
+  const queue = [...jobs];
+  const run = async (job) => {
     const t0 = Date.now();
+    console.log(`  ${job.id}: started`);
     const imgs = await generate(job, bearer);
     imgs.forEach((buf, i) => {
       // extra variants are kept next to the chosen one so a better take can be swapped in
@@ -62,7 +74,8 @@ async function main() {
       fs.writeFileSync(out, buf);
       console.log(`generated ${path.relative(process.cwd(), out)} (${((Date.now() - t0) / 1000).toFixed(0)}s)`);
     });
-  }
+  };
+  await Promise.all(Array.from({ length: +(process.env.IMAGE_CONCURRENCY || 2) }, async () => { while (queue.length) await run(queue.shift()); }));
 }
 
 main().catch((e) => {

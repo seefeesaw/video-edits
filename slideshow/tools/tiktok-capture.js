@@ -9,7 +9,11 @@ const NAME = 'my-post';
   const slides = [...new Set([...document.querySelectorAll('img')].map((i) => i.src).filter((s) => s.includes('photomode')))];
   const desc = document.querySelector('[data-e2e="browse-video-desc"], [data-e2e="video-desc"]')?.innerText?.replace(/\s*\n\s*/g, ' ').trim() || '';
   const music = document.querySelector('[data-e2e="browse-music"], [data-e2e="video-music"]')?.innerText?.trim() || '';
-  const json = JSON.stringify({ source: location.href.split('?')[0], title: document.title.replace(/ \| TikTok$/, ''), caption: desc, music, slides });
+  // a login/sign-up modal can replace document.title; prefer og:title and ignore modal titles
+  const og = document.querySelector('meta[property="og:title"]')?.content;
+  let title = (og || document.title).replace(/ \| TikTok$/, '');
+  if (/^(sign up|log in|tiktok)/i.test(title)) title = desc.split('#')[0].trim() || 'untitled';
+  const json = JSON.stringify({ source: location.href.split('?')[0], title, caption: desc, music, slides });
   if (!slides.length) return 'no photo-mode slides found yet: wait for the post to load (or scroll the carousel) and run again';
   if (!NAME) return json;
   location.href = `http://localhost:5179/save.html#file=${encodeURIComponent(`posts/${NAME}/capture.json`)}&back=${encodeURIComponent(location.href)}&data=${encodeURIComponent(json)}`;

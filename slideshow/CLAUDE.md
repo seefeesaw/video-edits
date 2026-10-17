@@ -11,8 +11,14 @@ Read README.md first. Deliverable: `posts/<name>/out/NN-*.png` (1080×1920), one
    line. It saves `posts/<NAME>/capture.json` by navigating to save.html and back (TikTok's CSP
    blocks direct requests to localhost). Then `node new-post.mjs <NAME>`. Never automate around
    TikTok's slider CAPTCHA (headless Chrome gets one); capture only through the browser pane.
+   The signed slide URLs expire after ~2 days: re-run the capture and `node new-post.mjs <NAME>
+   --refresh` to renew them.
 3. **Read the references** at `http://localhost:5179/review.html?post=<name>` — it works before
-   anything is rendered. Console API (`window.review`):
+   anything is rendered, and renders pair with references by their `NN-` number. Region formats:
+   **boxes and `layout`/`measure` regions are `[x0,y0,x1,y1]`; `show` crops and `stats` patches are
+   `[x,y,w,h]`.** The pane is small: `resize_window` to ~1100×1000 for `show` (the app may reset it;
+   set it again), and after re-rendering call `await review.refresh()` instead of reloading the page.
+   Screenshots occasionally time out; retry. Console API (`window.review`):
    - `show(n, [x,y,w,h], zoom, 'ref', 20)` – reference crop with a labelled grid in slide px (read
      coordinates straight off the screenshot; zoom auto-fits the viewport).
    - `layout(n, region, {ink, gapX, gapY})` – every text line/blob: `[x0,y0,x1,y1] w×h colours`.
@@ -24,9 +30,12 @@ Read README.md first. Deliverable: `posts/<name>/out/NN-*.png` (1080×1920), one
    - `measure`, `measureAll`, `pixel`, `stats(n,[x,y,w,h])` (background tuning), `scores()`.
 4. **Fonts.** Shortlist with `node fontmatch.mjs '[["TEXT",inkW,inkH],…]' --set display|text`, then
    decide by glyph shape: `await review.matchFont(n, inkBox, 'TEXT', [candidates], ink)` (IoU,
-   higher wins). Known for Skolify carousels: Coiny (bubble titles), Figtree 700/400 (captions and
-   body; the source is likely Canva Sans, which isn't on Google Fonts), Rammetto One (yellow-on-black
-   badges), Unbounded 900 (wide SKOLIFY wordmark), TikTok Sans 600 (TikTok captions), Inter (app UI).
+   higher wins). Typical IoU: 0.65–0.8 for bubble/display fonts (several similar fonts score close;
+   pick the best over several words, then eyeball), 0.5–0.65 for thin body text. Known for Skolify
+   carousels (still confirm per post): Coiny (bubble titles), Figtree 700/400 (bold captions/body;
+   the source is likely Canva Sans, not on Google Fonts), Inter 400 ("Outcome:" headings), Lexend
+   900 (wide SKOLIFY wordmark), Rammetto One (yellow-on-black badges), TikTok Sans 600 (TikTok
+   captions), Inter (app UI).
 5. **Backgrounds.** `review.stats` on a plain patch; tune `paper`/`crumpled` until the mean is
    within ~3 and the std-dev within ~1.
 6. **Author** `post.json`: every text line its own element with `fit` = its measured ink box; do not
@@ -35,6 +44,11 @@ Read README.md first. Deliverable: `posts/<name>/out/NN-*.png` (1080×1920), one
    otherwise write a fragment in slide coordinates (`"slideCoords": true`) with
    `@shared/skolify/kit.html`: `sk.header`, `sk.t(box, html, style, label, mode)`, `sk.input`,
    `sk.select`, `sk.pill`, `sk.card`, `sk.badge`, `sk.roundBtn`, `sk.closeX`, `sk.tick`, `sk.chat`.
+   TikTok captions: `tiktokText` with `fitLines` per line and `lineHeights: [h1, h2]` when the lines
+   differ in height (a line holding an emoji is taller). Emoji skew size-fitting: put each emoji in
+   its own `text` element with `fitMode: "stretch"` and fit the words separately. Mirrored
+   stickers/art: `"flip": true` on the element (never a CSS transform; it breaks auto-fit).
+   `image` elements: `objectFit` is the CSS sizing, `fit` is the auto-fit box.
    Text clipped by the phone frame: `sk.t(..., 'move')` with an explicit font size (its measured box
    is clipped too, so size-fitting would be wrong). Things on top of or outside the phone (floating
    cards, carousel arrows, chat bubble): a slide-level `{"type":"html","x":0,"y":0,"w":1080,"h":1920}`
@@ -43,7 +57,8 @@ Read README.md first. Deliverable: `posts/<name>/out/NN-*.png` (1080×1920), one
    setting and **composition as percentages of the frame**; `node generate.mjs posts/<name>`
    (`--more --only id` adds takes without overwriting). Pick: `node render.mjs posts/<name> --only N
    --variants`, then `await review.rankImages(N, [urls of out/candidates/*.png])` (lowest wins);
-   rename the winner to the job's `out`, delete the rest; fine-tune with `photo.scale`/`offset`. No
+   rename the winner to the job's `out`, delete the other takes and `out/candidates/`; fine-tune
+   with `photo.scale`/`offset`. Generation prints a heartbeat (~90–110s per call, two at a time). No
    real institutions' crests or names in prompts. Decorative art (map watermarks, stickers):
    `"background": "transparent"`.
 8. **Render & verify.** `node render.mjs posts/<name>` (~10s/slide), reload the review page, read
