@@ -1,0 +1,30 @@
+{
+  "description": "Person B: a young man of about 25 with short curly black hair and a short dark beard, medium-brown skin, wearing an oversized plain white T-shirt. Location B: a dim modern kitchen at night lit by violet-blue LED strip light on the walls and ceiling, dark cabinets behind him. He sits behind a light oak table; on the table in front of him, centred, one ordinary clear stemless glass. Static frontal camera at table height; calm, deadpan, slightly amused.",
+  "anchors": {
+    "4": {
+      "id": "video_6ad3da5c9b188190bb0dc5241ebb7761",
+      "seconds": 4,
+      "expiresAt": 1792355292,
+      "file": "anchors/4s.mp4",
+      "createdAt": "2026-10-17T20:29:22.165Z",
+      "history": [
+        "video_6ad3da5c9b188190bb0dc5241ebb7761"
+      ]
+    },
+    "8": {
+      "id": "video_6ad3dadb13e08190911b463ad8deb5c1",
+      "seconds": 8,
+      "expiresAt": 1792355419,
+      "file": "anchors/8s.mp4",
+      "createdAt": "2026-10-17T20:31:53.701Z",
+      "history": [
+        "video_6ad3dadb13e08190911b463ad8deb5c1"
+      ]
+    }
+  },
+  "frames": [
+    "frames/ref-1.jpg",
+    "frames/ref-2.jpg",
+    "frames/ref-3.jpg"
+  ]
+}

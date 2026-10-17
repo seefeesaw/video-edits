@@ -21,7 +21,11 @@ import { fileURLToPath } from 'node:url';
 // network blips ("fetch failed") are retried instead of ending a long generation run
 export const fetch = async (url, opts) => {
   for (let attempt = 0; ; attempt++) {
-    try { return await globalThis.fetch(url, opts); }
+    try {
+      const r = await globalThis.fetch(url, opts);
+      if (r.status === 401 && opts?.headers?.authorization && attempt === 0) { opts = { ...opts, headers: { ...opts.headers, ...auth(true) } }; continue; }
+      return r;
+    }
     catch (e) { if (attempt >= 5) throw e; console.log(`  ${e.message}; retrying in 15s`); await new Promise((r) => setTimeout(r, 15000)); }
   }
 };
@@ -33,10 +37,14 @@ const DEPLOYMENT = process.env.AZURE_FOUNDRY_VIDEO_DEPLOYMENT || cfg.deployment;
 export const BASE = `${ENDPOINT}/openai/v1/videos`;
 export { DEPLOYMENT };
 
-let tok = { value: '', at: 0 };
-export function auth() {
-  // tokens last ~60 min; refresh every 40 so long polls never expire
-  if (Date.now() - tok.at > 40 * 60e3) tok = { value: execSync(`az account get-access-token --resource ${cfg.scope} --query accessToken -o tsv`, { encoding: 'utf8' }).trim(), at: Date.now() };
+// az hands out a CACHED token that may have only minutes left: track its real expiry and renew
+// with 10 min to spare (a 40-minute timer still hit 401s on long runs); `auth(true)` forces a renewal
+let tok = { value: '', exp: 0 };
+export function auth(force = false) {
+  if (force || Date.now() > tok.exp - 10 * 60e3) {
+    const j = JSON.parse(execSync(`az account get-access-token --resource ${cfg.scope} -o json`, { encoding: 'utf8' }));
+    tok = { value: j.accessToken, exp: j.expires_on ? j.expires_on * 1000 : Date.parse(j.expiresOn) || Date.now() + 30 * 60e3 };
+  }
   return { authorization: `Bearer ${tok.value}` };
 }
 

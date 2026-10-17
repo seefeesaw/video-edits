@@ -1,0 +1,30 @@
+{
+  "description": "Person A: a young man of about 22 with short wavy dark-brown hair, light olive skin, clean-shaven, wearing a plain black short-sleeve T-shirt. Location A: a warm home kitchen with medium-brown wooden cabinets, a stainless-steel fridge directly behind him, a speckled beige granite countertop in the foreground, a stovetop kettle on the left, a small ceiling spotlight at the top of the frame, warm tungsten light. On the counter in the centre: an enormous footed glass candy jar about 60 cm tall. Close, frontal camera at counter height; he stands behind the counter, very energetic, shouting and laughing.",
+  "anchors": {
+    "4": {
+      "id": "video_6ad3d9e8fc0c81909a21c3207c6f7ac3",
+      "seconds": 4,
+      "expiresAt": 1792355177,
+      "file": "anchors/4s.mp4",
+      "createdAt": "2026-10-17T20:27:28.638Z",
+      "history": [
+        "video_6ad3d9e8fc0c81909a21c3207c6f7ac3"
+      ]
+    },
+    "8": {
+      "id": "video_6ad3d96a9e08819083a09bd827790808",
+      "seconds": 8,
+      "expiresAt": 1792355050,
+      "file": "anchors/8s.mp4",
+      "createdAt": "2026-10-17T20:26:59.712Z",
+      "history": [
+        "video_6ad3d96a9e08819083a09bd827790808"
+      ]
+    }
+  },
+  "frames": [
+    "frames/ref-1.jpg",
+    "frames/ref-2.jpg",
+    "frames/ref-3.jpg"
+  ]
+}
