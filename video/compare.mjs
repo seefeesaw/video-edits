@@ -125,7 +125,9 @@ if (argv.includes('--apply')) {
     const fr = clipFrames(s);
     if (!fr.length) continue;
     const A = fr.map((x) => x.ref), B = fr.map((x) => gridOf(x.px, zoomOf(s), panOf(s))), g = fitGrade(A, B);
-    if (comp(A, B, g) <= comp(A, B)) { delete s.grade; console.log(`grade ${s.id}: none (a grade would not help)`); continue; }
+    // the grid score mixes composition and colour, so a grade that fixes a big brightness/warmth gap
+    // can cost a little comp; keep it unless it clearly hurts
+    if (comp(A, B, g) < comp(A, B) - 1) { delete s.grade; console.log(`grade ${s.id}: none (a grade hurts comp ${comp(A, B).toFixed(1)} -> ${comp(A, B, g).toFixed(1)})`); continue; }
     s.grade = { r: g[0].map((v, i) => +v.toFixed(i ? 2 : 4)), g: g[1].map((v, i) => +v.toFixed(i ? 2 : 4)), b: g[2].map((v, i) => +v.toFixed(i ? 2 : 4)), clip: clipOf(s) };
     console.log(`grade ${s.id}: comp ${comp(A, B).toFixed(1)} -> ${comp(A, B, g).toFixed(1)}`);
   }

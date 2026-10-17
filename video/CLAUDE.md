@@ -10,11 +10,15 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    `save.html`, which writes captured JSON to disk.
 2. **Capture the original** in the in-app browser: open the Short, then paste the WHOLE of
    `tools/yt-capture.js` into the javascript tool with `NAME` on its first line set to `<name>`
-   (the javascript tool cannot read files: Read the file, edit NAME in your paste). It runs ~1–2 min
-   in the page and then navigates to save.html and back. Wait for the file:
+   (the javascript tool cannot read files: Read the file, edit NAME in your paste). It runs ~2 min
+   in the page (a seek every ~150ms; the script returns at once and keeps running, so don't wait
+   inside the 45s javascript tool) and then navigates to save.html and back. Delete any old
+   `reference.json` first, then wait for the file:
    `until [ -s videos/<name>/reference.json ]; do sleep 5; done` (Bash, in the background). Paste
-   only once per tab (a second concurrent run is refused). Check `reference.json`: `cuts`,
-   `sourceFps`, `shotMidpoints`.
+   only once per tab (a second concurrent run is refused). If nothing appears after ~4 min, read
+   `window.__ytcapError` in the tab (it fails loudly when the player won't stay paused or seeks
+   don't land; reload the Short and paste again). Check `reference.json`: `cuts`, `sourceFps`,
+   `shotMidpoints`. The save reloads the Short, so `ytcap` is gone afterwards.
 3. **Look at every shot**: `node refsheet.mjs videos/<name>` → Read `out/ref-shots.jpg` (one frame
    per shot midpoint) and `out/ref-every.jpg` (every 0.5s, shows motion within shots). For each
    shot write down: action, hands, props, camera distance/angle, motion, and **composition as
@@ -25,8 +29,9 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    glyphs only (pred on bright pixels) and add the shadow in CSS.
 4. **Write `video.json`**: `fps` = 60 if `sourceFps` is 60 (cuts fall between 30fps frames),
    else 30; shot `start`/`end` = the reference cuts exactly. A soft jump cut inside one setup is
-   still a shot: reuse the previous shot's clip with a later `from` and a different `zoom`/`pan`
-   (`"framing": "manual"`). `style` holds only what is constant in EVERY shot (set, lighting, grade,
+   still a shot: `"takes": 0, "clip": "clips/<previous shot's take>.mp4"`, a later `from` and a
+   different `zoom`/`pan` (`"framing": "manual"`; `pan` +y shows more of the bottom, i.e. content
+   moves up). `style` holds only what is constant in EVERY shot (set, lighting, grade,
    framing distance) — per-shot items (a board of snacks, a torch, a hand) go in that shot's prompts,
    or they leak into every keyframe. Overlays with `fit` boxes. `takes: 2`. Never recreate
    copyrighted footage on screens, songs, or brand logos/packaging: use generic stand-ins and say so
@@ -38,8 +43,11 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    `keyframe: {prompt: <first frame composition>}` and keep the shot `prompt` for the action only.
    The keyframe is the clip's FIRST frame: for "X enters the frame" shots, describe the frame with X
    in place, prompt X leaving, and set `"reverse": true`. `node keyframes.mjs videos/<name>`; Read
-   the keyframes and compare them with ref-shots.jpg (object size and position!) before spending Sora
-   time — regenerate a keyframe with `--only sN` rather than fixing it later with zoom. Sora rejects
+   the `assets/keyframes/<id>.720x1280.png` files (what Sora gets: the model's 2:3 image minus 8% on
+   each side) and compare them with ref-shots.jpg (object size and position!) before spending Sora
+   time — regenerate a keyframe with `--force --only sN` rather than fixing it later with zoom.
+   gpt-image-2 tends to draw the main object smaller than asked: state its size emphatically
+   ("BIG: more than half the frame width"). Sora rejects
    input frames showing people or faces (`moderation_blocked: people-in-user-uploads`), including
    on screens: hands only; screens show scenery/abstract light/title cards.
    **Generate**: `node sora.mjs videos/<name>` (~2 jobs at once, ~60–100s each; background it).

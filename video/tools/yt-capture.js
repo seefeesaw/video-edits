@@ -7,7 +7,7 @@
 //   - cut times (seek-based scan at 1/60s; works with the browser pane hidden), source fps
 //   - a 9×16 colour grid every 0.25s (compare.mjs scores renders against these)
 //   - contact sheets: one frame per shot midpoint, and every 0.5s
-// then saves video/videos/<NAME>/reference.json and returns to the Short. Takes ~1–2 min; wait for
+// then saves video/videos/<NAME>/reference.json and returns to the Short. Takes ~2 min; wait for
 // the file on disk. Then `node refsheet.mjs videos/<NAME>` moves the sheets out to out/*.jpg.
 // Helpers stay on window.ytcap: cuts(), capture(), box(t, pred, region), sheetDataUrl(times).
 const NAME = 'my-video';
@@ -16,13 +16,27 @@ const NAME = 'my-video';
   // seek and wait for 'seeked' (fires even when the page is hidden, unlike rAF/rVFC); the frame is
   // drawable at once. No setTimeout on this path: hidden tabs clamp timers to ~1s, which turned a
   // 1-minute scan into 10+ minutes.
-  const seek = (t) => new Promise((res) => {
+  // The Shorts player resumes playback (and can reset to 0) behind a plain video.pause(), so pause
+  // through the player API, re-pause before every seek, and check the seek landed: a scan reading
+  // stale frames silently loses every cut after that point.
+  const player = () => document.querySelector('#shorts-player') || document.querySelector('.html5-video-player');
+  const seekOnce = (t) => new Promise((res) => {
     const el = v(); let done = false;
+    if (!el.paused) { try { player().pauseVideo(); } catch {} el.pause(); }
     const fin = () => { if (done) return; done = true; el.removeEventListener('seeked', fin); res(); };
     el.addEventListener('seeked', fin); el.currentTime = t; setTimeout(fin, 3000);
   });
+  let misses = 0;
+  const seek = async (t) => {
+    for (let k = 0; k < 4; k++) {
+      await seekOnce(t);
+      if (v().paused && Math.abs(v().currentTime - t) < 0.02) return;
+    }
+    if (++misses > 5) throw new Error(`seeks are not landing (asked ${t}s, at ${v().currentTime.toFixed(3)}s, paused=${v().paused}); reload the Short and paste again`);
+  };
   const prep = () => {
-    v().pause(); v().muted = true;
+    try { player().pauseVideo(); } catch {}
+    v().pause(); v().muted = true; misses = 0;
     try { (document.querySelector('#shorts-player') || document.querySelector('.html5-video-player')).setPlaybackQualityRange('hd1080', 'hd1080'); } catch {}
   };
   const raw = (w, h) => { const c = new OffscreenCanvas(w, h); const g = c.getContext('2d', { willReadFrequently: true }); g.drawImage(v(), 0, 0, w, h); return g.getImageData(0, 0, w, h).data; };
@@ -42,6 +56,7 @@ const NAME = 'my-video';
     // absolute terms or a strong local peak (catches soft jump cuts inside one setup).
     async cuts() {
       prep(); const el = v(); const pts = []; let prev = null;
+      // a scan that sees no frame changes for >1.5s while the video plainly moves is broken: checked below
       for (let t = 0; t < el.duration - 0.01; t += 1 / 60) {
         await seek(+t.toFixed(4)); const d = raw(54, 96);
         if (prev) {
@@ -60,6 +75,8 @@ const NAME = 'my-video';
       });
       // a cut seen at two consecutive steps (half-frame landing) counts once
       const cuts = out.filter((t, i) => i === 0 || t - out[i - 1] > 0.05);
+      const last = pts.length ? pts[pts.length - 1][0] : 0;
+      if (el.duration - last > 1.5) throw new Error(`no frame changes after ${last}s of ${el.duration.toFixed(2)}s: the scan read stale frames; reload the Short and paste again`);
       return { fps, cuts };
     },
     async capture(step = 0.25) {
@@ -104,5 +121,5 @@ const NAME = 'my-video';
   if (!NAME) return 'ytcap ready (NAME not set: nothing captured)';
   window.__ytcapError = null;
   ytcap.capture().then((json) => ytcap.save(`video/videos/${NAME}/reference.json`, json)).catch((e) => (window.__ytcapError = e.message));
-  return `capturing; video/videos/${NAME}/reference.json will appear on disk in ~1–2 min (then: node refsheet.mjs videos/${NAME})`;
+  return `capturing; video/videos/${NAME}/reference.json will appear on disk in ~2 min (then: node refsheet.mjs videos/${NAME})`;
 })();

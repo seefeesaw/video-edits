@@ -58,7 +58,9 @@ element and auto-fit (`fit: [x0,y0,x1,y1]` = ink box measured on the reference).
       "from": 0.4,           // where in the clip the slot starts (skip Sora's settle-in)
       "speed": 1,            // >1 plays faster (uses more of the clip)
       "zoom": [1.0, 1.08],   // reframe: crop-zoom, constant or animated [start, end]
-      "pan": [[0, 0], [0, -0.2]],   // crop offset -1..1 (x, y), constant or animated
+      "pan": [[0, 0], [0, -0.2]],   // crop window offset -1..1 (x, y), constant or animated:
+                             // +x shows more of the right (content moves left), +y shows more of
+                             // the bottom (content moves up); only has an effect with zoom > 1
       "framing": "manual",   // compare.mjs --framing leaves this shot's zoom/pan alone
       "reverse": true,       // play the used span backwards (keyframe = first frame, so generate
                              // "X leaves" and reverse it for "X enters the frame")
@@ -67,7 +69,9 @@ element and auto-fit (`fit: [x0,y0,x1,y1]` = ink box measured on the reference).
                              // built by keyframes.mjs from product.refs (gpt-image-2 edit) and sent
                              // to Sora as input_reference; or a path to an existing image
       "takes": 2,            // generate N variants (s1.mp4, s1.v2.mp4 …); "clip" picks one
-      "clip": "clips/s1.v2.mp4"
+      "clip": "clips/s1.v2.mp4"  // may point at another shot's take (a jump cut inside one
+                             // setup): set "takes": 0 so sora.mjs skips the shot; --pick leaves it
+                             // alone, so re-point it by hand if --pick changes the source shot
     }
   ],
   "overlays": [ { "from": 0, "to": 10.681, "elements": [ /* slideshow elements */ ] } ],
