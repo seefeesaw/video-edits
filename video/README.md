@@ -6,7 +6,7 @@ Recreates short-form vertical videos (Shorts/Reels/TikToks) from a declarative s
 product photos ──keyframes.mjs (gpt-image-2 edit)──▶ assets/keyframes/<shot>.png (first frames)
 video.json ──sora.mjs (image-to-video from the keyframe)──▶ clips/<shot>.mp4 (Sora 2, 720×1280, audio)
            ──build.mjs─▶ out/<name>.mp4  (1080×1920: trimmed/reframed shots, cuts, overlays, audio)
-reference Short (YouTube tab) + tools/yt-compare.js ──▶ per-shot similarity, cut timing, side-by-sides
+reference Short (YouTube tab) + tools/yt-capture.js ──▶ reference.json ──compare.mjs──▶ per-shot similarity, cuts
 ```
 
 ## Commands
@@ -42,7 +42,7 @@ element and auto-fit (`fit: [x0,y0,x1,y1]` = ink box measured on the reference).
 ```jsonc
 {
   "title": "…", "source": "<url of the original>",
-  "size": [1080, 1920], "fps": 30, "duration": 10.681,
+  "size": [1080, 1920], "fps": 30, "duration": 10.681,   // fps: 60 when reference.json sourceFps is 60
   "soraSize": "720x1280",
   "style": "shared description appended to every shot prompt (setting, props, lighting, grade)",
   "product": {                       // a real product that must look exactly like its photos
@@ -59,6 +59,10 @@ element and auto-fit (`fit: [x0,y0,x1,y1]` = ink box measured on the reference).
       "speed": 1,            // >1 plays faster (uses more of the clip)
       "zoom": [1.0, 1.08],   // reframe: crop-zoom, constant or animated [start, end]
       "pan": [[0, 0], [0, -0.2]],   // crop offset -1..1 (x, y), constant or animated
+      "framing": "manual",   // compare.mjs --framing leaves this shot's zoom/pan alone
+      "reverse": true,       // play the used span backwards (keyframe = first frame, so generate
+                             // "X leaves" and reverse it for "X enters the frame")
+      "filter": "hflip",     // extra ffmpeg video filters, appended after the grade
       "keyframe": { "prompt": "the shot's first frame: composition as % of frame…" },
                              // built by keyframes.mjs from product.refs (gpt-image-2 edit) and sent
                              // to Sora as input_reference; or a path to an existing image
@@ -79,19 +83,26 @@ are not recreated — the pipeline uses generic stand-ins and says so in `notes`
 ## Comparing with the original
 
 ```
-YouTube tab: tools/yt-capture.js → ytcap.captureAndSave('video/videos/<name>/reference.json')
-node compare.mjs videos/<name>             # per-shot composition score, brightness/warmth deltas, cuts
-node compare.mjs videos/<name> --pick      # choose the best take per shot ("clip")
-node compare.mjs videos/<name> --framing   # search crop-zoom/pan per shot ("zoom"/"pan")
-node compare.mjs videos/<name> --apply     # fit a per-shot colour grade ("grade")
+YouTube tab: paste tools/yt-capture.js with NAME set → videos/<name>/reference.json (~1–2 min)
+node refsheet.mjs videos/<name> [--mine]    # reference contact sheets as images (+ your build's)
+node compare.mjs videos/<name> --pick      # choose the best take per shot ("clip")      } from raw
+node compare.mjs videos/<name> --framing   # search crop-zoom/pan per shot ("zoom"/"pan") } clips; no
+node compare.mjs videos/<name> --apply     # fit a per-shot colour grade ("grade")         } build needed
+node build.mjs videos/<name>
+node compare.mjs videos/<name>             # per-shot composition score, brightness/warmth, cuts
 ```
+`--only s3,s5` restricts pick/framing/apply.
 
-The capture reads the player's own frames in the page (nothing is downloaded): duration, exact cut
-times via `requestVideoFrameCallback`, and a 9×16 colour grid every 0.25s. YouTube's CSP blocks
-loading local files or posting to localhost, so the script hands the JSON over by navigating to the
-review server's `save.html`, which writes it under `video/` or `slideshow/` and navigates back.
-`ytcap.frames([…])` shows reference frames for screenshots; `ytcap.box()` measures caption ink.
+The capture reads the player's own frames in the page (nothing is downloaded): duration, source fps,
+cut times (a seek-based scan every 1/60s; a cut is a large frame change or a strong local peak, which
+catches soft jump cuts), a 9×16 colour grid every 0.25s, and two contact sheets (one frame per shot
+midpoint, one every 0.5s) embedded as JPEG data URLs that `refsheet.mjs` writes out. It works with
+the browser pane hidden. YouTube's CSP blocks loading local files or posting to localhost, so the
+script hands the JSON over by navigating to the review server's `save.html`, which writes it under
+`video/` or `slideshow/` and navigates back. `ytcap.box(t, pred, region)` measures caption ink.
 
 Shot fields written by compare: `clip` (chosen take), `zoom`/`pan` (reframe), `grade`
-(`{r:[gain,offset], g:…, b:…}`, applied as an RGB LUT). Builds use exact frame counts per slot, so
-cuts land on the reference's frames.
+(`{r:[gain,offset], g:…, b:…, clip}`, applied as an RGB LUT; ignored by build.mjs if `clip` has
+changed since). `--apply` is idempotent (fitted from the raw clip + framing each time). Builds use
+exact frame counts per slot, so cuts land on the reference's frames; a 60fps source has cuts between
+30fps frames, so build at `"fps": 60` for frame-exact cuts.

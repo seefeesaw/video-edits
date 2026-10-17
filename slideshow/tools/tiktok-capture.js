@@ -9,10 +9,12 @@ const NAME = 'my-post';
   const slides = [...new Set([...document.querySelectorAll('img')].map((i) => i.src).filter((s) => s.includes('photomode')))];
   const desc = document.querySelector('[data-e2e="browse-video-desc"], [data-e2e="video-desc"]')?.innerText?.replace(/\s*\n\s*/g, ' ').trim() || '';
   const music = document.querySelector('[data-e2e="browse-music"], [data-e2e="video-music"]')?.innerText?.trim() || '';
-  // a login/sign-up modal can replace document.title; prefer og:title and ignore modal titles
-  const og = document.querySelector('meta[property="og:title"]')?.content;
-  let title = (og || document.title).replace(/ \| TikTok$/, '');
-  if (/^(sign up|log in|tiktok)/i.test(title)) title = desc.split('#')[0].trim() || 'untitled';
+  // document.title holds the post's own title; a login/sign-up modal can replace it, and og:title is
+  // often just "<user> on TikTok", so fall through generic titles to the caption text
+  const og = document.querySelector('meta[property="og:title"]')?.content || '';
+  const generic = (t) => !t || /^(sign up|log in|tiktok)/i.test(t) || / on TikTok$/i.test(t);
+  let title = [document.title, og].map((t) => t.replace(/ \| TikTok$/, '').trim()).find((t) => !generic(t));
+  if (!title) title = desc.split('#')[0].trim() || 'untitled';
   const json = JSON.stringify({ source: location.href.split('?')[0], title, caption: desc, music, slides });
   if (!slides.length) return 'no photo-mode slides found yet: wait for the post to load (or scroll the carousel) and run again';
   if (!NAME) return json;

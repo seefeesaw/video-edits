@@ -23,14 +23,15 @@ let fonts = argv.includes('--fonts') ? argv[argv.indexOf('--fonts') + 1].split('
 fonts = [...new Set(fonts)];
 const fam = (f) => f.split(':')[0];
 const families = [...new Set(fonts.map(fam))];
-const link = 'https://fonts.googleapis.com/css2?' + families.map((f) => 'family=' + f.replace(/ /g, '+') + ':wght@100..900').join('&') + '&display=block';
-const linkStatic = 'https://fonts.googleapis.com/css2?' + families.map((f) => 'family=' + f.replace(/ /g, '+')).join('&') + '&display=block';
+// one stylesheet per family+weight: a range request (wght@100..900) is rejected for families with a
+// narrower range, and a 400-only fallback would synthesise bold (equal scores for 600 and 700)
+const css = (f, w) => `https://fonts.googleapis.com/css2?family=${f.replace(/ /g, '+')}${w ? `:wght@${w}` : ''}&display=block`;
+const links = [...new Set([...fonts.map((f) => css(fam(f), f.split(':')[1])), ...families.map((f) => css(f))])];
 
 const CHROME = process.env.CHROME_PATH || ['C:/Program Files/Google/Chrome/Application/chrome.exe', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome'].find((p) => fs.existsSync(p));
 const b = await puppeteer.launch({ executablePath: CHROME });
 const p = await b.newPage();
-// Variable-axis request fails for static-only families, so load both forms; one of them resolves.
-await p.setContent(`<link rel=stylesheet href="${link}"><link rel=stylesheet href="${linkStatic}">` + fonts.map((f) => `<span style="font-family:'${fam(f)}';font-weight:${f.split(':')[1] || 400}">Ag</span>`).join(''), { waitUntil: 'networkidle0' });
+await p.setContent(links.map((l) => `<link rel=stylesheet href="${l}">`).join('') + fonts.map((f) => `<span style="font-family:'${fam(f)}';font-weight:${f.split(':')[1] || 400}">Ag</span>`).join(''), { waitUntil: 'networkidle0' });
 await p.evaluate(() => document.fonts.ready);
 const res = await p.evaluate((fonts, samples) => {
   const c = document.createElement('canvas'); c.width = 4000; c.height = 320; const g = c.getContext('2d');

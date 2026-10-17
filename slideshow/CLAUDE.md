@@ -46,17 +46,22 @@ Read README.md first. Deliverable: `posts/<name>/out/NN-*.png` (1080×1920), one
    `sk.select`, `sk.pill`, `sk.card`, `sk.badge`, `sk.roundBtn`, `sk.closeX`, `sk.tick`, `sk.chat`.
    TikTok captions: `tiktokText` with `fitLines` per line and `lineHeights: [h1, h2]` when the lines
    differ in height (a line holding an emoji is taller). Emoji skew size-fitting: put each emoji in
-   its own `text` element with `fitMode: "stretch"` and fit the words separately. Mirrored
+   its own `text` element with `fitMode: "stretch"` and fit the words separately. A caption drawn
+   over a sticker: a second `tiktokText` with `"bg": "transparent"` on top. `arrow` elements are
+   not auto-fitted: draw arrows as an `html` SVG in slide coordinates. Mirrored
    stickers/art: `"flip": true` on the element (never a CSS transform; it breaks auto-fit).
    `image` elements: `objectFit` is the CSS sizing, `fit` is the auto-fit box.
    Text clipped by the phone frame: `sk.t(..., 'move')` with an explicit font size (its measured box
-   is clipped too, so size-fitting would be wrong). Things on top of or outside the phone (floating
+   is clipped too, so size-fitting would be wrong); its fit warning ("off by Npx" in height) is
+   expected and can be ignored. Things on top of or outside the phone (floating
    cards, carousel arrows, chat bubble): a slide-level `{"type":"html","x":0,"y":0,"w":1080,"h":1920}`
    element; clip a group to a rounded panel with `sk.clip(rect, radius, html)`.
 7. **Photos** that cannot be rebuilt: a `generate` job whose prompt states subject, wardrobe, props,
    setting and **composition as percentages of the frame**; `node generate.mjs posts/<name>`
    (`--more --only id` adds takes without overwriting). Pick: `node render.mjs posts/<name> --only N
-   --variants`, then `await review.rankImages(N, [urls of out/candidates/*.png])` (lowest wins);
+   --variants` (writes only `out/candidates/`, not `out/NN-*.png`), then `await review.rankImages(N,
+   [urls of out/candidates/*.png])` (lowest wins, but it compares colour blocks only: when scores are
+   within ~3, choose by pose/subject direction by eye);
    rename the winner to the job's `out`, delete the other takes and `out/candidates/`; fine-tune
    with `photo.scale`/`offset`. Generation prints a heartbeat (~90–110s per call, two at a time). No
    real institutions' crests or names in prompts. Decorative art (map watermarks, stickers):

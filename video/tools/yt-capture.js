@@ -1,32 +1,31 @@
 // Capture a reference fingerprint of a YouTube Short, in the Short's own tab (the player's frames
-// are readable in-page; nothing is downloaded). YouTube's CSP blocks loading local files into the
-// page, so comparison happens locally: this produces reference.json, compare.mjs scores renders
-// against it. Run this file's contents with the browser javascript tool on
-// https://www.youtube.com/shorts/<id>, then:
+// are readable in-page; nothing is downloaded). YouTube's CSP blocks fetch/forms to localhost, so
+// results are handed to the local review server by navigating to its save.html.
 //
-//   ytcap.captureAndSave('video/videos/<name>/reference.json')
-//                                    -> captures (~2 min, runs in the background), then navigates to
-//                                       the local server's save.html, which writes the file and
-//                                       returns here. Poll for the file on disk. (YouTube's CSP blocks
-//                                       fetch/form posts to localhost; top-level navigation is allowed.)
-//   await ytcap.capture()            -> the JSON string itself
-//   await ytcap.cuts()               -> cut times (first frame of each new shot)
-//   await ytcap.frames([t, …])       -> full-window view of reference frames for a screenshot
-//   await ytcap.box(t, pred, [x0,y0,x1,y1])  -> ink box in 1080x1920 coords (caption fitting)
-//   ytcap.close()                    -> remove the frame view
+// Paste this WHOLE file into the browser javascript tool on https://www.youtube.com/shorts/<id>
+// (again after any navigation), set NAME below, and it runs everything in one go:
+//   - cut times (seek-based scan at 1/60s; works with the browser pane hidden), source fps
+//   - a 9×16 colour grid every 0.25s (compare.mjs scores renders against these)
+//   - contact sheets: one frame per shot midpoint, and every 0.5s
+// then saves video/videos/<NAME>/reference.json and returns to the Short. Takes ~1–2 min; wait for
+// the file on disk. Then `node refsheet.mjs videos/<NAME>` moves the sheets out to out/*.jpg.
+// Helpers stay on window.ytcap: cuts(), capture(), box(t, pred, region), sheetDataUrl(times).
+const NAME = 'my-video';
 (() => {
   const v = () => document.querySelector('video');
+  // seek and wait for 'seeked' (fires even when the page is hidden, unlike rAF/rVFC); the frame is
+  // drawable at once. No setTimeout on this path: hidden tabs clamp timers to ~1s, which turned a
+  // 1-minute scan into 10+ minutes.
   const seek = (t) => new Promise((res) => {
-    const el = v();
-    const done = () => { el.removeEventListener('seeked', done); setTimeout(res, 60); };
-    el.addEventListener('seeked', done); el.currentTime = t; setTimeout(res, 4000);
+    const el = v(); let done = false;
+    const fin = () => { if (done) return; done = true; el.removeEventListener('seeked', fin); res(); };
+    el.addEventListener('seeked', fin); el.currentTime = t; setTimeout(fin, 3000);
   });
   const prep = () => {
     v().pause(); v().muted = true;
     try { (document.querySelector('#shorts-player') || document.querySelector('.html5-video-player')).setPlaybackQualityRange('hd1080', 'hd1080'); } catch {}
   };
   const raw = (w, h) => { const c = new OffscreenCanvas(w, h); const g = c.getContext('2d', { willReadFrequently: true }); g.drawImage(v(), 0, 0, w, h); return g.getImageData(0, 0, w, h).data; };
-  // GW×GH grid of mean colours, hex-encoded (r,g,b per cell)
   const GW = 9, GH = 16;
   const grid = () => {
     const w = GW * 8, h = GH * 8, d = raw(w, h); let out = '';
@@ -38,38 +37,57 @@
     return out;
   };
   const ytcap = {
-    // Cut times = presentation time of the first frame of each new shot. Uses
-    // requestVideoFrameCallback's mediaTime (the frame actually shown), because seeks in YouTube's
-    // MSE player land a frame or two off the requested time.
-    async cuts(thr = 24) {
-      prep(); const el = v(); const out = []; let prev = null, pt = null;
-      const seekShown = (t) => new Promise((res) => { let done = false; el.requestVideoFrameCallback((n, m) => { done = true; res(m.mediaTime); }); el.currentTime = t; setTimeout(() => !done && res(null), 1500); });
-      for (let t = 0; t < el.duration - 0.02; t += 1 / 60) {
-        const mt = await seekShown(+t.toFixed(4)); if (mt === null || mt === pt) continue;
-        const d = raw(54, 96);
-        if (prev) { let s = 0; for (let i = 0; i < d.length; i += 4) s += Math.abs(d[i] - prev[i]) + Math.abs(d[i + 1] - prev[i + 1]) + Math.abs(d[i + 2] - prev[i + 2]); if (s / (54 * 96 * 3) > thr) out.push(+mt.toFixed(4)); }
-        prev = d; pt = mt;
+    // Scan at 1/60s. Steps that land on the same decoded frame show ~0 change and are skipped;
+    // source fps comes from the spacing of real frame changes. A cut is a change that is large in
+    // absolute terms or a strong local peak (catches soft jump cuts inside one setup).
+    async cuts() {
+      prep(); const el = v(); const pts = []; let prev = null;
+      for (let t = 0; t < el.duration - 0.01; t += 1 / 60) {
+        await seek(+t.toFixed(4)); const d = raw(54, 96);
+        if (prev) {
+          let s = 0; for (let i = 0; i < d.length; i += 4) s += Math.abs(d[i] - prev[i]) + Math.abs(d[i + 1] - prev[i + 1]) + Math.abs(d[i + 2] - prev[i + 2]);
+          const diff = s / (54 * 96 * 3); if (diff > 0.3) pts.push([+t.toFixed(4), diff]);
+        }
+        prev = d;
       }
-      return out;
+      const gaps = pts.slice(1).map((p, i) => p[0] - pts[i][0]).filter((g) => g > 0.01 && g < 0.1).sort((a, b) => a - b);
+      const fps = gaps.length ? Math.round(1 / gaps[Math.floor(gaps.length / 2)]) : 30;
+      const out = [];
+      pts.forEach(([t, d], i) => {
+        const nb = [...pts.slice(Math.max(0, i - 6), i), ...pts.slice(i + 1, i + 7)].map((p) => p[1]).sort((a, b) => a - b);
+        const med = nb.length ? nb[Math.floor(nb.length / 2)] : 0;
+        if (d > 24 || (d > 10 && d > 4 * med)) out.push(t);
+      });
+      // a cut seen at two consecutive steps (half-frame landing) counts once
+      const cuts = out.filter((t, i) => i === 0 || t - out[i - 1] > 0.05);
+      return { fps, cuts };
     },
     async capture(step = 0.25) {
-      prep();
-      const samples = [];
-      for (let t = 0.05; t < v().duration - 0.02; t += step) { await seek(+t.toFixed(3)); samples.push([+t.toFixed(3), grid()]); }
-      return JSON.stringify({ source: location.href.split('?')[0], title: document.title.replace(/ - YouTube$/, ''), duration: +v().duration.toFixed(3), size: [v().videoWidth, v().videoHeight], grid: [GW, GH], step, cuts: await this.cuts(), samples });
+      // two scans at once fight over the seek position and miss cuts: one at a time
+      if (window.__ytcapBusy) throw new Error('a capture is already running in this tab');
+      window.__ytcapBusy = true;
+      try { return await this._capture(step); } finally { window.__ytcapBusy = false; }
     },
-    async frames(times) {
-      this.close(); prep();
-      const o = document.createElement('div'); o.id = '__ytcap'; o.style.cssText = 'position:fixed;inset:0;z-index:2147483647;background:#111;display:flex;flex-wrap:wrap;gap:4px;align-content:flex-start';
-      document.body.appendChild(o);
-      const h = Math.min(innerHeight - 8, ((innerWidth - 4 * times.length) / times.length) * 16 / 9);
-      for (const t of times) {
-        await seek(t);
-        const c = document.createElement('canvas'); c.width = 360; c.height = 640; const g = c.getContext('2d'); g.drawImage(v(), 0, 0, 360, 640);
-        g.fillStyle = '#ff0'; g.font = 'bold 22px monospace'; g.fillText(`${t}s`, 8, 26);
-        c.style.width = `${(h * 9) / 16}px`; o.appendChild(c);
+    async _capture(step) {
+      prep(); const samples = [];
+      for (let t = 0.05; t < v().duration - 0.02; t += step) { await seek(+t.toFixed(3)); samples.push([+t.toFixed(3), grid()]); }
+      const { fps, cuts } = await this.cuts();
+      const bounds = [0, ...cuts, v().duration];
+      const mids = bounds.slice(1).map((b, i) => +((bounds[i] + b) / 2).toFixed(3));
+      const shots = await this.sheetDataUrl(mids);
+      const every = await this.sheetDataUrl(Array.from({ length: Math.floor(v().duration / 0.5) }, (_, i) => +(0.1 + i * 0.5).toFixed(2)), 180);
+      return JSON.stringify({ source: location.href.split('?')[0], title: document.title.replace(/ - YouTube$/, ''), duration: +v().duration.toFixed(3), size: [v().videoWidth, v().videoHeight], sourceFps: fps, grid: [GW, GH], step, cuts, shotMidpoints: mids, sheets: { shots, every }, samples });
+    },
+    // contact sheet (JPEG data URL) of frames at the given times, 4 per row, labelled
+    async sheetDataUrl(times, w = 270) {
+      const h = Math.round((w * 16) / 9), cols = Math.min(4, times.length), rows = Math.ceil(times.length / cols);
+      const c = new OffscreenCanvas(cols * w, rows * h); const g = c.getContext('2d');
+      for (const [i, t] of times.entries()) {
+        await seek(t); const x = (i % cols) * w, y = Math.floor(i / cols) * h;
+        g.drawImage(v(), x, y, w, h); g.fillStyle = 'rgba(0,0,0,.6)'; g.fillRect(x, y, 70, 20); g.fillStyle = '#ff0'; g.font = 'bold 14px monospace'; g.fillText(`${t}s`, x + 4, y + 15);
       }
-      return `${times.length} frames`;
+      const blob = await c.convertToBlob({ type: 'image/jpeg', quality: 0.8 });
+      return await new Promise((r) => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(blob); });
     },
     async box(t, pred, [x0, y0, x1, y1]) {
       prep(); await seek(t);
@@ -78,15 +96,13 @@
       for (let y = 0; y < y1 - y0; y++) for (let x = 0; x < x1 - x0; x++) { const i = (y * (x1 - x0) + x) * 4; if (pred([d[i], d[i + 1], d[i + 2]])) { a = Math.min(a, x); b = Math.min(b, y); cc = Math.max(cc, x); dd = Math.max(dd, y); } }
       return cc < 0 ? null : [a + x0, b + y0, cc + x0, dd + y0];
     },
-    close() { document.getElementById('__ytcap')?.remove(); },
     save(file, json) {
       location.href = `http://localhost:5179/save.html#file=${encodeURIComponent(file)}&back=${encodeURIComponent(location.href)}&data=${encodeURIComponent(json)}`;
     },
-    captureAndSave(file) {
-      this.capture().then((json) => this.save(file, json)).catch((e) => (window.__ytcapError = e.message));
-      return `capturing; ${file} will appear on disk when done`;
-    },
   };
   window.ytcap = ytcap;
-  return 'ytcap ready';
+  if (!NAME) return 'ytcap ready (NAME not set: nothing captured)';
+  window.__ytcapError = null;
+  ytcap.capture().then((json) => ytcap.save(`video/videos/${NAME}/reference.json`, json)).catch((e) => (window.__ytcapError = e.message));
+  return `capturing; video/videos/${NAME}/reference.json will appear on disk in ~1–2 min (then: node refsheet.mjs videos/${NAME})`;
 })();

@@ -85,12 +85,18 @@ export async function build(dir, opts = {}) {
     if (!fs.existsSync(clip)) throw new Error(`missing clip for ${shot.id}: ${path.relative(process.cwd(), clip)} (run sora.mjs)`);
     inputs.push('-i', clip);
     const dur = shot.end - shot.start, speed = shot.speed ?? 1, from = shot.from ?? 0;
-    // grade: per-channel linear colour match {r:[gain,offset], g:…, b:…} (compare.mjs --apply writes it)
-    const g = shot.grade, lut = g ? `,lutrgb=r='clip(val*${g.r[0]}+${g.r[1]},0,255)':g='clip(val*${g.g[0]}+${g.g[1]},0,255)':b='clip(val*${g.b[0]}+${g.b[1]},0,255)'` : '';
-    // exact frame count per slot (from the slot's start/end frame indices), so cuts never drift
+    // grade: per-channel linear colour match {r:[gain,offset], g:…, b:…, clip} (compare.mjs --apply
+    // writes it); a grade fitted on another take is skipped, re-run --apply
+    let g = shot.grade;
+    if (g?.clip && g.clip !== (shot.clip || `clips/${shot.id}.mp4`)) { console.warn(`warning: ${shot.id}: grade was fitted on ${g.clip}, not ${shot.clip}; ignored (run compare.mjs --apply)`); g = null; }
+    const lut = g ? `,lutrgb=r='clip(val*${g.r[0]}+${g.r[1]},0,255)':g='clip(val*${g.g[0]}+${g.g[1]},0,255)':b='clip(val*${g.b[0]}+${g.b[1]},0,255)'` : '';
+    // exact frame count per slot (from the slot's start/end frame indices), so cuts never drift.
+    // "reverse": true plays the used span backwards (a keyframe is always the clip's FIRST frame, so
+    // for "X enters the frame" shots, generate X leaving and reverse it). "filter": extra ffmpeg filters.
     const nf = Math.round(shot.end * fps) - Math.round(shot.start * fps);
-    vf.push(`[${i}:v]trim=start=${from}:duration=${(dur * speed + 1).toFixed(3)},setpts=(PTS-STARTPTS)/${speed},fps=${fps},trim=end_frame=${nf},setpts=PTS-STARTPTS,${frameFilter(shot, W, H, dur)},setsar=1${lut}${shot.filter ? ',' + shot.filter : ''}[v${i}]`);
-    if (soraAudio) af.push(`[${i}:a]atrim=start=${from}:duration=${(dur * speed).toFixed(3)},asetpts=PTS-STARTPTS,${speed !== 1 ? `atempo=${speed},` : ''}aresample=48000,apad,atrim=duration=${dur.toFixed(3)}[a${i}]`);
+    const rev = shot.reverse ? ',reverse' : '';
+    vf.push(`[${i}:v]trim=start=${from}:duration=${(dur * speed + 1).toFixed(3)},setpts=(PTS-STARTPTS)/${speed},fps=${fps},trim=end_frame=${nf},setpts=PTS-STARTPTS${rev},${frameFilter(shot, W, H, dur)},setsar=1${lut}${shot.filter ? ',' + shot.filter : ''}[v${i}]`);
+    if (soraAudio) af.push(`[${i}:a]atrim=start=${from}:duration=${(dur * speed).toFixed(3)},asetpts=PTS-STARTPTS,${speed !== 1 ? `atempo=${speed},` : ''}aresample=48000,apad,atrim=duration=${dur.toFixed(3)}${shot.reverse ? ',areverse' : ''}[a${i}]`);
     labels.push(soraAudio ? `[v${i}][a${i}]` : `[v${i}]`);
   });
   const n = spec.shots.length;

@@ -197,8 +197,10 @@ S.matchFont = async (i, box, text, fonts, pred = (p) => Math.max(...p) < 110) =>
   const ref = S.slides[i - 1].ref, [x0, y0, x1, y1] = box, w = x1 - x0 + 1, h = y1 - y0 + 1, pad = 6;
   const fam = (f) => f.split(':')[0], wt = (f) => f.split(':')[1] || '400';
   const fams = [...new Set(fonts.map(fam))];
-  for (const u of ['https://fonts.googleapis.com/css2?' + fams.map((f) => 'family=' + f.replace(/ /g, '+') + ':wght@100..900').join('&') + '&display=block',
-                   'https://fonts.googleapis.com/css2?' + fams.map((f) => 'family=' + f.replace(/ /g, '+')).join('&') + '&display=block']) {
+  // one stylesheet per family+weight: a range like wght@100..900 is rejected for families with a
+  // narrower range, and the 400-only fallback then synthesises every weight (fake bold)
+  const css = (f, w) => `https://fonts.googleapis.com/css2?family=${f.replace(/ /g, '+')}${w ? `:wght@${w}` : ''}&display=block`;
+  for (const u of [...new Set([...fonts.map((f) => css(fam(f), f.includes(':') ? wt(f) : null)), ...fams.map((f) => css(f))])]) {
     if (!document.querySelector(`link[href="${u}"]`)) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = u; document.head.appendChild(l); }
   }
   await new Promise((r) => setTimeout(r, 1500));
