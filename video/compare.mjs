@@ -77,17 +77,36 @@ const comp = (A, B, gg = gradeArr()) => {
 };
 const zoomOf = (s) => (Array.isArray(s.zoom) ? s.zoom[0] : s.zoom ?? 1);
 const panOf = (s) => (s.pan ? (Array.isArray(s.pan[0]) ? s.pan[0] : s.pan) : [0, 0]);
+// cuts inside the span of a clip that a shot uses (clip seconds), found like the capture finds them
+function innerCuts(s, clip) {
+  const speed = s.speed ?? 1, from = s.from ?? 0, len = (s.end - s.start) * speed, w = 54, h = 96, fsz = w * h * 3;
+  const r = ff(['-ss', from.toFixed(3), '-t', len.toFixed(3), '-i', path.join(dir, clip), '-vf', `fps=30,scale=${w}:${h}:flags=area`, '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'], 1 << 26);
+  const n = Math.floor(r.stdout.length / fsz), d = [0];
+  for (let k = 1; k < n; k++) { let t = 0; for (let i = 0; i < fsz; i++) t += Math.abs(r.stdout[k * fsz + i] - r.stdout[(k - 1) * fsz + i]); d.push(t / fsz); }
+  const out = [];
+  d.forEach((v, k) => {
+    const nb = [...d.slice(Math.max(1, k - 6), k), ...d.slice(k + 1, k + 7)].sort((a, b) => a - b), med = nb[Math.floor(nb.length / 2)] ?? 0;
+    if (k && ((v > 24 && v > 2 * med) || (v > 10 && v > 4 * med))) out.push(+(from + k / 30).toFixed(2));
+  });
+  return out;
+}
 const tuned = spec.shots.filter((s) => (!only || only.includes(s.id)) && samplesOf(s).length);
 
 if (argv.includes('--pick')) {
   for (const s of tuned) {
+    // "pick": "manual" keeps a take chosen by eye (the colour grid can prefer a take with the wrong
+    // content: smoke instead of powder, cereal instead of chocolate)
+    if (s.pick === 'manual') { console.log(`pick ${s.id}: manual, kept ${s.clip}`); continue; }
     const takes = fs.readdirSync(path.join(dir, 'clips')).filter((f) => f === `${s.id}.mp4` || (f.startsWith(`${s.id}.v`) && f.endsWith('.mp4')));
     if (!takes.length) continue;
     const scored = takes.map((f) => {
       const fr = clipFrames(s, `clips/${f}`), A = fr.map((x) => x.ref), B = fr.map((x) => gridOf(x.px));
-      return [fr.length ? comp(A, B, fitGrade(A, B)) : 0, f];
+      // Sora sometimes edits a clip (wide → close → wide): a cut inside the used span is a cut the
+      // reference doesn't have, so such takes lose 10 points
+      const cuts = innerCuts(s, `clips/${f}`);
+      return [(fr.length ? comp(A, B, fitGrade(A, B)) : 0) - (cuts.length ? 10 : 0), f, cuts];
     }).sort((x, y) => y[0] - x[0]);
-    console.log(`pick ${s.id}: ${scored.map(([v, f]) => `${f} ${v.toFixed(1)}`).join('  ')}`);
+    console.log(`pick ${s.id}: ${scored.map(([v, f, c]) => `${f} ${v.toFixed(1)}${c.length ? ` (inner cut at ${c.join(', ')}s, -10)` : ''}`).join('  ')}`);
     s.clip = `clips/${scored[0][1]}`;
   }
   save();
@@ -171,13 +190,17 @@ for (const s of spec.shots) {
   comps.push(sim / n);
   rows.push(`${s.id.padEnd(4)} ${s.start.toFixed(2)}-${s.end.toFixed(2)}  comp ${(sim / n).toFixed(1)}  brightness ${dl / n >= 0 ? '+' : ''}${(dl / n).toFixed(0)}  warmth ${dw / n >= 0 ? '+' : ''}${(dw / n).toFixed(0)}`);
 }
-// cuts in the build: a frame change that is large, or a strong local peak (soft jump cuts), as yt-capture
+// cuts in the build: a frame change that is large AND stands out from its neighbours (a powder
+// avalanche or splash changes every frame a lot but is no cut), or a strong local peak (soft jump cuts)
 const diffs = [0];
 for (let n = 1; n < nframes; n++) { let d = 0; const a = (n - 1) * fsz, b = n * fsz; for (let i = 0; i < fsz; i++) d += Math.abs(buf[a + i] - buf[b + i]); diffs.push(d / fsz); }
 const cuts = [];
 diffs.forEach((d, n) => {
-  const nb = [...diffs.slice(Math.max(1, n - 6), n), ...diffs.slice(n + 1, n + 7)].sort((a, b) => a - b), med = nb[Math.floor(nb.length / 2)] ?? 0;
-  if (n && (d > 24 || (d > 10 && d > 4 * med))) cuts.push(+(n / fps).toFixed(3));
+  // neighbours that are real frame changes only: a 60fps build of 30fps clips repeats every frame,
+  // and the zero diffs would make any busy motion look like a peak
+  const moving = (x) => x > 0.3;
+  const nb = [...diffs.slice(1, n).filter(moving).slice(-6), ...diffs.slice(n + 1).filter(moving).slice(0, 6)].sort((a, b) => a - b), med = nb[Math.floor(nb.length / 2)] ?? 0;
+  if (n && ((d > 24 && d > 2 * med) || (d > 10 && d > 4 * med))) cuts.push(+(n / fps).toFixed(3));
 });
 console.log(rows.join('\n'));
 console.log(`mean comp ${mean(comps).toFixed(1)}  (frames ${nframes}, ${(nframes / fps).toFixed(2)}s vs ref ${ref.duration}s)`);

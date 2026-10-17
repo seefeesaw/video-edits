@@ -45,6 +45,8 @@ element and auto-fit (`fit: [x0,y0,x1,y1]` = ink box measured on the reference).
   "size": [1080, 1920], "fps": 30, "duration": 10.681,   // fps: 60 when reference.json sourceFps is 60
   "soraSize": "720x1280",
   "style": "shared description appended to every shot prompt (setting, props, lighting, grade)",
+  "sets": { "A": "character + location A, word for word", "B": "…" },   // a shot's "set": "A" appends it
+  "captions": { "caption": [ /* slideshow elements */ ] },            // reused by overlays as "@caption",
   "product": {                       // a real product that must look exactly like its photos
     "name": "Meltie Mug Mini Fondue Mug, red",
     "refs": ["assets/product/front.png", "assets/product/in-use.jpg"],
@@ -74,7 +76,8 @@ element and auto-fit (`fit: [x0,y0,x1,y1]` = ink box measured on the reference).
                              // alone, so re-point it by hand if --pick changes the source shot
     }
   ],
-  "overlays": [ { "from": 0, "to": 10.681, "elements": [ /* slideshow elements */ ] } ],
+  "overlays": [ { "from": 0, "to": 10.681, "elements": [ /* slideshow elements */ ] },
+                { "from": 12.3, "to": 14.9, "elements": "@caption" } ],
   "fonts": ["TikTok Sans:wght@400;500;600"],
   "audio": { "sora": 1, "music": "assets/music.mp3", "musicVolume": 1, "musicStart": 0 }
 }

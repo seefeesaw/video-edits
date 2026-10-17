@@ -18,6 +18,14 @@ import path from 'node:path';
 import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
+// network blips ("fetch failed") are retried instead of ending a long generation run
+const fetch = async (url, opts) => {
+  for (let attempt = 0; ; attempt++) {
+    try { return await globalThis.fetch(url, opts); }
+    catch (e) { if (attempt >= 5) throw e; console.log(`  ${e.message}; retrying in 15s`); await new Promise((r) => setTimeout(r, 15000)); }
+  }
+};
+
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'foundry.json'), 'utf8'));
 const ENDPOINT = (process.env.AZURE_FOUNDRY_VIDEO_ENDPOINT || cfg.endpoint).replace(/\/+$/, '');
@@ -37,7 +45,9 @@ export const soraSecondsFor = (dur) => SORA_SECONDS.find((s) => s >= dur) ?? 12;
 async function create(shot, spec, dir) {
   const fd = new FormData();
   fd.set('model', DEPLOYMENT);
-  fd.set('prompt', [shot.prompt, spec.style].filter(Boolean).join('\n\n'));
+  // "sets": named recurring characters + locations (e.g. the two sides of a contrast video); a shot's
+  // "set": "A" adds that exact description, so every shot of a character uses the same words
+  fd.set('prompt', [shot.prompt, shot.set && spec.sets?.[shot.set], spec.style].filter(Boolean).join('\n\n'));
   fd.set('size', spec.soraSize || '720x1280');
   fd.set('seconds', String(shot.seconds ?? soraSecondsFor(shot.end - shot.start + (shot.from ?? 0))));
   if (shot.keyframe) {

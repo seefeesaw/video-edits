@@ -30,11 +30,16 @@ async function renderOverlays(spec, dir, outDir, W, H) {
     const page = await browser.newPage();
     await page.setViewport({ width: W, height: H, deviceScaleFactor: 1 });
     for (const [i, g] of groups.entries()) {
-      const html = buildSlideHtml(post, { elements: g.elements }, ctx).replace('<body>', '<body style="background:transparent">');
+      // "elements": "@name" reuses spec.captions[name] (a caption that recurs in several time windows)
+      const elements = typeof g.elements === 'string' ? spec.captions?.[g.elements.replace(/^@/, '')] : g.elements;
+      if (!elements) throw new Error(`overlay ${i}: unknown caption ${g.elements}`);
+      const html = buildSlideHtml(post, { elements }, ctx).replace('<body>', '<body style="background:transparent">');
       const htmlPath = path.join(outDir, `__overlay${i}.html`);
       fs.writeFileSync(htmlPath, html);
       await page.goto(pathToFileURL(htmlPath).href, { waitUntil: 'networkidle0' });
-      await page.evaluate(() => document.fonts.ready);
+      // load the caption fonts explicitly: fonts.ready can resolve before a web font is even requested,
+      // and the first overlay then fits and renders in a serif fallback
+      await page.evaluate(async (fams) => { await Promise.all(fams.map((f) => document.fonts.load(`500 40px "${f}"`).catch(() => null))); await document.fonts.ready; await window.__tiktokTextReady; }, (spec.fonts || []).map((f) => f.split(':')[0]));
       const fits = await fitAll(page, W, H, (m) => warnings.push(`overlay ${i}: ${m}`));
       const file = path.join(outDir, `overlay${i}.png`);
       fs.writeFileSync(file, await page.screenshot({ clip: { x: 0, y: 0, width: W, height: H }, omitBackground: true }));

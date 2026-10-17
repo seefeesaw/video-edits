@@ -35,7 +35,11 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    framing distance) — per-shot items (a board of snacks, a torch, a hand) go in that shot's prompts,
    or they leak into every keyframe. Overlays with `fit` boxes. `takes: 2`. Never recreate
    copyrighted footage on screens, songs, or brand logos/packaging: use generic stand-ins and say so
-   in `notes`.
+   in `notes`. **People on camera** (faces are the subject, e.g. a creator talking or reacting): Sora
+   rejects input images with faces, so those shots are text-to-video with no `keyframe`. Describe
+   each recurring person + location once in `sets` (A, B…) and give every shot `"set"`, so the words
+   never drift between shots; recreate them as new generic people, never the original creators. A
+   caption that recurs in several windows: define it once in `captions` and use `"elements": "@name"`.
 5. **Product**: if the video features a real product, it must be that exact product. Download its
    photos from the brand's store page (Shopify: `/products/<handle>.json`; each image's `alt` or
    `variant_ids` tells which colour variant it shows) into `assets/product/`, set `product` (refs +
