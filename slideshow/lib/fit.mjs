@@ -75,6 +75,8 @@ export async function fitAll(page, W, H, log = () => {}) {
       }, i, x0 - m[0], y0 - m[1]);
       m = await inkBox(page, i, t.box, W, H);
       if (!m) throw new Error('lost');
+      // most targets converge in one pass; skip the second when already within 1px
+      if (Math.max(...m.map((v, k) => Math.abs(v - t.box[k]))) <= 1) break;
     }
     } catch {
       // the target left its box (e.g. clipped by a frame); restore and report instead of failing

@@ -22,7 +22,8 @@
     "Open Sans:wght@300;400;500;600;700;800",
     "Inter:wght@400;500;600;700;800;900",
     "TikTok Sans:wght@500;600;700",
-    "Fredoka:wght@600;700"
+    "Fredoka:wght@600;700",
+    "Figtree:wght@400;500;600;700;800"
   ],
   "css": [
     "@shared/skolify/app.css",
@@ -146,7 +147,7 @@
             392
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -231,7 +232,7 @@
             554
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -250,7 +251,7 @@
             624
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -331,7 +332,7 @@
             471
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -350,7 +351,7 @@
             506
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -369,7 +370,7 @@
             654
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -388,7 +389,7 @@
             733
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -469,7 +470,7 @@
             530
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -488,7 +489,7 @@
             589
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -542,7 +543,7 @@
             485
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -561,7 +562,7 @@
             545
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -615,7 +616,7 @@
             712
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -634,7 +635,7 @@
             779
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -653,7 +654,7 @@
             837
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -672,7 +673,7 @@
             913
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -691,7 +692,7 @@
             1124
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -710,7 +711,7 @@
             1176
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -729,7 +730,7 @@
             1226
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 700,
             "size": 40,
             "color": "#000",
@@ -748,7 +749,7 @@
             1564
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 400,
             "size": 40,
             "color": "#222",
@@ -767,7 +768,7 @@
             1601
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 400,
             "size": 40,
             "color": "#222",
@@ -786,7 +787,7 @@
             1638
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 400,
             "size": 40,
             "color": "#222",
@@ -805,7 +806,7 @@
             1669
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 400,
             "size": 40,
             "color": "#222",
@@ -824,7 +825,7 @@
             1711
           ],
           "font": {
-            "family": "Open Sans",
+            "family": "Figtree",
             "weight": 400,
             "size": 40,
             "color": "#222",

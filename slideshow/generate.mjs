@@ -5,6 +5,7 @@
 //   node generate.mjs posts/<name>            generate every missing asset in post.json "generate"
 //   node generate.mjs posts/<name> --force    regenerate even if the file exists
 //   node generate.mjs posts/<name> --only hook-photo
+//   node generate.mjs posts/<name> --more --only hook-photo   add takes as the next free .vN files
 //
 // post.json:
 //   "generate": [{ "id": "hook-photo", "out": "assets/hook-photo.png", "prompt": "…",
@@ -43,10 +44,10 @@ async function main() {
   const argv = process.argv.slice(2);
   const oi = argv.indexOf('--only');
   const only = oi >= 0 ? argv[oi + 1].split(',') : null;
-  const force = argv.includes('--force');
+  const force = argv.includes('--force'), more = argv.includes('--more');
   const dir = path.resolve(argv.find((a, i) => !a.startsWith('--') && (oi < 0 || i !== oi + 1)) || '');
   const post = JSON.parse(fs.readFileSync(path.join(dir, 'post.json'), 'utf8'));
-  const jobs = (post.generate || []).filter((j) => (!only || only.includes(j.id)) && (force || !fs.existsSync(path.join(dir, j.out))));
+  const jobs = (post.generate || []).filter((j) => (!only || only.includes(j.id)) && (force || more || !fs.existsSync(path.join(dir, j.out))));
   if (!jobs.length) return console.log('nothing to generate');
   const bearer = token();
   for (const job of jobs) {
@@ -54,7 +55,9 @@ async function main() {
     const imgs = await generate(job, bearer);
     imgs.forEach((buf, i) => {
       // extra variants are kept next to the chosen one so a better take can be swapped in
-      const out = path.join(dir, i === 0 ? job.out : job.out.replace(/(\.\w+)$/, `.v${i + 1}$1`));
+      // --more keeps existing takes and writes the next free .vN; otherwise take 1 is `out`
+      let out = path.join(dir, i === 0 ? job.out : job.out.replace(/(\.\w+)$/, `.v${i + 1}$1`));
+      if (more) { let k = 2; out = path.join(dir, job.out); while (fs.existsSync(out)) out = path.join(dir, job.out.replace(/(\.\w+)$/, `.v${k++}$1`)); }
       fs.mkdirSync(path.dirname(out), { recursive: true });
       fs.writeFileSync(out, buf);
       console.log(`generated ${path.relative(process.cwd(), out)} (${((Date.now() - t0) / 1000).toFixed(0)}s)`);

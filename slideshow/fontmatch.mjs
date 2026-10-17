@@ -6,6 +6,8 @@
 // Each sample is [text, inkWidth, inkHeight] measured on the reference (e.g. with review.layout).
 // Score = mean |log(fontAspect / refAspect)| over samples (0 = perfect). Lower is better; the
 // winner still needs auto-fit (size + letter-spacing), this only picks the family/weight.
+// Aspect ratio cannot tell similar families apart: confirm the top few with review.matchFont()
+// on the review page, which compares actual glyph shapes against the reference pixels.
 import puppeteer from 'puppeteer-core';
 import fs from 'node:fs';
 
@@ -40,7 +42,10 @@ const res = await p.evaluate((fonts, samples) => {
   };
   return fonts.map((f) => {
     const [n, w = '400'] = f.split(':');
-    if (!document.fonts.check(`${w} 20px '${n}'`)) return [9, f + ' (not loaded)'];
+    // document.fonts.check() is true for families that were never registered, so look for a
+    // FontFace of this family that actually loaded
+    const loaded = [...document.fonts].some((ff) => ff.family.replace(/["']/g, '') === n && ff.status === 'loaded');
+    if (!loaded) return [9, `9.000  ${f.padEnd(26)} (not on Google Fonts / not loaded)`];
     const r = samples.map(([t, tw, th]) => { const [iw, ih] = ink(n, w, t); return (iw / ih) / (tw / th); });
     const err = r.reduce((s, v) => s + Math.abs(Math.log(v)), 0) / r.length;
     return [err, `${err.toFixed(3)}  ${f.padEnd(26)} ${r.map((v) => v.toFixed(2)).join(' ')}`];

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-// Scaffolds posts/<name>/ from a capture (output of tools/tiktok-capture.js):
-//   node new-post.mjs <name> capture.json
+// Scaffolds posts/<name>/ from a capture (tools/tiktok-capture.js saves it to
+// posts/<name>/capture.json via the review server; or pass any capture file):
+//   node new-post.mjs <name> [capture.json]
 // Creates post.json with references + one placeholder slide per reference, screens/screens.css,
 // and empty assets/. Existing posts are never overwritten.
 import fs from 'node:fs';
@@ -8,9 +9,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
-const [name, capFile] = process.argv.slice(2);
-if (!name || !capFile) throw new Error('usage: node new-post.mjs <name> <capture.json>');
+const [name, capArg] = process.argv.slice(2);
+if (!name) throw new Error('usage: node new-post.mjs <name> [capture.json]');
 const dir = path.join(ROOT, 'posts', name);
+const capFile = capArg || path.join(dir, 'capture.json');
+if (!fs.existsSync(capFile)) throw new Error(`no capture at ${capFile}: run tools/tiktok-capture.js on the post first`);
 if (fs.existsSync(path.join(dir, 'post.json'))) throw new Error(`${dir} already has a post.json`);
 const cap = JSON.parse(fs.readFileSync(capFile, 'utf8'));
 fs.mkdirSync(path.join(dir, 'screens'), { recursive: true });

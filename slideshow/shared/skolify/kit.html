@@ -20,6 +20,22 @@
     // floating black chat bubble with the logo
     chat: (cx, cy, r) => `<div class="sk-chat" style="left:${cx - r}px;top:${cy - r}px;width:${r * 2}px;height:${r * 2}px">${sk.logo(r * 0.95, r * 0.76, '#fff', '#111')}</div>`,
     // text positioned by its reference ink box (auto-fit does the sizing)
-    t: (box, html, style = '', label) => `<div class="ska" data-fit="${box.join(',')}"${label ? ` data-fit-label="${label}"` : ''} style="left:${box[0]}px;top:${box[1]}px;white-space:nowrap;line-height:1;${style}">${html}</div>`,
+    // mode: 'text' (default) fits size+spacing+position; 'move' only positions (use for text clipped by
+    // a phone frame, whose measured box is clipped too — give it an explicit font size); null = no fit
+    t: (box, html, style = '', label, mode = 'text') => `<div class="ska"${mode ? ` data-fit="${box.join(',')}"${mode !== 'text' ? ` data-fit-mode="${mode}"` : ''}` : ''}${label ? ` data-fit-label="${label}"` : ''} style="left:${box[0]}px;top:${box[1]}px;white-space:nowrap;line-height:1;${style}">${html}</div>`,
+    // form controls (slide coordinates, box = outer rect [x0,y0,x1,y1])
+    box: (b, style = '') => `<div class="ska" style="left:${b[0]}px;top:${b[1]}px;width:${b[2] - b[0]}px;height:${b[3] - b[1]}px;${style}"></div>`,
+    input: (b, radius = 9) => sk.box(b, `background:#fff;border:1.5px solid #dcdfe3;border-radius:${radius}px`),
+    select: (b, radius = 9) => sk.input(b, radius) + `<svg class="ska" style="left:${b[2] - 26}px;top:${(b[1] + b[3]) / 2 - 8}px" width="12" height="16" viewBox="0 0 12 16"><path d="M2.5 6 L6 2.5 L9.5 6 M2.5 10 L6 13.5 L9.5 10" stroke="#222" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    pill: (b, bg = '#eef1f5') => sk.box(b, `background:${bg};border-radius:${(b[3] - b[1]) / 2}px`),
+    card: (b, radius = 14, style = '') => sk.box(b, `background:#fff;border:1.5px solid #e6e8eb;border-radius:${radius}px;box-shadow:0 3px 10px rgba(0,0,0,.05);${style}`),
+    badge: (b, bg = '#1265e0', radius = 7) => sk.box(b, `background:${bg};border-radius:${radius}px`),
+    // round arrow/nav button: dir 'left'|'right'; dark=true for the filled black style
+    roundBtn: (cx, cy, r, dir = 'right', dark = true) => `<div class="ska" style="left:${cx - r}px;top:${cy - r}px;width:${2 * r}px;height:${2 * r}px;border-radius:50%;background:${dark ? '#151515' : '#c9c9c9'};display:flex;align-items:center;justify-content:center"><svg width="${r * 0.6}" height="${r * 0.6}" viewBox="0 0 14 14"><path d="${dir === 'left' ? 'M9 2 L4 7 L9 12' : 'M5 2 L10 7 L5 12'}" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`,
+    closeX: (cx, cy, size = 12, color = '#8a8a8a') => `<svg class="ska" style="left:${cx - size / 2}px;top:${cy - size / 2}px" width="${size}" height="${size}" viewBox="0 0 12 12"><path d="M1.5 1.5 L10.5 10.5 M10.5 1.5 L1.5 10.5" stroke="${color}" stroke-width="2" stroke-linecap="round"/></svg>`,
+    tick: (cx, cy, r, bg = '#1b78e6') => `<div class="ska" style="left:${cx - r}px;top:${cy - r}px;width:${2 * r}px;height:${2 * r}px;border-radius:50%;background:${bg};display:flex;align-items:center;justify-content:center"><svg width="${r * 1.1}" height="${r * 1.1}" viewBox="0 0 30 30"><path d="M8 15.5 L13 20.5 L22 10.5" stroke="#fff" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`,
+    // full-slide overlay wrapper for things that sit on top of / outside the phone frame (floating
+    // cards, carousel arrows, chat bubble): use as a slide-level {"type":"html"} element at 0,0 1080x1920
+    clip: (rect, radius, inner) => `<div class="ska" style="left:0;top:0;width:1080px;height:1920px;clip-path:inset(${rect[1]}px ${1080 - rect[2]}px ${1920 - rect[3]}px ${rect[0]}px round ${radius}px)">${inner}</div>`,
   };
 </script>

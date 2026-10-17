@@ -154,11 +154,80 @@ S.pixel = (i, x, y) => { const s = S.slides[i - 1], k = (y * s.mine.width + x) *
 S.reload = () => open(document.getElementById('post').value);
 // review.show(slide, [x,y,w,h]?, zoom?, mode?) – single slide, cropped, for screenshots.
 // mode 'ref' shows the reference alone (reading content), 'side'/'onion'/'diff' compare.
-S.show = (i, crop = null, zoom = 0.3, mode = 'side') => {
+// grid: labelled lines every N slide px drawn on the canvases, so coordinates can be read straight
+// off a screenshot (no scale arithmetic). Zoom is clamped so the crop fits the viewport width.
+S.show = (i, crop = null, zoom = 0.3, mode = 'side', grid = 0) => {
+  const W0 = S.slides[i - 1].mine.width;
+  const cw = crop ? crop[2] : W0, panes = mode === 'side' ? 2 : 1;
+  zoom = Math.min(zoom, (innerWidth - 24) / (cw * panes));
   S.only = i; S.crop = crop; S.zoom = zoom; S.mode = mode === 'ref' ? 'side' : mode; draw();
   if (mode === 'ref') document.querySelectorAll('.pair canvas:nth-child(2)').forEach((c) => c.remove());
   document.querySelector('header').style.display = 'none'; document.querySelectorAll('.slide h3').forEach((h) => (h.style.display = 'none'));
-  scrollTo(0, 0); return { viewport: [innerWidth, innerHeight], scale: `1 slide px = ${zoom} css px` };
+  if (grid) document.querySelectorAll('.pair canvas').forEach((c) => {
+    const g = c.getContext('2d'), [x0, y0] = crop || [0, 0];
+    g.font = 'bold 11px monospace'; g.lineWidth = 1;
+    for (let X = Math.ceil(x0 / grid) * grid; (X - x0) * zoom < c.width; X += grid) { const sx = (X - x0) * zoom + 0.5; g.strokeStyle = X % (grid * 5) ? 'rgba(0,200,255,.45)' : 'rgba(255,0,0,.85)'; g.beginPath(); g.moveTo(sx, 0); g.lineTo(sx, c.height); g.stroke(); if (X % (grid * 5) === 0) { g.fillStyle = '#fff'; g.fillRect(sx + 1, 0, 30, 12); g.fillStyle = '#d00'; g.fillText(X, sx + 2, 10); } }
+    for (let Y = Math.ceil(y0 / grid) * grid; (Y - y0) * zoom < c.height; Y += grid) { const sy = (Y - y0) * zoom + 0.5; g.strokeStyle = Y % (grid * 5) ? 'rgba(0,200,255,.45)' : 'rgba(255,0,0,.85)'; g.beginPath(); g.moveTo(0, sy); g.lineTo(c.width, sy); g.stroke(); if (Y % (grid * 5) === 0) { g.fillStyle = '#fff'; g.fillRect(0, sy + 1, 34, 12); g.fillStyle = '#d00'; g.fillText(Y, 2, sy + 11); } }
+  });
+  scrollTo(0, 0); return { viewport: [innerWidth, innerHeight], zoom, note: grid ? `grid every ${grid}px (red, labelled, every ${grid * 5})` : 'pass grid (e.g. 20) to label slide coordinates' };
+};
+// review.scan(slide, 'row'|'col', at, [from, to], pred?, src?) -> runs of matching pixels along a
+// line: frame borders, card edges. Default predicate: dark (<70). For faint borders use e.g.
+// p => Math.max(...p) < 236. Returns [[start, end], …] in slide px.
+S.scan = (i, axis, at, [a0, a1], pred = (p) => Math.max(...p) < 70, src = 'ref') => {
+  const img = src === 'mine' ? S.slides[i - 1].mine : S.slides[i - 1].ref, out = []; let st = -1;
+  for (let k = a0; k <= a1; k++) {
+    const x = axis === 'row' ? k : at, y = axis === 'row' ? at : k, j = (y * img.width + x) * 4;
+    const v = k < a1 && pred([img.data[j], img.data[j + 1], img.data[j + 2]]);
+    if (v && st < 0) st = k; if (!v && st >= 0) { out.push([st, k - 1]); st = -1; }
+  }
+  return out;
+};
+// review.matchFont(slide, [x0,y0,x1,y1], text, ['Coiny', 'Sniglet:800', …], pred?) – compares glyph
+// SHAPES: each candidate is drawn into the measured ink box (height and width fitted like auto-fit)
+// and scored by IoU with the reference ink mask (higher is better). Use it to confirm
+// fontmatch.mjs's aspect-ratio shortlist. pred selects ink pixels (default: dark).
+S.matchFont = async (i, box, text, fonts, pred = (p) => Math.max(...p) < 110) => {
+  const ref = S.slides[i - 1].ref, [x0, y0, x1, y1] = box, w = x1 - x0 + 1, h = y1 - y0 + 1, pad = 6;
+  const fam = (f) => f.split(':')[0], wt = (f) => f.split(':')[1] || '400';
+  const fams = [...new Set(fonts.map(fam))];
+  for (const u of ['https://fonts.googleapis.com/css2?' + fams.map((f) => 'family=' + f.replace(/ /g, '+') + ':wght@100..900').join('&') + '&display=block',
+                   'https://fonts.googleapis.com/css2?' + fams.map((f) => 'family=' + f.replace(/ /g, '+')).join('&') + '&display=block']) {
+    if (!document.querySelector(`link[href="${u}"]`)) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = u; document.head.appendChild(l); }
+  }
+  await new Promise((r) => setTimeout(r, 1500));
+  await Promise.all(fonts.map((f) => document.fonts.load(`${wt(f)} 40px '${fam(f)}'`).catch(() => null)));
+  const W = w + pad * 2, H = h + pad * 2;
+  const refMask = new Uint8Array(W * H);
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const X = x0 - pad + x, Y = y0 - pad + y; if (X < 0 || Y < 0 || X >= ref.width || Y >= ref.height) continue;
+    const k = (Y * ref.width + X) * 4; refMask[y * W + x] = pred([ref.data[k], ref.data[k + 1], ref.data[k + 2]]) ? 1 : 0;
+  }
+  const c = new OffscreenCanvas(Math.max(600, W * 3), Math.max(300, H * 3)), g = c.getContext('2d', { willReadFrequently: true });
+  const inkOf = (font, size, ls) => {
+    g.clearRect(0, 0, c.width, c.height); g.font = font.replace('SIZE', size + 'px'); g.letterSpacing = ls + 'px'; g.fillStyle = '#000';
+    g.fillText(text, 20, c.height * 0.7);
+    const d = g.getImageData(0, 0, c.width, c.height).data; let a = 1e9, b = 1e9, cc = -1, dd = -1;
+    for (let y = 0; y < c.height; y++) for (let x = 0; x < c.width; x++) if (d[(y * c.width + x) * 4 + 3] > 110) { if (x < a) a = x; if (y < b) b = y; if (x > cc) cc = x; if (y > dd) dd = y; }
+    return { d, box: [a, b, cc, dd] };
+  };
+  const rows = [];
+  for (const f of fonts) {
+    const loaded = [...document.fonts].some((ff) => ff.family.replace(/["']/g, '') === fam(f) && ff.status === 'loaded');
+    if (!loaded) { rows.push([-1, `${f} (not on Google Fonts / not loaded)`]); continue; }
+    const font = `${wt(f)} SIZE '${fam(f)}'`;
+    let size = Math.min(200, h * 1.4), ls = 0, r = inkOf(font, size, ls);
+    size *= h / (r.box[3] - r.box[1] + 1); r = inkOf(font, size, ls);
+    ls = (w - (r.box[2] - r.box[0] + 1)) / Math.max(1, text.length - 1); r = inkOf(font, size, ls);
+    let inter = 0, uni = 0;
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const sx = r.box[0] + Math.round(((x - pad) * (r.box[2] - r.box[0] + 1)) / w), sy = r.box[1] + Math.round(((y - pad) * (r.box[3] - r.box[1] + 1)) / h);
+      const m = sx >= 0 && sy >= 0 && sx < c.width && sy < c.height && r.d[(sy * c.width + sx) * 4 + 3] > 110 ? 1 : 0, rr = refMask[y * W + x];
+      if (m && rr) inter++; if (m || rr) uni++;
+    }
+    rows.push([inter / Math.max(1, uni), `${f}  (size ${size.toFixed(1)}, spacing ${ls.toFixed(2)})`]);
+  }
+  return rows.sort((a, b) => b[0] - a[0]).map(([v, t]) => `${v < 0 ? '  -  ' : v.toFixed(3)}  ${t}`).join('\n');
 };
 // review.rankImages(slide, urls) – rank candidate full-slide renders (e.g. one per generated photo
 // variant) by composition distance to the reference: mean colour difference of 24px blocks, so
@@ -167,7 +236,11 @@ S.rankImages = async (i, urls) => {
   const ref = S.slides[i - 1].ref, out = [];
   for (const u of urls) {
     const im = await load(u + (u.includes('?') ? '&' : '?') + Date.now());
-    const d = pixels(im, ref.width, ref.height).data; let s = 0, n = 0;
+    // cover-crop (centred) instead of stretching, so a raw 2:3 asset is judged as it will render
+    const cc = new OffscreenCanvas(ref.width, ref.height), cg = cc.getContext('2d');
+    const k = Math.max(ref.width / im.naturalWidth, ref.height / im.naturalHeight);
+    cg.drawImage(im, (ref.width - im.naturalWidth * k) / 2, (ref.height - im.naturalHeight * k) / 2, im.naturalWidth * k, im.naturalHeight * k);
+    const d = cg.getImageData(0, 0, ref.width, ref.height).data; let s = 0, n = 0;
     for (let by = 0; by < ref.height; by += 24) for (let bx = 0; bx < ref.width; bx += 24) {
       const a = [0, 0, 0], b = [0, 0, 0];
       for (let y = by; y < Math.min(by + 24, ref.height); y += 4) for (let x = bx; x < Math.min(bx + 24, ref.width); x += 4) { const k = (y * ref.width + x) * 4; for (let j = 0; j < 3; j++) { a[j] += d[k + j]; b[j] += ref.data[k + j]; } }
