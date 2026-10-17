@@ -1,0 +1,268 @@
+{
+  "title": "Fondue mug movie night",
+  "source": "https://youtube.com/shorts/tfE3-IsPbOw",
+  "reference": "https://www.youtube.com/shorts/tfE3-IsPbOw",
+  "notes": "The product is the real Meltie Mug Mini Fondue Mug (red), built into every shot from the store's product photos via keyframes. The original's laptop plays copyrighted series footage and its soundtrack is a copyrighted song; this replica shows people-free cinematic scenes on the laptop (Sora rejects input frames with people) and uses Sora's own audio unless audio.music points to a track you have the rights to. Snacks are unbranded.",
+  "size": [
+    1080,
+    1920
+  ],
+  "fps": 30,
+  "duration": 10.681,
+  "soraSize": "720x1280",
+  "style": "Vertical smartphone video filmed at night at a home desk, phone about 70 cm away at desk height, WIDE framing showing the whole set: a clean white desk across the bottom quarter; a dark grey open laptop on the left whose bright screen fills the upper-left third; a small Christmas tree with warm fairy lights in the upper-right quarter; a dark wall washed in deep red light across the top. The red Meltie Mini Fondue Mug stands on the desk and is small in frame (about a quarter of the frame tall). Hands have long light-grey manicured nails. Warm, cosy, slightly moody colour grade, realistic, steady handheld. No on-screen text, no logos.",
+  "shots": [
+    {
+      "id": "s1",
+      "start": 0,
+      "end": 2.2333,
+      "prompt": "The hand lifts the chocolate-coated strawberry out of the mug, chocolate dripping; slow drift closer. Keep the mug exactly as in the first frame.",
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The mug, full of melted milk chocolate with a lit tealight in its base, stands at the lower centre-left (horizontally 35-60%, vertically 50-82%). A hand from the right holds the red-handled fondue fork with a chocolate-dipped strawberry just above the mug. The laptop screen top-left shows a red neon retro title card on black. The corner of a wooden snack board with marshmallows and strawberries enters at the bottom-left."
+      },
+      "clip": "clips/s1.v2.mp4",
+      "zoom": 1.2,
+      "pan": [
+        0.5,
+        1
+      ],
+      "grade": {
+        "r": [
+          1.1691,
+          30.02
+        ],
+        "g": [
+          1.0328,
+          27.19
+        ],
+        "b": [
+          1.1374,
+          11.61
+        ]
+      }
+    },
+    {
+      "id": "s2",
+      "start": 2.2333,
+      "end": 3.1333,
+      "prompt": "The hand turns the empty mug slightly toward the camera to show the 'Chocolate...' script and the empty tealight opening. Keep the mug exactly as in the first frame.",
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The empty mug (no chocolate, no candle) stands in the centre (horizontally 25-65%, vertically 45-78%); a hand from the right holds it by the handle. Laptop screen top-left shows a dim cinematic scene of a foggy forest road at night (no people); tree glowing top-right; white desk across the bottom quarter."
+      },
+      "clip": "clips/s2.mp4",
+      "zoom": 1.25,
+      "pan": [
+        1,
+        1
+      ],
+      "grade": {
+        "r": [
+          1.051,
+          22.7
+        ],
+        "g": [
+          1.0256,
+          25.02
+        ],
+        "b": [
+          1.2501,
+          18.51
+        ]
+      }
+    },
+    {
+      "id": "s3",
+      "start": 3.1333,
+      "end": 4.4,
+      "prompt": "More chocolate malt balls pour into the mug from above, bouncing and piling up high. Keep the mug exactly as in the first frame.",
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The mug stands in the centre (horizontally 22-58%, vertically 45-80%) half full of round milk-chocolate malt balls. A plain red wafer-bar wrapper with no branding hangs into the top-right corner. Laptop screen top-left shows a dim cinematic scene of a rainy window with blue light (no people); tree glowing right."
+      },
+      "clip": "clips/s3.mp4",
+      "zoom": 1.2,
+      "pan": [
+        0.75,
+        0.25
+      ],
+      "grade": {
+        "r": [
+          0.8581,
+          51.32
+        ],
+        "g": [
+          0.8824,
+          31.96
+        ],
+        "b": [
+          1.0578,
+          23.6
+        ]
+      }
+    },
+    {
+      "id": "s4",
+      "start": 4.4,
+      "end": 5.4333,
+      "prompt": "The torch lighter clicks and lights the tealight's wick; a small flame appears. Keep the mug exactly as in the first frame.",
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Foreground centre-left (vertically 40-58%): a hand holds a small white tealight candle; another hand from the right holds a black pocket butane torch lighter to its wick. Behind, slightly out of focus, the mug full of chocolate balls stands at the centre; laptop screen top-left shows a cold bluish cinematic scene of snowy trees (no people); tree right."
+      },
+      "clip": "clips/s4.v2.mp4",
+      "zoom": 1.25,
+      "pan": [
+        0.75,
+        1
+      ],
+      "grade": {
+        "r": [
+          1.1187,
+          -5.67
+        ],
+        "g": [
+          0.9868,
+          8.15
+        ],
+        "b": [
+          1.1675,
+          0.19
+        ]
+      }
+    },
+    {
+      "id": "s5",
+      "start": 5.4333,
+      "end": 6.0333,
+      "prompt": "The hands slide the lit tealight into the opening under the mug. Keep the mug exactly as in the first frame.",
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The mug piled high with chocolate malt balls, with the red-handled fork in it, stands at the centre-left (vertically 30-70%); two hands at the bottom hold a lit tealight just in front of the arched opening at its base. Laptop screen top-left shows a cinematic scene of an empty school hallway lit orange (no people)."
+      },
+      "clip": "clips/s5.mp4",
+      "zoom": 1.2,
+      "pan": [
+        1,
+        1
+      ],
+      "grade": {
+        "r": [
+          1.1048,
+          19.31
+        ],
+        "g": [
+          1.3724,
+          5.72
+        ],
+        "b": [
+          1.4621,
+          14.7
+        ]
+      }
+    },
+    {
+      "id": "s6",
+      "start": 6.0333,
+      "end": 6.9333,
+      "prompt": "Slow circular stirring of the melted chocolate with the fork. Keep the mug exactly as in the first frame.",
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The mug of fully melted glossy chocolate stands in the centre (vertically 45-75%) with the tealight glowing under it; a hand from the left holds it; a hand from the top-right holds the red-handled fondue fork in the chocolate. Laptop screen top-left shows a dark cinematic scene of a moonlit lake (no people); tree top-right."
+      },
+      "clip": "clips/s6.mp4",
+      "zoom": 1.25,
+      "pan": [
+        1,
+        1
+      ],
+      "grade": {
+        "r": [
+          1.2259,
+          28.5
+        ],
+        "g": [
+          1.2693,
+          22.89
+        ],
+        "b": [
+          1.3136,
+          23.04
+        ]
+      }
+    },
+    {
+      "id": "s7",
+      "start": 6.9333,
+      "end": 10.681,
+      "prompt": "The hand dips the marshmallow into the chocolate and lifts it out coated and dripping; gentle push in. Keep the mug exactly as in the first frame.",
+      "takes": 2,
+      "keyframe": {
+        "prompt": "A rectangular wooden serving board fills the bottom third across the full width with chocolate chip cookies, rows of chocolate malt balls, white marshmallows and halved strawberries on waffle pieces. The mug of melted chocolate stands behind it in the centre (vertically 33-60%) with a lit tealight in its base. A hand from the right holds the red-handled fork with a marshmallow above the mug. Laptop screen top-left shows a cinematic scene of a small town street at night (no people); tree top-right."
+      },
+      "clip": "clips/s7.v2.mp4",
+      "zoom": 1.25,
+      "pan": [
+        0,
+        1
+      ],
+      "grade": {
+        "r": [
+          1.3562,
+          -1.26
+        ],
+        "g": [
+          1.4641,
+          17.15
+        ],
+        "b": [
+          1.6052,
+          14.79
+        ]
+      }
+    }
+  ],
+  "overlays": [
+    {
+      "from": 0,
+      "to": 10.681,
+      "elements": [
+        {
+          "type": "text",
+          "text": "This and Stranger Things s5 🍫",
+          "x": 221,
+          "y": 300,
+          "fit": [
+            221,
+            311,
+            841,
+            353
+          ],
+          "font": {
+            "family": "TikTok Sans, Noto Color Emoji",
+            "weight": 500,
+            "size": 40,
+            "color": "#ffffff",
+            "lineHeight": 1
+          },
+          "style": "text-shadow: 0 1px 3px rgba(0,0,0,.55)"
+        }
+      ]
+    }
+  ],
+  "fonts": [
+    "TikTok Sans:wght@400;500;600"
+  ],
+  "audio": {
+    "sora": 1
+  },
+  "product": {
+    "name": "Meltie Mug Mini Fondue Mug, red",
+    "refs": [
+      "assets/product/IMG_3997.png",
+      "assets/product/IMG-4084.jpg"
+    ],
+    "description": "a glossy red ceramic mug with a white interior; the body flares wider at the top and narrows to the base; 'Chocolate...' in white cursive script with a small white swirl/® mark on the front; a tall arched rectangular opening at the base where a tealight sits; an angular red handle on the right; a long red-handled stainless fondue fork that clips onto the handle"
+  }
+}

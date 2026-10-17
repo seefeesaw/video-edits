@@ -1,0 +1,7 @@
+{
+  "endpoint": "https://thumafoundry36d.openai.azure.com",
+  "deployment": "thuma-video",
+  "model": "sora-2",
+  "apiVersion": "preview",
+  "scope": "https://ai.azure.com"
+}

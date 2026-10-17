@@ -15,7 +15,7 @@ import { renderBackground } from './lib/backgrounds.mjs';
 import { fitAll } from './lib/fit.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
-const CHROME =
+export const CHROME =
   process.env.CHROME_PATH ||
   [
     'C:/Program Files/Google/Chrome/Application/chrome.exe',
@@ -52,6 +52,25 @@ function fontLink(fonts) {
   return `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?${q}&display=block">`;
 }
 
+export function makeContext(dir, post, warnings = []) {
+  const ctx = {
+    dir,
+    // "@shared/…" resolves to slideshow/shared (reusable screens, styles, logos); anything else is
+    // relative to the post directory.
+    resolve: (f) => (f.startsWith('@shared/') ? path.join(ROOT, 'shared', f.slice(8)) : path.join(dir, f)),
+    read: (f) => fs.readFileSync(ctx.resolve(f), 'utf8'),
+    asset: (f) => {
+      if (!f) return null;
+      if (/^(https?:|data:)/.test(f)) return f;
+      const p = ctx.resolve(f);
+      return fs.existsSync(p) ? pathToFileURL(p).href : null;
+    },
+    warn: (m) => warnings.push(m),
+    size: post.size || [1080, 1920],
+  };
+  return ctx;
+}
+
 export function buildSlideHtml(post, slide, ctx) {
   const [W, H] = post.size || [1080, 1920];
   const css = (post.css || []).map((f) => ctx.read(f)).join('\n');
@@ -81,21 +100,7 @@ async function main() {
   const [W, H] = post.size || [1080, 1920];
 
   const warnings = [];
-  const ctx = {
-    dir,
-    // "@shared/…" resolves to slideshow/shared (reusable screens, styles, logos); anything else is
-    // relative to the post directory.
-    resolve: (f) => (f.startsWith('@shared/') ? path.join(ROOT, 'shared', f.slice(8)) : path.join(dir, f)),
-    read: (f) => fs.readFileSync(ctx.resolve(f), 'utf8'),
-    asset: (f) => {
-      if (!f) return null;
-      if (/^(https?:|data:)/.test(f)) return f;
-      const p = ctx.resolve(f);
-      return fs.existsSync(p) ? pathToFileURL(p).href : null;
-    },
-    warn: (m) => warnings.push(m),
-    size: post.size || [1080, 1920],
-  };
+  const ctx = makeContext(dir, post, warnings);
 
   if (!CHROME) throw new Error('Chrome not found; set CHROME_PATH');
   const browser = await puppeteer.launch({ executablePath: CHROME, args: ['--allow-file-access-from-files'] });
@@ -160,7 +165,10 @@ async function main() {
   for (const w of warnings) console.warn(`warning: ${w}`);
 }
 
-main().catch((e) => {
-  console.error(e.message);
-  process.exit(1);
-});
+// run only as a CLI, so other pipelines (video/build.mjs) can import buildSlideHtml/makeContext
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((e) => {
+    console.error(e.message);
+    process.exit(1);
+  });
+}

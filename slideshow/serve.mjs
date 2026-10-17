@@ -8,14 +8,39 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const PORT = +(process.argv[2] || process.env.PORT || 5179);
-const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.webp': 'image/webp' };
+const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.mp4': 'video/mp4' };
 
 http
   .createServer((req, res) => {
     const url = new URL(req.url, 'http://x');
-    let p = path.normalize(path.join(ROOT, decodeURIComponent(url.pathname)));
-    if (!p.startsWith(ROOT)) return res.writeHead(403).end();
+    // CORS so other origins (e.g. a YouTube tab running video/tools/yt-compare.js) can read renders
+    res.setHeader('access-control-allow-origin', '*');
+    // /video/... serves the sibling video pipeline (renders, tools)
+    const VROOT = path.join(ROOT, '..', 'video');
+    const isVideo = url.pathname.startsWith('/video/');
+    let p = isVideo ? path.normalize(path.join(VROOT, decodeURIComponent(url.pathname.slice(7)))) : path.normalize(path.join(ROOT, decodeURIComponent(url.pathname)));
+    if (!p.startsWith(isVideo ? VROOT : ROOT)) return res.writeHead(403).end();
     if (url.pathname === '/') p = path.join(ROOT, 'review.html');
+    // POST /api/put?file=<path under slideshow/ or video/> writes the request body. Lets a capture
+    // script running in another site's tab hand its JSON to the pipeline (form POST in a new window,
+    // since page CSPs usually block fetch to localhost). Only .json files, only inside the repo dirs.
+    if (url.pathname === '/api/put') {
+      const rel = url.searchParams.get('file') || '';
+      const target = path.normalize(rel.startsWith('video/') ? path.join(ROOT, '..', rel) : path.join(ROOT, rel));
+      const okRoot = target.startsWith(ROOT + path.sep) || target.startsWith(path.join(ROOT, '..', 'video') + path.sep);
+      if (!okRoot || !target.endsWith('.json')) return res.writeHead(400).end('bad file');
+      let body = '';
+      req.on('data', (c) => (body += c));
+      req.on('end', () => {
+        const ct = req.headers['content-type'] || '';
+        const data = ct.includes('application/x-www-form-urlencoded') ? new URLSearchParams(body).get('data') : body;
+        try { JSON.parse(data); } catch { return res.writeHead(400).end('not json'); }
+        fs.mkdirSync(path.dirname(target), { recursive: true });
+        fs.writeFileSync(target, data);
+        res.writeHead(200, { 'content-type': 'text/html' }).end(`<p>saved ${rel} (${data.length} bytes). You can close this tab.</p>`);
+      });
+      return;
+    }
     if (url.pathname === '/api/posts') {
       const posts = fs.readdirSync(path.join(ROOT, 'posts')).filter((d) => fs.existsSync(path.join(ROOT, 'posts', d, 'post.json')));
       return res.writeHead(200, { 'content-type': 'application/json' }).end(JSON.stringify(posts));

@@ -1,0 +1,6 @@
+node_modules/
+videos/*/clips/round*/
+videos/*/clips/jobs.json
+videos/*/out/frames/
+videos/*/out/*.html
+videos/*/out/overlay*.png

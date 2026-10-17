@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Save capture</title>
+<style>body{font:15px system-ui,sans-serif;margin:24px;background:#111;color:#eee}code{color:#fdc904}</style></head>
+<body>
+<p id="msg">Saving…</p>
+<script>
+  // Hand-off for capture scripts running on other sites (YouTube, TikTok), whose CSP blocks fetches
+  // to localhost but not navigation. The capture tab navigates here with
+  //   #file=<path under slideshow/ or video/>&back=<url to return to>&data=<urlencoded JSON>
+  // and this page POSTs the JSON to /api/put, then (optionally) returns to the original page.
+  (async () => {
+    const h = new URLSearchParams(location.hash.slice(1));
+    const file = h.get('file'), data = h.get('data'), back = h.get('back');
+    const msg = document.getElementById('msg');
+    if (!file || !data) { msg.textContent = 'nothing to save (expected #file=…&data=…)'; return; }
+    const r = await fetch(`/api/put?file=${encodeURIComponent(file)}`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: data });
+    msg.innerHTML = r.ok ? `saved <code>${file}</code> (${data.length} bytes)` : `failed: ${r.status} ${await r.text()}`;
+    document.title = r.ok ? 'saved' : 'save failed';
+    if (r.ok && back) setTimeout(() => (location.href = back), 600);
+  })();
+</script>
+</body>
+</html>
