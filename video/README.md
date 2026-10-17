@@ -37,6 +37,24 @@ time (~150s each); 429s are retried.
 Overlays are rendered with the slideshow engine (`../slideshow`), so captions accept every slideshow
 element and auto-fit (`fit: [x0,y0,x1,y1]` = ink box measured on the reference).
 
+## Characters (same person across shots and videos)
+
+```bash
+node character.mjs create <name> --desc "<person + place>" [--action "…"] [--seconds 4,8]
+node character.mjs adopt <name> --id video_…      # a good generated take (ids in clips/ids.json)
+node character.mjs refresh <name>                 # before anchors expire (Sora keeps videos 24 h)
+node character.mjs status
+```
+
+Sora refuses input images that show people, even generated ones, so a recurring character can't
+start from a picture. A character is an **anchor**: a Sora clip of that person in their place, kept in
+`characters/<name>/` (character.json + reference frames). A video maps its sets to characters
+(`"characters": {"A": "<name>"}`); every shot with `"set": "A"` is generated as a **remix** of that
+anchor, which keeps face, clothes, place and framing and changes only the action. A remix keeps its
+source's length, so a character has one anchor per clip length (4/8/12 s). Anchors expire 24 h after
+they are made: run `refresh` (remixes each anchor into an unchanged copy; reports similarity to the
+original reference frames) at least daily while a series is in production, or recreate them.
+
 ## video.json
 
 ```jsonc
@@ -46,6 +64,7 @@ element and auto-fit (`fit: [x0,y0,x1,y1]` = ink box measured on the reference).
   "soraSize": "720x1280",
   "style": "shared description appended to every shot prompt (setting, props, lighting, grade)",
   "sets": { "A": "character + location A, word for word", "B": "…" },   // a shot's "set": "A" appends it
+  "characters": { "A": "chocmilk-max" },   // set → library character: those shots remix its anchor
   "captions": { "caption": [ /* slideshow elements */ ] },            // reused by overlays as "@caption",
   "product": {                       // a real product that must look exactly like its photos
     "name": "Meltie Mug Mini Fondue Mug, red",

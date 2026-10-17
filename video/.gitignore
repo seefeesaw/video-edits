@@ -6,3 +6,4 @@ videos/*/out/*.html
 videos/*/out/overlay*.png
 # reference contact sheets (frames of the original) and side-by-sides
 videos/*/out/*.jpg
+characters/*/anchors/*.mp4

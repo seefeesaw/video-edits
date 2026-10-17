@@ -9,7 +9,7 @@
 //   node compare.mjs videos/<name> --pick      score every take of every shot (s1.mp4, s1.v2.mp4 …)
 //        after a fair per-take colour match and set each shot's "clip" to the best one
 //   node compare.mjs videos/<name> --framing   search crop zoom (1–1.25, --max-zoom N) and pan per shot
-//        and write "zoom"/"pan". A crop is kept only if it gains ≥0.5 points (the colour grid can be
+//        and write "zoom"/"pan". A crop is kept only if it gains ≥1 point (the colour grid can be
 //        fooled into cropping away set pieces); shots with "framing": "manual" are left alone
 //   node compare.mjs videos/<name> --apply     fit a per-channel grade (gain/offset matching the
 //        reference's mean and contrast) from the clip + framing and write it to "grade". Idempotent:
@@ -86,7 +86,10 @@ function innerCuts(s, clip) {
   const out = [];
   d.forEach((v, k) => {
     const nb = [...d.slice(Math.max(1, k - 6), k), ...d.slice(k + 1, k + 7)].sort((a, b) => a - b), med = nb[Math.floor(nb.length / 2)] ?? 0;
-    if (k && ((v > 24 && v > 2 * med) || (v > 10 && v > 4 * med))) out.push(+(from + k / 30).toFixed(2));
+    // an edit is one big change between two otherwise steady pictures; a splash or avalanche keeps
+    // changing on both sides of its biggest frame, so it must also tower over its direct neighbours
+    const around = Math.max(d[k - 1] ?? 0, d[k + 1] ?? 0);
+    if (k && ((v > 24 && v > 2 * med) || (v > 10 && v > 4 * med)) && v > 3 * around) out.push(+(from + k / 30).toFixed(2));
   });
   return out;
 }
@@ -107,7 +110,10 @@ if (argv.includes('--pick')) {
       return [(fr.length ? comp(A, B, fitGrade(A, B)) : 0) - (cuts.length ? 10 : 0), f, cuts];
     }).sort((x, y) => y[0] - x[0]);
     console.log(`pick ${s.id}: ${scored.map(([v, f, c]) => `${f} ${v.toFixed(1)}${c.length ? ` (inner cut at ${c.join(', ')}s, -10)` : ''}`).join('  ')}`);
-    s.clip = `clips/${scored[0][1]}`;
+    const old = s.clip, now = `clips/${scored[0][1]}`;
+    s.clip = now;
+    // jump-cut shots reuse this shot's take ("takes": 0, "clip": <this shot's clip>): keep them on it
+    for (const o of spec.shots) if (o !== s && o.takes === 0 && old && o.clip === old && o.clip !== now) { o.clip = now; console.log(`  ${o.id} reuses ${s.id}'s take: now ${now}`); }
   }
   save();
   console.log('set each shot\'s "clip" to its best take; next: --framing, --apply, build.mjs');
@@ -130,7 +136,7 @@ if (argv.includes('--framing')) {
     for (let z = 1.05; z <= mz + 1e-4; z += 0.05) for (let x = -1; x <= 1.001; x += 0.25) for (let y = -1; y <= 1.001; y += 0.25) {
       const sc = score(z, [x, y]); if (sc > best[0]) best = [sc, +z.toFixed(2), [+x.toFixed(2), +y.toFixed(2)]];
     }
-    if (best[0] - base < 0.5) best = [base, 1, [0, 0]];
+    if (best[0] - base < 1) best = [base, 1, [0, 0]];
     console.log(`framing ${s.id}: zoom ${best[1]} pan [${best[2]}]  comp ${base.toFixed(1)} -> ${best[0].toFixed(1)}`);
     s.zoom = best[1]; s.pan = best[2];
   }
@@ -146,7 +152,7 @@ if (argv.includes('--apply')) {
     const A = fr.map((x) => x.ref), B = fr.map((x) => gridOf(x.px, zoomOf(s), panOf(s))), g = fitGrade(A, B);
     // the grid score mixes composition and colour, so a grade that fixes a big brightness/warmth gap
     // can cost a little comp; keep it unless it clearly hurts
-    if (comp(A, B, g) < comp(A, B) - 1) { delete s.grade; console.log(`grade ${s.id}: none (a grade hurts comp ${comp(A, B).toFixed(1)} -> ${comp(A, B, g).toFixed(1)})`); continue; }
+    if (comp(A, B, g) < comp(A, B) - 0.3) { delete s.grade; console.log(`grade ${s.id}: none (a grade hurts comp ${comp(A, B).toFixed(1)} -> ${comp(A, B, g).toFixed(1)})`); continue; }
     s.grade = { r: g[0].map((v, i) => +v.toFixed(i ? 2 : 4)), g: g[1].map((v, i) => +v.toFixed(i ? 2 : 4)), b: g[2].map((v, i) => +v.toFixed(i ? 2 : 4)), clip: clipOf(s) };
     console.log(`grade ${s.id}: comp ${comp(A, B).toFixed(1)} -> ${comp(A, B, g).toFixed(1)}`);
   }
