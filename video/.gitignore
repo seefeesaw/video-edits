@@ -9,3 +9,4 @@ videos/*/out/*.jpg
 characters/*/anchors/*.mp4
 videos/*/bible/post.json
 videos/*/clips/rejected/
+videos/*/out/_screens/

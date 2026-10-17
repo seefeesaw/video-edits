@@ -54,6 +54,47 @@ async function renderOverlays(spec, dir, outDir, W, H) {
   return files;
 }
 
+// "screens": a phone/laptop in a Sora clip shows OUR video. Sora generates the device with a pure
+// green screen (people-free, so it can also be keyframed); this pre-pass finds the green box in a
+// frame, keys it out and composites the screen video (+ an optional UI overlay rendered from
+// `captions[ui]`, e.g. a TikTok-style caption and side rail) behind it, writing
+// out/_screens/<id>.mp4 at the output size. Shots then cut/zoom that file like any clip, so the
+// screen zooms with the device.
+//   "screens": [{ "id": "PHONE", "clip": "clips/PHONE.mp4", "from": 0, "len": 7,
+//                 "screen": { "clip": "clips/SCREEN.mp4", "from": 1.0 }, "ui": "screenui" }]
+async function composeScreens(spec, dir, outDir, W, H, fps) {
+  const list = spec.screens || [];
+  if (!list.length) return;
+  const sdir = path.join(outDir, '_screens');
+  fs.mkdirSync(sdir, { recursive: true });
+  for (const s of list) {
+    const base = path.join(dir, s.clip), scr = path.join(dir, s.screen.clip);
+    // green box + key colour from a frame in the middle of the used span
+    const f = path.join(sdir, `_${s.id}.raw`);
+    ff(['-ss', String((s.from ?? 0) + s.len / 2), '-i', base, '-frames:v', '1', '-vf', `scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H}`, '-f', 'rawvideo', '-pix_fmt', 'rgb24', f]);
+    const px = fs.readFileSync(f); fs.rmSync(f);
+    let x0 = W, y0 = H, x1 = -1, y1 = -1, sr = 0, sg = 0, sb = 0, n = 0;
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const i = (y * W + x) * 3, r = px[i], g = px[i + 1], b = px[i + 2];
+      if (g > 110 && g > 1.5 * r && g > 1.5 * b) { x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y); sr += r; sg += g; sb += b; n++; }
+    }
+    if (n < 2000) throw new Error(`screen ${s.id}: no green screen found in ${s.clip}`);
+    const key = `0x${[sr, sg, sb].map((v) => Math.round(v / n).toString(16).padStart(2, '0')).join('')}`;
+    const bw = (x1 - x0 + 1) & ~1, bh = (y1 - y0 + 1) & ~1;
+    let ui = null;
+    if (s.ui) {
+      const [file] = await renderOverlays({ ...spec, overlays: [{ from: 0, to: s.len, elements: `@${s.ui}` }] }, dir, sdir, W, H);
+      ui = file.file;
+    }
+    const out = path.join(sdir, `${s.id}.mp4`);
+    const scrChain = `[1:v]trim=start=${s.screen.from ?? 0}:duration=${s.len},setpts=PTS-STARTPTS,fps=${fps},scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H}${ui ? '[sv];[sv][2:v]overlay=0:0[su];[su]' : ','}scale=${bw}:${bh}[scr]`;
+    ff(['-i', base, '-i', scr, ...(ui ? ['-loop', '1', '-i', ui] : []), '-filter_complex',
+      `[0:v]trim=start=${s.from ?? 0}:duration=${s.len},setpts=PTS-STARTPTS,fps=${fps},scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},chromakey=${key}:0.16:0.06[k];${scrChain};color=black:size=${W}x${H}:rate=${fps}:duration=${s.len}[bg];[bg][scr]overlay=${x0}:${y0}[t];[t][k]overlay=0:0:shortest=1[v]`,
+      '-map', '[v]', '-map', '0:a?', '-t', String(s.len), '-c:v', 'libx264', '-crf', '14', '-preset', 'fast', '-pix_fmt', 'yuv420p', out]);
+    console.log(`screen ${s.id}: green box [${x0},${y0},${x1},${y1}] key ${key} → ${path.relative(process.cwd(), out)}`);
+  }
+}
+
 // Reframe filter for one shot: cover-scale to W×H, then optional zoom (≥1) and pan, both of which
 // may animate linearly over the shot (zoom: [from, to], pan: [[x,y],[x,y]] as -1..1 offsets).
 function frameFilter(shot, W, H, dur) {
@@ -81,6 +122,7 @@ export async function build(dir, opts = {}) {
   const outDir = path.join(dir, 'out');
   fs.mkdirSync(outDir, { recursive: true });
   const name = path.basename(dir);
+  await composeScreens(spec, dir, outDir, W, H, fps);
   const overlays = await renderOverlays(spec, dir, outDir, W, H);
 
   const inputs = [], vf = [], af = [], labels = [];

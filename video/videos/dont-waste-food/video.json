@@ -1,0 +1,474 @@
+{
+  "title": "Don't waste food",
+  "source": "https://www.youtube.com/shorts/F5q31YupQSM",
+  "notes": "Contrast short. The phone in the opening plays OUR clip (series character chocmilk-max doing an over-the-top ice cream, with an unbranded TikTok-style UI), composited onto a green screen; the original's third-party TikTok is not reproduced. The reacting creator is series character chocmilk-chill. The original's four close-ups of distressed children are replaced by dignified stand-ins without children (adult hands sharing one chocolate square, an empty cup, an almost empty tin bowl, one bread roll torn into pieces). Ice-cream tubs and packaging are unbranded. Sora audio.",
+  "size": [
+    1080,
+    1920
+  ],
+  "fps": 60,
+  "duration": 22.821,
+  "soraSize": "720x1280",
+  "style": "One continuous unedited take: no cuts, no jump cuts, no zooms. Realistic, natural light, crisp focus, no on-screen text, no logos or brand names.",
+  "sets": {
+    "P": "A light-skinned adult hand holds a black smartphone in a bright yellow case upright and steady, about 35 cm in front of the camera, over a light oak desk with a black charging cable; the phone fills the middle 60% of the frame width; daylight, shallow depth of field.",
+    "K": "Person B in a dim modern kitchen at night lit by violet-blue LED strip light along the ceiling and walls, sitting behind a light oak table; static frontal camera at table height."
+  },
+  "bible": {
+    "props": {
+      "phone": {
+        "desc": "a black smartphone in a bright yellow case"
+      },
+      "tubs": {
+        "desc": "two large white rectangular two-litre plastic ice-cream tubs with a light-blue label band and no text"
+      },
+      "bowl": {
+        "desc": "a large clear glass mixing bowl, empty"
+      },
+      "icecream": {
+        "desc": "a large clear glass bowl and one white two-litre tub of vanilla ice cream with a red lid and no text"
+      },
+      "choc": {
+        "desc": "one small square of milk chocolate"
+      },
+      "cup": {
+        "desc": "an empty, slightly crumpled clear plastic cup"
+      },
+      "tin": {
+        "desc": "a dented white enamel tin bowl with a thin blue rim, empty except for a few grains of rice"
+      },
+      "bread": {
+        "desc": "one small round bread roll"
+      }
+    },
+    "sets": {
+      "P": {
+        "props": [
+          "phone"
+        ]
+      },
+      "K": {
+        "props": [
+          "tubs",
+          "bowl"
+        ]
+      },
+      "S": {
+        "props": [
+          "icecream"
+        ]
+      },
+      "D1": {
+        "props": [
+          "choc"
+        ],
+        "desc": "close-up on a worn patterned cotton cloth spread on dusty ground, warm late-afternoon light, documentary photography style, shallow depth of field",
+        "layout": "The small chocolate square lies in the centre of the cloth (45-60% of the frame height); the frame is otherwise empty (hands will enter)."
+      },
+      "D2": {
+        "props": [
+          "cup"
+        ],
+        "desc": "close-up against a soft out-of-focus background of a dusty courtyard and a weathered wall, soft daylight, documentary photography style",
+        "layout": "The empty plastic cup stands alone on a rough wooden crate in the centre of the frame (40-65% height)."
+      },
+      "D3": {
+        "props": [
+          "tin"
+        ],
+        "desc": "close-up on dry cracked earth, warm low sun, documentary photography style, shallow depth of field",
+        "layout": "The tin bowl sits in the centre of the frame (45-70% height), seen slightly from above so the few grains inside are visible."
+      },
+      "D4": {
+        "props": [
+          "bread"
+        ],
+        "desc": "close-up on a rough wooden table outdoors in warm late-afternoon light, documentary photography style",
+        "layout": "The single bread roll lies in the centre of the table (45-60% height); the rest of the table is empty (hands will enter)."
+      }
+    }
+  },
+  "performances": [
+    {
+      "id": "PHONE",
+      "set": "P",
+      "seconds": 8,
+      "takes": 2,
+      "prompt": "The hand holds the phone completely still for the whole clip, barely moving. the phone screen is lit with a perfectly flat, uniform, pure chroma-key green (#00FF00) image from edge to edge: no interface, no reflections, no glare.",
+      "clip": "clips/PHONE.mp4"
+    },
+    {
+      "id": "SCREEN",
+      "set": "S",
+      "remixOf": "character:chocmilk-max",
+      "seconds": 12,
+      "takes": 2,
+      "prompt": "He stands behind a speckled granite kitchen counter in his warm kitchen; on the counter there is only a large clear glass bowl (remove the giant jar, the pot, the steel bowl and the milk jugs). 0-3 s: he lifts the whole tub of vanilla ice cream and dumps it upside down into the bowl, screaming with joy. 3-7 s: he squeezes a huge stream of chocolate sauce all over the ice cream. 7-12 s: he sprays a mountain of whipped cream on top and laughs into the camera.",
+      "clip": "clips/SCREEN.mp4"
+    },
+    {
+      "id": "CHILL",
+      "set": "K",
+      "remixOf": "character:chocmilk-chill",
+      "seconds": 12,
+      "takes": 2,
+      "prompt": "He now wears a plain mustard-yellow T-shirt. The table is now bare except one large empty clear glass mixing bowl in front of him (remove the glass, the bottle, the box, the carton and the frother). 0-1 s: he looks into the camera. 1-6 s: he holds the two ice-cream tubs upside down over the bowl and shakes them; nothing comes out because the ice cream is frozen solid; he grins. 6-8 s: he lowers the tubs onto the table either side of the bowl and stops smiling. 8-12 s: he looks into the camera seriously and slowly wags his index finger 'no'.",
+      "continuity": {
+        "CHILL.mp4": {
+          "total": 9.22,
+          "face": 9,
+          "hair": 9,
+          "outfit": 10,
+          "tubs": 8,
+          "bowl": 9,
+          "set": 10
+        },
+        "CHILL.v2.mp4": {
+          "total": 8.67,
+          "face": 9,
+          "hair": 9,
+          "outfit": 10,
+          "tubs": 3,
+          "bowl": 9,
+          "set": 10
+        }
+      },
+      "clip": "clips/CHILL.mp4"
+    }
+  ],
+  "screens": [
+    {
+      "id": "PHONE",
+      "clip": "clips/PHONE.mp4",
+      "from": 0.3,
+      "len": 6.6,
+      "screen": {
+        "clip": "clips/SCREEN.mp4",
+        "from": 0.2
+      },
+      "ui": "screenui"
+    }
+  ],
+  "captions": {
+    "screenui": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1080,
+        "h": 1920,
+        "html": "<div style=\"position:absolute;left:90px;top:300px;padding:14px 26px;background:#fff;border-radius:14px;font:500 54px/1 'TikTok Sans';color:#111\">Me when I want Ice Cream:</div><div style=\"position:absolute;right:28px;top:900px;width:120px;display:flex;flex-direction:column;align-items:center;gap:34px;font:600 30px/1 'TikTok Sans';color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.6)\"><div style=\"width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,#0f5e57,#e0a53b);border:4px solid #fff\"></div><div style=\"text-align:center\"><svg width=\"84\" height=\"76\" viewBox=\"0 0 24 22\"><path d=\"M12 21s-9-6.2-9-12.2C3 4.6 6.1 2 9.2 2c1.4 0 2.3.7 2.8 1.6C12.5 2.7 13.4 2 14.8 2 17.9 2 21 4.6 21 8.8 21 14.8 12 21 12 21z\" fill=\"#fff\"/></svg><div>4.6M</div></div><div style=\"text-align:center\"><svg width=\"80\" height=\"76\" viewBox=\"0 0 24 22\"><path d=\"M12 2C6.5 2 2 5.8 2 10.4c0 2.6 1.4 4.9 3.7 6.4L5 21l4.3-2.4c.9.2 1.8.3 2.7.3 5.5 0 10-3.8 10-8.5S17.5 2 12 2z\" fill=\"#fff\"/></svg><div>187K</div></div><div style=\"text-align:center\"><svg width=\"80\" height=\"72\" viewBox=\"0 0 24 22\"><path d=\"M14 2v5C6 7 3 12 2 20c3-4 7-5.5 12-5.5v5L22 11z\" fill=\"#fff\"/></svg><div>84K</div></div></div><div style=\"position:absolute;left:36px;bottom:150px;width:820px;font:600 36px/1.35 'TikTok Sans';color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.6)\">@chocmilk.max<br><span style=\"font-weight:400\">Anyone else love ice cream? 🍦</span></div>"
+      }
+    ]
+  },
+  "fonts": [
+    "TikTok Sans:wght@400;500;600"
+  ],
+  "audio": {
+    "sora": 1
+  },
+  "shots": [
+    {
+      "id": "s1",
+      "set": "P",
+      "start": 0,
+      "end": 4.35,
+      "takes": 0,
+      "pick": "manual",
+      "framing": "manual",
+      "prompt": "",
+      "clip": "out/_screens/PHONE.mp4",
+      "from": 0,
+      "zoom": [
+        1,
+        1.12
+      ],
+      "pan": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "s2",
+      "set": "P",
+      "start": 4.35,
+      "end": 4.45,
+      "takes": 0,
+      "pick": "manual",
+      "framing": "manual",
+      "prompt": "",
+      "clip": "out/_screens/PHONE.mp4",
+      "from": 4.35,
+      "zoom": 1.5,
+      "pan": [
+        0,
+        -0.2
+      ]
+    },
+    {
+      "id": "s3",
+      "set": "P",
+      "start": 4.45,
+      "end": 6.3,
+      "takes": 0,
+      "pick": "manual",
+      "framing": "manual",
+      "prompt": "",
+      "clip": "out/_screens/PHONE.mp4",
+      "from": 4.45,
+      "zoom": 2,
+      "pan": [
+        0.8,
+        0.4
+      ]
+    },
+    {
+      "id": "s4",
+      "set": "K",
+      "start": 6.3,
+      "end": 10,
+      "takes": 0,
+      "pick": "manual",
+      "prompt": "",
+      "clip": "clips/CHILL.mp4",
+      "from": 1.2,
+      "zoom": 1.2,
+      "pan": [
+        -0.25,
+        -1
+      ],
+      "grade": {
+        "r": [
+          0.7646,
+          57.64
+        ],
+        "g": [
+          0.8373,
+          55.97
+        ],
+        "b": [
+          0.8504,
+          50.64
+        ],
+        "clip": "clips/CHILL.mp4"
+      }
+    },
+    {
+      "id": "s5",
+      "set": "D1",
+      "start": 10,
+      "end": 12.7667,
+      "startFrom": "set",
+      "takes": 2,
+      "from": 0.6,
+      "prompt": "Two weathered adult hands (only the hands and wrists) enter, break the chocolate square in half, and one hand slowly offers one half toward the camera. Gentle, respectful, documentary feel.",
+      "continuity": {
+        "s5.v2.mp4": {
+          "total": 9.75,
+          "face": 10,
+          "hair": 10,
+          "outfit": 10,
+          "choc": 9,
+          "set": 9
+        },
+        "s5.mp4": {
+          "total": 9.63,
+          "face": 10,
+          "hair": 10,
+          "outfit": 10,
+          "choc": 8,
+          "set": 9
+        }
+      },
+      "clip": "clips/s5.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          0.9817,
+          18.08
+        ],
+        "g": [
+          0.855,
+          39.73
+        ],
+        "b": [
+          0.8275,
+          51.32
+        ],
+        "clip": "clips/s5.mp4"
+      }
+    },
+    {
+      "id": "s6",
+      "set": "D2",
+      "start": 12.7667,
+      "end": 14.6667,
+      "startFrom": "set",
+      "takes": 2,
+      "from": 0.6,
+      "prompt": "A weathered adult hand (only the hand and wrist) enters, picks up the empty plastic cup and slowly holds it up to the light, turning it; it is empty. Documentary feel.",
+      "continuity": {
+        "s6.mp4": {
+          "total": 9.63,
+          "face": 10,
+          "hair": 10,
+          "outfit": 10,
+          "cup": 8,
+          "set": 9
+        },
+        "s6.v2.mp4": {
+          "total": 9.38,
+          "face": 10,
+          "hair": 10,
+          "outfit": 10,
+          "cup": 6,
+          "set": 9
+        }
+      },
+      "clip": "clips/s6.mp4",
+      "pick": "manual",
+      "zoom": 1.1,
+      "pan": [
+        0.75,
+        -1
+      ],
+      "grade": {
+        "r": [
+          1.4878,
+          -72.82
+        ],
+        "g": [
+          1.1545,
+          -32.76
+        ],
+        "b": [
+          1.0866,
+          -30.97
+        ],
+        "clip": "clips/s6.mp4"
+      }
+    },
+    {
+      "id": "s7",
+      "set": "D3",
+      "start": 14.6667,
+      "end": 16.6,
+      "startFrom": "set",
+      "takes": 2,
+      "from": 0.6,
+      "prompt": "A weathered adult hand (only the hand and wrist) enters and slowly tilts the tin bowl toward the camera, showing it is empty except for a few grains of rice. Documentary feel.",
+      "continuity": {
+        "s7.mp4": {
+          "total": 9.75,
+          "face": 10,
+          "hair": 10,
+          "outfit": 10,
+          "tin": 8,
+          "set": 10
+        },
+        "s7.v2.mp4": {
+          "total": 9.63,
+          "face": 10,
+          "hair": 10,
+          "outfit": 10,
+          "tin": 7,
+          "set": 10
+        }
+      },
+      "clip": "clips/s7.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          0.9362,
+          -19.01
+        ],
+        "g": [
+          0.6237,
+          12.05
+        ],
+        "b": [
+          0.5,
+          20.43
+        ],
+        "clip": "clips/s7.mp4"
+      }
+    },
+    {
+      "id": "s8",
+      "set": "D4",
+      "start": 16.6,
+      "end": 18.75,
+      "startFrom": "set",
+      "takes": 2,
+      "from": 0.36,
+      "prompt": "Several weathered adult hands (only hands and wrists) reach in and each carefully tears a small piece from the single bread roll, sharing it between many people. Documentary feel.",
+      "continuity": {
+        "s8.mp4": {
+          "total": 9.88,
+          "face": 10,
+          "hair": 10,
+          "outfit": 10,
+          "bread": 9,
+          "set": 10
+        },
+        "s8.v2.mp4": {
+          "total": 9.88,
+          "face": 10,
+          "hair": 10,
+          "outfit": 10,
+          "bread": 9,
+          "set": 10
+        }
+      },
+      "clip": "clips/s8.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "s9",
+      "set": "K",
+      "start": 18.75,
+      "end": 22.821,
+      "takes": 0,
+      "pick": "manual",
+      "prompt": "",
+      "clip": "clips/CHILL.mp4",
+      "from": 7.6,
+      "zoom": 1.3,
+      "pan": [
+        0,
+        -0.5
+      ],
+      "framing": "manual",
+      "grade": {
+        "r": [
+          0.8283,
+          44.86
+        ],
+        "g": [
+          0.9412,
+          43.21
+        ],
+        "b": [
+          0.7436,
+          71.86
+        ],
+        "clip": "clips/CHILL.mp4"
+      }
+    }
+  ]
+}

@@ -89,6 +89,19 @@ async function remix(shot, spec, ch) {
 // A performance that continues another one: remix that performance's chosen take (one hop from a
 // face already in the video, instead of one hop per shot from the anchor)
 async function remixPerformance(p, spec, dir) {
+  // "remixOf": "character:<name>" starts from a library character's anchor (another video of the
+  // series): same person; describe the new clothes/props/place in the prompt
+  if (p.remixOf.startsWith('character:')) {
+    const name = p.remixOf.slice(10), c = JSON.parse(fs.readFileSync(path.join(ROOT, 'characters', name, 'character.json'), 'utf8'));
+    const a = c.anchors?.[p.seconds];
+    if (!a) throw new Error(`${p.id}: ${name} has no ${p.seconds}s anchor (a remix keeps its source's length)`);
+    if (a.expiresAt && Date.now() / 1000 > a.expiresAt - 900) throw new Error(`${p.id}: ${name}'s ${p.seconds}s anchor has expired: node character.mjs refresh ${name}`);
+    const prompt = [`Keep exactly the same person as in this video: the identical face (face shape, eyes, eyebrows, nose, mouth, skin tone, facial hair), the same hairline, hair length and hairstyle. Do not replace, age or restyle him. Everything else is new and replaces what is in this video: ${p.prompt}`, propWords(spec, p.set), spec.style].filter(Boolean).join('\n\n');
+    const r = await fetch(`${BASE}/${a.id}/remix`, { method: 'POST', headers: { ...auth(), 'content-type': 'application/json' }, body: JSON.stringify({ prompt }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(`${p.id}: remix HTTP ${r.status} ${JSON.stringify(j).slice(0, 300)}`);
+    return j.id;
+  }
   const src = spec.performances.find((x) => x.id === p.remixOf);
   if (!src) throw new Error(`${p.id}: remixOf ${p.remixOf} is not a performance`);
   const clip = (src.clip || `clips/${src.id}.mp4`).replace(/\\/g, '/');

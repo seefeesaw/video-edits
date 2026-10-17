@@ -20,6 +20,17 @@
       "history": [
         "video_6ad3d96a9e08819083a09bd827790808"
       ]
+    },
+    "12": {
+      "id": "video_6ad3f7399868819086d0c1b18ee2a9bd",
+      "seconds": 12,
+      "expiresAt": 1792362682,
+      "file": "anchors/12s.mp4",
+      "createdAt": "2026-10-17T23:13:02.452Z",
+      "history": [
+        "video_6ad3f7399868819086d0c1b18ee2a9bd"
+      ],
+      "adopted": true
     }
   },
   "frames": [
