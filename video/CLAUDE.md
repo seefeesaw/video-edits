@@ -38,12 +38,19 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    copyrighted footage on screens, songs, or brand logos/packaging: use generic stand-ins and say so
    in `notes`. **People on camera** (faces are the subject, e.g. a creator talking or reacting): Sora
    rejects input images with faces (even generated ones), so those shots are never keyframed.
-   Text-to-video with the same words still gives a different-looking person in every shot, so a
-   person who appears in more than one shot must be a **library character**: create it first
-   (`node character.mjs create <name> --desc "<person + place>" --seconds 4,8`, the lengths the
-   shots need; ~3 min), map the set to it (`"characters": {"A": "<name>"}`) and give every shot
-   `"set"`: those shots are remixes of the character's anchor (same face, clothes, place). Keep the
-   description in `sets` too. Recreate people as new generic people, never the original creators. A
+   **Continuity bible first** (README "Continuity bible"): list every prop that must not change with
+   exact words in `bible.props`, each set with its props and their first-frame layout in
+   `bible.sets` (state the main object's size emphatically), run `node bible.mjs`, and Read
+   `bible/bible-sheet.jpg` before any Sora time. Performances then use `"startFrom": "set"` and their
+   prompt starts with the person stepping in (0-1 s). Pick every take with
+   `node continuity.mjs videos/<name> --takes <id> --apply` (then confirm the action by eye).
+   Every separate generation (text-to-video OR remix of an anchor) can change the face, so a person
+   who appears in more than one shot gets **performances** (README "Performances"): one 12 s take
+   per person with that person's actions in order, cut into the shots (`"takes": 0`, `"clip"`,
+   `"from"`), plus one `remixOf` performance for the rest. Pick the performance take by face AND
+   action with `refsheet.mjs --takes <perf>`. Library characters (`"characters"`, per-shot remixes of
+   an anchor) keep clothes/place but still drift the face per shot: use them to start a series'
+   next video from the same person, not as the only consistency measure. Recreate people as new generic people, never the original creators. A
    caption that recurs in several windows: define it once in `captions` and use `"elements": "@name"`.
    A **series** reuses its library characters across videos (README "Characters"): check
    `node character.mjs status` first and `refresh` anchors with under 6 h left (Sora deletes them

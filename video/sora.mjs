@@ -63,29 +63,63 @@ export function characterFor(shot, spec) {
   return { name, ...JSON.parse(fs.readFileSync(file, 'utf8')) };
 }
 
+// Continuity bible (bible.mjs): the exact words for every prop of a set, appended to every prompt
+// that uses that set, so the objects are described identically in every generation and remix
+export function propWords(spec, setId) {
+  const set = spec.bible?.sets?.[setId];
+  if (!set?.props?.length) return '';
+  return `These objects must look exactly like this in every frame (same shape, proportions, colour, material, caps and handles; never swap or restyle them): ${set.props.map((id) => `${id}: ${spec.bible.props[id].desc}`).join('; ')}.`;
+}
+// the set of a performance that remixes another: the source's set
+const setOf = (shot, spec) => shot.set || (shot.remixOf && spec.performances?.find((x) => x.id === shot.remixOf)?.set);
+
 async function remix(shot, spec, ch) {
   const secs = soraSecondsFor(shot.end - shot.start + (shot.from ?? 0));
   const a = ch.anchors?.[secs];
   if (!a) throw new Error(`${shot.id}: character ${ch.name} has no ${secs}s anchor (a remix keeps its source's length): node character.mjs create ${ch.name} --seconds ${secs}`);
   if (a.expiresAt && Date.now() / 1000 > a.expiresAt - 900) throw new Error(`${shot.id}: ${ch.name}'s ${secs}s anchor has expired (Sora keeps videos 24h): node character.mjs refresh ${ch.name}`);
-  const prompt = [`Keep exactly the same person (face, hair, body, clothes), the same location, lighting and camera framing as this video. New action for this clip: ${shot.prompt}`, spec.style].filter(Boolean).join('\n\n');
+  // identity first: a vague "same person" lets the face drift between remixes
+  const prompt = [`Keep exactly the same person as in this video: the identical face (face shape, eyes, eyebrows, nose, mouth, skin tone, facial hair), the same hairline, hair length and hairstyle, the same body and clothes. Do not replace, age or restyle him. Same location, lighting and camera framing. New action for this clip: ${shot.prompt}`, propWords(spec, shot.set), spec.style].filter(Boolean).join('\n\n');
   const r = await fetch(`${BASE}/${a.id}/remix`, { method: 'POST', headers: { ...auth(), 'content-type': 'application/json' }, body: JSON.stringify({ prompt }) });
   const j = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error(`${shot.id}: remix HTTP ${r.status} ${JSON.stringify(j).slice(0, 300)}`);
   return j.id;
 }
 
+// A performance that continues another one: remix that performance's chosen take (one hop from a
+// face already in the video, instead of one hop per shot from the anchor)
+async function remixPerformance(p, spec, dir) {
+  const src = spec.performances.find((x) => x.id === p.remixOf);
+  if (!src) throw new Error(`${p.id}: remixOf ${p.remixOf} is not a performance`);
+  const clip = (src.clip || `clips/${src.id}.mp4`).replace(/\\/g, '/');
+  const idsFile = path.join(dir, 'clips', 'ids.json');
+  const id = fs.existsSync(idsFile) ? JSON.parse(fs.readFileSync(idsFile, 'utf8'))[clip]?.id : null;
+  if (!id) throw new Error(`${p.id}: no Sora id recorded for ${clip} (generate ${src.id} first and set its "clip")`);
+  const prompt = [`Continue with exactly the same person as in this video: the identical face (face shape, eyes, eyebrows, nose, mouth, skin tone, facial hair), the same hairline, hair length and hairstyle, the same body and clothes. Do not replace, age or restyle him. Same location, lighting and camera framing. New actions for this clip: ${p.prompt}`, propWords(spec, setOf(p, spec)), spec.style].filter(Boolean).join('\n\n');
+  const r = await fetch(`${BASE}/${id}/remix`, { method: 'POST', headers: { ...auth(), 'content-type': 'application/json' }, body: JSON.stringify({ prompt }) });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(`${p.id}: remix HTTP ${r.status} ${JSON.stringify(j).slice(0, 300)}`);
+  return j.id;
+}
+
 async function create(shot, spec, dir) {
+  if (shot.remixOf) return remixPerformance(shot, spec, dir);
   const ch = characterFor(shot, spec);
   if (ch) return remix(shot, spec, ch);
   const fd = new FormData();
   fd.set('model', DEPLOYMENT);
   // "sets": named recurring characters + locations (e.g. the two sides of a contrast video); a shot's
   // "set": "A" adds that exact description, so every shot of a character uses the same words
-  fd.set('prompt', [shot.prompt, shot.set && spec.sets?.[shot.set], spec.style].filter(Boolean).join('\n\n'));
+  fd.set('prompt', [shot.prompt, shot.set && spec.sets?.[shot.set], propWords(spec, shot.set), spec.style].filter(Boolean).join('\n\n'));
   fd.set('size', spec.soraSize || '720x1280');
   fd.set('seconds', String(shot.seconds ?? soraSecondsFor(shot.end - shot.start + (shot.from ?? 0))));
-  if (shot.keyframe) {
+  // "startFrom": "set" — begin from the set's people-free bible frame (bible.mjs): the place and
+  // every prop are pinned by the first frame; the prompt must have the person step in
+  if (shot.startFrom === 'set') {
+    const file = path.join(dir, 'bible', `set-${shot.set}.${spec.soraSize || '720x1280'}.png`);
+    if (!fs.existsSync(file)) throw new Error(`${shot.id}: bible frame ${path.relative(dir, file)} missing (run bible.mjs)`);
+    fd.set('input_reference', new Blob([fs.readFileSync(file)], { type: 'image/png' }), path.basename(file));
+  } else if (shot.keyframe) {
     // object keyframes are built by keyframes.mjs; send the Sora-sized version
     const file = typeof shot.keyframe === 'string' ? path.join(dir, shot.keyframe) : path.join(dir, 'assets', 'keyframes', `${shot.id}.${(spec.soraSize || '720x1280')}.png`);
     if (!fs.existsSync(file)) throw new Error(`${shot.id}: keyframe ${path.relative(dir, file)} missing (run keyframes.mjs)`);
@@ -134,7 +168,11 @@ async function main() {
   const saveJobs = () => fs.writeFileSync(jobsFile, JSON.stringify(pending, null, 2));
 
   const work = [];
-  for (const shot of spec.shots) {
+  // "performances": long takes that several shots are cut from (the face can't drift inside one
+  // clip): { id, set?, prompt (timed actions), seconds, takes?, remixOf?: "<performance id>" }. They
+  // land in clips/<id>.mp4 (.vN); shots use them with "takes": 0, "clip": "clips/<id>.mp4", "from".
+  const perfShots = (spec.performances || []).map((p) => ({ ...p, start: 0, end: p.seconds, from: 0, seconds: p.seconds }));
+  for (const shot of [...perfShots, ...spec.shots]) {
     if (only && !only.includes(shot.id)) continue;
     const takes = shot.takes ?? 1;
     let n0 = 1;

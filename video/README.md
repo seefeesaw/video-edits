@@ -37,6 +37,51 @@ time (~150s each); 429s are retried.
 Overlays are rendered with the slideshow engine (`../slideshow`), so captions accept every slideshow
 element and auto-fit (`fit: [x0,y0,x1,y1]` = ink box measured on the reference).
 
+## Continuity bible (everything that must not change)
+
+```bash
+node bible.mjs videos/<name>                         # canonical props + people-free set frames
+node continuity.mjs videos/<name> --takes A2 --apply # rank takes on face, outfit, every prop, set
+```
+
+`"bible": {"props": {"jar": {"desc": "<exact words>"}}, "sets": {"A": {"desc", "props": [...], "layout"}}}`.
+bible.mjs makes one product image per prop, then each set's **people-free first frame** as a
+gpt-image-2 edit that takes those prop images as references (so the set contains those exact
+objects). Sora refuses images with people but accepts the empty set, so a performance with
+`"startFrom": "set"` begins from it — place, props and their positions are pinned by the first frame
+and the prompt has the person step in (cut the shots from after that). Every prompt of a set also
+gets the props' exact words appended. continuity.mjs shows the vision model (thuma-luna) the bible
+images plus the established face (the source performance, or the library character) and the
+candidate takes side by side, and scores each take per element; `--apply` picks the best.
+
+## Performances (one face across many shots)
+
+A face only stays identical inside ONE continuous clip; every separate generation (text or remix)
+is a new chance to drift. So for a person who appears in several shots, generate long takes and
+cut the shots out of them:
+
+```jsonc
+"performances": [
+  { "id": "B1", "set": "B", "seconds": 12, "takes": 2,
+    "prompt": "One continuous take with these actions in order. 0-1 s: … 1-4 s: … 4-6 s: …" },
+  { "id": "B2", "remixOf": "B1", "seconds": 12, "takes": 2, "prompt": "<the remaining actions>" }
+],
+"shots": [ { "id": "s4", "start": 9.05, "end": 10.9, "takes": 0, "clip": "clips/B1.v2.mp4", "from": 3.0 } ]
+```
+
+**A remix re-renders the WHOLE source video from the source's opening state** (an empty jar stays
+empty even if the prompt says it is full). To continue a state (a full, dripping jar after the pour),
+remix the source asking to keep it unchanged except its LAST seconds ("Keep the first 8 s exactly;
+change only 8-12 s: …") and cut the shot from those last seconds. For an action that doesn't depend on
+state (a pour, a drink) any remix works.
+
+`node sora.mjs videos/<name> --only B1` → `node refsheet.mjs videos/<name> --takes B1` (8 frames
+over the whole take) → set the performance's `"clip"` to the take with the right face and every
+action, and each shot's `clip`/`from` to the moment its action happens → generate `B2` (a remix of
+B1's chosen take: one hop from that face) → build. Timed prompts are followed roughly; read the
+sheet for the real timings. A chosen performance can become the character's library anchor
+(`character.mjs adopt <name> --id <its id from clips/ids.json>`) for the next video in a series.
+
 ## Characters (same person across shots and videos)
 
 ```bash

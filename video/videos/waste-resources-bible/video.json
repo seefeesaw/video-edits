@@ -1,0 +1,697 @@
+{
+  "title": "Do not waste resources (continuity bible)",
+  "source": "https://www.youtube.com/shorts/FZn1-iX3U-Q",
+  "notes": "Continuity: a bible of canonical props and people-free set frames (bible/) is generated first. Each character is one 12 s performance that STARTS from its set frame (props and place pinned by the first frame; the person steps in), cut into the shots; remaining actions are remixes of it. Every prompt carries the exact prop wording. People are new generated people; packaging is unbranded.",
+  "size": [
+    1080,
+    1920
+  ],
+  "fps": 60,
+  "duration": 27.841,
+  "soraSize": "720x1280",
+  "sets": {
+    "A": "Person A: a young man of about 22 with short wavy dark-brown hair, light olive skin, clean-shaven, wearing a plain black short-sleeve T-shirt. Location A: a warm home kitchen with medium-brown wooden cabinets, a stainless-steel fridge directly behind him, a speckled beige granite countertop in the foreground, a stovetop kettle on the left, a small ceiling spotlight at the top of the frame, warm tungsten light. On the counter in the centre: an enormous footed glass candy jar about 60 cm tall. Close, frontal camera at counter height; he stands behind the counter, very energetic, shouting and laughing.",
+    "B": "Person B: a young man of about 25 with short curly black hair and a short dark beard, medium-brown skin, wearing an oversized plain white T-shirt. Location B: a dim modern kitchen at night lit by violet-blue LED strip light on the walls and ceiling, dark cabinets behind him. He sits behind a light oak table; on the table in front of him, centred, one ordinary clear stemless glass. Static frontal camera at table height; calm, deadpan, slightly amused."
+  },
+  "style": "One continuous unedited take: no cuts, no jump cuts, no zooms or camera changes. Vertical smartphone video, realistic, natural skin, crisp focus, no on-screen text, no logos or brand names on any packaging or clothing.",
+  "overlays": [
+    {
+      "from": 0,
+      "to": 2.2667,
+      "elements": "@caption"
+    },
+    {
+      "from": 6.3667,
+      "to": 9.05,
+      "elements": "@caption"
+    },
+    {
+      "from": 12.2667,
+      "to": 14.85,
+      "elements": "@caption"
+    },
+    {
+      "from": 17.1667,
+      "to": 19.1,
+      "elements": "@caption"
+    },
+    {
+      "from": 20.6,
+      "to": 24.5667,
+      "elements": "@caption"
+    }
+  ],
+  "captions": {
+    "caption": [
+      {
+        "type": "html",
+        "x": 116,
+        "y": 247,
+        "w": 849,
+        "h": 107,
+        "html": "<div style=\"width:100%;height:100%;background:#fff;border-radius:16px\"></div>"
+      },
+      {
+        "type": "text",
+        "text": "When I want chocolate milk:",
+        "x": 143,
+        "y": 278,
+        "fit": [
+          143,
+          278,
+          934,
+          321
+        ],
+        "font": {
+          "family": "TikTok Sans",
+          "weight": 500,
+          "size": 52,
+          "color": "#111",
+          "lineHeight": 1
+        }
+      }
+    ]
+  },
+  "fonts": [
+    "TikTok Sans:wght@400;500;600"
+  ],
+  "audio": {
+    "sora": 1
+  },
+  "bible": {
+    "props": {
+      "jar": {
+        "desc": "an enormous footed glass jar about 60 cm tall: a wide round clear-glass bowl on a short thick glass pedestal with a round glass foot, a wide open mouth with a thick rolled rim, no lid, plain clear glass with no text"
+      },
+      "pot": {
+        "desc": "a huge plain white enamel cooking pot with two short side handles, full of melted dark chocolate"
+      },
+      "bowl": {
+        "desc": "an enormous brushed stainless-steel mixing bowl heaped with dry light-brown chocolate powder"
+      },
+      "jugs": {
+        "desc": "two big translucent white plastic one-gallon milk jugs with blue caps, full of milk, with no labels"
+      },
+      "syrup": {
+        "desc": "a small plain bright-yellow plastic squeeze bottle with a white flip cap and no label"
+      },
+      "cocoa": {
+        "desc": "a small plain bright-yellow rectangular cardboard box of cocoa powder with no text or pictures"
+      },
+      "carton": {
+        "desc": "a plain white-and-light-blue one-litre milk carton with a blue screw cap and no text"
+      },
+      "frother": {
+        "desc": "a small handheld light-blue electric milk frother with a thin metal whisk"
+      },
+      "glass": {
+        "desc": "an ordinary clear stemless wine glass, empty"
+      }
+    },
+    "sets": {
+      "A": {
+        "props": [
+          "jar",
+          "pot",
+          "bowl",
+          "jugs"
+        ],
+        "desc": "a warm home kitchen at night: medium-brown wooden cabinets, a stainless-steel fridge in the middle background, a speckled beige granite countertop across the bottom third, a stovetop kettle on the left, a small ceiling spotlight at the top, warm tungsten light; close frontal camera at counter height",
+        "layout": "The giant jar is ENORMOUS and dominates the frame: it stands in the centre of the counter and fills about 45% of the frame width and reaches from the counter (70% of the frame height) up to 35% of the frame height, about three times taller than the pot. The white pot stands on the counter to the left of the jar, the steel bowl to the right, the two milk jugs at the far right edge; the camera is close, the counter edge at the bottom of the frame; the space behind the counter, in front of the fridge, is empty (the person will stand there)."
+      },
+      "B": {
+        "props": [
+          "glass",
+          "syrup",
+          "cocoa",
+          "carton",
+          "frother"
+        ],
+        "desc": "a dim modern kitchen at night lit by violet-blue LED strip light along the ceiling and walls, dark cabinets; a light oak table across the bottom third; static frontal camera at table height",
+        "layout": "The empty glass stands centred on the table (65-80% of the frame height); to its right, in a neat row on the table, the yellow squeeze bottle, the yellow cocoa box, the milk carton and the frother lying flat; the space behind the table is empty (the person will sit there)."
+      }
+    }
+  },
+  "performances": [
+    {
+      "id": "A1",
+      "set": "A",
+      "startFrom": "set",
+      "seconds": 12,
+      "takes": 2,
+      "prompt": "One continuous take, no cuts. 0-1 s: Person A steps in from the right and stands behind the counter facing the camera. 1-3.5 s: he lifts the white pot and pours a thick river of melted chocolate into the giant jar, grinning wildly. 3.5-6 s: he tips the steel bowl over the jar and an avalanche of the dry powder pours onto it and spills across the counter while he screams with joy. 6-9 s: he pours both milk jugs onto the powder at once, milk flooding down the outside of the dark jar. 9-12 s: he plunges his whole forearm into the jar and stirs violently, powder exploding outwards.",
+      "continuity": {
+        "A1.v2.mp4": {
+          "total": 8.36,
+          "face": 8,
+          "hair": 8,
+          "outfit": 9,
+          "jar": 8,
+          "pot": 9,
+          "bowl": 9,
+          "jugs": 9,
+          "set": 7
+        },
+        "A1.mp4": {
+          "total": 7.55,
+          "face": 8,
+          "hair": 8,
+          "outfit": 9,
+          "jar": 8,
+          "pot": 2,
+          "bowl": 9,
+          "jugs": 7,
+          "set": 7
+        }
+      },
+      "clip": "clips/A1.v2.mp4"
+    },
+    {
+      "id": "A2",
+      "remixOf": "A1",
+      "seconds": 12,
+      "takes": 2,
+      "prompt": "Keep this video exactly the same for the first 8 seconds (same person, same actions, same props, same timing). Change ONLY the last 4 seconds (8-12 s): instead of stirring, he hugs the giant jar, which is now full of milky chocolate milk and dripping down its sides, lifts it up to his face, stares into the camera in mock seriousness, then lowers it back onto the counter covered in spilled milk and powder and keeps staring at the camera.",
+      "continuity": {
+        "A2.mp4": {
+          "total": 8.25,
+          "face": 9,
+          "hair": 9,
+          "outfit": 9,
+          "jar": 9,
+          "pot": 9,
+          "bowl": 9,
+          "jugs": 8,
+          "set": 9,
+          "state": 1
+        },
+        "A2.v2.mp4": {
+          "total": 7.67,
+          "face": 8,
+          "hair": 8,
+          "outfit": 9,
+          "jar": 9,
+          "pot": 8,
+          "bowl": 8,
+          "jugs": 8,
+          "set": 8,
+          "state": 1
+        }
+      },
+      "clip": "clips/A2.mp4"
+    },
+    {
+      "id": "B1",
+      "set": "B",
+      "startFrom": "set",
+      "seconds": 12,
+      "takes": 2,
+      "prompt": "One continuous take, no cuts. 0-1 s: Person B sits down behind the table facing the camera. 1-2 s: he looks into the camera with wide surprised eyes. 2-5 s: he picks up the yellow squeeze bottle and squeezes a thin stream of chocolate syrup into the glass. 5-7 s: he picks up the yellow cocoa box and tilts a modest amount of cocoa powder into the glass, then leans in and shakes a little more. 7-9.5 s: he pours milk from the carton into the glass. 9.5-12 s: he froths it with the light-blue frother.",
+      "continuity": {
+        "B1.mp4": {
+          "total": 9,
+          "face": 9,
+          "hair": 9,
+          "outfit": 9,
+          "glass": 8,
+          "syrup": 9,
+          "cocoa": 10,
+          "carton": 9,
+          "frother": 9,
+          "set": 9
+        },
+        "B1.v2.mp4": {
+          "total": 8.75,
+          "face": 9,
+          "hair": 9,
+          "outfit": 9,
+          "glass": 8,
+          "syrup": 9,
+          "cocoa": 6,
+          "carton": 9,
+          "frother": 10,
+          "set": 9
+        }
+      },
+      "clip": "clips/B1.v2.mp4"
+    },
+    {
+      "id": "B2",
+      "remixOf": "B1",
+      "seconds": 12,
+      "takes": 2,
+      "prompt": "He picks up his glass of light chocolate milk and drinks it in long sips while looking into the camera, then lowers it, satisfied, and smiles slightly.",
+      "continuity": {
+        "B2.v2.mp4": {
+          "total": 8.92,
+          "face": 8,
+          "hair": 8,
+          "outfit": 9,
+          "glass": 9,
+          "syrup": 10,
+          "cocoa": 10,
+          "carton": 10,
+          "frother": 9,
+          "set": 9
+        },
+        "B2.mp4": {
+          "total": 5.67,
+          "face": 8,
+          "hair": 8,
+          "outfit": 9,
+          "glass": 8,
+          "syrup": 0,
+          "cocoa": 0,
+          "carton": 0,
+          "frother": 5,
+          "set": 5
+        }
+      },
+      "clip": "clips/B2.v2.mp4"
+    },
+    {
+      "id": "B3",
+      "remixOf": "B1",
+      "seconds": 12,
+      "takes": 2,
+      "prompt": "Continue exactly from the end of this video with everything on the table where it is. He picks up the milk carton and slowly, steadily pours milk into the glass over about four seconds, watching calmly, then sets the carton back down in its place.",
+      "continuity": {
+        "B3.v2.mp4": {
+          "total": 8.38,
+          "face": 9,
+          "hair": 9,
+          "outfit": 9,
+          "glass": 8,
+          "syrup": 10,
+          "cocoa": 9,
+          "carton": 4,
+          "frother": 8,
+          "set": 9,
+          "state": 7
+        },
+        "B3.mp4": {
+          "total": 8,
+          "face": 9,
+          "hair": 9,
+          "outfit": 9,
+          "glass": 8,
+          "syrup": 2,
+          "cocoa": 9,
+          "carton": 9,
+          "frother": 9,
+          "set": 9,
+          "state": 4
+        }
+      },
+      "clip": "clips/B3.mp4"
+    }
+  ],
+  "shots": [
+    {
+      "id": "s1",
+      "set": "A",
+      "start": 0,
+      "end": 2.2667,
+      "takes": 0,
+      "clip": "clips/A1.v2.mp4",
+      "from": 1.7,
+      "performance": "A1",
+      "pick": "manual",
+      "prompt": "He lifts a huge white cooking pot and pours a thick river of melted chocolate into the giant glass jar, filling it a third of the way, grinning wildly at the camera. The jar fills the lower-centre of the frame; his face upper-left.",
+      "zoom": 1.35,
+      "pan": [
+        0.25,
+        -1
+      ],
+      "grade": {
+        "r": [
+          1.3197,
+          19.93
+        ],
+        "g": [
+          1.6449,
+          21.5
+        ],
+        "b": [
+          1.9002,
+          42.57
+        ],
+        "clip": "clips/A1.v2.mp4"
+      }
+    },
+    {
+      "id": "s2",
+      "set": "B",
+      "start": 2.2667,
+      "end": 6.3667,
+      "takes": 0,
+      "clip": "clips/B1.v2.mp4",
+      "from": 0.9,
+      "performance": "B1",
+      "pick": "manual",
+      "prompt": "He looks straight into the camera with wide surprised eyes, then without any cut calmly picks up a small plain yellow squeeze bottle of chocolate syrup and squeezes a thin stream into his glass. Same framing the whole time: he is centred, the glass at the bottom centre.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          0.7696,
+          50.35
+        ],
+        "g": [
+          0.8825,
+          34.41
+        ],
+        "b": [
+          0.9513,
+          17.02
+        ],
+        "clip": "clips/B1.v2.mp4"
+      }
+    },
+    {
+      "id": "s3",
+      "set": "A",
+      "start": 6.3667,
+      "end": 9.05,
+      "takes": 0,
+      "clip": "clips/A1.v2.mp4",
+      "from": 4.2,
+      "performance": "A1",
+      "pick": "manual",
+      "prompt": "He tips an enormous metal mixing bowl over the giant jar, which is already filled with dark liquid chocolate, and a heavy avalanche of DRY light-brown chocolate-milk powder pours out like sand (a dry granular powder, NOT smoke, NOT steam, NOT fog), piling on top of the jar and spilling down onto the counter, while he screams with joy.",
+      "zoom": 1.4,
+      "pan": [
+        0.75,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.1896,
+          19.56
+        ],
+        "g": [
+          1.2944,
+          31.29
+        ],
+        "b": [
+          1.3803,
+          54.12
+        ],
+        "clip": "clips/A1.v2.mp4"
+      }
+    },
+    {
+      "id": "s4",
+      "set": "B",
+      "start": 9.05,
+      "end": 10.9,
+      "takes": 0,
+      "clip": "clips/B1.v2.mp4",
+      "from": 5.05,
+      "performance": "B1",
+      "pick": "manual",
+      "prompt": "He opens a small plain yellow box of cocoa powder and tilts it over his glass, adding a modest amount, focused.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          0.7561,
+          49.49
+        ],
+        "g": [
+          0.831,
+          35.84
+        ],
+        "b": [
+          0.9046,
+          15.36
+        ],
+        "clip": "clips/B1.v2.mp4"
+      }
+    },
+    {
+      "id": "s5",
+      "set": "B",
+      "start": 10.9,
+      "end": 12.2667,
+      "takes": 0,
+      "clip": "clips/B1.v2.mp4",
+      "from": 5.9,
+      "performance": "B1",
+      "pick": "manual",
+      "prompt": "Closer: he leans in and shakes a little more cocoa powder from the small plain yellow box into his glass, concentrating.",
+      "zoom": 1.2,
+      "pan": [
+        0.3,
+        0.4
+      ],
+      "framing": "manual",
+      "grade": {
+        "r": [
+          0.8286,
+          29.6
+        ],
+        "g": [
+          0.9087,
+          18.04
+        ],
+        "b": [
+          0.8576,
+          8.5
+        ],
+        "clip": "clips/B1.v2.mp4"
+      }
+    },
+    {
+      "id": "s6",
+      "set": "A",
+      "start": 12.2667,
+      "end": 13.05,
+      "takes": 0,
+      "clip": "clips/A1.v2.mp4",
+      "from": 6.3,
+      "performance": "A1",
+      "pick": "manual",
+      "prompt": "The giant jar is filled to the brim with dark liquid chocolate (no cereal, no balls, no solid pieces) and topped with a tall cone of dry light-brown powder; he holds a big plastic milk jug in each hand and pours both onto the powder at once, milk splashing.",
+      "zoom": 1.15,
+      "pan": [
+        -0.5,
+        -1
+      ],
+      "grade": {
+        "r": [
+          1.1767,
+          22.06
+        ],
+        "g": [
+          1.3704,
+          25.94
+        ],
+        "b": [
+          1.5441,
+          48.94
+        ],
+        "clip": "clips/A1.v2.mp4"
+      }
+    },
+    {
+      "id": "s7",
+      "set": "A",
+      "start": 13.05,
+      "end": 14.85,
+      "takes": 0,
+      "clip": "clips/A1.v2.mp4",
+      "from": 7.17,
+      "performance": "A1",
+      "pick": "manual",
+      "prompt": "The giant jar, full of DARK brown liquid chocolate, overflows as he keeps pouring two milk jugs onto it: white milk and wet powder flood down the outside of the dark jar onto the powder-covered counter; he shouts with excitement.",
+      "speed": 0.95,
+      "zoom": 1.4,
+      "pan": [
+        -0.25,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.1217,
+          9.65
+        ],
+        "g": [
+          1.2257,
+          15.28
+        ],
+        "b": [
+          1.2544,
+          35.85
+        ],
+        "clip": "clips/A1.v2.mp4"
+      }
+    },
+    {
+      "id": "s8",
+      "set": "B",
+      "start": 14.85,
+      "end": 17.1667,
+      "takes": 0,
+      "clip": "clips/B3.mp4",
+      "from": 0.1,
+      "performance": "B1",
+      "pick": "manual",
+      "prompt": "He calmly pours milk from a plain white-and-blue milk carton (no text) into his glass, filling it to a normal level.",
+      "zoom": 1.15,
+      "pan": [
+        -0.5,
+        -0.75
+      ],
+      "grade": {
+        "r": [
+          0.6736,
+          47.18
+        ],
+        "g": [
+          0.7706,
+          34.31
+        ],
+        "b": [
+          0.8721,
+          34.58
+        ],
+        "clip": "clips/B3.mp4"
+      }
+    },
+    {
+      "id": "s9",
+      "set": "A",
+      "start": 17.1667,
+      "end": 19.1,
+      "takes": 0,
+      "clip": "clips/A1.v2.mp4",
+      "from": 9.5,
+      "performance": "A1",
+      "pick": "manual",
+      "prompt": "He plunges his whole forearm into the overflowing giant jar of chocolate milk and powder and stirs it violently, powder exploding outwards, grimacing with effort.",
+      "zoom": 1.35,
+      "pan": [
+        0.25,
+        -1
+      ],
+      "grade": {
+        "r": [
+          1.0683,
+          28.2
+        ],
+        "g": [
+          1.1309,
+          35.3
+        ],
+        "b": [
+          1.1669,
+          45.35
+        ],
+        "clip": "clips/A1.v2.mp4"
+      }
+    },
+    {
+      "id": "s10",
+      "set": "B",
+      "start": 19.1,
+      "end": 20.6,
+      "takes": 0,
+      "clip": "clips/B1.v2.mp4",
+      "from": 9.8,
+      "performance": "B1",
+      "pick": "manual",
+      "prompt": "He froths the light-brown chocolate milk in his glass with a small handheld light-blue milk frother, calm and precise.",
+      "zoom": 1.3,
+      "pan": [
+        -0.75,
+        -0.25
+      ],
+      "grade": {
+        "r": [
+          0.767,
+          50.44
+        ],
+        "g": [
+          0.8552,
+          37.14
+        ],
+        "b": [
+          0.86,
+          30.36
+        ],
+        "clip": "clips/B1.v2.mp4"
+      }
+    },
+    {
+      "id": "s11",
+      "set": "A",
+      "start": 20.6,
+      "end": 24.5667,
+      "takes": 0,
+      "clip": "clips/A2.mp4",
+      "from": 8,
+      "performance": "A2",
+      "pick": "manual",
+      "prompt": "He hugs and lifts the enormous jar of dark chocolate milk, dripping with milk and powder all down its sides, staring into the camera in mock seriousness, then lowers it back onto the powder-covered counter.",
+      "zoom": 1.25,
+      "pan": [
+        1,
+        -1
+      ],
+      "grade": {
+        "r": [
+          1.4261,
+          4.85
+        ],
+        "g": [
+          1.6702,
+          15.49
+        ],
+        "b": [
+          2,
+          37.04
+        ],
+        "clip": "clips/A2.mp4"
+      }
+    },
+    {
+      "id": "s12",
+      "set": "B",
+      "start": 24.5667,
+      "end": 27.841,
+      "takes": 0,
+      "clip": "clips/B2.v2.mp4",
+      "from": 1.2,
+      "performance": "B2",
+      "pick": "manual",
+      "prompt": "He picks up his glass of light chocolate milk, drinks it in long sips looking into the camera, then lowers it, satisfied.",
+      "zoom": 1.2,
+      "pan": [
+        -0.25,
+        -1
+      ],
+      "grade": {
+        "r": [
+          0.7623,
+          46.4
+        ],
+        "g": [
+          0.8616,
+          32.48
+        ],
+        "b": [
+          0.8571,
+          35.71
+        ],
+        "clip": "clips/B2.v2.mp4"
+      }
+    }
+  ]
+}
