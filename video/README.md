@@ -66,15 +66,33 @@ says the screen is flat chroma-key green; the picture is composited after Sora p
 "captions": { "player_s2": [ { "type": "html", "x": 0, "y": 0, "w": 1600, "h": 1000,
                 "html": "<div …background:url({{src bible/screen-e1.png}})…>…app UI…</div>" } ] },
 "shots": [ { "id": "s2", …, "screen": { "ui": "player_s2", "size": [1600, 1000] } } ]   // or { "image": "bible/screen-e1.png" }
+// a video you have the rights to (the user's own scene file): plays from "from" and loops; "ui" is then
+// an overlay (player chrome on a transparent background)
+"screen": { "clip": "assets/screen/scene.mp4", "from": 12.5, "ui": "player_s2" }
 ```
 
 build.mjs keys the largest green blob of each take (a Christmas tree elsewhere is ignored; the box is
 unioned over the clip), cover-fits the rendered screen into it (anchored at the top, since a mug in
-front hides the bottom) and caches `out/_screens/<take>.<hash>.mp4`; compare.mjs scores the
+front hides the bottom; a device cut by the frame edge shows the picture's side that faces into
+the frame, unless `"anchor": "center"`) and caches `out/_screens/<take>.<hash>.mp4`; compare.mjs scores the
 composited takes, so --pick/--framing/--apply see the real picture. Because the picture never goes
 to Sora it may show people (adults: gpt-image-2 blocks stills of children/teens) and a streaming-app UI — but only original, generated content (never
-stills of a real show) and an invented title. Check every keyframe still shows the green (`node
+stills of a real show) and an invented title. Text that must be readable in every shot (a title): set `"anchor": "center"` on the shots and keep
+it inside the middle third of the screen (x 530-1070 of 1600) — the part a cut-off laptop still shows.
+Check every keyframe still shows the green (`node
 keyframes.mjs` warns when a `screen` shot's keyframe has none).
+
+## Changing one thing on purpose (another background, another room)
+
+"Exact replica, only the background different": keep every shot's foreground (product, props,
+hands, actions, framing, timing) and change only the bible set — the wall/room behind and its
+decoration (swap background-only props like a tree for the new ones, never the desk-front props) —
+plus the words that name the old background in `style` and in each keyframe prompt ("the tree
+glows top-right" → "the fairy-light window glows top-right"). Then set
+`"compare": {"trim": 0.35}`: the colour grid would otherwise count the new background as an error,
+the grade would pull the new wall back to the old colour, and --pick/--framing would prefer takes
+and crops that hide it. With trim, every score and grade fit uses the best-matching 65% of grid
+cells per frame. Don't make the new background green when a device screen is keyed.
 
 ## Performances (one face across many shots)
 
@@ -166,6 +184,7 @@ original reference frames) at least daily while a series is in production, or re
   "overlays": [ { "from": 0, "to": 10.681, "elements": [ /* slideshow elements */ ] },
                 { "from": 12.3, "to": 14.9, "elements": "@caption" } ],
   "fonts": ["TikTok Sans:wght@400;500;600"],
+  "compare": { "trim": 0.35 },      // only for replicas that change part of the picture on purpose
   "audio": { "sora": 1, "music": "assets/music.mp3", "musicVolume": 1, "musicStart": 0 }
 }
 ```

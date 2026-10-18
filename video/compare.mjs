@@ -17,6 +17,8 @@
 //        re-running gives the same grade; the grade records its clip and build.mjs ignores it when
 //        the shot's clip has changed since
 //   --only s3,s5   restrict --pick/--framing/--apply to those shots
+//   video.json "compare": {"trim": 0.35}: for replicas that change part of the picture on purpose
+//        (another background): scores and grade fits ignore the worst-matching 35% of grid cells
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -72,16 +74,42 @@ const gridOf = (px, z = 1, [panX, panY] = [0, 0]) => {
   }
   return out;
 };
-// per-channel linear fit [gain, offset] mapping grids B onto reference grids A
-const fitGrade = (A, B) => [0, 1, 2].map((c) => {
-  const xa = A.flatMap((a) => a.filter((_, i) => i % 3 === c)), xb = B.flatMap((b) => b.filter((_, i) => i % 3 === c));
+// "compare": {"trim": 0.35} in video.json: the replica changes part of the picture ON PURPOSE (a
+// different background/room, another screen picture), so every score and grade fit ignores the worst-
+// matching 35% of grid cells per frame — otherwise the grade drags the new wall back to the original's
+// colour and --pick/--framing prefer takes/crops that hide the intended change
+const TRIM = spec.compare?.trim ?? 0;
+const cellDiffs = (a, b, gg) => {
+  const d = [];
+  for (let i = 0; i < a.length; i += 3) {
+    let t = 0;
+    for (let c = 0; c < 3; c++) t += Math.abs(a[i + c] - Math.max(0, Math.min(255, b[i + c] * gg[c][0] + gg[c][1])));
+    d.push(t / 3);
+  }
+  return d;
+};
+// indices of the cells kept after trimming the worst-matching ones
+const keptCells = (d) => {
+  if (!TRIM) return d.map((_, i) => i);
+  const cut = [...d].sort((x, y) => x - y)[Math.floor(d.length * (1 - TRIM)) - 1];
+  return d.map((v, i) => (v <= cut ? i : -1)).filter((i) => i >= 0);
+};
+// per-channel linear fit [gain, offset] mapping grids B onto reference grids A (with TRIM: fitted on
+// the cells that still match after a first fit, so the intentionally changed area doesn't steer it)
+const fitOn = (A, B, keep) => [0, 1, 2].map((c) => {
+  const xa = A.flatMap((a, k) => keep[k].map((i) => a[i * 3 + c])), xb = B.flatMap((b, k) => keep[k].map((i) => b[i * 3 + c]));
   const ma = mean(xa), mb = mean(xb), g = Math.max(0.5, Math.min(2, sd(xa, ma) / sd(xb, mb)));
   return [g, ma - g * mb];
 });
+const fitGrade = (A, B) => {
+  const all = A.map((a) => Array.from({ length: a.length / 3 }, (_, i) => i));
+  const g = fitOn(A, B, all);
+  return TRIM ? fitOn(A, B, A.map((a, k) => keptCells(cellDiffs(a, B[k], g)))) : g;
+};
 const gradeArr = (g) => (g ? [g.r, g.g, g.b] : [[1, 0], [1, 0], [1, 0]]);
 const comp = (A, B, gg = gradeArr()) => {
   let d = 0, n = 0;
-  A.forEach((a, k) => a.forEach((v, i) => { d += Math.abs(v - Math.max(0, Math.min(255, B[k][i] * gg[i % 3][0] + gg[i % 3][1]))); n++; }));
+  A.forEach((a, k) => { const cd = cellDiffs(a, B[k], gg); for (const i of keptCells(cd)) { d += cd[i]; n++; } });
   return 100 - (100 * d) / n / 255;
 };
 const zoomOf = (s) => (Array.isArray(s.zoom) ? s.zoom[0] : s.zoom ?? 1);
@@ -215,12 +243,14 @@ for (const s of spec.shots) {
   for (const [t, hex] of samples) {
     const a = parse(hex), b = gridAt(Math.min(nframes - 1, Math.round(t * fps)));
     let d = 0, la = 0, lb = 0, wa = 0, wb = 0;
-    for (let i = 0; i < a.length; i += 3) {
-      d += (Math.abs(a[i] - b[i]) + Math.abs(a[i + 1] - b[i + 1]) + Math.abs(a[i + 2] - b[i + 2])) / 3;
+    const cd = cellDiffs(a, b, gradeArr()), keep = keptCells(cd);
+    for (const c of keep) {
+      const i = c * 3;
+      d += cd[c];
       la += a[i] + a[i + 1] + a[i + 2]; lb += b[i] + b[i + 1] + b[i + 2];
       wa += a[i] - a[i + 2]; wb += b[i] - b[i + 2];
     }
-    const cells = a.length / 3;
+    const cells = keep.length;
     sim += 100 - (100 * d) / cells / 255; dl += (lb - la) / cells / 3; dw += (wb - wa) / cells;
   }
   const n = samples.length;
@@ -240,7 +270,7 @@ diffs.forEach((d, n) => {
   if (n && ((d > 24 && d > 2 * med) || (d > 10 && d > 4 * med))) cuts.push(+(n / fps).toFixed(3));
 });
 console.log(rows.join('\n'));
-console.log(`mean comp ${mean(comps).toFixed(1)}  (frames ${nframes}, ${(nframes / fps).toFixed(2)}s vs ref ${ref.duration}s)`);
+console.log(`mean comp ${mean(comps).toFixed(1)}${TRIM ? ` (on the best-matching ${Math.round(100 * (1 - TRIM))}% of the picture: compare.trim)` : ''}  (frames ${nframes}, ${(nframes / fps).toFixed(2)}s vs ref ${ref.duration}s)`);
 console.log(`cuts ref : ${ref.cuts.join(' ')}`);
 console.log(`cuts mine: ${cuts.join(' ')}`);
 const unmatched = ref.cuts.filter((c) => !cuts.some((m) => Math.abs(m - c) <= 1.5 / fps));

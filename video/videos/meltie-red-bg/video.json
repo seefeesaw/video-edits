@@ -1,0 +1,493 @@
+{
+  "title": "This and Stranger Things s5 (red Meltie mug, Netflix on the laptop, new background)",
+  "source": "https://www.youtube.com/shorts/tfE3-IsPbOw",
+  "notes": "Exact replica of the Short with ONLY the background changed: a dark navy-blue wall with a night window and a warm fairy-light curtain replaces the red wall and the Christmas tree; desk, mug, laptop, props, hands, actions, framing and timing follow the original. RED variant of the real Meltie Mini Fondue Mug (store photo IMG_3997 + lifestyle photo IMG-4084). The laptop is a green screen composited with a Netflix-style screen showing only the title \"Harry Potter and the Philosopher's Stone\" in plain serif type (the title page, then the player on its title card) at the user's request: no film footage, stills, logo art, characters or actors. Unbranded wafer wrapper; Sora audio. compare.trim ignores the worst-matching 35% of the picture (the new background) when scoring and grading.",
+  "size": [
+    1080,
+    1920
+  ],
+  "fps": 60,
+  "duration": 10.681,
+  "soraSize": "720x1280",
+  "product": {
+    "name": "Meltie Mug Mini Fondue Mug, red",
+    "refs": [
+      "assets/product/red-front.png",
+      "assets/product/red-lit.jpg"
+    ],
+    "description": "the RED Meltie Mini Fondue Mug exactly as in the product photos: glossy bright red ceramic body that flares wider at the top, a white interior, 'Chocolate...' in white cursive script with a small white swirl/® mark on the front, a tall arched opening at the base for a tealight, an angular red handle on the right with a small round hole, and a fondue fork with a red handle and long steel tines that clips into the handle"
+  },
+  "style": "Vertical smartphone video filmed at night at a home desk, close camera at desk height; warm, cosy, slightly moody colour grade in a dim room with a dark navy-blue wall and warm fairy lights; hands have long light-grey manicured nails. One continuous take: no cuts, no zooms. Realistic. No on-screen text, no logos. The laptop screen is always flat chroma-key green.",
+  "bible": {
+    "props": {
+      "mug": {
+        "desc": "the RED Meltie Mini Fondue Mug exactly as in the product photos: glossy bright red ceramic body that flares wider at the top, a white interior, 'Chocolate...' in white cursive script with a small white swirl/® mark on the front, a tall arched opening at the base for a tealight, an angular red handle on the right with a small round hole, and a fondue fork with a red handle and long steel tines that clips into the handle",
+        "image": "assets/product/red-front.png"
+      },
+      "laptop": {
+        "desc": "a dark-grey open laptop, its screen lit with a perfectly flat, uniform, pure chroma-key green (#00FF00) from edge to edge: no picture, no interface, no reflections, no glare"
+      },
+      "curtain": {
+        "desc": "a tall dark window at night with snow falling outside, a curtain of warm white fairy lights (vertical strands of tiny warm bulbs) hanging across it"
+      },
+      "torch": {
+        "desc": "a small black pocket butane torch lighter"
+      },
+      "wrapper": {
+        "desc": "a plain red chocolate-wafer bar wrapper with no text or logo, torn open"
+      },
+      "board": {
+        "desc": "a rectangular light-wood serving board with chocolate chip cookies, rows of round milk-chocolate malt balls, white marshmallows and halved strawberries on waffle pieces"
+      }
+    },
+    "sets": {
+      "D": {
+        "props": [
+          "mug",
+          "laptop",
+          "curtain"
+        ],
+        "desc": "a home desk at night in a DIM room: a clean white desk top across the bottom 30% of the frame; behind it a dark navy-blue painted wall with a tall night window hung with a warm white fairy-light curtain, deep shadows, warm low light, no red light, no Christmas tree, no bright studio light; close camera at desk height",
+        "layout": "The red fondue mug stands empty in the centre of the desk and is BIG: about 40% of the frame width, its base at 80% of the frame height; the open laptop on the left with its green screen filling the upper-left third; the window with the fairy-light curtain in the upper-right quarter."
+      }
+    }
+  },
+  "overlays": [
+    {
+      "from": 0,
+      "to": 10.681,
+      "elements": [
+        {
+          "type": "text",
+          "text": "This and Stranger Things s5 🍫",
+          "x": 221,
+          "y": 300,
+          "fit": [
+            221,
+            311,
+            841,
+            353
+          ],
+          "font": {
+            "family": "TikTok Sans, Noto Color Emoji",
+            "weight": 500,
+            "size": 40,
+            "color": "#ffffff",
+            "lineHeight": 1
+          },
+          "style": "text-shadow: 0 1px 3px rgba(0,0,0,.55)"
+        }
+      ]
+    }
+  ],
+  "fonts": [
+    "TikTok Sans:wght@400;500;600",
+    "Bebas Neue",
+    "Inter:wght@400;600;700",
+    "Libre Baskerville"
+  ],
+  "audio": {
+    "sora": 1
+  },
+  "shots": [
+    {
+      "id": "s1",
+      "set": "D",
+      "start": 0,
+      "end": 2.25,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The mug, full of melted milk chocolate with a lit tealight in its base, stands at the lower centre (BIG: 45% of the frame width, vertically 45-82%). A hand from the right holds the mug's red-handled fondue fork with a chocolate-dipped strawberry just above the mug. The laptop top-left has its screen lit flat pure chroma-key green. The corner of the wooden snack board with marshmallows and strawberries enters at the bottom-left.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "The hand lifts the chocolate-coated strawberry out of the mug, chocolate dripping; slow drift closer. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "netflixHero",
+        "anchor": "center"
+      },
+      "clip": "clips/s1.mp4",
+      "grade": {
+        "r": [
+          1.0224,
+          55.5
+        ],
+        "g": [
+          1.2374,
+          16.27
+        ],
+        "b": [
+          1.4994,
+          -3.52
+        ],
+        "clip": "clips/s1.mp4"
+      }
+    },
+    {
+      "id": "s2",
+      "set": "D",
+      "start": 2.25,
+      "end": 3.1333,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The empty mug (no chocolate, no candle) stands in the centre (BIG: 45% of the frame width, vertically 42-80%); a hand from the right holds it by the handle. The laptop top-left has its screen lit flat pure chroma-key green; the fairy-light window glows top-right.",
+        "refs": []
+      },
+      "prompt": "The hand turns the empty mug slightly toward the camera to show the 'Chocolate...' script and the empty tealight opening. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "player_s2",
+        "anchor": "center"
+      },
+      "clip": "clips/s2.v2.mp4",
+      "grade": {
+        "r": [
+          0.8907,
+          68.3
+        ],
+        "g": [
+          1.186,
+          28.05
+        ],
+        "b": [
+          1.5073,
+          10.29
+        ],
+        "clip": "clips/s2.v2.mp4"
+      }
+    },
+    {
+      "id": "s3",
+      "set": "D",
+      "start": 3.1333,
+      "end": 4.4167,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The mug stands in the centre (BIG: 45% of the frame width, vertically 42-80%) half full of round milk-chocolate malt balls. The plain red wafer wrapper hangs into the top-right corner. The laptop top-left has its screen lit flat pure chroma-key green; the fairy-light window glows right.",
+        "refs": [
+          "bible/prop-wrapper.png"
+        ]
+      },
+      "prompt": "More chocolate malt balls pour into the mug from above, bouncing and piling up high. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "player_s3",
+        "anchor": "center"
+      },
+      "clip": "clips/s3.v2.mp4",
+      "grade": {
+        "r": [
+          0.9126,
+          66.32
+        ],
+        "g": [
+          1.2248,
+          26.48
+        ],
+        "b": [
+          1.5317,
+          12.67
+        ],
+        "clip": "clips/s3.v2.mp4"
+      }
+    },
+    {
+      "id": "s4",
+      "set": "D",
+      "start": 4.4167,
+      "end": 5.45,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Foreground centre-left (vertically 40-58%): a hand holds a small white tealight candle; another hand from the right holds the black pocket torch lighter to its wick. Behind, slightly out of focus, the mug full of chocolate malt balls stands at the centre; the laptop top-left has its screen lit flat pure chroma-key green; the fairy-light window right.",
+        "refs": [
+          "bible/prop-torch.png"
+        ]
+      },
+      "prompt": "The torch lighter clicks and lights the tealight's wick; a small flame appears. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "player_s4",
+        "anchor": "center"
+      },
+      "clip": "clips/s4.v2.mp4",
+      "grade": {
+        "r": [
+          1.0318,
+          43.76
+        ],
+        "g": [
+          1.284,
+          18.53
+        ],
+        "b": [
+          1.7412,
+          -2.92
+        ],
+        "clip": "clips/s4.v2.mp4"
+      }
+    },
+    {
+      "id": "s5",
+      "set": "D",
+      "start": 5.45,
+      "end": 6.0333,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The mug piled high with chocolate malt balls, its red-handled fork in it, stands at the centre-left (BIG: 45% of the frame width, vertically 30-72%); two hands at the bottom hold a lit tealight just in front of the arched opening at its base. The laptop top-left has its screen lit flat pure chroma-key green.",
+        "refs": []
+      },
+      "prompt": "The hands slide the lit tealight into the opening under the mug. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "player_s5",
+        "anchor": "center"
+      },
+      "clip": "clips/s5.mp4",
+      "grade": {
+        "r": [
+          0.8824,
+          70.53
+        ],
+        "g": [
+          1.2986,
+          17.64
+        ],
+        "b": [
+          1.7773,
+          -3.69
+        ],
+        "clip": "clips/s5.mp4"
+      }
+    },
+    {
+      "id": "s6",
+      "set": "D",
+      "start": 6.0333,
+      "end": 6.95,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The mug of fully melted glossy chocolate stands in the centre (BIG: 45% of the frame width, vertically 42-76%) with the tealight glowing under it; a hand from the left holds it; a hand from the top-right holds the red-handled fondue fork in the chocolate. The laptop top-left has its screen lit flat pure chroma-key green; the fairy-light window top-right.",
+        "refs": []
+      },
+      "prompt": "Slow circular stirring of the melted chocolate with the fork. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "player_s6",
+        "anchor": "center"
+      },
+      "clip": "clips/s6.mp4",
+      "grade": {
+        "r": [
+          1.0636,
+          54.16
+        ],
+        "g": [
+          1.3025,
+          25.91
+        ],
+        "b": [
+          1.5922,
+          15.62
+        ],
+        "clip": "clips/s6.mp4"
+      }
+    },
+    {
+      "id": "s7",
+      "set": "D",
+      "start": 6.95,
+      "end": 7.7,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The wooden serving board fills the bottom third across the full width. The mug of melted chocolate stands behind it in the centre (30% of the frame width, vertically 33-60%) with a lit tealight in its base. A hand from the right holds the red-handled fork with a marshmallow above the mug. The laptop top-left has its screen lit flat pure chroma-key green; the fairy-light window top-right.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "The hand dips the marshmallow into the chocolate and lifts it out coated and dripping; gentle push in. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "player_s7",
+        "anchor": "center"
+      },
+      "clip": "clips/s7.mp4",
+      "grade": {
+        "r": [
+          0.9592,
+          44.29
+        ],
+        "g": [
+          1.3069,
+          10.6
+        ],
+        "b": [
+          1.916,
+          -11.51
+        ],
+        "clip": "clips/s7.mp4"
+      }
+    },
+    {
+      "id": "s8",
+      "set": "D",
+      "start": 7.7,
+      "end": 10.681,
+      "from": 0.75,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The wooden serving board fills the bottom third across the full width. The mug of melted chocolate stands behind it in the centre (35% of the frame width, vertically 33-60%) with a lit tealight in its base. A hand from the right holds the red-handled fork with a marshmallow above the mug. The laptop top-left has its screen lit flat pure chroma-key green; the fairy-light window top-right.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "The hand dips the marshmallow into the chocolate and lifts it out coated and dripping; gentle push in. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "player_s8",
+        "anchor": "center"
+      },
+      "clip": "clips/s8.mp4",
+      "grade": {
+        "r": [
+          1.0139,
+          50.11
+        ],
+        "g": [
+          1.4256,
+          13.33
+        ],
+        "b": [
+          2,
+          -6.97
+        ],
+        "clip": "clips/s8.mp4"
+      }
+    }
+  ],
+  "captions": {
+    "netflixHero": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1600,
+        "h": 1000,
+        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:34px;font-family:'Bebas Neue';color:#E50914;font-size:60px;letter-spacing:2px\">NETFLIX</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:150px;font-family:'Bebas Neue';color:#E50914;font-size:30px;letter-spacing:9px;color:#ddd\"><span style=\"color:#E50914;font-size:42px\">N</span> FILM</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:215px\"><div style=\"font-family:'Libre Baskerville',Georgia,serif;color:#f2efe8;font-size:46px;line-height:1.15\">Harry Potter<br>and the<br>Philosopher&rsquo;s Stone</div></div><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:470px;color:#bbb;font-size:22px\">2001 &middot; PG &middot; 2h 32m</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:530px;display:flex;justify-content:center;gap:14px;font-weight:700;font-size:26px\"><div style=\"background:#fff;color:#000;padding:13px 34px;border-radius:6px\">&#9654;&nbsp; Play</div><div style=\"background:rgba(109,109,110,.7);color:#fff;padding:13px 26px;border-radius:6px\">&#9432;&nbsp; More Info</div></div></div>"
+      }
+    ],
+    "player_s2": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1600,
+        "h": 1000,
+        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:300px\"><div style=\"font-family:'Libre Baskerville',Georgia,serif;color:#f2efe8;font-size:46px;line-height:1.15\">Harry Potter<br>and the<br>Philosopher&rsquo;s Stone</div></div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:130px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:1%;height:8px;background:#E50914;border-radius:4px\"></div></div><div style=\"position:absolute;left:530px;width:540px;text-align:right;bottom:150px;font-size:22px;color:#fff;font-size:26px\">2:31:40</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:44px;display:flex;justify-content:center;gap:40px;color:#fff;font-size:40px\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span></div><div style=\"position:absolute;left:1030px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:46px\">N</div></div>"
+      }
+    ],
+    "player_s3": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1600,
+        "h": 1000,
+        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:300px\"><div style=\"font-family:'Libre Baskerville',Georgia,serif;color:#f2efe8;font-size:46px;line-height:1.15\">Harry Potter<br>and the<br>Philosopher&rsquo;s Stone</div></div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:130px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:1.5%;height:8px;background:#E50914;border-radius:4px\"></div></div><div style=\"position:absolute;left:530px;width:540px;text-align:right;bottom:150px;font-size:22px;color:#fff;font-size:26px\">2:31:39</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:44px;display:flex;justify-content:center;gap:40px;color:#fff;font-size:40px\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span></div><div style=\"position:absolute;left:1030px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:46px\">N</div></div>"
+      }
+    ],
+    "player_s4": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1600,
+        "h": 1000,
+        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:300px\"><div style=\"font-family:'Libre Baskerville',Georgia,serif;color:#f2efe8;font-size:46px;line-height:1.15\">Harry Potter<br>and the<br>Philosopher&rsquo;s Stone</div></div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:130px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:2%;height:8px;background:#E50914;border-radius:4px\"></div></div><div style=\"position:absolute;left:530px;width:540px;text-align:right;bottom:150px;font-size:22px;color:#fff;font-size:26px\">2:31:38</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:44px;display:flex;justify-content:center;gap:40px;color:#fff;font-size:40px\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span></div><div style=\"position:absolute;left:1030px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:46px\">N</div></div>"
+      }
+    ],
+    "player_s5": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1600,
+        "h": 1000,
+        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:300px\"><div style=\"font-family:'Libre Baskerville',Georgia,serif;color:#f2efe8;font-size:46px;line-height:1.15\">Harry Potter<br>and the<br>Philosopher&rsquo;s Stone</div></div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:130px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:2.5%;height:8px;background:#E50914;border-radius:4px\"></div></div><div style=\"position:absolute;left:530px;width:540px;text-align:right;bottom:150px;font-size:22px;color:#fff;font-size:26px\">2:31:37</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:44px;display:flex;justify-content:center;gap:40px;color:#fff;font-size:40px\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span></div><div style=\"position:absolute;left:1030px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:46px\">N</div></div>"
+      }
+    ],
+    "player_s6": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1600,
+        "h": 1000,
+        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:300px\"><div style=\"font-family:'Libre Baskerville',Georgia,serif;color:#f2efe8;font-size:46px;line-height:1.15\">Harry Potter<br>and the<br>Philosopher&rsquo;s Stone</div></div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:130px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:3%;height:8px;background:#E50914;border-radius:4px\"></div></div><div style=\"position:absolute;left:530px;width:540px;text-align:right;bottom:150px;font-size:22px;color:#fff;font-size:26px\">2:31:36</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:44px;display:flex;justify-content:center;gap:40px;color:#fff;font-size:40px\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span></div><div style=\"position:absolute;left:1030px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:46px\">N</div></div>"
+      }
+    ],
+    "player_s7": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1600,
+        "h": 1000,
+        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:300px\"><div style=\"font-family:'Libre Baskerville',Georgia,serif;color:#f2efe8;font-size:46px;line-height:1.15\">Harry Potter<br>and the<br>Philosopher&rsquo;s Stone</div></div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:130px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:3.5%;height:8px;background:#E50914;border-radius:4px\"></div></div><div style=\"position:absolute;left:530px;width:540px;text-align:right;bottom:150px;font-size:22px;color:#fff;font-size:26px\">2:31:35</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:44px;display:flex;justify-content:center;gap:40px;color:#fff;font-size:40px\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span></div><div style=\"position:absolute;left:1030px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:46px\">N</div></div>"
+      }
+    ],
+    "player_s8": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1600,
+        "h": 1000,
+        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:300px\"><div style=\"font-family:'Libre Baskerville',Georgia,serif;color:#f2efe8;font-size:46px;line-height:1.15\">Harry Potter<br>and the<br>Philosopher&rsquo;s Stone</div></div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:130px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:3.5%;height:8px;background:#E50914;border-radius:4px\"></div></div><div style=\"position:absolute;left:530px;width:540px;text-align:right;bottom:150px;font-size:22px;color:#fff;font-size:26px\">2:31:35</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:44px;display:flex;justify-content:center;gap:40px;color:#fff;font-size:40px\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span></div><div style=\"position:absolute;left:1030px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:46px\">N</div></div>"
+      }
+    ]
+  },
+  "compare": {
+    "trim": 0.35
+  }
+}

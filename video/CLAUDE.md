@@ -38,7 +38,8 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    framing distance) — per-shot items (a board of snacks, a torch, a hand) go in that shot's prompts,
    or they leak into every keyframe. Overlays with `fit` boxes. `takes: 2`. Never recreate
    copyrighted footage on screens, songs, or brand logos/packaging: use generic stand-ins and say so
-   in `notes`. **People on camera** (faces are the subject, e.g. a creator talking or reacting): Sora
+   in `notes`. A brief that changes one thing on purpose ("only the background different"): README
+   "Changing one thing on purpose" (new bible set + `"compare": {"trim": 0.35}`). **People on camera** (faces are the subject, e.g. a creator talking or reacting): Sora
    rejects input images with faces (even generated ones), so those shots are never keyframed.
    **Continuity bible first** (README "Continuity bible"): list every prop that must not change with
    exact words in `bible.props`, each set with its props and their first-frame layout in

@@ -101,6 +101,8 @@ async function composeScreens(spec, dir, outDir, W, H, fps) {
 //   "screen": { "ui": "<captions name>", "size": [1600, 1000] }   html elements (backgrounds via
 //             {{src bible/screen-x.png}}), rendered at the screen's own size
 //   "screen": { "image": "bible/screen-x.png" }                   a still, cover-fitted
+//   "screen": { "clip": "assets/screen/scene.mp4", "from": 12.5, "ui": "player" }   a video you have the
+//             rights to (plays from "from", loops), optionally under an html overlay (player chrome)
 //   "anchor": "left"|"right"|"center"  which side of the picture shows when the device is cut by the
 //             frame edge (default: the side facing into the frame)
 // The composite is made per TAKE (out/_screens/<take>.<hash>.mp4, cached) at the clip's own size, so
@@ -139,7 +141,7 @@ export async function screenClip(spec, dir, shot, clip) {
   fs.mkdirSync(sdir, { recursive: true });
   const ui = scr.ui ? JSON.stringify(spec.captions?.[scr.ui]) : '';
   if (scr.ui && !spec.captions?.[scr.ui]) throw new Error(`${shot.id}: screen ui "${scr.ui}" is not in captions`);
-  const stamp = ['v2', clip, fs.statSync(src).mtimeMs, JSON.stringify(scr), ui, scr.image && fs.statSync(path.join(dir, scr.image)).mtimeMs].join('|');
+  const stamp = ['v2', clip, fs.statSync(src).mtimeMs, JSON.stringify(scr), ui, scr.image && fs.statSync(path.join(dir, scr.image)).mtimeMs, scr.clip && fs.statSync(path.join(dir, scr.clip)).mtimeMs].join('|');
   const hash = (await import('node:crypto')).createHash('sha1').update(stamp).digest('hex').slice(0, 8);
   const rel = `out/_screens/${path.basename(clip, '.mp4')}.${hash}.mp4`, out = path.join(dir, rel);
   if (fs.existsSync(out)) return rel;
@@ -157,15 +159,20 @@ export async function screenClip(spec, dir, shot, clip) {
   const pad = 4, x0 = Math.max(0, box.x0 - pad) & ~1, y0 = Math.max(0, box.y0 - pad) & ~1;
   const bw = (Math.min(w, box.x1 + pad + 1) - x0) & ~1, bh = (Math.min(h, box.y1 + pad + 1) - y0) & ~1;
   const keyHex = `0x${key.map((v) => Math.round(v / nk).toString(16).padStart(2, '0')).join('')}`;
-  // the screen still: html ui rendered at the screen's size, or an image
+  // the screen source: a video ("clip", e.g. a scene YOU have the rights to; loops, starts at "from"),
+  // a still ("image"), or html ("ui", rendered at the screen's size; over a clip it is an overlay)
   const [sw, sh] = scr.size || [1600, 1000];
-  let still = scr.image && path.join(dir, scr.image);
+  let still = scr.image && path.join(dir, scr.image), uiPng = null;
   if (scr.ui) {
     const [file] = await renderOverlays({ ...spec, overlays: [{ from: 0, to: 1, elements: `@${scr.ui}` }] }, dir, sdir, sw, sh);
-    still = path.join(sdir, `${path.basename(clip, '.mp4')}.${hash}.png`);
-    ff(['-f', 'lavfi', '-i', `color=black:size=${sw}x${sh}`, '-i', file.file, '-filter_complex', '[0][1]overlay=0:0', '-frames:v', '1', still]);
-    fs.rmSync(file.file);
+    if (scr.clip) uiPng = file.file;
+    else {
+      still = path.join(sdir, `${path.basename(clip, '.mp4')}.${hash}.png`);
+      ff(['-f', 'lavfi', '-i', `color=black:size=${sw}x${sh}`, '-i', file.file, '-filter_complex', '[0][1]overlay=0:0', '-frames:v', '1', still]);
+      fs.rmSync(file.file);
+    }
   }
+  if (!scr.clip && !still) throw new Error(`${shot.id}: "screen" needs "ui", "image" or "clip"`);
   // fit the still to the box, anchored at the top (the bottom of a laptop screen is what a mug hides).
   // A screen cut off by the frame edge continues out of shot: scale it by its height to its real width
   // and show the part on the visible side (the reference crops it the same way), else cover-fit centred.
@@ -173,11 +180,14 @@ export async function screenClip(spec, dir, shot, clip) {
   const fullW = Math.max(bw, Math.round((bh * sw) / sh / 2) * 2);
   const fit = anchor === 'center' ? `scale=${bw}:${bh}:force_original_aspect_ratio=increase,crop=${bw}:${bh}:(iw-${bw})/2:0`
     : `scale=${fullW}:-2,crop=${bw}:min(ih\\,${bh}):${anchor === 'right' ? `iw-${bw}` : 0}:0,pad=${bw}:${bh}:0:0`;
-  ff(['-i', src, '-loop', '1', '-i', still, '-filter_complex',
+  const srcIn = scr.clip ? ['-stream_loop', '-1', '-ss', String(scr.from ?? 0), '-i', path.join(dir, scr.clip), ...(uiPng ? ['-loop', '1', '-i', uiPng] : [])] : ['-loop', '1', '-i', still];
+  const srcChain = scr.clip ? `[1:v]fps=${(spec.fps || 30)},scale=${sw}:${sh}:force_original_aspect_ratio=increase,crop=${sw}:${sh}${uiPng ? '[sv];[sv][2:v]overlay=0:0,' : ','}${fit}` : `[1:v]${fit}`;
+  ff(['-i', src, ...srcIn, '-filter_complex',
     `[0:v]split[base][c];[c]crop=${bw}:${bh}:${x0}:${y0},chromakey=${keyHex}:0.16:0.06,despill=type=green[fg];` +
-    `[1:v]${fit},format=yuva420p[s];` +
+    `${srcChain},format=yuva420p[s];` +
     `[s][fg]overlay=0:0[box];[base][box]overlay=${x0}:${y0}:shortest=1[v]`,
     '-map', '[v]', '-map', '0:a?', '-t', len.toFixed(3), '-c:v', 'libx264', '-crf', '14', '-preset', 'fast', '-pix_fmt', 'yuv420p', '-c:a', 'copy', out]);
+  if (uiPng) fs.rmSync(uiPng);
   console.log(`screen ${shot.id} (${clip}): green box [${x0},${y0},${x0 + bw},${y0 + bh}] key ${keyHex} anchor ${anchor} → ${rel}`);
   return rel;
 }
