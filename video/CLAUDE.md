@@ -89,7 +89,9 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    bible set ("dim room, deep red light, deep shadows, no bright studio light") and Read every
    keyframe against ref-shots.jpg; regenerate the ones that miss with `--force --only sN`. Sora rejects
    input frames showing people or faces (`moderation_blocked: people-in-user-uploads`), including
-   on screens: hands only; screens show scenery/abstract light/title cards.
+   on screens: hands only. A screen that must show a specific picture (a streaming app, an episode, a
+   UI) is a GREEN screen in the bible prop and keyframes, and gets the picture per shot via
+   `"screen"` after Sora (README "Device screens"); otherwise screens show scenery/abstract light.
    **Generate**: `node sora.mjs videos/<name>` (up to 2 jobs at once, often ~1 when anything else
    uses the deployment; ~60–120s each, so ~30 min for 20 takes; background it). `--more N --only sN`
    adds N takes.

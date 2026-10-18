@@ -18,7 +18,7 @@ import { fitAll } from '../slideshow/lib/fit.mjs';
 
 const ff = (args) => execFileSync('ffmpeg', ['-v', 'error', '-y', ...args], { stdio: ['ignore', 'inherit', 'inherit'] });
 
-async function renderOverlays(spec, dir, outDir, W, H) {
+export async function renderOverlays(spec, dir, outDir, W, H) {
   const groups = spec.overlays || [];
   if (!groups.length) return [];
   const post = { size: [W, H], fonts: spec.fonts || [], css: spec.css || [] };
@@ -95,6 +95,93 @@ async function composeScreens(spec, dir, outDir, W, H, fps) {
   }
 }
 
+// Per-shot "screen": the laptop/TV/phone in THIS shot's take is a pure green screen (the bible prop
+// says so, so keyframes and Sora keep it green) and shows a still we render ourselves after Sora — so
+// it may show anything Sora would refuse as an input (people, a streaming-app UI):
+//   "screen": { "ui": "<captions name>", "size": [1600, 1000] }   html elements (backgrounds via
+//             {{src bible/screen-x.png}}), rendered at the screen's own size
+//   "screen": { "image": "bible/screen-x.png" }                   a still, cover-fitted
+//   "anchor": "left"|"right"|"center"  which side of the picture shows when the device is cut by the
+//             frame edge (default: the side facing into the frame)
+// The composite is made per TAKE (out/_screens/<take>.<hash>.mp4, cached) at the clip's own size, so
+// --pick/--framing/--apply score and build.mjs cuts it exactly like a raw clip. The green area is the
+// largest green blob (a Christmas tree or plant elsewhere in frame is ignored), unioned over the clip so
+// a slowly drifting camera stays covered; only pixels inside that box are keyed.
+export const GREEN = (r, g, b) => g > 110 && g > 1.5 * r && g > 1.5 * b;
+// largest 4-connected green blob of an RGB frame (w×h): {x0,y0,x1,y1,n,key:[r,g,b]} or null
+export function greenBox(px, w, h) {
+  const seen = new Uint8Array(w * h);
+  let best = null;
+  for (let s = 0; s < w * h; s++) {
+    if (seen[s] || !GREEN(px[s * 3], px[s * 3 + 1], px[s * 3 + 2])) continue;
+    const st = [s], b = { x0: w, y0: h, x1: -1, y1: -1, n: 0, sum: [0, 0, 0] };
+    seen[s] = 1;
+    while (st.length) {
+      const p = st.pop(), x = p % w, y = (p - x) / w;
+      b.x0 = Math.min(b.x0, x); b.x1 = Math.max(b.x1, x); b.y0 = Math.min(b.y0, y); b.y1 = Math.max(b.y1, y); b.n++;
+      for (let c = 0; c < 3; c++) b.sum[c] += px[p * 3 + c];
+      for (const q of [x > 0 && p - 1, x < w - 1 && p + 1, y > 0 && p - w, y < h - 1 && p + w]) {
+        if (q === false || seen[q] || !GREEN(px[q * 3], px[q * 3 + 1], px[q * 3 + 2])) continue;
+        seen[q] = 1; st.push(q);
+      }
+    }
+    if (!best || b.n > best.n) best = b;
+  }
+  if (!best) return null;
+  best.key = best.sum.map((v) => Math.round(v / best.n));
+  return best;
+}
+const probe = (f) => JSON.parse(execFileSync('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height:format=duration', '-of', 'json', f], { encoding: 'utf8' }));
+export async function screenClip(spec, dir, shot, clip) {
+  const scr = shot.screen;
+  if (!scr || !fs.existsSync(path.join(dir, clip))) return clip;
+  const src = path.join(dir, clip), sdir = path.join(dir, 'out', '_screens');
+  fs.mkdirSync(sdir, { recursive: true });
+  const ui = scr.ui ? JSON.stringify(spec.captions?.[scr.ui]) : '';
+  if (scr.ui && !spec.captions?.[scr.ui]) throw new Error(`${shot.id}: screen ui "${scr.ui}" is not in captions`);
+  const stamp = ['v2', clip, fs.statSync(src).mtimeMs, JSON.stringify(scr), ui, scr.image && fs.statSync(path.join(dir, scr.image)).mtimeMs].join('|');
+  const hash = (await import('node:crypto')).createHash('sha1').update(stamp).digest('hex').slice(0, 8);
+  const rel = `out/_screens/${path.basename(clip, '.mp4')}.${hash}.mp4`, out = path.join(dir, rel);
+  if (fs.existsSync(out)) return rel;
+  const info = probe(src), { width: w, height: h } = info.streams[0], len = +info.format.duration;
+  // the green box: union of the largest green blob in 6 frames across the clip
+  let box = null, key = [0, 0, 0], nk = 0;
+  for (let k = 0; k < 6; k++) {
+    const px = execFileSync('ffmpeg', ['-v', 'error', '-ss', (len * (k + 0.5) / 6).toFixed(2), '-i', src, '-frames:v', '1', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'], { maxBuffer: 1 << 26 });
+    const b = greenBox(px, w, h);
+    if (!b || b.n < w * h * 0.01) continue;
+    box = box ? { x0: Math.min(box.x0, b.x0), y0: Math.min(box.y0, b.y0), x1: Math.max(box.x1, b.x1), y1: Math.max(box.y1, b.y1) } : b;
+    key = key.map((v, c) => v + b.key[c] * b.n); nk += b.n;
+  }
+  if (!box) throw new Error(`${shot.id}: no green screen in ${clip} (the keyframe/prompt must show the screen as flat chroma green)`);
+  const pad = 4, x0 = Math.max(0, box.x0 - pad) & ~1, y0 = Math.max(0, box.y0 - pad) & ~1;
+  const bw = (Math.min(w, box.x1 + pad + 1) - x0) & ~1, bh = (Math.min(h, box.y1 + pad + 1) - y0) & ~1;
+  const keyHex = `0x${key.map((v) => Math.round(v / nk).toString(16).padStart(2, '0')).join('')}`;
+  // the screen still: html ui rendered at the screen's size, or an image
+  const [sw, sh] = scr.size || [1600, 1000];
+  let still = scr.image && path.join(dir, scr.image);
+  if (scr.ui) {
+    const [file] = await renderOverlays({ ...spec, overlays: [{ from: 0, to: 1, elements: `@${scr.ui}` }] }, dir, sdir, sw, sh);
+    still = path.join(sdir, `${path.basename(clip, '.mp4')}.${hash}.png`);
+    ff(['-f', 'lavfi', '-i', `color=black:size=${sw}x${sh}`, '-i', file.file, '-filter_complex', '[0][1]overlay=0:0', '-frames:v', '1', still]);
+    fs.rmSync(file.file);
+  }
+  // fit the still to the box, anchored at the top (the bottom of a laptop screen is what a mug hides).
+  // A screen cut off by the frame edge continues out of shot: scale it by its height to its real width
+  // and show the part on the visible side (the reference crops it the same way), else cover-fit centred.
+  const atL = box.x0 <= 2, atR = box.x1 >= w - 3, anchor = scr.anchor || (atL && !atR ? 'right' : atR && !atL ? 'left' : 'center');
+  const fullW = Math.max(bw, Math.round((bh * sw) / sh / 2) * 2);
+  const fit = anchor === 'center' ? `scale=${bw}:${bh}:force_original_aspect_ratio=increase,crop=${bw}:${bh}:(iw-${bw})/2:0`
+    : `scale=${fullW}:-2,crop=${bw}:min(ih\\,${bh}):${anchor === 'right' ? `iw-${bw}` : 0}:0,pad=${bw}:${bh}:0:0`;
+  ff(['-i', src, '-loop', '1', '-i', still, '-filter_complex',
+    `[0:v]split[base][c];[c]crop=${bw}:${bh}:${x0}:${y0},chromakey=${keyHex}:0.16:0.06,despill=type=green[fg];` +
+    `[1:v]${fit},format=yuva420p[s];` +
+    `[s][fg]overlay=0:0[box];[base][box]overlay=${x0}:${y0}:shortest=1[v]`,
+    '-map', '[v]', '-map', '0:a?', '-t', len.toFixed(3), '-c:v', 'libx264', '-crf', '14', '-preset', 'fast', '-pix_fmt', 'yuv420p', '-c:a', 'copy', out]);
+  console.log(`screen ${shot.id} (${clip}): green box [${x0},${y0},${x0 + bw},${y0 + bh}] key ${keyHex} anchor ${anchor} → ${rel}`);
+  return rel;
+}
+
 // Reframe filter for one shot: cover-scale to W×H, then optional zoom (≥1) and pan, both of which
 // may animate linearly over the shot (zoom: [from, to], pan: [[x,y],[x,y]] as -1..1 offsets).
 function frameFilter(shot, W, H, dur) {
@@ -125,10 +212,13 @@ export async function build(dir, opts = {}) {
   await composeScreens(spec, dir, outDir, W, H, fps);
   const overlays = await renderOverlays(spec, dir, outDir, W, H);
 
+  // shots with a "screen" use their take with the screen composited in (cached per take)
+  const clipFor = {};
+  for (const shot of spec.shots) clipFor[shot.id] = await screenClip(spec, dir, shot, shot.clip || `clips/${shot.id}.mp4`);
   const inputs = [], vf = [], af = [], labels = [];
   const soraAudio = (spec.audio?.sora ?? 1) > 0;
   spec.shots.forEach((shot, i) => {
-    const clip = path.join(dir, shot.clip || `clips/${shot.id}.mp4`);
+    const clip = path.join(dir, clipFor[shot.id]);
     if (!fs.existsSync(clip)) throw new Error(`missing clip for ${shot.id}: ${path.relative(process.cwd(), clip)} (run sora.mjs)`);
     inputs.push('-i', clip);
     const dur = shot.end - shot.start, speed = shot.speed ?? 1, from = shot.from ?? 0;

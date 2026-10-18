@@ -4,6 +4,7 @@
 //
 //   video.json "bible": {
 //     "props": { "jar": { "desc": "<exact words>" }, "mug": { "desc": "…", "image": "assets/product/x.png" }, … },
+//     "screens": { "ep1": { "desc": "<a scene a laptop/TV shows>" } },   (stills for per-shot "screen")
 //     "sets":  { "A": { "desc": "<place, camera, lighting>", "props": ["jar", "pot", …],
 //                        "layout": "<where each prop stands in the first frame>" } }
 //   }
@@ -52,6 +53,14 @@ run(props.filter(([, p]) => !p.image).map(([id, p]) => ({
   prompt: `Photorealistic product photo of exactly one object, centred on a plain light-grey studio background, soft even light, whole object visible: ${p.desc}. ${NO}`,
 })));
 
+// screens: 16:9 stills that a device's green screen shows (composited after Sora by build.mjs, so
+// people are fine here); fictional scenes, never stills of a real show
+const screens = Object.entries(bible.screens || {}).filter(([id]) => !only || only.includes(id));
+run(screens.map(([id, p]) => ({
+  id: `screen-${id}`, out: `screen-${id}.png`, size: '1536x1024', quality: 'high', variants: 1,
+  prompt: `A single full-frame still from a fictional cinematic TV drama, widescreen, filmic grade, no letterbox bars: ${p.desc}. Original ADULT characters (no children or teenagers: the safety filter blocks them) who do not resemble any real actor. No text, subtitles, logos or watermark.`,
+})));
+
 const sets = Object.entries(bible.sets || {}).filter(([id]) => !only || only.includes(id));
 run(sets.map(([id, s]) => {
   const ps = (s.props || []).map((pid) => [pid, bible.props[pid]]);
@@ -70,7 +79,7 @@ for (const [id] of sets) {
   if (fs.existsSync(src) && (force || !fs.existsSync(out))) execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', src, '-vf', `scale=${w}:${h}:force_original_aspect_ratio=increase,crop=${w}:${h}`, out]);
 }
 // one sheet of the whole bible to review at a glance
-const imgs = [...Object.keys(bible.props || {}).map((p) => `prop-${p}.png`), ...Object.keys(bible.sets || {}).map((s) => `set-${s}.png`)].filter((f) => fs.existsSync(path.join(bdir, f)));
+const imgs = [...Object.keys(bible.props || {}).map((p) => `prop-${p}.png`), ...Object.keys(bible.screens || {}).map((p) => `screen-${p}.png`), ...Object.keys(bible.sets || {}).map((s) => `set-${s}.png`)].filter((f) => fs.existsSync(path.join(bdir, f)));
 if (imgs.length) {
   execFileSync('ffmpeg', ['-v', 'error', '-y', ...imgs.flatMap((f) => ['-i', path.join(bdir, f)]), '-filter_complex',
     `${imgs.map((_, i) => `[${i}]scale=240:320:force_original_aspect_ratio=decrease,pad=240:320:(ow-iw)/2:(oh-ih)/2:white[i${i}]`).join(';')};${imgs.map((_, i) => `[i${i}]`).join('')}xstack=inputs=${imgs.length}:layout=${imgs.map((_, i) => `${(i % 6) * 240}_${Math.floor(i / 6) * 320}`).join('|')}:fill=white`, path.join(bdir, 'bible-sheet.jpg')]);

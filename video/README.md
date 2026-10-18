@@ -54,6 +54,28 @@ gets the props' exact words appended. continuity.mjs shows the vision model (thu
 images plus the established face (the source performance, or the library character) and the
 candidate takes side by side, and scores each take per element; `--apply` picks the best.
 
+## Device screens (a laptop/TV/phone that shows a specific picture)
+
+Sora refuses input frames with people, and an app UI on a generated screen comes out garbled. So the
+device is a **green screen** in the bible prop (`"laptop": {"desc": "… its screen lit with a perfectly
+flat, uniform, pure chroma-key green (#00FF00) from edge to edge …"}`) and every keyframe/prompt
+says the screen is flat chroma-key green; the picture is composited after Sora per shot:
+
+```jsonc
+"bible": { "screens": { "e1": { "desc": "<a fictional scene the laptop plays>" } } },   // bible/screen-e1.png (16:9)
+"captions": { "player_s2": [ { "type": "html", "x": 0, "y": 0, "w": 1600, "h": 1000,
+                "html": "<div …background:url({{src bible/screen-e1.png}})…>…app UI…</div>" } ] },
+"shots": [ { "id": "s2", …, "screen": { "ui": "player_s2", "size": [1600, 1000] } } ]   // or { "image": "bible/screen-e1.png" }
+```
+
+build.mjs keys the largest green blob of each take (a Christmas tree elsewhere is ignored; the box is
+unioned over the clip), cover-fits the rendered screen into it (anchored at the top, since a mug in
+front hides the bottom) and caches `out/_screens/<take>.<hash>.mp4`; compare.mjs scores the
+composited takes, so --pick/--framing/--apply see the real picture. Because the picture never goes
+to Sora it may show people (adults: gpt-image-2 blocks stills of children/teens) and a streaming-app UI — but only original, generated content (never
+stills of a real show) and an invented title. Check every keyframe still shows the green (`node
+keyframes.mjs` warns when a `screen` shot's keyframe has none).
+
 ## Performances (one face across many shots)
 
 A face only stays identical inside ONE continuous clip; every separate generation (text or remix)
@@ -134,6 +156,7 @@ original reference frames) at least daily while a series is in production, or re
       "keyframe": { "prompt": "the shot's first frame: composition as % of frame…" },
                              // built by keyframes.mjs from product.refs (gpt-image-2 edit) and sent
                              // to Sora as input_reference; or a path to an existing image
+      "screen": { "ui": "player_s2" },   // composite our picture into the green screen (Device screens)
       "takes": 2,            // generate N variants (s1.mp4, s1.v2.mp4 …); "clip" picks one
       "clip": "clips/s1.v2.mp4"  // may point at another shot's take (a jump cut inside one
                              // setup): set "takes": 0 so sora.mjs skips the shot; --pick leaves it

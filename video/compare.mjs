@@ -20,6 +20,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { screenClip } from './build.mjs';
 
 const argv = process.argv.slice(2);
 const dir = path.resolve(argv.find((a) => !a.startsWith('--') && !/^s\d/.test(a) && !a.endsWith('.mp4')) || '');
@@ -32,6 +33,13 @@ const fps = spec.fps || 30, W = GW * 8, H = GH * 8, SW = W * 2, SH = H * 2;
 const parse = (hex) => Array.from({ length: hex.length / 2 }, (_, i) => parseInt(hex.slice(i * 2, i * 2 + 2), 16));
 const samplesOf = (s) => ref.samples.filter(([t]) => t >= s.start + 0.03 && t < s.end - 0.03);
 const clipOf = (s) => s.clip || `clips/${s.id}.mp4`;
+// shots with a "screen" are scored on their takes WITH the screen composited (build.mjs screenClip)
+const composited = {};
+for (const s of spec.shots.filter((x) => x.screen && fs.existsSync(path.join(dir, 'clips')))) {
+  const takes = fs.readdirSync(path.join(dir, 'clips')).filter((f) => f === `${s.id}.mp4` || (f.startsWith(`${s.id}.v`) && f.endsWith('.mp4')));
+  for (const c of new Set([...takes.map((f) => `clips/${f}`), clipOf(s)])) composited[`${s.id}|${c}`] = await screenClip(spec, dir, s, c);
+}
+const seen = (s, clip) => composited[`${s.id}|${clip}`] || clip;
 const save = () => fs.writeFileSync(path.join(dir, 'video.json'), JSON.stringify(spec, null, 2) + '\n');
 const ff = (args, max) => {
   const r = spawnSync('ffmpeg', ['-v', 'error', ...args], { maxBuffer: max, timeout: 120000 });
@@ -48,7 +56,7 @@ const clipTime = (s, t) => {
 };
 // raw clip frames (SW×SH RGB) at every reference sample inside the shot
 const clipFrames = (s, clip = clipOf(s)) => samplesOf(s).map(([t, hex]) => {
-  const r = ff(['-ss', clipTime(s, t).toFixed(3), '-i', path.join(dir, clip), '-frames:v', '1', '-vf', `scale=${SW}:${SH}:force_original_aspect_ratio=increase:flags=area,crop=${SW}:${SH}`, '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'], 1 << 26);
+  const r = ff(['-ss', clipTime(s, t).toFixed(3), '-i', path.join(dir, seen(s, clip)), '-frames:v', '1', '-vf', `scale=${SW}:${SH}:force_original_aspect_ratio=increase:flags=area,crop=${SW}:${SH}`, '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'], 1 << 26);
   return { t, ref: parse(hex), px: r.stdout };
 }).filter((f) => f.px.length === SW * SH * 3);
 // 9×16 grid of a frame after crop zoom z / pan, the same window build.mjs crops

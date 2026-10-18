@@ -17,6 +17,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execSync, execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { greenBox } from './build.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, '..', 'slideshow', 'foundry.json'), 'utf8'));
@@ -85,7 +86,7 @@ async function main() {
       spec.style,
       product.refs?.length ? `The product in the reference image(s) — ${product.name || 'the product'}${product.description ? `: ${product.description}` : ''} — must appear exactly as photographed: same shape, proportions, colour, glaze, lettering and handle. Do not redesign it.` : '',
       // Sora's moderation blocks input images showing people ("people-in-user-uploads"); hands are fine.
-      'This is the first frame of a vertical phone video. Photorealistic, no added text or watermark. No people or faces anywhere in the image — only hands and forearms may appear; any screen (laptop, TV, phone) shows scenery, abstract light or a title card, never a person.',
+      `This is the first frame of a vertical phone video. Photorealistic, no added text or watermark. No people or faces anywhere in the image — only hands and forearms may appear; ${s.screen ? 'the device screen is lit flat, uniform, pure chroma-key green (#00FF00) from edge to edge, with no picture, interface, reflection or glare (a picture is composited into it later)' : 'any screen (laptop, TV, phone) shows scenery, abstract light or a title card, never a person'}.`,
       // the 2:3 image is cover-cropped to 9:16 for Sora (8% off each side), and the model tends to
       // shrink the main object below the stated size
       'The image will be cropped to 9:16 by cutting 8% off the left and right edges: all positions given as percentages refer to the remaining central area, and nothing important may sit in the outer 8% strips. Object sizes given as percentages are hard requirements: do not draw the main object smaller than stated.',
@@ -96,6 +97,13 @@ async function main() {
     fs.writeFileSync(out, buf);
     soraSizedKeyframe(out, spec.soraSize);
     console.log(`keyframe ${path.relative(process.cwd(), out)} (${((Date.now() - t0) / 1000).toFixed(0)}s)`);
+    // a "screen" shot needs a clean green screen in its first frame, or the composite has nothing to key
+    if (s.screen) {
+      const sized = out.replace(/\.png$/, `.${spec.soraSize || '720x1280'}.png`), [w, h] = (spec.soraSize || '720x1280').split('x').map(Number);
+      const b = greenBox(execFileSync('ffmpeg', ['-v', 'error', '-i', sized, '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'], { maxBuffer: 1 << 26 }), w, h);
+      if (!b || b.n < w * h * 0.01) console.warn(`warning: ${s.id}: no green screen in its keyframe; regenerate with --force --only ${s.id}`);
+      else console.log(`  ${s.id}: green screen ${((100 * b.n) / (w * h)).toFixed(0)}% of the frame`);
+    }
   };
   await Promise.all(Array.from({ length: +(process.env.IMAGE_CONCURRENCY || 2) }, worker));
 }
