@@ -73,9 +73,15 @@ async function main() {
   const one = async (s) => {
     const out = path.join(dir, 'assets', 'keyframes', `${s.id}.png`);
     if (fs.existsSync(out) && !force) return;
-    const refs = [...(product.refs || []), ...(s.keyframe.refs || [])].map((r) => path.join(dir, r));
+    // continuity bible: the shot's set frame (the same room and props in every keyframe) + that set's
+    // prop images go in as references too, so every keyframe is an edit of the same world
+    const set = s.set && spec.bible?.sets?.[s.set];
+    const bibleRefs = set ? [`bible/set-${s.set}.png`, ...(set.props || []).map((p) => `bible/prop-${p}.png`)].filter((f) => fs.existsSync(path.join(dir, f))) : [];
+    // the edits endpoint takes a limited number of images: product photos first, then the bible
+    const refs = [...(product.refs || []), ...bibleRefs, ...(s.keyframe.refs || [])].slice(0, 10).map((r) => path.join(dir, r));
     const prompt = [
       s.keyframe.prompt,
+      set ? `The place is EXACTLY the set reference image (same room, furniture, wall colours, lighting and props in the same places), only the camera distance/angle and the action change as described. Props must look exactly like their reference images: ${(set.props || []).map((p) => `${p}: ${spec.bible.props[p].desc}`).join('; ')}.` : '',
       spec.style,
       product.refs?.length ? `The product in the reference image(s) — ${product.name || 'the product'}${product.description ? `: ${product.description}` : ''} — must appear exactly as photographed: same shape, proportions, colour, glaze, lettering and handle. Do not redesign it.` : '',
       // Sora's moderation blocks input images showing people ("people-in-user-uploads"); hands are fine.

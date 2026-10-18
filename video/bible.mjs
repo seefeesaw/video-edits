@@ -3,7 +3,7 @@
 // performance/shot (and by later videos in a series).
 //
 //   video.json "bible": {
-//     "props": { "jar": { "desc": "<exact words>" }, … },
+//     "props": { "jar": { "desc": "<exact words>" }, "mug": { "desc": "…", "image": "assets/product/x.png" }, … },
 //     "sets":  { "A": { "desc": "<place, camera, lighting>", "props": ["jar", "pot", …],
 //                        "layout": "<where each prop stands in the first frame>" } }
 //   }
@@ -42,7 +42,12 @@ function run(jobs) {
 }
 
 const props = Object.entries(bible.props || {}).filter(([id]) => !only || only.includes(id));
-run(props.map(([id, p]) => ({
+// a real product: "image": the store photo IS the prop reference (copied, never generated)
+for (const [id, p] of props) if (p.image) {
+  const out = path.join(bdir, `prop-${id}.png`);
+  if (force || !fs.existsSync(out)) execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', path.join(dir, p.image), out]);
+}
+run(props.filter(([, p]) => !p.image).map(([id, p]) => ({
   id: `prop-${id}`, out: `prop-${id}.png`, size: '1024x1024', quality: 'high', variants: 1,
   prompt: `Photorealistic product photo of exactly one object, centred on a plain light-grey studio background, soft even light, whole object visible: ${p.desc}. ${NO}`,
 })));

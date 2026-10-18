@@ -60,6 +60,12 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    `variant_ids` tells which colour variant it shows) into `assets/product/`, set `product` (refs +
    a precise description: shape, colour, lettering, handle, accessories), give every shot
    `keyframe: {prompt: <first frame composition>}` and keep the shot `prompt` for the action only.
+   With a bible, make the product a bible prop with `"image": "assets/product/<photo>"` (the store
+   photo itself is the prop reference) and give every shot `"set"`: keyframes.mjs then edits from
+   the product photos + the set's bible frame + its prop images, so every keyframe shows the same
+   room, the same props and the exact product (give shot-specific props via `keyframe.refs`, e.g.
+   `["bible/prop-torch.png"]`). Pick the variant's photos by the image's `variant_ids`/`alt`; crop
+   multi-product lifestyle photos to the right variant.
    The keyframe is the clip's FIRST frame: for "X enters the frame" shots, describe the frame with X
    in place, prompt X leaving, and set `"reverse": true`. `node keyframes.mjs videos/<name>`; Read
    the `assets/keyframes/<id>.720x1280.png` files (what Sora gets: the model's 2:3 image minus 8% on
