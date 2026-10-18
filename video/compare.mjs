@@ -8,7 +8,8 @@
 //        brightness/warmth vs the reference, and cut times of the build vs the reference
 //   node compare.mjs videos/<name> --pick      score every take of every shot (s1.mp4, s1.v2.mp4 …)
 //        after a fair per-take colour match and set each shot's "clip" to the best one
-//   node compare.mjs videos/<name> --framing   search crop zoom (1–1.25, --max-zoom N) and pan per shot
+//   node compare.mjs videos/<name> --choose s1=v2,s4=1   set takes chosen by eye (locked: "pick": "manual")
+//   node compare.mjs videos/<name> --framing   search crop zoom (1–1.15, --max-zoom N) and pan per shot
 //        and write "zoom"/"pan". A crop is kept only if it gains ≥1 point (the colour grid can be
 //        fooled into cropping away set pieces); shots with "framing": "manual" are left alone
 //   node compare.mjs videos/<name> --apply     fit a per-channel grade (gain/offset matching the
@@ -95,6 +96,23 @@ function innerCuts(s, clip) {
 }
 const tuned = spec.shots.filter((s) => (!only || only.includes(s.id)) && samplesOf(s).length);
 
+// --choose s1=v2,s4=1,s8=v3: set takes chosen by eye ("1" = sN.mp4, "v2" = sN.v2.mp4) and lock them
+// against --pick ("pick": "manual"); reports the grade to refit
+if (argv.includes('--choose')) {
+  for (const kv of arg('--choose').split(',')) {
+    const [id, t] = kv.split('=');
+    const s = spec.shots.find((x) => x.id === id) || (spec.performances || []).find((x) => x.id === id);
+    if (!s) throw new Error(`--choose: no shot or performance ${id}`);
+    const clip = `clips/${t === '1' || t === 'v1' ? `${id}.mp4` : `${id}.${t}.mp4`}`;
+    if (!fs.existsSync(path.join(dir, clip))) throw new Error(`--choose: ${clip} does not exist`);
+    s.clip = clip; if (spec.shots.includes(s)) s.pick = 'manual';
+    console.log(`${id}: clip = ${clip}`);
+  }
+  save();
+  console.log('next: --framing, --apply (the grade is per clip), build.mjs');
+  process.exit(0);
+}
+
 if (argv.includes('--pick')) {
   for (const s of tuned) {
     // "pick": "manual" keeps a take chosen by eye (the colour grid can prefer a take with the wrong
@@ -124,7 +142,9 @@ if (argv.includes('--pick')) {
 }
 
 if (argv.includes('--framing')) {
-  const mz = +(arg('--max-zoom') || 1.25);
+  // conservative by default: the colour grid rewards crops that look worse (enlarging an already big
+  // object, cutting a prop out of frame); --max-zoom raises the cap
+  const mz = +(arg('--max-zoom') || 1.15);
   for (const s of tuned) {
     if (s.framing === 'manual') { console.log(`framing ${s.id}: manual, kept zoom ${JSON.stringify(s.zoom ?? 1)}`); continue; }
     const fr = clipFrames(s);
@@ -139,7 +159,7 @@ if (argv.includes('--framing')) {
     for (let z = 1.05; z <= mz + 1e-4; z += 0.05) for (let x = -1; x <= 1.001; x += 0.25) for (let y = -1; y <= 1.001; y += 0.25) {
       const sc = score(z, [x, y]); if (sc > best[0]) best = [sc, +z.toFixed(2), [+x.toFixed(2), +y.toFixed(2)]];
     }
-    if (best[0] - base < 1) best = [base, 1, [0, 0]];
+    if (best[0] - base < 2) best = [base, 1, [0, 0]];
     console.log(`framing ${s.id}: zoom ${best[1]} pan [${best[2]}]  comp ${base.toFixed(1)} -> ${best[0].toFixed(1)}`);
     s.zoom = best[1]; s.pan = best[2];
   }
@@ -155,7 +175,7 @@ if (argv.includes('--apply')) {
     const A = fr.map((x) => x.ref), B = fr.map((x) => gridOf(x.px, zoomOf(s), panOf(s))), g = fitGrade(A, B);
     // the grid score mixes composition and colour, so a grade that fixes a big brightness/warmth gap
     // can cost a little comp; keep it unless it clearly hurts
-    if (comp(A, B, g) < comp(A, B) - 0.3) { delete s.grade; console.log(`grade ${s.id}: none (a grade hurts comp ${comp(A, B).toFixed(1)} -> ${comp(A, B, g).toFixed(1)})`); continue; }
+    if (comp(A, B, g) < comp(A, B)) { delete s.grade; console.log(`grade ${s.id}: none (a grade hurts comp ${comp(A, B).toFixed(1)} -> ${comp(A, B, g).toFixed(1)})`); continue; }
     s.grade = { r: g[0].map((v, i) => +v.toFixed(i ? 2 : 4)), g: g[1].map((v, i) => +v.toFixed(i ? 2 : 4)), b: g[2].map((v, i) => +v.toFixed(i ? 2 : 4)), clip: clipOf(s) };
     console.log(`grade ${s.id}: comp ${comp(A, B).toFixed(1)} -> ${comp(A, B, g).toFixed(1)}`);
   }

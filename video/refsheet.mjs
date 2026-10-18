@@ -41,7 +41,12 @@ for (const takesOf of takesList) {
   const s = spec.shots.find((x) => x.id === takesOf) || (perf && { ...perf, start: 0, end: perf.seconds, from: 0 });
   if (!s) throw new Error(`no shot or performance ${takesOf}`);
   const takes = fs.readdirSync(path.join(dir, 'clips')).filter((f) => f === `${s.id}.mp4` || (f.startsWith(`${s.id}.v`) && f.endsWith('.mp4')));
-  const len = (s.end - s.start) * (s.speed ?? 1), from = s.from ?? 0;
+  // --full: the whole take (to retime "from"), not just the span the shot uses
+  const full = argv.includes('--full');
+  const clipLen = (f) => +execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', path.join(dir, 'clips', f)]).toString().trim();
+  const len0 = (s.end - s.start) * (s.speed ?? 1);
+  const from = full ? 0 : s.from ?? 0;
+  const len = full ? clipLen(fs.readdirSync(path.join(dir, 'clips')).find((f) => f === `${s.id}.mp4` || f.startsWith(`${s.id}.v`)) || `${s.id}.mp4`) : len0;
   // a shot of a library character gets that character's reference frames as the first row, so each
   // take's face can be judged against the canonical one
   const ch = !perf && s.set && spec.characters?.[s.set];

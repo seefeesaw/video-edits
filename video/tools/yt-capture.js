@@ -7,7 +7,7 @@
 //   - cut times (seek-based scan at 1/60s; works with the browser pane hidden), source fps
 //   - a 9×16 colour grid every 0.25s (compare.mjs scores renders against these)
 //   - contact sheets: one frame per shot midpoint, and every 0.5s
-// then saves video/videos/<NAME>/reference.json and returns to the Short. Takes ~2 min; wait for
+// then saves video/videos/<NAME>/reference.json and returns to the Short. Takes ~4 min per 10 s of video; wait for
 // the file on disk. Then `node refsheet.mjs videos/<NAME>` moves the sheets out to out/*.jpg.
 // Helpers stay on window.ytcap: cuts(), capture(), box(t, pred, region), sheetDataUrl(times).
 const NAME = 'my-video';
@@ -121,5 +121,5 @@ const NAME = 'my-video';
   if (!NAME) return 'ytcap ready (NAME not set: nothing captured)';
   window.__ytcapError = null;
   ytcap.capture().then((json) => ytcap.save(`video/videos/${NAME}/reference.json`, json)).catch((e) => (window.__ytcapError = e.message));
-  return `capturing; video/videos/${NAME}/reference.json will appear on disk in ~2 min (then: node refsheet.mjs videos/${NAME})`;
+  return `capturing; video/videos/${NAME}/reference.json will appear on disk in ~4 min per 10 s of video (then: node refsheet.mjs videos/${NAME})`;
 })();

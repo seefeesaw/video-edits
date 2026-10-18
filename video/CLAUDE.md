@@ -26,7 +26,9 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    percentages of the frame** (where the main object, hands, screen, background sit, and how big the
    main object is — measure it, e.g. "mug 45% of frame width"). Caption ink boxes:
    re-paste the script with `NAME = null` and use `ytcap.box(t, pred, [x0,y0,x1,y1])` (1080×1920
-   coordinates). Captions with a dark outline/shadow: the ink box includes it, so fit the white
+   coordinates). A caption with an emoji: a bright-pixel box also catches the emoji's highlights, so
+   scan columns for the gap between text and emoji and fit them separately (text box + emoji box).
+   Captions with a dark outline/shadow: the ink box includes it, so fit the white
    glyphs only (pred on bright pixels) and add the shadow in CSS.
 4. **Write `video.json`**: `fps` = what refsheet.mjs prints (60 whenever cuts fall between 30fps
    frames, even for a 30fps source); shot `start`/`end` = the reference cuts exactly. A soft jump cut inside one setup is
@@ -48,11 +50,15 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    `node continuity.mjs videos/<name> --takes <id> --apply` (then confirm the action by eye). Takes of
    hands-and-product shots that start from the same keyframe score alike on both continuity and
    `--pick` (it prints TIE): decide by the ACTION on `node refsheet.mjs videos/<name> --takes s1,s2,…`
-   (does the candle light, is the strawberry dipped) and set `"clip"` + `"pick": "manual"`.
+   (does the candle light, is the strawberry dipped; `--full` shows whole takes for retiming
+   `from`) and set them with `node compare.mjs videos/<name> --choose s1=v2,s4=1`.
    Every separate generation (text-to-video OR remix of an anchor) can change the face, so a person
    who appears in more than one shot gets **performances** (README "Performances"): one 12 s take
    per person with that person's actions in order, cut into the shots (`"takes": 0`, `"clip"`,
-   `"from"`), plus one `remixOf` performance for the rest. Pick the performance take by face AND
+   `"from"`), plus one `remixOf` performance for the rest. Wording: `sets` (strings) is appended to
+   Sora prompts of shots with that `"set"`; `bible.sets` (desc/layout/props) drives bible.mjs and
+   keyframes.mjs (gpt-image-2) and its props' exact words are appended to Sora prompts too. Keep the
+   place described the same way in both. Pick the performance take by face AND
    action with `refsheet.mjs --takes <perf>`. Library characters (`"characters"`, per-shot remixes of
    an anchor) keep clothes/place but still drift the face per shot: use them to start a series'
    next video from the same person, not as the only consistency measure. Recreate people as new generic people, never the original creators. A
@@ -77,8 +83,11 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    the `assets/keyframes/<id>.720x1280.png` files (what Sora gets: the model's 2:3 image minus 8% on
    each side) and compare them with ref-shots.jpg (object size and position!) before spending Sora
    time — regenerate a keyframe with `--force --only sN` rather than fixing it later with zoom.
-   gpt-image-2 tends to draw the main object smaller than asked: state its size emphatically
-   ("BIG: more than half the frame width"). Sora rejects
+   gpt-image-2 tends to draw the main object smaller than asked (state its size emphatically, "BIG:
+   more than half the frame width"), ignores VERTICAL positions (a rim "at 54%" lands at ~37%) and
+   brightens moody scenes into studio light: describe dark/red ambient light emphatically in the
+   bible set ("dim room, deep red light, deep shadows, no bright studio light") and Read every
+   keyframe against ref-shots.jpg; regenerate the ones that miss with `--force --only sN`. Sora rejects
    input frames showing people or faces (`moderation_blocked: people-in-user-uploads`), including
    on screens: hands only; screens show scenery/abstract light/title cards.
    **Generate**: `node sora.mjs videos/<name>` (up to 2 jobs at once, often ~1 when anything else
