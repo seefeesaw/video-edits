@@ -1,0 +1,377 @@
+{
+  "title": "This and Stranger Things s5 (white Meltie mug, new background, Netflix on the laptop)",
+  "source": "https://www.youtube.com/shorts/tfE3-IsPbOw",
+  "notes": "Exact replica of the Short with ONLY the background changed: a dark navy-blue wall with a night window and a warm fairy-light curtain replaces the red wall and the Christmas tree; desk, mug, laptop, props, hands, actions, framing and timing follow the original. WHITE variant of the real Meltie Mini Fondue Mug (store photo IMG_3998 + the white mug cropped from IMG-4087). The laptop is a green screen composited with the official Netflix logo (Netflix_2015_logo.svg from Wikimedia Commons, unchanged) filling the screen as on a real computer; the whole laptop is in frame in every shot (\"screen.whole\") so the full logo shows. Unbranded wafer wrapper; Sora audio. compare.trim ignores the worst-matching 35% of the picture (the new background).",
+  "size": [
+    1080,
+    1920
+  ],
+  "fps": 60,
+  "duration": 10.681,
+  "soraSize": "720x1280",
+  "product": {
+    "name": "Meltie Mug Mini Fondue Mug, white",
+    "refs": [
+      "assets/product/white-front.png",
+      "assets/product/white-lit.jpg"
+    ],
+    "description": "the WHITE Meltie Mini Fondue Mug exactly as in the product photos: glossy off-white ceramic body that flares wider at the top, a dark chocolate-brown interior, 'Chocolate...' in brown cursive script with a small brown swirl/® mark on the front, a tall arched opening at the base for a tealight, an angular white handle on the right, and a fondue fork with a brown handle and long steel tines that clips into a slot in the handle"
+  },
+  "style": "Vertical smartphone video filmed at night at a home desk, close camera at desk height; warm, cosy, slightly moody colour grade in a dim room with a dark navy-blue wall and warm fairy lights; hands have long light-grey manicured nails. One continuous take: no cuts, no zooms. Realistic. No on-screen text, no logos. The laptop screen is always flat chroma-key green.",
+  "bible": {
+    "props": {
+      "mug": {
+        "desc": "the WHITE Meltie Mini Fondue Mug exactly as in the product photos: glossy off-white ceramic body that flares wider at the top, a dark chocolate-brown interior, 'Chocolate...' in brown cursive script with a small brown swirl/® mark on the front, a tall arched opening at the base for a tealight, an angular white handle on the right, and a fondue fork with a brown handle and long steel tines that clips into a slot in the handle",
+        "image": "assets/product/white-front.png"
+      },
+      "laptop": {
+        "desc": "a dark-grey open laptop, its screen lit with a perfectly flat, uniform, pure chroma-key green (#00FF00) from edge to edge: no picture, no interface, no reflections, no glare"
+      },
+      "curtain": {
+        "desc": "a tall dark window at night with snow falling outside, a curtain of warm white fairy lights (vertical strands of tiny warm bulbs) hanging across it"
+      },
+      "torch": {
+        "desc": "a small black pocket butane torch lighter"
+      },
+      "wrapper": {
+        "desc": "a plain red chocolate-wafer bar wrapper with no text or logo, torn open"
+      },
+      "board": {
+        "desc": "a rectangular light-wood serving board with chocolate chip cookies, rows of round milk-chocolate malt balls, white marshmallows and halved strawberries on waffle pieces"
+      }
+    },
+    "sets": {
+      "D": {
+        "props": [
+          "mug",
+          "laptop",
+          "curtain"
+        ],
+        "desc": "a home desk at night in a DIM room: a clean white desk top across the bottom 30% of the frame; behind it a dark navy-blue painted wall with a tall night window hung with a warm white fairy-light curtain, deep shadows, warm low light, no red light, no Christmas tree, no bright studio light; close camera at desk height",
+        "layout": "The white fondue mug stands empty in the centre of the desk and is BIG: about 40% of the frame width, its base at 80% of the frame height; the WHOLE open laptop stands further back on the desk, CENTRED behind the mug and fully inside the picture with clear wall visible on both its left and right sides (all four corners of the screen and the whole lid visible, nothing cut by the picture edge), its green screen spanning about 22-78% of the frame width and 14-38% of the frame height, entirely above the mug's rim so the mug does not cover it; the window with the fairy-light curtain on the wall behind, to the right of the laptop."
+      }
+    }
+  },
+  "overlays": [
+    {
+      "from": 0,
+      "to": 10.681,
+      "elements": [
+        {
+          "type": "text",
+          "text": "This and Stranger Things s5 🍫",
+          "x": 221,
+          "y": 300,
+          "fit": [
+            221,
+            311,
+            841,
+            353
+          ],
+          "font": {
+            "family": "TikTok Sans, Noto Color Emoji",
+            "weight": 500,
+            "size": 40,
+            "color": "#ffffff",
+            "lineHeight": 1
+          },
+          "style": "text-shadow: 0 1px 3px rgba(0,0,0,.55)"
+        }
+      ]
+    }
+  ],
+  "fonts": [
+    "TikTok Sans:wght@400;500;600"
+  ],
+  "audio": {
+    "sora": 1
+  },
+  "shots": [
+    {
+      "id": "s1",
+      "set": "D",
+      "start": 0,
+      "end": 2.25,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The mug, full of melted milk chocolate with a lit tealight in its base, stands at the lower centre (BIG: 45% of the frame width, vertically 45-82%). A hand from the right holds the mug's brown-handled fondue fork with a chocolate-dipped strawberry just above the mug. The WHOLE open laptop stands further back on the desk, CENTRED behind the mug and fully inside the picture with clear wall visible on both its left and right sides (all four corners of the screen and the whole lid visible, nothing cut by the picture edge), its green screen spanning about 22-78% of the frame width and 14-38% of the frame height, entirely above the mug's rim so the mug does not cover it, its screen lit flat pure chroma-key green. The corner of the wooden snack board with marshmallows and strawberries enters at the bottom-left.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "The hand lifts the chocolate-coated strawberry out of the mug, chocolate dripping; slow drift closer. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "netflixLogo",
+        "whole": true
+      },
+      "clip": "clips/s1.v2.mp4",
+      "grade": {
+        "r": [
+          1.017,
+          23.29
+        ],
+        "g": [
+          1.017,
+          23.29
+        ],
+        "b": [
+          1.017,
+          23.29
+        ],
+        "clip": "clips/s1.v2.mp4"
+      }
+    },
+    {
+      "id": "s2",
+      "set": "D",
+      "start": 2.25,
+      "end": 3.1333,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The empty mug (no chocolate, no candle) stands in the centre (BIG: 45% of the frame width, vertically 42-80%); a hand from the right holds it by the handle. The WHOLE open laptop stands further back on the desk, CENTRED behind the mug and fully inside the picture with clear wall visible on both its left and right sides (all four corners of the screen and the whole lid visible, nothing cut by the picture edge), its green screen spanning about 22-78% of the frame width and 14-38% of the frame height, entirely above the mug's rim so the mug does not cover it, its screen lit flat pure chroma-key green; the fairy-light window glows top-right.",
+        "refs": []
+      },
+      "prompt": "The hand turns the empty mug slightly toward the camera to show the 'Chocolate...' script and the empty tealight opening. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "netflixLogo",
+        "whole": true
+      },
+      "clip": "clips/s2.mp4",
+      "grade": {
+        "r": [
+          1.1722,
+          30.73
+        ],
+        "g": [
+          1.1722,
+          30.73
+        ],
+        "b": [
+          1.1722,
+          30.73
+        ],
+        "clip": "clips/s2.mp4"
+      }
+    },
+    {
+      "id": "s3",
+      "set": "D",
+      "start": 3.1333,
+      "end": 4.4167,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The mug stands in the centre (BIG: 45% of the frame width, vertically 42-80%) half full of round milk-chocolate malt balls. The plain red wafer wrapper hangs into the top-right corner. The WHOLE open laptop stands further back on the desk, CENTRED behind the mug and fully inside the picture with clear wall visible on both its left and right sides (all four corners of the screen and the whole lid visible, nothing cut by the picture edge), its green screen spanning about 22-78% of the frame width and 14-38% of the frame height, entirely above the mug's rim so the mug does not cover it, its screen lit flat pure chroma-key green; the fairy-light window glows right.",
+        "refs": [
+          "bible/prop-wrapper.png"
+        ]
+      },
+      "prompt": "More chocolate malt balls pour into the mug from above, bouncing and piling up high. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "netflixLogo",
+        "whole": true
+      },
+      "clip": "clips/s3.v2.mp4",
+      "grade": {
+        "r": [
+          0.9533,
+          29.14
+        ],
+        "g": [
+          0.9533,
+          29.14
+        ],
+        "b": [
+          0.9533,
+          29.14
+        ],
+        "clip": "clips/s3.v2.mp4"
+      }
+    },
+    {
+      "id": "s4",
+      "set": "D",
+      "start": 4.4167,
+      "end": 5.45,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Foreground centre-left (vertically 40-58%): a hand holds a small white tealight candle; another hand from the right holds the black pocket torch lighter to its wick. Behind, slightly out of focus, the mug full of chocolate malt balls stands at the centre; The WHOLE open laptop stands further back on the desk, CENTRED behind the mug and fully inside the picture with clear wall visible on both its left and right sides (all four corners of the screen and the whole lid visible, nothing cut by the picture edge), its green screen spanning about 22-78% of the frame width and 14-38% of the frame height, entirely above the mug's rim so the mug does not cover it, its screen lit flat pure chroma-key green; the fairy-light window right.",
+        "refs": [
+          "bible/prop-torch.png"
+        ]
+      },
+      "prompt": "The torch lighter clicks and lights the tealight's wick; a small flame appears. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "netflixLogo",
+        "whole": true
+      },
+      "clip": "clips/s4.mp4",
+      "pick": "manual",
+      "grade": {
+        "r": [
+          1.3634,
+          10.3
+        ],
+        "g": [
+          1.3634,
+          10.3
+        ],
+        "b": [
+          1.3634,
+          10.3
+        ],
+        "clip": "clips/s4.mp4"
+      }
+    },
+    {
+      "id": "s5",
+      "set": "D",
+      "start": 5.45,
+      "end": 6.0333,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The mug piled high with chocolate malt balls, its brown-handled fork in it, stands at the centre-left (BIG: 45% of the frame width, vertically 30-72%); two hands at the bottom hold a lit tealight just in front of the arched opening at its base. The WHOLE open laptop stands further back on the desk, CENTRED behind the mug and fully inside the picture with clear wall visible on both its left and right sides (all four corners of the screen and the whole lid visible, nothing cut by the picture edge), its green screen spanning about 22-78% of the frame width and 8-28% of the frame height, entirely above the top of the heaped malt balls so the mug does not cover it, its screen lit flat pure chroma-key green.",
+        "refs": []
+      },
+      "prompt": "The hands slide the lit tealight into the opening under the mug. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "netflixLogo",
+        "whole": true
+      },
+      "clip": "clips/s5.v2.mp4"
+    },
+    {
+      "id": "s6",
+      "set": "D",
+      "start": 6.0333,
+      "end": 6.95,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The mug of fully melted glossy chocolate stands in the centre (BIG: 45% of the frame width, vertically 42-76%) with the tealight glowing under it; a hand from the left holds it; a hand from the top-right holds the brown-handled fondue fork in the chocolate. The WHOLE open laptop stands further back on the desk, CENTRED behind the mug and fully inside the picture with clear wall visible on both its left and right sides (all four corners of the screen and the whole lid visible, nothing cut by the picture edge), its green screen spanning about 22-78% of the frame width and 14-38% of the frame height, entirely above the mug's rim so the mug does not cover it, its screen lit flat pure chroma-key green; the fairy-light window top-right.",
+        "refs": []
+      },
+      "prompt": "Slow circular stirring of the melted chocolate with the fork. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "netflixLogo",
+        "whole": true
+      },
+      "clip": "clips/s6.v2.mp4",
+      "grade": {
+        "r": [
+          1.0084,
+          44.58
+        ],
+        "g": [
+          1.0084,
+          44.58
+        ],
+        "b": [
+          1.0084,
+          44.58
+        ],
+        "clip": "clips/s6.v2.mp4"
+      }
+    },
+    {
+      "id": "s7",
+      "set": "D",
+      "start": 6.95,
+      "end": 7.7,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The wooden serving board fills the bottom third across the full width. The mug of melted chocolate stands behind it in the centre (30% of the frame width, vertically 33-60%) with a lit tealight in its base. A hand from the right holds the brown-handled fork with a marshmallow above the mug. The WHOLE open laptop stands further back on the desk, CENTRED behind the mug and fully inside the picture with clear wall visible on both its left and right sides (all four corners of the screen and the whole lid visible, nothing cut by the picture edge), its green screen spanning about 22-78% of the frame width and 14-38% of the frame height, entirely above the mug's rim so the mug does not cover it, its screen lit flat pure chroma-key green; the fairy-light window top-right.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "The hand dips the marshmallow into the chocolate and lifts it out coated and dripping; gentle push in. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "netflixLogo",
+        "whole": true
+      },
+      "clip": "clips/s7.v2.mp4"
+    },
+    {
+      "id": "s8",
+      "set": "D",
+      "start": 7.7,
+      "end": 10.681,
+      "from": 0.75,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The wooden serving board fills the bottom third across the full width. The mug of melted chocolate stands behind it in the centre (35% of the frame width, vertically 33-60%) with a lit tealight in its base. A hand from the right holds the brown-handled fork with a marshmallow above the mug. The WHOLE open laptop stands further back on the desk, CENTRED behind the mug and fully inside the picture with clear wall visible on both its left and right sides (all four corners of the screen and the whole lid visible, nothing cut by the picture edge), its green screen spanning about 22-78% of the frame width and 14-38% of the frame height, entirely above the mug's rim so the mug does not cover it, its screen lit flat pure chroma-key green; the fairy-light window top-right.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "The hand dips the marshmallow into the chocolate and lifts it out coated and dripping; gentle push in. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "netflixLogo",
+        "whole": true
+      },
+      "clip": "clips/s8.v2.mp4"
+    }
+  ],
+  "captions": {
+    "netflixLogo": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1600,
+        "h": 1000,
+        "html": "<div style=\"position:absolute;inset:0;background:#000\"><img src=\"{{src assets/screen/netflix-logo.svg}}\" style=\"position:absolute;left:200px;top:338px;width:1200px;height:324px\"></div>"
+      }
+    ]
+  },
+  "compare": {
+    "trim": 0.35,
+    "grade": "luma"
+  }
+}

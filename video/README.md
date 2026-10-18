@@ -77,7 +77,12 @@ front hides the bottom; a device cut by the frame edge shows the picture's side 
 the frame, unless `"anchor": "center"`) and caches `out/_screens/<take>.<hash>.mp4`; compare.mjs scores the
 composited takes, so --pick/--framing/--apply see the real picture. Because the picture never goes
 to Sora it may show people (adults: gpt-image-2 blocks stills of children/teens) and a streaming-app UI — but only original, generated content (never
-stills of a real show) and an invented title. Text that must be readable in every shot (a title): set `"anchor": "center"` on the shots and keep
+stills of a real show) and an invented title. A picture that should fill a FULLY visible device (a logo on a whole laptop, like a real computer):
+`"screen": {"ui": "…", "whole": true}` — keyframes.mjs asks for the whole device in frame and warns
+when a keyframe's screen touches the frame edge, sora.mjs keeps it in frame, and build.mjs scales the
+picture to the whole green box. Place the device where the product can't cover it (set back, screen
+above the product's rim) in the bible layout and every keyframe prompt.
+Text that must be readable in every shot (a title): set `"anchor": "center"` on the shots and keep
 it inside the middle third of the screen (x 530-1070 of 1600) — the part a cut-off laptop still shows.
 Check every keyframe still shows the green (`node
 keyframes.mjs` warns when a `screen` shot's keyframe has none).
@@ -89,7 +94,8 @@ hands, actions, framing, timing) and change only the bible set — the wall/room
 decoration (swap background-only props like a tree for the new ones, never the desk-front props) —
 plus the words that name the old background in `style` and in each keyframe prompt ("the tree
 glows top-right" → "the fairy-light window glows top-right"). Then set
-`"compare": {"trim": 0.35}`: the colour grid would otherwise count the new background as an error,
+`"compare": {"trim": 0.35, "grade": "luma"}` (luma: --apply matches brightness/contrast only, so the
+new colours stay — an RGB grade turned a navy wall pink): the colour grid would otherwise count the new background as an error,
 the grade would pull the new wall back to the old colour, and --pick/--framing would prefer takes
 and crops that hide it. With trim, every score and grade fit uses the best-matching 65% of grid
 cells per frame. Don't make the new background green when a device screen is keyed.

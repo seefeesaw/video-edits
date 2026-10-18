@@ -18,7 +18,8 @@
 //        the shot's clip has changed since
 //   --only s3,s5   restrict --pick/--framing/--apply to those shots
 //   video.json "compare": {"trim": 0.35}: for replicas that change part of the picture on purpose
-//        (another background): scores and grade fits ignore the worst-matching 35% of grid cells
+//        (another background): scores and grade fits ignore the worst-matching 35% of grid cells;
+//        add "grade": "luma" so --apply only matches brightness/contrast and keeps the new colours
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -101,10 +102,16 @@ const fitOn = (A, B, keep) => [0, 1, 2].map((c) => {
   const ma = mean(xa), mb = mean(xb), g = Math.max(0.5, Math.min(2, sd(xa, ma) / sd(xb, mb)));
   return [g, ma - g * mb];
 });
+// "compare": {"grade": "luma"}: one gain/offset for all three channels (brightness and contrast only,
+// never a hue shift) — for replicas whose new colours are intentional (a navy wall instead of a red one
+// would otherwise be pulled towards red)
+const LUMA = spec.compare?.grade === 'luma';
 const fitGrade = (A, B) => {
   const all = A.map((a) => Array.from({ length: a.length / 3 }, (_, i) => i));
-  const g = fitOn(A, B, all);
-  return TRIM ? fitOn(A, B, A.map((a, k) => keptCells(cellDiffs(a, B[k], g)))) : g;
+  let g = fitOn(A, B, all);
+  if (TRIM) g = fitOn(A, B, A.map((a, k) => keptCells(cellDiffs(a, B[k], g))));
+  if (LUMA) { const m = [0, 1].map((j) => (g[0][j] + g[1][j] + g[2][j]) / 3); g = [m, m, m]; }
+  return g;
 };
 const gradeArr = (g) => (g ? [g.r, g.g, g.b] : [[1, 0], [1, 0], [1, 0]]);
 const comp = (A, B, gg = gradeArr()) => {

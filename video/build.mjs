@@ -103,6 +103,7 @@ async function composeScreens(spec, dir, outDir, W, H, fps) {
 //   "screen": { "image": "bible/screen-x.png" }                   a still, cover-fitted
 //   "screen": { "clip": "assets/screen/scene.mp4", "from": 12.5, "ui": "player" }   a video you have the
 //             rights to (plays from "from", loops), optionally under an html overlay (player chrome)
+//   "whole": true  the device is fully in frame: the picture fills the whole green box (a real display)
 //   "anchor": "left"|"right"|"center"  which side of the picture shows when the device is cut by the
 //             frame edge (default: the side facing into the frame)
 // The composite is made per TAKE (out/_screens/<take>.<hash>.mp4, cached) at the clip's own size, so
@@ -176,9 +177,13 @@ export async function screenClip(spec, dir, shot, clip) {
   // fit the still to the box, anchored at the top (the bottom of a laptop screen is what a mug hides).
   // A screen cut off by the frame edge continues out of shot: scale it by its height to its real width
   // and show the part on the visible side (the reference crops it the same way), else cover-fit centred.
-  const atL = box.x0 <= 2, atR = box.x1 >= w - 3, anchor = scr.anchor || (atL && !atR ? 'right' : atR && !atL ? 'left' : 'center');
+  const atL = box.x0 <= 2, atR = box.x1 >= w - 3;
+  // "whole": the device is meant to be fully in frame, so the picture fills the screen exactly like a
+  // real display (scaled to the green box, nothing cropped); warn if the take cut the screen anyway
+  if (scr.whole && (atL || atR || box.y0 <= 2)) console.warn(`warning: ${shot.id} (${clip}): the screen touches the frame edge, but "whole" wants the device fully in frame (pick another take / regenerate)`);
+  const anchor = scr.whole ? 'fill' : scr.anchor || (atL && !atR ? 'right' : atR && !atL ? 'left' : 'center');
   const fullW = Math.max(bw, Math.round((bh * sw) / sh / 2) * 2);
-  const fit = anchor === 'center' ? `scale=${bw}:${bh}:force_original_aspect_ratio=increase,crop=${bw}:${bh}:(iw-${bw})/2:0`
+  const fit = anchor === 'fill' ? `scale=${bw}:${bh}` : anchor === 'center' ? `scale=${bw}:${bh}:force_original_aspect_ratio=increase,crop=${bw}:${bh}:(iw-${bw})/2:0`
     : `scale=${fullW}:-2,crop=${bw}:min(ih\\,${bh}):${anchor === 'right' ? `iw-${bw}` : 0}:0,pad=${bw}:${bh}:0:0`;
   const srcIn = scr.clip ? ['-stream_loop', '-1', '-ss', String(scr.from ?? 0), '-i', path.join(dir, scr.clip), ...(uiPng ? ['-loop', '1', '-i', uiPng] : [])] : ['-loop', '1', '-i', still];
   const srcChain = scr.clip ? `[1:v]fps=${(spec.fps || 30)},scale=${sw}:${sh}:force_original_aspect_ratio=increase,crop=${sw}:${sh}${uiPng ? '[sv];[sv][2:v]overlay=0:0,' : ','}${fit}` : `[1:v]${fit}`;
