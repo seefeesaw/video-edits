@@ -10,8 +10,8 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    `save.html`, which writes captured JSON to disk.
 2. **Capture the original** in the in-app browser: open the Short, then paste the WHOLE of
    `tools/yt-capture.js` into the javascript tool with `NAME` on its first line set to `<name>`
-   (the javascript tool cannot read files: Read the file, edit NAME in your paste). It runs ~2 min
-   per 10 s of video (~5 min for a 30 s Short; a seek every ~150ms; the script returns at once and keeps running, so don't wait
+   (the javascript tool cannot read files: Read the file, edit NAME in your paste). It runs ~4-5 min
+   per 10 s of video (~8 min for a 10 s Short, ~12 min for 30 s; a seek every ~150ms; the script returns at once and keeps running, so don't wait
    inside the 45s javascript tool) and then navigates to save.html and back. Delete any old
    `reference.json` first, then wait for the file:
    `until [ -s videos/<name>/reference.json ]; do sleep 5; done` (Bash, in the background). Paste
@@ -40,10 +40,15 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    rejects input images with faces (even generated ones), so those shots are never keyframed.
    **Continuity bible first** (README "Continuity bible"): list every prop that must not change with
    exact words in `bible.props`, each set with its props and their first-frame layout in
-   `bible.sets` (state the main object's size emphatically), run `node bible.mjs`, and Read
+   `bible.sets` (give the set frame the main object's size in the DOMINANT shot; every shot's
+   keyframe prompt then states its own size, which overrides the set's scale — wide shots smaller),
+   run `node bible.mjs` (gpt-image-2 often takes 2-6 min per image; budget ~20 min for 8 keyframes), and Read
    `bible/bible-sheet.jpg` before any Sora time. Performances then use `"startFrom": "set"` and their
-   prompt starts with the person stepping in (0-1 s). Pick every take with
-   `node continuity.mjs videos/<name> --takes <id> --apply` (then confirm the action by eye).
+   prompt starts with the person stepping in (0-1 s). Pick takes with people by
+   `node continuity.mjs videos/<name> --takes <id> --apply` (then confirm the action by eye). Takes of
+   hands-and-product shots that start from the same keyframe score alike on both continuity and
+   `--pick` (it prints TIE): decide by the ACTION on `node refsheet.mjs videos/<name> --takes s1,s2,…`
+   (does the candle light, is the strawberry dipped) and set `"clip"` + `"pick": "manual"`.
    Every separate generation (text-to-video OR remix of an anchor) can change the face, so a person
    who appears in more than one shot gets **performances** (README "Performances"): one 12 s take
    per person with that person's actions in order, cut into the shots (`"takes": 0`, `"clip"`,
@@ -57,7 +62,8 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    after 24 h).
 5. **Product**: if the video features a real product, it must be that exact product. Download its
    photos from the brand's store page (Shopify: `/products/<handle>.json`; each image's `alt` or
-   `variant_ids` tells which colour variant it shows) into `assets/product/`, set `product` (refs +
+   `variant_ids` tells which colour variant it shows) into `assets/product/`; crop a variant out of
+   a multi-product lifestyle photo with `node tools/crop.mjs in out x y w h` (fractions), set `product` (refs +
    a precise description: shape, colour, lettering, handle, accessories), give every shot
    `keyframe: {prompt: <first frame composition>}` and keep the shot `prompt` for the action only.
    With a bible, make the product a bible prop with `"image": "assets/product/<photo>"` (the store
@@ -83,7 +89,7 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    `--pick` scores colour layout only: for every shot whose ACTION matters, run `node refsheet.mjs
    videos/<name> --takes sN` and check the take does the right thing at the right moment (order of
    actions, the moment at the shot's midpoint); override with `"clip"` + `"pick": "manual"` and move
-   `from` to retime. `--framing` caps zoom at 1.25 and keeps a crop only for a ≥1 point gain; check it didn't crop
+   `from` to retime. `--framing` caps zoom at 1.25 and keeps a crop only for a ≥1 point gain (it can enlarge an already-too-big object or trim a hand: set `"framing": "manual"` with zoom 1 where it hurts); check it didn't crop
    away a set piece (set `"framing": "manual"` with your own zoom/pan if it did). Re-run `--apply`
    whenever clip or framing changes (build.mjs ignores a grade fitted on another clip).
 7. **Score**: `node compare.mjs videos/<name>` (per-shot comp, brightness/warmth, cuts; it lists

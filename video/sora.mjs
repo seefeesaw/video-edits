@@ -145,22 +145,30 @@ async function create(shot, spec, dir) {
   return j.id;
 }
 
+// a request whose BODY read can also drop ("terminated"): retry the whole request + read
+async function reread(url, read, label) {
+  for (let attempt = 0; ; attempt++) {
+    try { return await read(await fetch(url, { headers: auth() })); }
+    catch (e) { if (attempt >= 8) throw new Error(`${label}: ${e.message} (network; the job id is kept in jobs.json, re-run to resume)`); console.log(`  ${label}: ${e.message}; retrying in 15s`); await new Promise((r) => setTimeout(r, 15000)); }
+  }
+}
+export class JobFailed extends Error {}
+
 export async function waitAndSave(id, file, label) {
   const t0 = Date.now();
   let s;
   for (;;) {
-    s = await (await fetch(`${BASE}/${id}`, { headers: auth() })).json();
+    s = await reread(`${BASE}/${id}`, (r) => r.json(), label);
     if (['completed', 'failed', 'cancelled'].includes(s.status)) break;
     await new Promise((x) => setTimeout(x, 10000));
   }
   if (s.status !== 'completed') {
     const hint = /people-in-user-uploads/.test(JSON.stringify(s.error || {})) ? ' — the keyframe shows a person or face (screens included); regenerate it people-free (only hands)' : '';
-    throw new Error(`${label}: ${s.status} ${JSON.stringify(s.error || {}).slice(0, 300)}${hint}`);
+    throw new JobFailed(`${label}: ${s.status} ${JSON.stringify(s.error || {}).slice(0, 300)}${hint}`);
   }
-  const v = await fetch(`${BASE}/${id}/content`, { headers: auth() });
-  if (!v.ok) throw new Error(`${label}: download HTTP ${v.status}`);
+  const buf = await reread(`${BASE}/${id}/content`, async (v) => { if (!v.ok) throw new Error(`download HTTP ${v.status}`); return Buffer.from(await v.arrayBuffer()); }, label);
   fs.mkdirSync(path.dirname(file), { recursive: true });
-  fs.writeFileSync(file, Buffer.from(await v.arrayBuffer()));
+  fs.writeFileSync(file, buf);
   console.log(`clip ${path.relative(process.cwd(), file)} (${((Date.now() - t0) / 1000).toFixed(0)}s)`);
   return s;
 }
@@ -232,10 +240,12 @@ async function main() {
   await Promise.all(Array.from({ length: limit }, async () => {
     while (queue.length) {
       const w = queue.shift();
-      try { await runOne(w); } catch (e) { failed.push(e); console.error(e.message); if (pending[w.rel]) { delete pending[w.rel]; saveJobs(); } }
+      // forget a job only when Sora says it failed; on a network error keep its id so a re-run
+      // resumes it instead of paying for a new one
+      try { await runOne(w); } catch (e) { failed.push(e); console.error(e.message); if (e instanceof JobFailed && pending[w.rel]) { delete pending[w.rel]; saveJobs(); } }
     }
   }));
-  if (failed.length) process.exit(1);
+  if (failed.length) { console.error(`${failed.length} job(s) did not finish (see above); re-run the same command to resume`); process.exit(1); }
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch((e) => { console.error(e.message); process.exit(1); });

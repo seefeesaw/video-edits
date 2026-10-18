@@ -14,7 +14,7 @@
 //    the prop images as references (so the props in the set are those exact objects) →
 //    bible/set-<id>.png and bible/set-<id>.720x1280.png (what Sora gets).
 // Sora refuses input images with people, but a people-free set is accepted: performances start from
-// it (`"start": "set"`), so the place and every prop are pinned by the first frame, and the person
+// it (`"startFrom": "set"`), so the place and every prop are pinned by the first frame, and the person
 // steps in. sora.mjs also appends each listed prop's exact words to every prompt that uses it.
 // Then: node continuity.mjs videos/<name> --takes <perf>  ranks takes against these references.
 import fs from 'node:fs';
@@ -31,7 +31,7 @@ const spec = JSON.parse(fs.readFileSync(path.join(dir, 'video.json'), 'utf8'));
 const bible = spec.bible || {};
 const bdir = path.join(dir, 'bible');
 fs.mkdirSync(bdir, { recursive: true });
-const NO = 'No people, no hands, no faces anywhere. No text, no labels, no logos, no brand names, no watermark.';
+const NO = 'No people, no hands, no faces anywhere. No added text, labels, logos, brand names or watermark (lettering printed on a reference product stays exactly as in its photo).';
 
 // jobs run through the slideshow's gpt-image-2 generator (generations, or edits when refs are given)
 function run(jobs) {

@@ -64,7 +64,10 @@ if (!takes.length) throw new Error(`no takes of ${id} in clips/`);
 const from = perf ? 0 : item.from ?? 0, len = perf ? perf.seconds : (item.end - item.start) * (item.speed ?? 1);
 const cands = takes.map((f, i) => [f, sheet(path.join(dir, 'clips', f), from, len, path.join(tmp, `take${i}.jpg`))]);
 
-const elements = ['face', 'hair', 'outfit', ...(spec.bible?.sets?.[setId]?.props || []), 'set', ...(faceSrc && perf ? ['state'] : [])];
+// a person is only judged when there is one to judge (a performance, a library character, a remix
+// source); hands-and-product shots score the props and set only (a missing face scored a free 10)
+const hasPerson = !!(perf || faceSrc || (item.set && spec.characters?.[item.set]));
+const elements = [...(hasPerson ? ['face', 'hair', 'outfit'] : []), ...(spec.bible?.sets?.[setId]?.props || []), 'set', ...(faceSrc && perf ? ['state'] : [])];
 const content = [
   { type: 'text', text: `You are a strict film continuity supervisor. Below are REFERENCE images, then ${cands.length} CANDIDATE takes (each a 2x2 sheet of frames over time). Score every candidate 0-10 for how exactly it keeps each element identical to the references: ${elements.join(', ')}. Be harsh: a different skin tone, face shape, beard, hair length or hairstyle is a different person (face <= 4); a prop with a different shape, size, colour, cap or material is <= 4; an element that changes between the frames of one take also loses points. "state" (when present) is whether the take CONTINUES the end of the source take: same contents in every container, same spills and mess (an empty or clean jar after it was full is <= 2). Score only continuity, not the action. Return JSON only: {"takes":[{"take":"<file>","scores":{${elements.map((e) => `"${e}":0`).join(',')}},"issues":"<short>"}]}` },
   ...refs.flatMap(([label, f]) => [{ type: 'text', text: `REFERENCE: ${label}` }, { type: 'image_url', image_url: { url: b64(f) } }]),

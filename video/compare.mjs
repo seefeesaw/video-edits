@@ -110,6 +110,9 @@ if (argv.includes('--pick')) {
       return [(fr.length ? comp(A, B, fitGrade(A, B)) : 0) - (cuts.length ? 10 : 0), f, cuts];
     }).sort((x, y) => y[0] - x[0]);
     console.log(`pick ${s.id}: ${scored.map(([v, f, c]) => `${f} ${v.toFixed(1)}${c.length ? ` (inner cut at ${c.join(', ')}s, -10)` : ''}`).join('  ')}`);
+    // takes that start from the same keyframe look alike in a short slot: a near-tie is decided by
+    // the ACTION, which this score can't see
+    if (scored.length > 1 && scored[0][0] - scored[1][0] < 0.3) console.log(`  ${s.id}: TIE (${(scored[0][0] - scored[1][0]).toFixed(2)}): judge the action with node refsheet.mjs ${path.relative(process.cwd(), dir)} --takes ${s.id}, then set "clip" + "pick": "manual"`);
     const old = s.clip, now = `clips/${scored[0][1]}`;
     s.clip = now;
     // jump-cut shots reuse this shot's take ("takes": 0, "clip": <this shot's clip>): keep them on it

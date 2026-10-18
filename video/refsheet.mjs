@@ -33,8 +33,8 @@ if (!moved && ref.sheets) console.log(`sheets: ${Object.values(ref.sheets).join(
 // cuts on odd 1/60 s (frame times offset by half a frame) can only be hit by a 60fps build
 const off = (ref.cuts || []).filter((c) => Math.abs(c * 30 - Math.round(c * 30)) > 0.25);
 console.log(off.length ? `fps: use "fps": 60 (${off.length} of ${ref.cuts.length} cuts fall between 30fps frames, e.g. ${off.slice(0, 3).join(', ')})` : `fps: ${ref.sourceFps || 30} is enough (every cut is on a 30fps frame)`);
-const takesOf = argv.includes('--takes') ? argv[argv.indexOf('--takes') + 1] : null;
-if (takesOf) {
+const takesList = argv.includes('--takes') ? argv[argv.indexOf('--takes') + 1].split(',') : [];
+for (const takesOf of takesList) {
   const spec = JSON.parse(fs.readFileSync(path.join(dir, 'video.json'), 'utf8'));
   // a shot, or a performance (a long take shots are cut from: shown over its whole length, 8 frames)
   const perf = (spec.performances || []).find((x) => x.id === takesOf);
