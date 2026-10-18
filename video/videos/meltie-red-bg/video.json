@@ -1,7 +1,7 @@
 {
   "title": "This and Stranger Things s5 (red Meltie mug, Netflix on the laptop, new background)",
   "source": "https://www.youtube.com/shorts/tfE3-IsPbOw",
-  "notes": "Exact replica of the Short with ONLY the background changed: a dark navy-blue wall with a night window and a warm fairy-light curtain replaces the red wall and the Christmas tree; desk, mug, laptop, props, hands, actions, framing and timing follow the original. RED variant of the real Meltie Mini Fondue Mug (store photo IMG_3997 + lifestyle photo IMG-4084). The laptop is a green screen composited with a Netflix-style screen showing only the title \"Harry Potter and the Philosopher's Stone\" in plain serif type (the title page, then the player on its title card) at the user's request: no film footage, stills, logo art, characters or actors. Unbranded wafer wrapper; Sora audio. compare.trim ignores the worst-matching 35% of the picture (the new background) when scoring and grading.",
+  "notes": "Exact replica of the Short with ONLY the background changed: a dark navy-blue wall with a night window and a warm fairy-light curtain replaces the red wall and the Christmas tree; desk, mug, laptop, props, hands, actions, framing and timing follow the original. RED variant of the real Meltie Mini Fondue Mug (store photo IMG_3997 + lifestyle photo IMG-4084). The laptop is a green screen composited with the official Netflix logo (Netflix_2015_logo.svg from Wikimedia Commons, unchanged) centred on black in every shot, at the user's request. Unbranded wafer wrapper; Sora audio. compare.trim ignores the worst-matching 35% of the picture (the new background) when scoring and grading.",
   "size": [
     1080,
     1920
@@ -81,10 +81,7 @@
     }
   ],
   "fonts": [
-    "TikTok Sans:wght@400;500;600",
-    "Bebas Neue",
-    "Inter:wght@400;600;700",
-    "Libre Baskerville"
+    "TikTok Sans:wght@400;500;600"
   ],
   "audio": {
     "sora": 1
@@ -110,22 +107,22 @@
         0
       ],
       "screen": {
-        "ui": "netflixHero",
+        "ui": "netflixLogo",
         "anchor": "center"
       },
       "clip": "clips/s1.mp4",
       "grade": {
         "r": [
-          1.0224,
-          55.5
+          1.0252,
+          54.27
         ],
         "g": [
-          1.2374,
-          16.27
+          1.2196,
+          18.45
         ],
         "b": [
-          1.4994,
-          -3.52
+          1.4706,
+          -0.61
         ],
         "clip": "clips/s1.mp4"
       }
@@ -148,22 +145,22 @@
         0
       ],
       "screen": {
-        "ui": "player_s2",
+        "ui": "netflixLogo",
         "anchor": "center"
       },
       "clip": "clips/s2.v2.mp4",
       "grade": {
         "r": [
-          0.8907,
-          68.3
+          0.8892,
+          68.59
         ],
         "g": [
-          1.186,
-          28.05
+          1.1865,
+          28.02
         ],
         "b": [
-          1.5073,
-          10.29
+          1.5069,
+          10.44
         ],
         "clip": "clips/s2.v2.mp4"
       }
@@ -188,22 +185,22 @@
         0
       ],
       "screen": {
-        "ui": "player_s3",
+        "ui": "netflixLogo",
         "anchor": "center"
       },
       "clip": "clips/s3.v2.mp4",
       "grade": {
         "r": [
-          0.9126,
-          66.32
+          0.9187,
+          65.12
         ],
         "g": [
-          1.2248,
-          26.48
+          1.215,
+          27.31
         ],
         "b": [
-          1.5317,
-          12.67
+          1.5164,
+          13.92
         ],
         "clip": "clips/s3.v2.mp4"
       }
@@ -228,22 +225,22 @@
         0
       ],
       "screen": {
-        "ui": "player_s4",
+        "ui": "netflixLogo",
         "anchor": "center"
       },
       "clip": "clips/s4.v2.mp4",
       "grade": {
         "r": [
-          1.0318,
-          43.76
+          1.0301,
+          44.21
         ],
         "g": [
-          1.284,
-          18.53
+          1.2758,
+          19.37
         ],
         "b": [
-          1.7412,
-          -2.92
+          1.7287,
+          -1.89
         ],
         "clip": "clips/s4.v2.mp4"
       }
@@ -266,22 +263,22 @@
         0
       ],
       "screen": {
-        "ui": "player_s5",
+        "ui": "netflixLogo",
         "anchor": "center"
       },
       "clip": "clips/s5.mp4",
       "grade": {
         "r": [
-          0.8824,
-          70.53
+          0.8792,
+          71.7
         ],
         "g": [
-          1.2986,
-          17.64
+          1.2846,
+          19.32
         ],
         "b": [
-          1.7773,
-          -3.69
+          1.7521,
+          -1.58
         ],
         "clip": "clips/s5.mp4"
       }
@@ -304,22 +301,22 @@
         0
       ],
       "screen": {
-        "ui": "player_s6",
+        "ui": "netflixLogo",
         "anchor": "center"
       },
       "clip": "clips/s6.mp4",
       "grade": {
         "r": [
-          1.0636,
-          54.16
+          1.0559,
+          54.42
         ],
         "g": [
-          1.3025,
-          25.91
+          1.2714,
+          28.04
         ],
         "b": [
-          1.5922,
-          15.62
+          1.5459,
+          18.26
         ],
         "clip": "clips/s6.mp4"
       }
@@ -344,22 +341,22 @@
         0
       ],
       "screen": {
-        "ui": "player_s7",
+        "ui": "netflixLogo",
         "anchor": "center"
       },
       "clip": "clips/s7.mp4",
       "grade": {
         "r": [
-          0.9592,
-          44.29
+          0.9606,
+          44.11
         ],
         "g": [
-          1.3069,
-          10.6
+          1.3062,
+          10.65
         ],
         "b": [
-          1.916,
-          -11.51
+          1.9154,
+          -11.49
         ],
         "clip": "clips/s7.mp4"
       }
@@ -384,106 +381,36 @@
         0
       ],
       "screen": {
-        "ui": "player_s8",
+        "ui": "netflixLogo",
         "anchor": "center"
       },
       "clip": "clips/s8.mp4",
       "grade": {
         "r": [
-          1.0139,
-          50.11
+          1.0162,
+          49.66
         ],
         "g": [
-          1.4256,
-          13.33
+          1.4135,
+          14.34
         ],
         "b": [
           2,
-          -6.97
+          -6.45
         ],
         "clip": "clips/s8.mp4"
       }
     }
   ],
   "captions": {
-    "netflixHero": [
+    "netflixLogo": [
       {
         "type": "html",
         "x": 0,
         "y": 0,
         "w": 1600,
         "h": 1000,
-        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:34px;font-family:'Bebas Neue';color:#E50914;font-size:60px;letter-spacing:2px\">NETFLIX</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:150px;font-family:'Bebas Neue';color:#E50914;font-size:30px;letter-spacing:9px;color:#ddd\"><span style=\"color:#E50914;font-size:42px\">N</span> FILM</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:215px\"><div style=\"font-family:'Libre Baskerville',Georgia,serif;color:#f2efe8;font-size:46px;line-height:1.15\">Harry Potter<br>and the<br>Philosopher&rsquo;s Stone</div></div><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:470px;color:#bbb;font-size:22px\">2001 &middot; PG &middot; 2h 32m</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:530px;display:flex;justify-content:center;gap:14px;font-weight:700;font-size:26px\"><div style=\"background:#fff;color:#000;padding:13px 34px;border-radius:6px\">&#9654;&nbsp; Play</div><div style=\"background:rgba(109,109,110,.7);color:#fff;padding:13px 26px;border-radius:6px\">&#9432;&nbsp; More Info</div></div></div>"
-      }
-    ],
-    "player_s2": [
-      {
-        "type": "html",
-        "x": 0,
-        "y": 0,
-        "w": 1600,
-        "h": 1000,
-        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:300px\"><div style=\"font-family:'Libre Baskerville',Georgia,serif;color:#f2efe8;font-size:46px;line-height:1.15\">Harry Potter<br>and the<br>Philosopher&rsquo;s Stone</div></div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:130px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:1%;height:8px;background:#E50914;border-radius:4px\"></div></div><div style=\"position:absolute;left:530px;width:540px;text-align:right;bottom:150px;font-size:22px;color:#fff;font-size:26px\">2:31:40</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:44px;display:flex;justify-content:center;gap:40px;color:#fff;font-size:40px\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span></div><div style=\"position:absolute;left:1030px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:46px\">N</div></div>"
-      }
-    ],
-    "player_s3": [
-      {
-        "type": "html",
-        "x": 0,
-        "y": 0,
-        "w": 1600,
-        "h": 1000,
-        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:300px\"><div style=\"font-family:'Libre Baskerville',Georgia,serif;color:#f2efe8;font-size:46px;line-height:1.15\">Harry Potter<br>and the<br>Philosopher&rsquo;s Stone</div></div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:130px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:1.5%;height:8px;background:#E50914;border-radius:4px\"></div></div><div style=\"position:absolute;left:530px;width:540px;text-align:right;bottom:150px;font-size:22px;color:#fff;font-size:26px\">2:31:39</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:44px;display:flex;justify-content:center;gap:40px;color:#fff;font-size:40px\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span></div><div style=\"position:absolute;left:1030px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:46px\">N</div></div>"
-      }
-    ],
-    "player_s4": [
-      {
-        "type": "html",
-        "x": 0,
-        "y": 0,
-        "w": 1600,
-        "h": 1000,
-        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:300px\"><div style=\"font-family:'Libre Baskerville',Georgia,serif;color:#f2efe8;font-size:46px;line-height:1.15\">Harry Potter<br>and the<br>Philosopher&rsquo;s Stone</div></div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:130px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:2%;height:8px;background:#E50914;border-radius:4px\"></div></div><div style=\"position:absolute;left:530px;width:540px;text-align:right;bottom:150px;font-size:22px;color:#fff;font-size:26px\">2:31:38</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:44px;display:flex;justify-content:center;gap:40px;color:#fff;font-size:40px\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span></div><div style=\"position:absolute;left:1030px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:46px\">N</div></div>"
-      }
-    ],
-    "player_s5": [
-      {
-        "type": "html",
-        "x": 0,
-        "y": 0,
-        "w": 1600,
-        "h": 1000,
-        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:300px\"><div style=\"font-family:'Libre Baskerville',Georgia,serif;color:#f2efe8;font-size:46px;line-height:1.15\">Harry Potter<br>and the<br>Philosopher&rsquo;s Stone</div></div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:130px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:2.5%;height:8px;background:#E50914;border-radius:4px\"></div></div><div style=\"position:absolute;left:530px;width:540px;text-align:right;bottom:150px;font-size:22px;color:#fff;font-size:26px\">2:31:37</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:44px;display:flex;justify-content:center;gap:40px;color:#fff;font-size:40px\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span></div><div style=\"position:absolute;left:1030px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:46px\">N</div></div>"
-      }
-    ],
-    "player_s6": [
-      {
-        "type": "html",
-        "x": 0,
-        "y": 0,
-        "w": 1600,
-        "h": 1000,
-        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:300px\"><div style=\"font-family:'Libre Baskerville',Georgia,serif;color:#f2efe8;font-size:46px;line-height:1.15\">Harry Potter<br>and the<br>Philosopher&rsquo;s Stone</div></div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:130px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:3%;height:8px;background:#E50914;border-radius:4px\"></div></div><div style=\"position:absolute;left:530px;width:540px;text-align:right;bottom:150px;font-size:22px;color:#fff;font-size:26px\">2:31:36</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:44px;display:flex;justify-content:center;gap:40px;color:#fff;font-size:40px\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span></div><div style=\"position:absolute;left:1030px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:46px\">N</div></div>"
-      }
-    ],
-    "player_s7": [
-      {
-        "type": "html",
-        "x": 0,
-        "y": 0,
-        "w": 1600,
-        "h": 1000,
-        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:300px\"><div style=\"font-family:'Libre Baskerville',Georgia,serif;color:#f2efe8;font-size:46px;line-height:1.15\">Harry Potter<br>and the<br>Philosopher&rsquo;s Stone</div></div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:130px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:3.5%;height:8px;background:#E50914;border-radius:4px\"></div></div><div style=\"position:absolute;left:530px;width:540px;text-align:right;bottom:150px;font-size:22px;color:#fff;font-size:26px\">2:31:35</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:44px;display:flex;justify-content:center;gap:40px;color:#fff;font-size:40px\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span></div><div style=\"position:absolute;left:1030px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:46px\">N</div></div>"
-      }
-    ],
-    "player_s8": [
-      {
-        "type": "html",
-        "x": 0,
-        "y": 0,
-        "w": 1600,
-        "h": 1000,
-        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;left:530px;width:540px;text-align:center;top:300px\"><div style=\"font-family:'Libre Baskerville',Georgia,serif;color:#f2efe8;font-size:46px;line-height:1.15\">Harry Potter<br>and the<br>Philosopher&rsquo;s Stone</div></div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:130px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:3.5%;height:8px;background:#E50914;border-radius:4px\"></div></div><div style=\"position:absolute;left:530px;width:540px;text-align:right;bottom:150px;font-size:22px;color:#fff;font-size:26px\">2:31:35</div><div style=\"position:absolute;left:530px;width:540px;text-align:center;bottom:44px;display:flex;justify-content:center;gap:40px;color:#fff;font-size:40px\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span></div><div style=\"position:absolute;left:1030px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:46px\">N</div></div>"
+        "html": "<div style=\"position:absolute;inset:0;background:#000\"><img src=\"{{src assets/screen/netflix-logo.svg}}\" style=\"position:absolute;left:600px;top:445px;width:400px;height:108px\"></div>"
       }
     ]
   },
