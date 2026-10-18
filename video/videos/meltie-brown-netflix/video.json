@@ -1,0 +1,506 @@
+{
+  "title": "This and Stranger Things s5 (brown Meltie mug, Netflix on the laptop)",
+  "source": "https://www.youtube.com/shorts/tfE3-IsPbOw",
+  "notes": "Same Short, BROWN variant of the real Meltie Mini Fondue Mug (store photos of the brown variant). The laptop is a green screen in every keyframe and take; build.mjs composites a Netflix-style screen into it after Sora (per-shot \"screen\"): the title page of a fictional series, then its episode playing in the Netflix player. The scenes are original generated stills (fictional characters), not Stranger Things footage; the series title is invented. The wafer wrapper is unbranded; Sora audio.",
+  "size": [
+    1080,
+    1920
+  ],
+  "fps": 60,
+  "duration": 10.681,
+  "soraSize": "720x1280",
+  "product": {
+    "name": "Meltie Mug Mini Fondue Mug, brown",
+    "refs": [
+      "assets/product/brown-front.png",
+      "assets/product/brown-lit.png"
+    ],
+    "description": "the BROWN Meltie Mini Fondue Mug exactly as in the product photos: glossy chocolate-brown ceramic body that flares wider at the top, a white interior, 'Chocolate...' in white cursive script with a small white swirl/® mark on the front, a tall arched opening at the base for a tealight, an angular brown handle on the right with a small round hole, and a fondue fork with a terracotta-brown handle and long steel tines that clips into the handle"
+  },
+  "style": "Vertical smartphone video filmed at night at a home desk, close camera at desk height; warm, cosy, slightly moody colour grade with a deep red wall light; hands have long light-grey manicured nails. One continuous take: no cuts, no zooms. Realistic. No on-screen text, no logos. The laptop screen is always flat chroma-key green.",
+  "bible": {
+    "props": {
+      "mug": {
+        "desc": "the BROWN Meltie Mini Fondue Mug exactly as in the product photos: glossy chocolate-brown ceramic body that flares wider at the top, a white interior, 'Chocolate...' in white cursive script with a small white swirl/® mark on the front, a tall arched opening at the base for a tealight, an angular brown handle on the right with a small round hole, and a fondue fork with a terracotta-brown handle and long steel tines that clips into the handle",
+        "image": "assets/product/brown-front.png"
+      },
+      "laptop": {
+        "desc": "a dark-grey open laptop, its screen lit with a perfectly flat, uniform, pure chroma-key green (#00FF00) from edge to edge: no picture, no interface, no reflections, no glare"
+      },
+      "tree": {
+        "desc": "a small Christmas tree, about 60 cm tall, with warm white fairy lights"
+      },
+      "torch": {
+        "desc": "a small black pocket butane torch lighter"
+      },
+      "wrapper": {
+        "desc": "a plain red chocolate-wafer bar wrapper with no text or logo, torn open"
+      },
+      "board": {
+        "desc": "a rectangular light-wood serving board with chocolate chip cookies, rows of round milk-chocolate malt balls, white marshmallows and halved strawberries on waffle pieces"
+      }
+    },
+    "sets": {
+      "D": {
+        "props": [
+          "mug",
+          "laptop",
+          "tree"
+        ],
+        "desc": "a home desk at night in a DIM room: a clean white desk top across the bottom 30% of the frame, a dark wall washed in deep red light behind, deep shadows, warm low light, no bright studio light; close camera at desk height",
+        "layout": "The brown fondue mug stands empty in the centre of the desk and is BIG: about 40% of the frame width, its base at 80% of the frame height; the open laptop on the left with its green screen filling the upper-left third; the small lit Christmas tree in the upper-right quarter."
+      }
+    },
+    "screens": {
+      "hero": {
+        "desc": "a lonely two-lane forest road at night in thick fog, a single streetlight and a deep red glow in the sky above the pine trees, 1980s small-town mood, no people"
+      },
+      "e1": {
+        "desc": "a curly-haired man in his late twenties in an oversized grey suit jacket and loose tie, standing in a warm 1980s wood-panelled living room lit by a table lamp, medium shot, he looks surprised"
+      },
+      "e2": {
+        "desc": "a woman in her late twenties with a short dark bob in a white blouse and dark sweater vest standing in a 1980s office corridor with green filing cabinets, cool daylight, medium shot"
+      },
+      "e3": {
+        "desc": "close-up of an old typed letter and a faded flyer pinned to a cork board under a desk lamp, the typing is blurred and illegible, 1980s"
+      },
+      "e4": {
+        "desc": "a man in a red jacket seen from behind walking up to the front door of a red-brick suburban house on a grey afternoon, 1980s"
+      },
+      "e5": {
+        "desc": "two men in their thirties in 1980s denim jackets, one in a cowboy hat, standing in a dim barn at night lit by a hanging lantern, tense mood, medium shot"
+      },
+      "e6": {
+        "desc": "a woman in her thirties with long wavy auburn hair in a light-blue dress and brown cardigan sitting in a floral armchair in a 1980s living room with orange curtains and a lamp, medium shot, she looks off-screen"
+      }
+    }
+  },
+  "overlays": [
+    {
+      "from": 0,
+      "to": 10.681,
+      "elements": [
+        {
+          "type": "text",
+          "text": "This and Stranger Things s5 🍫",
+          "x": 221,
+          "y": 300,
+          "fit": [
+            221,
+            311,
+            841,
+            353
+          ],
+          "font": {
+            "family": "TikTok Sans, Noto Color Emoji",
+            "weight": 500,
+            "size": 40,
+            "color": "#ffffff",
+            "lineHeight": 1
+          },
+          "style": "text-shadow: 0 1px 3px rgba(0,0,0,.55)"
+        }
+      ]
+    }
+  ],
+  "fonts": [
+    "TikTok Sans:wght@400;500;600",
+    "Bebas Neue",
+    "Inter:wght@400;600;700"
+  ],
+  "audio": {
+    "sora": 1
+  },
+  "shots": [
+    {
+      "id": "s1",
+      "set": "D",
+      "start": 0,
+      "end": 2.25,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The mug, full of melted milk chocolate with a lit tealight in its base, stands at the lower centre (BIG: 45% of the frame width, vertically 45-82%). A hand from the right holds the mug's brown-handled fondue fork with a chocolate-dipped strawberry just above the mug. The laptop top-left has its screen lit flat pure chroma-key green. The corner of the wooden snack board with marshmallows and strawberries enters at the bottom-left.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "The hand lifts the chocolate-coated strawberry out of the mug, chocolate dripping; slow drift closer. Keep the mug exactly as in the first frame.",
+      "zoom": 1.15,
+      "pan": [
+        -1,
+        -1
+      ],
+      "screen": {
+        "ui": "netflixHero"
+      },
+      "clip": "clips/s1.v2.mp4",
+      "grade": {
+        "r": [
+          1.2101,
+          31.49
+        ],
+        "g": [
+          1.1148,
+          23.44
+        ],
+        "b": [
+          1.2862,
+          17.5
+        ],
+        "clip": "clips/s1.v2.mp4"
+      }
+    },
+    {
+      "id": "s2",
+      "set": "D",
+      "start": 2.25,
+      "end": 3.1333,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The empty mug (no chocolate, no candle) stands in the centre (BIG: 45% of the frame width, vertically 42-80%); a hand from the right holds it by the handle. The laptop top-left has its screen lit flat pure chroma-key green; the tree glows top-right.",
+        "refs": []
+      },
+      "prompt": "The hand turns the empty mug slightly toward the camera to show the 'Chocolate...' script and the empty tealight opening. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "player_s2"
+      },
+      "clip": "clips/s2.v2.mp4",
+      "grade": {
+        "r": [
+          1.3557,
+          0.09
+        ],
+        "g": [
+          1.2186,
+          14.61
+        ],
+        "b": [
+          1.4194,
+          17.8
+        ],
+        "clip": "clips/s2.v2.mp4"
+      }
+    },
+    {
+      "id": "s3",
+      "set": "D",
+      "start": 3.1333,
+      "end": 4.4167,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The mug stands in the centre (BIG: 45% of the frame width, vertically 42-80%) half full of round milk-chocolate malt balls. The plain red wafer wrapper hangs into the top-right corner. The laptop top-left has its screen lit flat pure chroma-key green; the tree glows right.",
+        "refs": [
+          "bible/prop-wrapper.png"
+        ]
+      },
+      "prompt": "More chocolate malt balls pour into the mug from above, bouncing and piling up high. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "player_s3"
+      },
+      "clip": "clips/s3.v2.mp4",
+      "grade": {
+        "r": [
+          1.3811,
+          14.83
+        ],
+        "g": [
+          1.2925,
+          18.25
+        ],
+        "b": [
+          1.4503,
+          22.44
+        ],
+        "clip": "clips/s3.v2.mp4"
+      }
+    },
+    {
+      "id": "s4",
+      "set": "D",
+      "start": 4.4167,
+      "end": 5.45,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Foreground centre-left (vertically 40-58%): a hand holds a small white tealight candle; another hand from the right holds the black pocket torch lighter to its wick. Behind, slightly out of focus, the mug full of chocolate malt balls stands at the centre; the laptop top-left has its screen lit flat pure chroma-key green; the tree right.",
+        "refs": [
+          "bible/prop-torch.png"
+        ]
+      },
+      "prompt": "The torch lighter clicks and lights the tealight's wick; a small flame appears. Keep the mug exactly as in the first frame.",
+      "zoom": 1.15,
+      "pan": [
+        0.75,
+        0.5
+      ],
+      "screen": {
+        "ui": "player_s4"
+      },
+      "clip": "clips/s4.mp4",
+      "pick": "manual",
+      "grade": {
+        "r": [
+          1.3996,
+          -0.99
+        ],
+        "g": [
+          1.3568,
+          5.48
+        ],
+        "b": [
+          1.618,
+          10.92
+        ],
+        "clip": "clips/s4.mp4"
+      }
+    },
+    {
+      "id": "s5",
+      "set": "D",
+      "start": 5.45,
+      "end": 6.0333,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The mug piled high with chocolate malt balls, its brown-handled fork in it, stands at the centre-left (BIG: 45% of the frame width, vertically 30-72%); two hands at the bottom hold a lit tealight just in front of the arched opening at its base. The laptop top-left has its screen lit flat pure chroma-key green.",
+        "refs": []
+      },
+      "prompt": "The hands slide the lit tealight into the opening under the mug. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "player_s5"
+      },
+      "clip": "clips/s5.v2.mp4",
+      "grade": {
+        "r": [
+          1.2392,
+          32.11
+        ],
+        "g": [
+          1.2036,
+          19.35
+        ],
+        "b": [
+          1.4207,
+          18.45
+        ],
+        "clip": "clips/s5.v2.mp4"
+      }
+    },
+    {
+      "id": "s6",
+      "set": "D",
+      "start": 6.0333,
+      "end": 6.95,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The mug of fully melted glossy chocolate stands in the centre (BIG: 45% of the frame width, vertically 42-76%) with the tealight glowing under it; a hand from the left holds it; a hand from the top-right holds the brown-handled fondue fork in the chocolate. The laptop top-left has its screen lit flat pure chroma-key green; the tree top-right.",
+        "refs": []
+      },
+      "prompt": "Slow circular stirring of the melted chocolate with the fork. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "player_s6"
+      },
+      "clip": "clips/s6.mp4",
+      "grade": {
+        "r": [
+          1.1266,
+          33.98
+        ],
+        "g": [
+          1.0556,
+          38.05
+        ],
+        "b": [
+          1.1606,
+          42.79
+        ],
+        "clip": "clips/s6.mp4"
+      }
+    },
+    {
+      "id": "s7",
+      "set": "D",
+      "start": 6.95,
+      "end": 7.7,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The wooden serving board fills the bottom third across the full width. The mug of melted chocolate stands behind it in the centre (30% of the frame width, vertically 33-60%) with a lit tealight in its base. A hand from the right holds the brown-handled fork with a marshmallow above the mug. The laptop top-left has its screen lit flat pure chroma-key green; the tree top-right.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "The hand dips the marshmallow into the chocolate and lifts it out coated and dripping; gentle push in. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "player_s7"
+      },
+      "clip": "clips/s7.v2.mp4",
+      "grade": {
+        "r": [
+          1.262,
+          -4.25
+        ],
+        "g": [
+          1.3783,
+          4.88
+        ],
+        "b": [
+          1.6825,
+          15.19
+        ],
+        "clip": "clips/s7.v2.mp4"
+      }
+    },
+    {
+      "id": "s8",
+      "set": "D",
+      "start": 7.7,
+      "end": 10.681,
+      "from": 0.75,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The wooden serving board fills the bottom third across the full width. The mug of melted chocolate stands behind it in the centre (35% of the frame width, vertically 33-60%) with a lit tealight in its base. A hand from the right holds the brown-handled fork with a marshmallow above the mug. The laptop top-left has its screen lit flat pure chroma-key green; the tree top-right.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "The hand dips the marshmallow into the chocolate and lifts it out coated and dripping; gentle push in. Keep the mug exactly as in the first frame.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "screen": {
+        "ui": "player_s8"
+      },
+      "clip": "clips/s8.mp4",
+      "pick": "manual",
+      "grade": {
+        "r": [
+          1.2325,
+          1.83
+        ],
+        "g": [
+          1.3277,
+          13.33
+        ],
+        "b": [
+          1.6731,
+          18.78
+        ],
+        "clip": "clips/s8.mp4"
+      }
+    }
+  ],
+  "captions": {
+    "netflixHero": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1600,
+        "h": 1000,
+        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;left:0;top:0;width:1150px;height:760px;background:url({{src bible/screen-hero.png}}) center/cover\"></div><div style=\"position:absolute;left:0;top:0;width:1600px;height:760px;background:linear-gradient(270deg,#000 30%,rgba(0,0,0,.6) 48%,rgba(0,0,0,0) 72%),linear-gradient(0deg,#000 2%,rgba(0,0,0,0) 30%)\"></div><div style=\"position:absolute;left:900px;top:26px;font-family:'Bebas Neue';color:#E50914;font-size:64px;letter-spacing:2px\">NETFLIX</div><div style=\"position:absolute;left:1130px;top:50px;font-size:17px;display:flex;gap:20px;color:#e5e5e5\"><b style=\"color:#fff\">Home</b><span>TV Shows</span><span>Movies</span><span>New &amp; Popular</span><span>My List</span></div><div style=\"position:absolute;left:900px;top:170px;font-family:'Bebas Neue';color:#E50914;font-size:30px;letter-spacing:9px;color:#ddd\"><span style=\"color:#E50914;font-size:44px\">N</span> SERIES</div><div style=\"position:absolute;left:896px;top:230px;width:680px;font-family:'Bebas Neue';font-size:132px;line-height:.86;color:transparent;-webkit-text-stroke:3px #ff2a1f;text-shadow:0 0 18px #ff1a0d,0 0 42px #c00\">MIDNIGHT<br>HOLLOW</div><div style=\"position:absolute;left:900px;top:510px;color:#fff;font-size:22px;width:640px;line-height:1.35\">#1 in TV Shows Today &middot; Season 5 &middot; When the lights go out in Hollow Creek, the friends face the darkness one last time.</div><div style=\"position:absolute;left:900px;top:620px;display:flex;gap:14px;font-weight:700;font-size:24px\"><div style=\"background:#fff;color:#000;padding:12px 34px;border-radius:6px\">&#9654;&nbsp; Play</div><div style=\"background:rgba(109,109,110,.7);color:#fff;padding:12px 30px;border-radius:6px\">&#9432;&nbsp; More Info</div></div><div style=\"position:absolute;left:900px;top:790px;color:#e5e5e5;font-weight:600;font-size:24px\">Continue Watching for You</div><div style=\"position:absolute;left:900px;top:836px;display:flex;gap:10px\"><div style=\"width:290px;height:163px;border-radius:5px;background:url({{src bible/screen-e1.png}}) center/cover;position:relative\"><div style=\"position:absolute;left:0;right:0;bottom:0;height:5px;background:#555\"><div style=\"width:70%;height:5px;background:#E50914\"></div></div></div><div style=\"width:290px;height:163px;border-radius:5px;background:url({{src bible/screen-e2.png}}) center/cover;position:relative\"><div style=\"position:absolute;left:0;right:0;bottom:0;height:5px;background:#555\"><div style=\"width:35%;height:5px;background:#E50914\"></div></div></div><div style=\"width:290px;height:163px;border-radius:5px;background:url({{src bible/screen-e4.png}}) center/cover;position:relative\"><div style=\"position:absolute;left:0;right:0;bottom:0;height:5px;background:#555\"><div style=\"width:55%;height:5px;background:#E50914\"></div></div></div><div style=\"width:290px;height:163px;border-radius:5px;background:url({{src bible/screen-e5.png}}) center/cover;position:relative\"><div style=\"position:absolute;left:0;right:0;bottom:0;height:5px;background:#555\"><div style=\"width:20%;height:5px;background:#E50914\"></div></div></div><div style=\"width:290px;height:163px;border-radius:5px;background:url({{src bible/screen-e6.png}}) center/cover;position:relative\"><div style=\"position:absolute;left:0;right:0;bottom:0;height:5px;background:#555\"><div style=\"width:85%;height:5px;background:#E50914\"></div></div></div></div></div>"
+      }
+    ],
+    "player_s2": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1600,
+        "h": 1000,
+        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;inset:0;background:url({{src bible/screen-e1.png}}) center/cover\"></div><div style=\"position:absolute;left:0;right:0;bottom:0;height:230px;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,0))\"></div><div style=\"position:absolute;left:0;right:0;top:0;height:120px;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,0))\"></div><div style=\"position:absolute;left:40px;top:30px;color:#fff;font-size:44px;font-weight:700\">&#8592;</div><div style=\"position:absolute;left:52px;bottom:120px;right:170px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:18%;height:8px;background:#E50914;border-radius:4px\"></div><div style=\"position:absolute;left:calc(18% - 12px);top:-8px;width:24px;height:24px;border-radius:50%;background:#E50914\"></div></div><div style=\"position:absolute;right:52px;bottom:110px;color:#fff;font-size:24px\">41:12</div><div style=\"position:absolute;left:52px;bottom:40px;display:flex;gap:40px;color:#fff;font-size:40px;align-items:center\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span><span style=\"font-size:34px\">&#128266;</span></div><div style=\"position:absolute;left:0;right:0;bottom:48px;text-align:center;color:#fff;font-size:26px\"><b>Midnight Hollow</b>&nbsp; E3 &nbsp;Chapter Three: The Lights</div><div style=\"position:absolute;right:52px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:44px\">N</div></div>"
+      }
+    ],
+    "player_s3": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1600,
+        "h": 1000,
+        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;inset:0;background:url({{src bible/screen-e2.png}}) center/cover\"></div><div style=\"position:absolute;left:0;right:0;bottom:0;height:230px;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,0))\"></div><div style=\"position:absolute;left:0;right:0;top:0;height:120px;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,0))\"></div><div style=\"position:absolute;left:40px;top:30px;color:#fff;font-size:44px;font-weight:700\">&#8592;</div><div style=\"position:absolute;left:52px;bottom:120px;right:170px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:21%;height:8px;background:#E50914;border-radius:4px\"></div><div style=\"position:absolute;left:calc(21% - 12px);top:-8px;width:24px;height:24px;border-radius:50%;background:#E50914\"></div></div><div style=\"position:absolute;right:52px;bottom:110px;color:#fff;font-size:24px\">40:31</div><div style=\"position:absolute;left:52px;bottom:40px;display:flex;gap:40px;color:#fff;font-size:40px;align-items:center\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span><span style=\"font-size:34px\">&#128266;</span></div><div style=\"position:absolute;left:0;right:0;bottom:48px;text-align:center;color:#fff;font-size:26px\"><b>Midnight Hollow</b>&nbsp; E3 &nbsp;Chapter Three: The Lights</div><div style=\"position:absolute;right:52px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:44px\">N</div></div>"
+      }
+    ],
+    "player_s4": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1600,
+        "h": 1000,
+        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;inset:0;background:url({{src bible/screen-e3.png}}) center/cover\"></div><div style=\"position:absolute;left:0;right:0;bottom:0;height:230px;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,0))\"></div><div style=\"position:absolute;left:0;right:0;top:0;height:120px;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,0))\"></div><div style=\"position:absolute;left:40px;top:30px;color:#fff;font-size:44px;font-weight:700\">&#8592;</div><div style=\"position:absolute;left:52px;bottom:120px;right:170px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:24%;height:8px;background:#E50914;border-radius:4px\"></div><div style=\"position:absolute;left:calc(24% - 12px);top:-8px;width:24px;height:24px;border-radius:50%;background:#E50914\"></div></div><div style=\"position:absolute;right:52px;bottom:110px;color:#fff;font-size:24px\">39:57</div><div style=\"position:absolute;left:52px;bottom:40px;display:flex;gap:40px;color:#fff;font-size:40px;align-items:center\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span><span style=\"font-size:34px\">&#128266;</span></div><div style=\"position:absolute;left:0;right:0;bottom:48px;text-align:center;color:#fff;font-size:26px\"><b>Midnight Hollow</b>&nbsp; E3 &nbsp;Chapter Three: The Lights</div><div style=\"position:absolute;right:52px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:44px\">N</div></div>"
+      }
+    ],
+    "player_s5": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1600,
+        "h": 1000,
+        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;inset:0;background:url({{src bible/screen-e4.png}}) center/cover\"></div><div style=\"position:absolute;left:0;right:0;bottom:0;height:230px;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,0))\"></div><div style=\"position:absolute;left:0;right:0;top:0;height:120px;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,0))\"></div><div style=\"position:absolute;left:40px;top:30px;color:#fff;font-size:44px;font-weight:700\">&#8592;</div><div style=\"position:absolute;left:52px;bottom:120px;right:170px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:27%;height:8px;background:#E50914;border-radius:4px\"></div><div style=\"position:absolute;left:calc(27% - 12px);top:-8px;width:24px;height:24px;border-radius:50%;background:#E50914\"></div></div><div style=\"position:absolute;right:52px;bottom:110px;color:#fff;font-size:24px\">39:20</div><div style=\"position:absolute;left:52px;bottom:40px;display:flex;gap:40px;color:#fff;font-size:40px;align-items:center\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span><span style=\"font-size:34px\">&#128266;</span></div><div style=\"position:absolute;left:0;right:0;bottom:48px;text-align:center;color:#fff;font-size:26px\"><b>Midnight Hollow</b>&nbsp; E3 &nbsp;Chapter Three: The Lights</div><div style=\"position:absolute;right:52px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:44px\">N</div></div>"
+      }
+    ],
+    "player_s6": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1600,
+        "h": 1000,
+        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;inset:0;background:url({{src bible/screen-e5.png}}) center/cover\"></div><div style=\"position:absolute;left:0;right:0;bottom:0;height:230px;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,0))\"></div><div style=\"position:absolute;left:0;right:0;top:0;height:120px;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,0))\"></div><div style=\"position:absolute;left:40px;top:30px;color:#fff;font-size:44px;font-weight:700\">&#8592;</div><div style=\"position:absolute;left:52px;bottom:120px;right:170px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:30%;height:8px;background:#E50914;border-radius:4px\"></div><div style=\"position:absolute;left:calc(30% - 12px);top:-8px;width:24px;height:24px;border-radius:50%;background:#E50914\"></div></div><div style=\"position:absolute;right:52px;bottom:110px;color:#fff;font-size:24px\">38:44</div><div style=\"position:absolute;left:52px;bottom:40px;display:flex;gap:40px;color:#fff;font-size:40px;align-items:center\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span><span style=\"font-size:34px\">&#128266;</span></div><div style=\"position:absolute;left:0;right:0;bottom:48px;text-align:center;color:#fff;font-size:26px\"><b>Midnight Hollow</b>&nbsp; E3 &nbsp;Chapter Three: The Lights</div><div style=\"position:absolute;right:52px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:44px\">N</div></div>"
+      }
+    ],
+    "player_s7": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1600,
+        "h": 1000,
+        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;inset:0;background:url({{src bible/screen-e6.png}}) center/cover\"></div><div style=\"position:absolute;left:0;right:0;bottom:0;height:230px;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,0))\"></div><div style=\"position:absolute;left:0;right:0;top:0;height:120px;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,0))\"></div><div style=\"position:absolute;left:40px;top:30px;color:#fff;font-size:44px;font-weight:700\">&#8592;</div><div style=\"position:absolute;left:52px;bottom:120px;right:170px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:33%;height:8px;background:#E50914;border-radius:4px\"></div><div style=\"position:absolute;left:calc(33% - 12px);top:-8px;width:24px;height:24px;border-radius:50%;background:#E50914\"></div></div><div style=\"position:absolute;right:52px;bottom:110px;color:#fff;font-size:24px\">38:02</div><div style=\"position:absolute;left:52px;bottom:40px;display:flex;gap:40px;color:#fff;font-size:40px;align-items:center\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span><span style=\"font-size:34px\">&#128266;</span></div><div style=\"position:absolute;left:0;right:0;bottom:48px;text-align:center;color:#fff;font-size:26px\"><b>Midnight Hollow</b>&nbsp; E3 &nbsp;Chapter Three: The Lights</div><div style=\"position:absolute;right:52px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:44px\">N</div></div>"
+      }
+    ],
+    "player_s8": [
+      {
+        "type": "html",
+        "x": 0,
+        "y": 0,
+        "w": 1600,
+        "h": 1000,
+        "html": "<div style=\"position:absolute;inset:0;background:#000;overflow:hidden;font-family:Inter\"><div style=\"position:absolute;inset:0;background:url({{src bible/screen-e6.png}}) center/cover\"></div><div style=\"position:absolute;left:0;right:0;bottom:0;height:230px;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,0))\"></div><div style=\"position:absolute;left:0;right:0;top:0;height:120px;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,0))\"></div><div style=\"position:absolute;left:40px;top:30px;color:#fff;font-size:44px;font-weight:700\">&#8592;</div><div style=\"position:absolute;left:52px;bottom:120px;right:170px;height:8px;background:rgba(255,255,255,.35);border-radius:4px\"><div style=\"width:33%;height:8px;background:#E50914;border-radius:4px\"></div><div style=\"position:absolute;left:calc(33% - 12px);top:-8px;width:24px;height:24px;border-radius:50%;background:#E50914\"></div></div><div style=\"position:absolute;right:52px;bottom:110px;color:#fff;font-size:24px\">38:02</div><div style=\"position:absolute;left:52px;bottom:40px;display:flex;gap:40px;color:#fff;font-size:40px;align-items:center\"><span>&#10074;&#10074;</span><span>&#8634;</span><span>&#8635;</span><span style=\"font-size:34px\">&#128266;</span></div><div style=\"position:absolute;left:0;right:0;bottom:48px;text-align:center;color:#fff;font-size:26px\"><b>Midnight Hollow</b>&nbsp; E3 &nbsp;Chapter Three: The Lights</div><div style=\"position:absolute;right:52px;bottom:40px;font-family:'Bebas Neue';color:#E50914;font-size:44px\">N</div></div>"
+      }
+    ]
+  }
+}
