@@ -134,6 +134,16 @@ export function greenBox(px, w, h) {
   best.key = best.sum.map((v) => Math.round(v / best.n));
   return best;
 }
+// "whole": the DEVICE (not just its screen) must be in frame. A laptop's lid and base reach well past
+// its screen (base ~12% of the screen width each side, lid ~6% above), so a screen box that merely
+// doesn't touch the edge can still have the laptop cut: require that margin. Returns a reason or null.
+export function wholeDeviceIssue(b, w, h) {
+  const bw = b.x1 - b.x0, bh = b.y1 - b.y0, mx = 0.12 * bw + 4, my = 0.06 * bh + 4;
+  if (b.x0 < mx) return `the screen is ${b.x0}px from the left edge (the laptop needs ~${Math.round(mx)}px)`;
+  if (w - 1 - b.x1 < mx) return `the screen is ${w - 1 - b.x1}px from the right edge (the laptop needs ~${Math.round(mx)}px)`;
+  if (b.y0 < my) return `the screen is ${b.y0}px from the top (the lid needs ~${Math.round(my)}px)`;
+  return null;
+}
 const probe = (f) => JSON.parse(execFileSync('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height:format=duration', '-of', 'json', f], { encoding: 'utf8' }));
 export async function screenClip(spec, dir, shot, clip) {
   const scr = shot.screen;
@@ -180,7 +190,8 @@ export async function screenClip(spec, dir, shot, clip) {
   const atL = box.x0 <= 2, atR = box.x1 >= w - 3;
   // "whole": the device is meant to be fully in frame, so the picture fills the screen exactly like a
   // real display (scaled to the green box, nothing cropped); warn if the take cut the screen anyway
-  if (scr.whole && (atL || atR || box.y0 <= 2)) console.warn(`warning: ${shot.id} (${clip}): the screen touches the frame edge, but "whole" wants the device fully in frame (pick another take / regenerate)`);
+  const cut = scr.whole && wholeDeviceIssue(box, w, h);
+  if (cut) console.warn(`warning: ${shot.id} (${clip}): "whole" wants the device fully in frame, but ${cut} (pick another take / regenerate)`);
   const anchor = scr.whole ? 'fill' : scr.anchor || (atL && !atR ? 'right' : atR && !atL ? 'left' : 'center');
   const fullW = Math.max(bw, Math.round((bh * sw) / sh / 2) * 2);
   const fit = anchor === 'fill' ? `scale=${bw}:${bh}` : anchor === 'center' ? `scale=${bw}:${bh}:force_original_aspect_ratio=increase,crop=${bw}:${bh}:(iw-${bw})/2:0`

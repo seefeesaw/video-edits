@@ -17,7 +17,9 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    `until [ -s videos/<name>/reference.json ]; do sleep 5; done` (Bash, in the background). Paste
    only once per tab (a second concurrent run is refused). If nothing appears after ~3x that, read
    `window.__ytcapError` in the tab (it fails loudly when the player won't stay paused or seeks
-   don't land; reload the Short and paste again). Check `reference.json`: `cuts`, `sourceFps`,
+   don't land; reload the Short and paste again). Reusing a reference captured for another video: copy its `reference.json` AND its
+   `out/ref-shots.jpg` + `out/ref-every.jpg` (git-ignored; reference.json only points at them).
+   Check `reference.json`: `cuts`, `sourceFps`,
    `shotMidpoints`. The save reloads the Short, so `ytcap` is gone afterwards.
 3. **Look at every shot**: `node refsheet.mjs videos/<name>` → Read `out/ref-shots.jpg` (one frame
    per shot midpoint) and `out/ref-every.jpg` (every 0.5s, shows motion within shots); it also
@@ -52,7 +54,7 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    hands-and-product shots that start from the same keyframe score alike on both continuity and
    `--pick` (it prints TIE): decide by the ACTION on `node refsheet.mjs videos/<name> --takes s1,s2,…`
    (does the candle light, is the strawberry dipped; `--full` shows whole takes for retiming
-   `from`) and set them with `node compare.mjs videos/<name> --choose s1=v2,s4=1`.
+   `from`) and set them with `node compare.mjs videos/<name> --choose s1=v2,s4=1` ("1" = sN.mp4, "v3" or "3" = sN.v3.mp4).
    Every separate generation (text-to-video OR remix of an anchor) can change the face, so a person
    who appears in more than one shot gets **performances** (README "Performances"): one 12 s take
    per person with that person's actions in order, cut into the shots (`"takes": 0`, `"clip"`,

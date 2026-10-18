@@ -80,8 +80,14 @@ to Sora it may show people (adults: gpt-image-2 blocks stills of children/teens)
 stills of a real show) and an invented title. A picture that should fill a FULLY visible device (a logo on a whole laptop, like a real computer):
 `"screen": {"ui": "…", "whole": true}` — keyframes.mjs asks for the whole device in frame and warns
 when a keyframe's screen touches the frame edge, sora.mjs keeps it in frame, and build.mjs scales the
-picture to the whole green box. Place the device where the product can't cover it (set back, screen
-above the product's rim) in the bible layout and every keyframe prompt.
+picture to the whole green box. gpt-image-2 copies the device position from the bible set frame and
+ignores horizontal margins ("14-52% of the width" still lands flush with the edge), so build the SET
+with the device CENTRED behind the product, clear wall on both sides, screen above the product's rim
+("symmetric composition"), and repeat that wording in every keyframe prompt. The keyframe check
+needs room for the lid and base around the screen, not just a screen off the edge. Don't prompt camera
+moves (a "push-in" from the original crops the device): sora.mjs adds "static camera" for whole
+screens. A jump cut inside one clip can't zoom both sides then: use a small zoom with the pan at one
+side (`"zoom": 1.07, "pan": [-1, 0]` crops only the right).
 Text that must be readable in every shot (a title): set `"anchor": "center"` on the shots and keep
 it inside the middle third of the screen (x 530-1070 of 1600) — the part a cut-off laptop still shows.
 Check every keyframe still shows the green (`node
@@ -168,7 +174,8 @@ original reference frames) at least daily while a series is in production, or re
       "prompt": "what happens in this shot",
       "seconds": 4,          // Sora clip length (4|8|12); default: smallest covering the slot
       "from": 0.4,           // where in the clip the slot starts (skip Sora's settle-in)
-      "speed": 1,            // >1 plays faster (uses more of the clip)
+      "speed": 1,            // >1 plays faster (uses more of the clip); <1 slow motion (e.g. 0.8 to
+                             // end a slot before a hand enters)
       "zoom": [1.0, 1.08],   // reframe: crop-zoom, constant or animated [start, end]
       "pan": [[0, 0], [0, -0.2]],   // crop window offset -1..1 (x, y), constant or animated:
                              // +x shows more of the right (content moves left), +y shows more of

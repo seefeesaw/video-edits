@@ -29,7 +29,12 @@ for (const [k, file] of [['shots', 'ref-shots.jpg'], ['every', 'ref-every.jpg']]
   console.log(`wrote ${path.relative(process.cwd(), path.join(out, file))}`);
 }
 if (moved) fs.writeFileSync(path.join(dir, 'reference.json'), JSON.stringify(ref) + '\n');
-if (!moved && ref.sheets) console.log(`sheets: ${Object.values(ref.sheets).join(', ')}`);
+if (!moved && ref.sheets) {
+  // the sheets live in the capture's own out/ (git-ignored): a reference.json copied from another video
+  // folder needs its out/ref-*.jpg copied along
+  const missing = Object.values(ref.sheets).filter((f) => !fs.existsSync(path.join(dir, f)));
+  console.log(missing.length ? `warning: ${missing.join(', ')} missing: reference.json only points at them — copy out/ref-shots.jpg and out/ref-every.jpg from the folder the reference was captured in` : `sheets: ${Object.values(ref.sheets).join(', ')}`);
+}
 // cuts on odd 1/60 s (frame times offset by half a frame) can only be hit by a 60fps build
 const off = (ref.cuts || []).filter((c) => Math.abs(c * 30 - Math.round(c * 30)) > 0.25);
 console.log(off.length ? `fps: use "fps": 60 (${off.length} of ${ref.cuts.length} cuts fall between 30fps frames, e.g. ${off.slice(0, 3).join(', ')})` : `fps: ${ref.sourceFps || 30} is enough (every cut is on a 30fps frame)`);
@@ -46,7 +51,9 @@ for (const takesOf of takesList) {
   const clipLen = (f) => +execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', path.join(dir, 'clips', f)]).toString().trim();
   const len0 = (s.end - s.start) * (s.speed ?? 1);
   const from = full ? 0 : s.from ?? 0;
-  const len = full ? clipLen(fs.readdirSync(path.join(dir, 'clips')).find((f) => f === `${s.id}.mp4` || f.startsWith(`${s.id}.v`)) || `${s.id}.mp4`) : len0;
+  // with --full each take is shown over its OWN length (a --more take can be longer than the first)
+  const lenOf = (f) => (full ? clipLen(f) : len0);
+  const len = Math.max(...takes.map(lenOf), len0);
   // a shot of a library character gets that character's reference frames as the first row, so each
   // take's face can be judged against the canonical one
   const ch = !perf && s.set && spec.characters?.[s.set];
@@ -61,14 +68,16 @@ for (const takesOf of takesList) {
   }
   const rows = takes.map((f) => {
     const row = path.join(out, `_take-${f}.jpg`);
-    execFileSync('ffmpeg', ['-v', 'error', '-y', '-ss', from.toFixed(3), '-t', len.toFixed(3), '-i', path.join(dir, 'clips', f), '-vf', `fps=${((perf ? 8 : 5) / len).toFixed(4)},scale=180:320,tile=${perf ? 8 : 5}x1`, '-frames:v', '1', row]);
+    const lf = lenOf(f);
+    execFileSync('ffmpeg', ['-v', 'error', '-y', '-ss', from.toFixed(3), '-t', lf.toFixed(3), '-i', path.join(dir, 'clips', f), '-vf', `fps=${((perf ? 8 : 5) / lf).toFixed(4)},scale=180:320,tile=${perf ? 8 : 5}x1`, '-frames:v', '1', row]);
     return row;
   });
   // Sora sometimes edits inside a clip (jumps between action beats): list each take's jump-free
   // segments so shot windows ("from" + slot length) can be placed inside one of them
   for (const f of takes) {
     const w = 54, h = 96, fsz = w * h * 3;
-    const buf = execFileSync('ffmpeg', ['-v', 'error', '-ss', from.toFixed(3), '-t', len.toFixed(3), '-i', path.join(dir, 'clips', f), '-vf', `fps=30,scale=${w}:${h}:flags=area`, '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'], { maxBuffer: 1 << 28 });
+    const lf = lenOf(f);
+    const buf = execFileSync('ffmpeg', ['-v', 'error', '-ss', from.toFixed(3), '-t', lf.toFixed(3), '-i', path.join(dir, 'clips', f), '-vf', `fps=30,scale=${w}:${h}:flags=area`, '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'], { maxBuffer: 1 << 28 });
     const n = Math.floor(buf.length / fsz), d = [0];
     for (let k = 1; k < n; k++) { let t = 0; for (let i = 0; i < fsz; i++) t += Math.abs(buf[k * fsz + i] - buf[(k - 1) * fsz + i]); d.push(t / fsz); }
     const cuts = [];
@@ -76,7 +85,7 @@ for (const takesOf of takesList) {
       const nb = [...d.slice(Math.max(1, k - 6), k), ...d.slice(k + 1, k + 7)].sort((x, y) => x - y), med = nb[Math.floor(nb.length / 2)] ?? 0;
       if (k && ((v > 24 && v > 2 * med) || (v > 10 && v > 4 * med)) && v > 3 * Math.max(d[k - 1] ?? 0, d[k + 1] ?? 0)) cuts.push(+(from + k / 30).toFixed(2));
     });
-    const b = [from, ...cuts, +(from + len).toFixed(2)];
+    const b = [from, ...cuts, +(from + lf).toFixed(2)];
     console.log(`  ${f}: jump-free segments ${b.slice(1).map((e, i) => `${b[i].toFixed(2)}-${e.toFixed(2)}`).join('  ')}`);
   }
   const file = path.join(out, `takes-${s.id}.jpg`);

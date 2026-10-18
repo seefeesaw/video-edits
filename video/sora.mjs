@@ -124,7 +124,7 @@ async function create(shot, spec, dir) {
   // "sets": named recurring characters + locations (e.g. the two sides of a contrast video); a shot's
   // "set": "A" adds that exact description, so every shot of a character uses the same words
   // a "screen" shot: the device must stay keyable for build.mjs's composite
-  const screenWords = shot.screen && `The device screen stays lit flat, uniform, pure chroma-key green for the whole clip: no picture, no interface, no reflections.${shot.screen.whole ? ' The whole device stays fully inside the frame and uncovered the whole time.' : ''}`;
+  const screenWords = shot.screen && `The device screen stays lit flat, uniform, pure chroma-key green for the whole clip: no picture, no interface, no reflections.${shot.screen.whole ? ' The whole device stays fully inside the frame and uncovered the whole time: static camera, no push-in, no zoom, no pan.' : ''}`;
   fd.set('prompt', [shot.prompt, shot.set && spec.sets?.[shot.set], propWords(spec, shot.set), screenWords, spec.style].filter(Boolean).join('\n\n'));
   fd.set('size', spec.soraSize || '720x1280');
   fd.set('seconds', String(shot.seconds ?? soraSecondsFor(shot.end - shot.start + (shot.from ?? 0))));

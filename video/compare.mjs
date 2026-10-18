@@ -146,7 +146,9 @@ if (argv.includes('--choose')) {
     const [id, t] = kv.split('=');
     const s = spec.shots.find((x) => x.id === id) || (spec.performances || []).find((x) => x.id === id);
     if (!s) throw new Error(`--choose: no shot or performance ${id}`);
-    const clip = `clips/${t === '1' || t === 'v1' ? `${id}.mp4` : `${id}.${t}.mp4`}`;
+    // "1"/"v1" = sN.mp4; "v3" or just "3" = sN.v3.mp4
+    const n = String(t).replace(/^v/, '');
+    const clip = `clips/${n === '1' ? `${id}.mp4` : `${id}.v${n}.mp4`}`;
     if (!fs.existsSync(path.join(dir, clip))) throw new Error(`--choose: ${clip} does not exist`);
     s.clip = clip; if (spec.shots.includes(s)) s.pick = 'manual';
     console.log(`${id}: clip = ${clip}`);

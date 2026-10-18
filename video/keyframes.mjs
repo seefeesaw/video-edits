@@ -17,7 +17,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execSync, execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { greenBox } from './build.mjs';
+import { greenBox, wholeDeviceIssue } from './build.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, '..', 'slideshow', 'foundry.json'), 'utf8'));
@@ -102,7 +102,7 @@ async function main() {
       const sized = out.replace(/\.png$/, `.${spec.soraSize || '720x1280'}.png`), [w, h] = (spec.soraSize || '720x1280').split('x').map(Number);
       const b = greenBox(execFileSync('ffmpeg', ['-v', 'error', '-i', sized, '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'], { maxBuffer: 1 << 26 }), w, h);
       if (!b || b.n < w * h * 0.01) console.warn(`warning: ${s.id}: no green screen in its keyframe; regenerate with --force --only ${s.id}`);
-      else if (s.screen.whole && (b.x0 <= 2 || b.x1 >= w - 3 || b.y0 <= 2)) console.warn(`warning: ${s.id}: the screen touches the frame edge but "whole" wants the device fully in frame; regenerate with --force --only ${s.id}`);
+      else if (s.screen.whole && wholeDeviceIssue(b, w, h)) console.warn(`warning: ${s.id}: "whole" wants the device fully in frame, but ${wholeDeviceIssue(b, w, h)}; regenerate with --force --only ${s.id} (centre the device behind the product in the bible set if it keeps landing at the edge)`);
       else console.log(`  ${s.id}: green screen ${((100 * b.n) / (w * h)).toFixed(0)}% of the frame`);
     }
   };
