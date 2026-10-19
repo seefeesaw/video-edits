@@ -71,7 +71,11 @@ const NAME = 'my-video';
       pts.forEach(([t, d], i) => {
         const nb = [...pts.slice(Math.max(0, i - 6), i), ...pts.slice(i + 1, i + 7)].map((p) => p[1]).sort((a, b) => a - b);
         const med = nb.length ? nb[Math.floor(nb.length / 2)] : 0;
-        if (d > 24 || (d > 10 && d > 4 * med)) out.push(t);
+        // an edit is ONE big change between two steadier frames; fast handheld motion (a fork whipped
+        // from board to mug) changes a lot on both sides of its biggest frame, so it must also tower
+        // over its direct neighbours (the same rule compare.mjs uses for inner cuts)
+        const around = Math.max(pts[i - 1]?.[1] ?? 0, pts[i + 1]?.[1] ?? 0);
+        if ((d > 24 || (d > 10 && d > 4 * med)) && d > 2.5 * around) out.push(t);
       });
       // a cut seen at two consecutive steps (half-frame landing) counts once
       const cuts = out.filter((t, i) => i === 0 || t - out[i - 1] > 0.05);
@@ -86,6 +90,10 @@ const NAME = 'my-video';
       try { return await this._capture(step); } finally { window.__ytcapBusy = false; }
     },
     async _capture(step) {
+      // pasted right after navigation the player may not have loaded metadata yet (duration NaN):
+      // wait for it (seeks to a non-finite time would throw)
+      for (let k = 0; k < 100 && !(v() && Number.isFinite(v().duration) && v().duration > 0); k++) await new Promise((r) => setTimeout(r, 200));
+      if (!Number.isFinite(v()?.duration)) throw new Error('the video never loaded (duration unknown): reload the Short and paste again');
       prep(); const samples = [];
       for (let t = 0.05; t < v().duration - 0.02; t += step) { await seek(+t.toFixed(3)); samples.push([+t.toFixed(3), grid()]); }
       const { fps, cuts } = await this.cuts();
@@ -121,5 +129,5 @@ const NAME = 'my-video';
   if (!NAME) return 'ytcap ready (NAME not set: nothing captured)';
   window.__ytcapError = null;
   ytcap.capture().then((json) => ytcap.save(`video/videos/${NAME}/reference.json`, json)).catch((e) => (window.__ytcapError = e.message));
-  return `capturing; video/videos/${NAME}/reference.json will appear on disk in ~4 min per 10 s of video (then: node refsheet.mjs videos/${NAME})`;
+  return `capturing (waits for the video to load first); video/videos/${NAME}/reference.json will appear on disk in ~4 min per 10 s of video (then: node refsheet.mjs videos/${NAME})`;
 })();

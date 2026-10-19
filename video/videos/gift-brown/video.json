@@ -1,0 +1,488 @@
+{
+  "title": "A perfect gift for a movie night (brown Meltie mug)",
+  "source": "https://www.youtube.com/shorts/nTW_I836Gg4",
+  "notes": "Replica of the Short with the BROWN variant of the real Meltie Mini Fondue Mug (store photos; it is also the variant in the original). Hands only, every shot starts from a keyframe built from the product photos + the bible set + bible props. The laptop is a green screen; build.mjs composites original generated stills of a fictional 1980s series (adult characters, no real show footage), cut by the frame edge like the original's laptop. The chocolate bag is plain red with no brand; Sora audio.",
+  "size": [
+    1080,
+    1920
+  ],
+  "fps": 60,
+  "duration": 9.621,
+  "soraSize": "720x1280",
+  "product": {
+    "name": "Meltie Mug Mini Fondue Mug, brown",
+    "refs": [
+      "assets/product/brown-front.png",
+      "assets/product/brown-lit.png"
+    ],
+    "description": "the BROWN Meltie Mini Fondue Mug exactly as in the product photos: glossy chocolate-brown ceramic body that flares wider at the top, a white interior, 'Chocolate...' in white cursive script with a small white swirl/® mark on the front, a tall arched opening at the base for a tealight, an angular brown handle on the right with a small round hole, and a fondue fork with a terracotta-brown handle and long steel tines that clips into the handle"
+  },
+  "style": "Vertical smartphone video filmed at night at a home desk at desk height; warm, cosy, moody colour grade with a deep red wall light; hands have long glossy dark-grey manicured nails. One continuous take: no cuts. Realistic. No on-screen text, no logos.",
+  "bible": {
+    "props": {
+      "mug": {
+        "desc": "the BROWN Meltie Mini Fondue Mug exactly as in the product photos: glossy chocolate-brown ceramic body that flares wider at the top, a white interior, 'Chocolate...' in white cursive script with a small white swirl/® mark on the front, a tall arched opening at the base for a tealight, an angular brown handle on the right with a small round hole, and a fondue fork with a terracotta-brown handle and long steel tines that clips into the handle",
+        "image": "assets/product/brown-front.png"
+      },
+      "laptop": {
+        "desc": "a dark-grey open laptop, its screen lit with a perfectly flat, uniform, pure chroma-key green (#00FF00) from edge to edge: no picture, no interface, no reflections, no glare"
+      },
+      "tree": {
+        "desc": "a small Christmas tree, about 60 cm tall, with warm white fairy lights"
+      },
+      "torch": {
+        "desc": "a small black pocket butane torch lighter"
+      },
+      "candle": {
+        "desc": "a round amber-orange glass candle jar with a lit tealight glowing inside"
+      },
+      "bag": {
+        "desc": "a plain glossy red foil chocolate sharing bag with no text or logo, torn open at the top"
+      },
+      "board": {
+        "desc": "an oval light bamboo serving board with chocolate chip cookies, a pile of round milk-chocolate malt balls, big white marshmallows, halved strawberries and broken golden waffle pieces"
+      }
+    },
+    "sets": {
+      "D": {
+        "props": [
+          "mug",
+          "laptop",
+          "tree",
+          "candle"
+        ],
+        "desc": "a home desk at night in a DIM room: a clean white desk top across the bottom 40% of the frame, a wall washed in deep red light behind, deep shadows, warm low light, no bright studio light; close camera at desk height",
+        "layout": "The brown fondue mug stands empty in the centre of the desk and is BIG: about 40% of the frame width, its base at 75% of the frame height; the open laptop on the left, cut by the left edge of the picture, its green screen in the upper-left (0-35% of the width, 18-45% of the height); the lit Christmas tree in the upper-right quarter; the amber candle jar on the desk to the right of the mug (70-100% of the width, 37-55% of the height)."
+      }
+    }
+  },
+  "overlays": [
+    {
+      "from": 0,
+      "to": 9.621,
+      "elements": [
+        {
+          "type": "text",
+          "text": "Are you free December",
+          "x": 265,
+          "y": 312,
+          "fit": [
+            265,
+            319,
+            814,
+            365
+          ],
+          "font": {
+            "family": "TikTok Sans",
+            "weight": 500,
+            "size": 46,
+            "color": "#ffffff",
+            "lineHeight": 1
+          },
+          "style": "text-shadow: 0 1px 3px rgba(0,0,0,.55)"
+        },
+        {
+          "type": "text",
+          "text": "25?",
+          "x": 437,
+          "y": 372,
+          "fit": [
+            437,
+            379,
+            521,
+            420
+          ],
+          "font": {
+            "family": "TikTok Sans",
+            "weight": 500,
+            "size": 46,
+            "color": "#ffffff",
+            "lineHeight": 1
+          },
+          "style": "text-shadow: 0 1px 3px rgba(0,0,0,.55)"
+        },
+        {
+          "type": "text",
+          "text": "🍫🎬",
+          "x": 544,
+          "y": 374,
+          "fit": [
+            544,
+            376,
+            639,
+            424
+          ],
+          "font": {
+            "family": "Noto Color Emoji",
+            "weight": 400,
+            "size": 44,
+            "color": "#ffffff",
+            "lineHeight": 1
+          },
+          "style": "letter-spacing:-4px"
+        }
+      ]
+    }
+  ],
+  "fonts": [
+    "TikTok Sans:wght@400;500;600"
+  ],
+  "audio": {
+    "sora": 1
+  },
+  "shots": [
+    {
+      "id": "s1",
+      "set": "D",
+      "start": 0,
+      "end": 2.15,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Close handheld view from the front-left at desk height. The brown mug full of melted milk chocolate, a lit tealight in its base, stands at the upper middle (25-62% of the width, 15-47% of the height). The oval bamboo board fills the lower-left (0-78% of the width, 45-88% of the height) with strawberries, marshmallows and waffle pieces. A hand from the right holds the brown-handled fondue fork pushed into a golden waffle piece on the board. the laptop on the left, cut by the left edge, has its screen lit flat pure chroma-key green at the top-left; the candle jar glows top-right.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "Handheld, one continuous take. 0-1 s: the fork lifts the waffle piece off the board and carries it up to the mug while the camera follows closer. 1-2.5 s: it dips the waffle into the melted chocolate and swirls it round, coating it, the camera now looking down into the mug from close above. 2.5-4 s: it keeps swirling the waffle in the chocolate.",
+      "screen": {
+        "image": "bible/screen-e1.png"
+      },
+      "clip": "clips/s1.mp4",
+      "pick": "manual",
+      "speed": 1.8,
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.2005,
+          9.29
+        ],
+        "g": [
+          1.1898,
+          33.53
+        ],
+        "b": [
+          1.5359,
+          26.09
+        ],
+        "clip": "clips/s1.mp4"
+      }
+    },
+    {
+      "id": "s2",
+      "set": "D",
+      "start": 2.15,
+      "end": 2.8,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The EMPTY brown mug (white interior, no chocolate, no candle) stands in the centre (BIG: 26-65% of the width, 40-75% of the height); a hand from the right holds it by the handle. the laptop on the left, cut by the left edge, has its screen lit flat pure chroma-key green (0-35% of the width, 18-45% of the height); the Christmas tree glows top-right; the amber candle jar right of the mug.",
+        "refs": []
+      },
+      "prompt": "The hand turns the empty mug very slightly toward the camera and holds it still.",
+      "screen": {
+        "image": "bible/screen-e2.png"
+      },
+      "clip": "clips/s2.v2.mp4",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.3474,
+          4.56
+        ],
+        "g": [
+          1.1892,
+          35.42
+        ],
+        "b": [
+          1.4355,
+          31.26
+        ],
+        "clip": "clips/s2.v2.mp4"
+      }
+    },
+    {
+      "id": "s3",
+      "set": "D",
+      "start": 2.8,
+      "end": 3.9,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The brown mug stands in the centre (27-63% of the width, 42-77% of the height) with a few round milk-chocolate malt balls inside. The plain red foil bag hangs into the top-right corner (66-100% of the width, 0-38% of the height), tilted, malt balls tumbling from it toward the mug. the laptop on the left, cut by the left edge, has its screen lit flat pure chroma-key green; the candle jar right of the mug.",
+        "refs": [
+          "bible/prop-bag.png"
+        ]
+      },
+      "prompt": "Round milk-chocolate malt balls pour from the red bag into the mug, bouncing and piling up.",
+      "screen": {
+        "image": "bible/screen-e3.png"
+      },
+      "clip": "clips/s3.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.1541,
+          38.34
+        ],
+        "g": [
+          1.1329,
+          47.68
+        ],
+        "b": [
+          1.4622,
+          43.15
+        ],
+        "clip": "clips/s3.mp4"
+      }
+    },
+    {
+      "id": "s4",
+      "set": "D",
+      "start": 3.9,
+      "end": 4.8667,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Foreground: a hand from the left (0-55% of the width, 35-75% of the height) holds an unlit white tealight upright; another hand from the right holds the black pocket torch lighter (55-100% of the width, 40-58% of the height) with its nozzle at the wick. Behind, the brown mug full of malt balls (35-65% of the width, 40-75% of the height). the laptop on the left, cut by the left edge, has its screen lit flat pure chroma-key green; the candle jar right.",
+        "refs": [
+          "bible/prop-torch.png"
+        ]
+      },
+      "prompt": "The torch clicks and a blue flame lights the tealight's wick; a small flame appears.",
+      "screen": {
+        "image": "bible/screen-e4.png"
+      },
+      "clip": "clips/s4.v2.mp4",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.2604,
+          13.36
+        ],
+        "g": [
+          1.405,
+          25.32
+        ],
+        "b": [
+          1.8832,
+          28.79
+        ],
+        "clip": "clips/s4.v2.mp4"
+      }
+    },
+    {
+      "id": "s5",
+      "set": "D",
+      "start": 4.8667,
+      "end": 5.4,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Close: the brown mug, piled with malt balls, fills the middle (30-95% of the width, 30-85% of the height), its arched base opening facing the camera; two hands at the bottom hold a lit tealight just in front of the opening. the laptop on the left, cut by the left edge, has its screen lit flat pure chroma-key green at the left.",
+        "refs": []
+      },
+      "prompt": "The hands slide the lit tealight into the opening under the mug.",
+      "screen": {
+        "image": "bible/screen-e5.png"
+      },
+      "clip": "clips/s5.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.195,
+          13.01
+        ],
+        "g": [
+          1.2494,
+          30.19
+        ],
+        "b": [
+          1.7823,
+          30.64
+        ],
+        "clip": "clips/s5.mp4"
+      }
+    },
+    {
+      "id": "s6",
+      "set": "D",
+      "start": 5.4,
+      "end": 6.3,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "The brown mug full of glossy melted chocolate stands in the centre (25-70% of the width, 40-90% of the height), the tealight glowing under it; a hand from the top-right (65-100% of the width, 22-45% of the height) holds the brown-handled fondue fork in the chocolate. the laptop on the left, cut by the left edge, has its screen lit flat pure chroma-key green (0-55% of the width, 0-45% of the height).",
+        "refs": []
+      },
+      "prompt": "Slow circular stirring of the melted chocolate with the fork.",
+      "screen": {
+        "image": "bible/screen-e1.png"
+      },
+      "clip": "clips/s6.mp4",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.4536,
+          -16.6
+        ],
+        "g": [
+          1.4273,
+          27.51
+        ],
+        "b": [
+          1.65,
+          37.05
+        ],
+        "clip": "clips/s6.mp4"
+      }
+    },
+    {
+      "id": "s7",
+      "set": "D",
+      "start": 6.3,
+      "end": 7.15,
+      "from": 0.5,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Wider: the brown mug of melted chocolate stands further back, centre-right (50-75% of the width, 37-58% of the height), lit tealight in its base, the fork resting in it. The oval bamboo board is half in frame at the bottom-left, entering (0-55% of the width, 70-100% of the height). the laptop on the left, cut by the left edge, has its screen lit flat pure chroma-key green (0-45% of the width, 25-48% of the height); the candle jar right of the mug; the tree top-right.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "A hand out of frame slides the oval board fully into place on the desk in front of the mug (it ends at 0-85% of the width, 63-98% of the height); then everything is still.",
+      "screen": {
+        "image": "bible/screen-e6.png"
+      },
+      "clip": "clips/s7.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.217,
+          9.59
+        ],
+        "g": [
+          1.1501,
+          33.5
+        ],
+        "b": [
+          1.4824,
+          19.86
+        ],
+        "clip": "clips/s7.mp4"
+      }
+    },
+    {
+      "id": "s8",
+      "set": "D",
+      "start": 7.15,
+      "end": 7.4,
+      "from": 0.5,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Close on the oval bamboo board (it fills the lower 60%): chocolate chip cookies at the left, milk-chocolate malt balls, big white marshmallows, strawberries and waffle pieces. A hand from the right holds the brown-handled fondue fork just above one marshmallow. The base of the mug at the top-right edge; the laptop on the left, cut by the left edge, has its screen lit flat pure chroma-key green at the top-left.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "The fork stabs down into the marshmallow and starts lifting it.",
+      "screen": {
+        "image": "bible/screen-e2.png"
+      },
+      "clip": "clips/s8.v2.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.2432,
+          -8.08
+        ],
+        "g": [
+          1.0952,
+          13.74
+        ],
+        "b": [
+          1.1507,
+          7.93
+        ],
+        "clip": "clips/s8.v2.mp4"
+      }
+    },
+    {
+      "id": "s9",
+      "set": "D",
+      "start": 7.4,
+      "end": 9.621,
+      "from": 0.1,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Wide: the brown mug of melted chocolate (48-92% of the width, 37-65% of the height), lit tealight in its base; the oval bamboo board across the bottom (0-100% of the width, 62-92% of the height). A hand from the top-right holds the brown-handled fondue fork with a white marshmallow on it just above the board. the laptop on the left, cut by the left edge, has its screen lit flat pure chroma-key green (0-48% of the width, 25-50% of the height); the candle jar right; the tree top-right.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "0-1 s: the fork lifts the white marshmallow up over the mug. 1-2 s: it lowers it straight down into the melted chocolate until it is fully submerged. 2-3.5 s: it lifts it back out, fully coated in glossy chocolate, a drip falling into the mug, and holds it above the mug.",
+      "screen": {
+        "image": "bible/screen-e6.png"
+      },
+      "clip": "clips/s9.mp4",
+      "pick": "manual",
+      "speed": 1.75,
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.1974,
+          6.85
+        ],
+        "g": [
+          1.0764,
+          27.87
+        ],
+        "b": [
+          1.2331,
+          15.67
+        ],
+        "clip": "clips/s9.mp4"
+      }
+    }
+  ]
+}

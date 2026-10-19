@@ -19,6 +19,10 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    `window.__ytcapError` in the tab (it fails loudly when the player won't stay paused or seeks
    don't land; reload the Short and paste again). Reusing a reference captured for another video: copy its `reference.json` AND its
    `out/ref-shots.jpg` + `out/ref-every.jpg` (git-ignored; reference.json only points at them).
+   The capture waits for the player to load (pasting right after navigation used to fail with
+   "non-finite" seeks) and ignores fast handheld motion (a fork whipped from board to mug changes a lot
+   on BOTH sides of its biggest frame; an edit is one big change). If a 'shot' is under ~0.2 s, check it
+   frame by frame (`ytcap.sheetDataUrl([...times])`) before treating it as a cut.
    Check `reference.json`: `cuts`, `sourceFps`,
    `shotMidpoints`. The save reloads the Short, so `ytcap` is gone afterwards.
 3. **Look at every shot**: `node refsheet.mjs videos/<name>` → Read `out/ref-shots.jpg` (one frame

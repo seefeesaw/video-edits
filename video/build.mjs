@@ -172,8 +172,10 @@ export async function screenClip(spec, dir, shot, clip) {
   const keyHex = `0x${key.map((v) => Math.round(v / nk).toString(16).padStart(2, '0')).join('')}`;
   // the screen source: a video ("clip", e.g. a scene YOU have the rights to; loops, starts at "from"),
   // a still ("image"), or html ("ui", rendered at the screen's size; over a clip it is an overlay)
-  const [sw, sh] = scr.size || [1600, 1000];
+  let [sw, sh] = scr.size || [1600, 1000];
   let still = scr.image && path.join(dir, scr.image), uiPng = null;
+  // a still keeps its own aspect (a 3:2 film still on a 16:10 laptop): fit and edge crops use it
+  if (still && !scr.ui && !scr.size) ({ width: sw, height: sh } = probe(still).streams[0]);
   if (scr.ui) {
     const [file] = await renderOverlays({ ...spec, overlays: [{ from: 0, to: 1, elements: `@${scr.ui}` }] }, dir, sdir, sw, sh);
     if (scr.clip) uiPng = file.file;
