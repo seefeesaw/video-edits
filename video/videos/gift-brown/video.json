@@ -448,7 +448,7 @@
       "set": "D",
       "start": 7.4,
       "end": 9.621,
-      "from": 0.1,
+      "from": 0.3,
       "takes": 2,
       "keyframe": {
         "prompt": "Wide: the brown mug of melted chocolate (48-92% of the width, 37-65% of the height), lit tealight in its base; the oval bamboo board across the bottom (0-100% of the width, 62-92% of the height). A hand from the top-right holds the brown-handled fondue fork with a white marshmallow on it just above the board. the laptop on the left, cut by the left edge, has its screen lit flat pure chroma-key green (0-48% of the width, 25-50% of the height); the candle jar right; the tree top-right.",
@@ -456,13 +456,13 @@
           "bible/prop-board.png"
         ]
       },
-      "prompt": "0-1 s: the fork lifts the white marshmallow up over the mug. 1-2 s: it lowers it straight down into the melted chocolate until it is fully submerged. 2-3.5 s: it lifts it back out, fully coated in glossy chocolate, a drip falling into the mug, and holds it above the mug.",
+      "prompt": "One continuous static take, no camera move. 0-0.8 s: the fork lifts the white marshmallow up from the board and moves it over the mug. 0.8-1.8 s: it lowers the marshmallow straight DOWN INTO the mug, through the rim, until the marshmallow disappears completely under the surface of the melted chocolate inside the mug. 1.8-2.3 s: it stays under the chocolate for a moment. 2.3-3.5 s: it rises slowly straight back up out of the mug, now fully coated in glossy brown chocolate, chocolate dripping from it back into the mug. 3.5-4 s: it is held still just above the mug. The marshmallow stays on the fork the whole time and never leaves the mug's opening while dipping.",
       "screen": {
         "image": "bible/screen-e6.png"
       },
-      "clip": "clips/s9.mp4",
+      "clip": "clips/s9.v3.mp4",
       "pick": "manual",
-      "speed": 1.75,
+      "speed": 1.4,
       "zoom": 1,
       "pan": [
         0,
@@ -470,18 +470,18 @@
       ],
       "grade": {
         "r": [
-          1.1974,
-          6.85
+          1.1793,
+          5.51
         ],
         "g": [
-          1.0764,
-          27.87
+          1.0589,
+          26.9
         ],
         "b": [
-          1.2331,
-          15.67
+          1.2114,
+          15.06
         ],
-        "clip": "clips/s9.mp4"
+        "clip": "clips/s9.v3.mp4"
       }
     }
   ]

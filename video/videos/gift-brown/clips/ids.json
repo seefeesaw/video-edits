@@ -88,5 +88,20 @@
     "id": "video_6ad567976afc8190bade640e845805f9",
     "at": "2026-10-19T00:44:17.988Z",
     "expiresAt": 1792456984
+  },
+  "clips/s9.v3.mp4": {
+    "id": "video_6ad570bd671c81909db3220c1dc486e7",
+    "at": "2026-10-19T01:23:17.821Z",
+    "expiresAt": 1792459326
+  },
+  "clips/s9.v4.mp4": {
+    "id": "video_6ad57135f6308190b02b0087790be3dd",
+    "at": "2026-10-19T01:25:18.110Z",
+    "expiresAt": 1792459446
+  },
+  "clips/s9.v5.mp4": {
+    "id": "video_6ad571aea1208190aebc7f8cbc24ff83",
+    "at": "2026-10-19T01:29:52.394Z",
+    "expiresAt": 1792459567
   }
 }
