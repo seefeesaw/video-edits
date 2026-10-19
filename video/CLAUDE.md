@@ -99,6 +99,10 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    on screens: hands only. A screen that must show a specific picture (a streaming app, an episode, a
    UI) is a GREEN screen in the bible prop and keyframes, and gets the picture per shot via
    `"screen"` after Sora (README "Device screens"); otherwise screens show scenery/abstract light.
+   **Dips**: Sora skips a dip (the marshmallow jumps from plain to coated above the mug) unless the
+   prompt spells each beat with times: over the mug → lowered straight DOWN INTO the mug until it
+   disappears under the chocolate → stays under a moment → rises out coated, dripping. Check the dip
+   frame by frame on the take sheet before building.
    **Generate**: `node sora.mjs videos/<name>` (up to 2 jobs at once, often ~1 when anything else
    uses the deployment; ~60–120s each, so ~30 min for 20 takes; background it). `--more N --only sN`
    adds N takes.
