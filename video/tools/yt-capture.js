@@ -12,7 +12,9 @@
 // Helpers stay on window.ytcap: cuts(), capture(), box(t, pred, region), sheetDataUrl(times).
 const NAME = 'my-video';
 (() => {
-  const v = () => document.querySelector('video');
+  // the Shorts page can hold several <video> elements (preloaded neighbours): use the active player's,
+  // else the one that has loaded media
+  const v = () => document.querySelector('#shorts-player video') || [...document.querySelectorAll('video')].find((e) => e.readyState >= 1 && e.videoWidth) || document.querySelector('video');
   // seek and wait for 'seeked' (fires even when the page is hidden, unlike rAF/rVFC); the frame is
   // drawable at once. No setTimeout on this path: hidden tabs clamp timers to ~1s, which turned a
   // 1-minute scan into 10+ minutes.

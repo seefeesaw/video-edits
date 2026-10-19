@@ -230,6 +230,19 @@ function frameFilter(shot, W, H, dur) {
   ].join(',');
 }
 
+async function previewOverlays(dir) {
+  const spec = JSON.parse(fs.readFileSync(path.join(dir, 'video.json'), 'utf8'));
+  const [W, H] = spec.size || [1080, 1920];
+  const outDir = path.join(dir, 'out');
+  fs.mkdirSync(outDir, { recursive: true });
+  const files = await renderOverlays(spec, dir, outDir, W, H);
+  const sheet = path.join(outDir, 'ref-shots.jpg');
+  // first overlay over the first reference shot frame (ref-shots.jpg cells are 270x480)
+  const base = fs.existsSync(sheet) ? ['-i', sheet, '-filter_complex', `[0]crop=270:480:0:0,scale=${W}:${H}[b];[b][1]overlay=0:0`] : ['-f', 'lavfi', '-i', `color=gray:size=${W}x${H}`, '-filter_complex', '[0][1]overlay=0:0'];
+  if (files.length) ff([...base.slice(0, 2), '-i', files[0].file, ...base.slice(2), '-frames:v', '1', path.join(outDir, 'captions-preview.jpg')]);
+  console.log(`wrote ${path.relative(process.cwd(), path.join(outDir, 'captions-preview.jpg'))} (overlay 0 over the first reference shot)`);
+}
+
 export async function build(dir, opts = {}) {
   const spec = JSON.parse(fs.readFileSync(path.join(dir, 'video.json'), 'utf8'));
   const [W, H] = spec.size || [1080, 1920];
@@ -300,5 +313,9 @@ export async function build(dir, opts = {}) {
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const argv = process.argv.slice(2);
-  build(path.resolve(argv.find((a) => !a.startsWith('--'))), { frames: argv.includes('--frames') }).catch((e) => { console.error(e.message); process.exit(1); });
+  const target = path.resolve(argv.find((a) => !a.startsWith('--')));
+  // --overlays: render only the captions over the reference's shot frames (out/captions-preview.jpg),
+  // to check fonts and fits in seconds without a build
+  if (argv.includes('--overlays')) previewOverlays(target).catch((e) => { console.error(e.message); process.exit(1); });
+  else build(target, { frames: argv.includes('--frames') }).catch((e) => { console.error(e.message); process.exit(1); });
 }

@@ -176,7 +176,8 @@ if (argv.includes('--pick')) {
     // takes that start from the same keyframe look alike in a short slot: a near-tie is decided by
     // the ACTION, which this score can't see
     if (scored.length > 1 && scored[0][0] - scored[1][0] < 0.3) console.log(`  ${s.id}: TIE (${(scored[0][0] - scored[1][0]).toFixed(2)}): judge the action with node refsheet.mjs ${path.relative(process.cwd(), dir)} --takes ${s.id}, then set "clip" + "pick": "manual"`);
-    const old = s.clip, now = `clips/${scored[0][1]}`;
+    // a shot with no "clip" yet uses clips/<id>.mp4: jump-cut shots pointing there must follow too
+    const old = s.clip || `clips/${s.id}.mp4`, now = `clips/${scored[0][1]}`;
     s.clip = now;
     // jump-cut shots reuse this shot's take ("takes": 0, "clip": <this shot's clip>): keep them on it
     for (const o of spec.shots) if (o !== s && o.takes === 0 && old && o.clip === old && o.clip !== now) { o.clip = now; console.log(`  ${o.id} reuses ${s.id}'s take: now ${now}`); }
@@ -220,7 +221,13 @@ if (argv.includes('--apply')) {
     const A = fr.map((x) => x.ref), B = fr.map((x) => gridOf(x.px, zoomOf(s), panOf(s))), g = fitGrade(A, B);
     // the grid score mixes composition and colour, so a grade that fixes a big brightness/warmth gap
     // can cost a little comp; keep it unless it clearly hurts
-    if (comp(A, B, g) < comp(A, B)) { delete s.grade; console.log(`grade ${s.id}: none (a grade hurts comp ${comp(A, B).toFixed(1)} -> ${comp(A, B, g).toFixed(1)})`); continue; }
+    if (comp(A, B, g) < comp(A, B)) {
+      // a very short shot cut from another shot's take (a jump cut) has too few samples for its own fit:
+      // share that shot's grade so the two match instead of jumping in brightness at the cut
+      const twin = spec.shots.find((o) => o !== s && clipOf(o) === clipOf(s) && o.grade);
+      if (twin) { s.grade = { ...twin.grade }; console.log(`grade ${s.id}: shared from ${twin.id} (same take; its own fit hurt comp)`); continue; }
+      delete s.grade; console.log(`grade ${s.id}: none (a grade hurts comp ${comp(A, B).toFixed(1)} -> ${comp(A, B, g).toFixed(1)})`); continue;
+    }
     s.grade = { r: g[0].map((v, i) => +v.toFixed(i ? 2 : 4)), g: g[1].map((v, i) => +v.toFixed(i ? 2 : 4)), b: g[2].map((v, i) => +v.toFixed(i ? 2 : 4)), clip: clipOf(s) };
     console.log(`grade ${s.id}: comp ${comp(A, B).toFixed(1)} -> ${comp(A, B, g).toFixed(1)}`);
   }

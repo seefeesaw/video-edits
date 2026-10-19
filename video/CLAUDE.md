@@ -32,7 +32,13 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    percentages of the frame** (where the main object, hands, screen, background sit, and how big the
    main object is — measure it, e.g. "mug 45% of frame width"). Caption ink boxes:
    re-paste the script with `NAME = null` and use `ytcap.box(t, pred, [x0,y0,x1,y1])` (1080×1920
-   coordinates). A caption with an emoji: a bright-pixel box also catches the emoji's highlights, so
+   coordinates), or — quicker, and when you reused a reference and skipped the capture — paste the
+   small `tools/yt-box.js` (`ytbox.lines(t, region)` per text line, `ytbox.runs` for the glyph/emoji gap,
+   `ytbox.stable(times, region)` for an emoji: the pixels that don't change across frames). Emoji go in
+   their own element with font "Noto Color Emoji" (its glyphs differ from the original's, so add
+   `"fitMode": "stretch"` if the fit is off by more than 2px). Check fonts and fits in seconds with
+   `node build.mjs videos/<name> --overlays` (out/captions-preview.jpg: your caption over the first
+   reference frame). A caption with an emoji: a bright-pixel box also catches the emoji's highlights, so
    scan columns for the gap between text and emoji and fit them separately (text box + emoji box).
    Captions with a dark outline/shadow: the ink box includes it, so fit the white
    glyphs only (pred on bright pixels) and add the shadow in CSS.
@@ -108,6 +114,9 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    adds N takes.
 6. **Pick, frame, grade, build** (free, no build needed for the first three):
    `node compare.mjs videos/<name> --pick` → `--framing` → `--apply` → `node build.mjs videos/<name>`.
+   With device screens, the first `--pick` composites every take (~1-2 min each) — run it in the
+   background. A screen picture showing a person on a laptop cut by the frame edge: set
+   `"anchor": "center"` so the person, not the room behind them, stays in the visible part.
    `--pick` scores colour layout only: for every shot whose ACTION matters, run `node refsheet.mjs
    videos/<name> --takes sN` and check the take does the right thing at the right moment (order of
    actions, the moment at the shot's midpoint); override with `"clip"` + `"pick": "manual"` and move
