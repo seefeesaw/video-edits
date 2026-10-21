@@ -10,3 +10,4 @@
 | 03 | r03-white-fireplace | white | fireside coffee table | When the evenings get darker and / it's Harry Potter season at last | one-shot comp 89.2, 7/7 cuts, no fix |
 | 04 | r04-brown-study | brown | study desk | When sweater weather hits and it's / officially Harry Potter season | one-shot comp 87.9, 7/7 cuts; fix: s7 retimed to the take's real exit (v1 teleported = extra cut, v2 used); compare reports EXTRA cuts |
 | 05 | r05-red-floor | red | floor picnic on a rug | When the rain starts and it feels / like it's Harry Potter season | one-shot comp 87.7, 7/7 cuts; fix: sora.mjs retries HTTP 408/5xx on create (a timeout dropped a take) |
+| 06 | r06-white-nook | white | breakfast nook | When the first frost hits and it's / suddenly Harry Potter season | one-shot comp 88.4 (extra cut in s7: Sora took the board away on frame 1 in both takes); fix: 2 more s7 takes, template now makes 3 s7 takes |
