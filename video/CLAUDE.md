@@ -102,7 +102,8 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    A keyframe drawn mid-action gives a take that skips the reference's opening move. Sora often
    ignores "the camera moves closer": mark such shots `"push": true` and `--framing` adds a push-in
    zoom `[1, z]` when the take stayed wide (only on marked shots: on static shots the grid also
-   rewards push-ins that crop the product away). A hand in front of the product: gpt-image-2 tends
+   rewards push-ins that crop the product away). Its pan stays within ±0.5 across; if the product
+   sits off-centre, pin it with `"push": {"pan": [x, y]}` and check the shot on `mine-shots.jpg`. A hand in front of the product: gpt-image-2 tends
    to put it over the product, so say where the product stays visible ("the mug fully visible to the
    RIGHT of the hand, not covered by it") and check the keyframe.
    For "X enters the frame" shots, describe the frame with X

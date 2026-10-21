@@ -222,7 +222,10 @@ if (argv.includes('--framing')) {
     const mp = +(arg('--max-push') || 1.5), ks = fr.map((x) => slotK(s, x.t));
     const pushScore = (z1, p) => comp(A, fr.map((x, i) => gridOf(x.px, 1 + (z1 - 1) * ks[i], p)), gg);
     let push = null;
-    if (s.push && fr.length >= 3) for (let z = 1.1; z <= mp + 1e-4; z += 0.1) for (let x = -1; x <= 1.001; x += 0.25) for (let y = -1; y <= 1.001; y += 0.25) {
+    // the grid would aim a push-in at a corner and crop the product off the frame's side: the pan stays
+    // within ±0.5 across, or exactly where "push": {"pan": [x, y]} pins it (the product's position)
+    const pinned = s.push?.pan, xs = pinned ? [pinned[0]] : [-0.5, -0.25, 0, 0.25, 0.5], ys = pinned ? [pinned[1]] : [-1, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1];
+    if (s.push && fr.length >= 3) for (let z = 1.1; z <= mp + 1e-4; z += 0.1) for (const x of xs) for (const y of ys) {
       const sc = pushScore(z, [x, y]); if (sc > (push?.[0] ?? -1)) push = [sc, [1, +z.toFixed(2)], [+x.toFixed(2), +y.toFixed(2)]];
     }
     if (push && push[0] - best[0] >= 1 && push[0] - base >= 1) best = push;

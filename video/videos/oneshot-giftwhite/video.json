@@ -1,0 +1,379 @@
+{
+  "title": "A perfect gift for a movie night (white Meltie mug, in bed) — one-shot test",
+  "source": "https://www.youtube.com/shorts/nTW_I836Gg4",
+  "notes": "One-shot test of the pipeline (white variant, new setting): the treats on a wooden bed tray on a cream duvet in a bedroom, an upholstered headboard with pillows and a glowing bedside lamp behind, instead of the white desk, red wall and Christmas tree. WHITE variant of the real Meltie Mini Fondue Mug. The pour and the last shot spill chocolate on purpose (brief). Laptop: green screen with original generated stills of a fictional 1980s series; plain unbranded red foil bag; Sora audio.",
+  "size": [
+    1080,
+    1920
+  ],
+  "fps": 60,
+  "duration": 9.621,
+  "soraSize": "720x1280",
+  "compare": {
+    "trim": 0.35,
+    "grade": "luma"
+  },
+  "product": {
+    "name": "Meltie Mug Mini Fondue Mug, white",
+    "refs": [
+      "assets/product/white-front.png",
+      "assets/product/white-lit.jpg"
+    ],
+    "description": "the WHITE Meltie Mini Fondue Mug exactly as in the product photos: glossy off-white ceramic body that flares wider at the top, a glossy dark chocolate-brown glazed interior, 'Chocolate...' in brown cursive script with a small brown swirl mark on the front, a tall arched opening at the base for a tealight, an angular white handle on the right, and a fondue fork with a brown handle and long steel tines that clips into a slot in the handle"
+  },
+  "style": "Cosy movie night at home in the evening, in BED: everything happens on a wooden bed tray on a cream duvet, an upholstered headboard and pillows behind; a dim warm room, deep soft shadows, warm amber lamp light, no bright studio light, no red wall, no Christmas tree. Handheld vertical phone video at bed-tray height, shallow depth of field, rich warm colour grade. Hands have long glossy dark-grey manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+  "bible": {
+    "props": {
+      "mug": {
+        "image": "assets/product/white-front.png",
+        "desc": "the WHITE Meltie Mini Fondue Mug exactly as in the product photos: glossy off-white ceramic body that flares wider at the top, a glossy dark chocolate-brown glazed interior, 'Chocolate...' in brown cursive script with a small brown swirl mark on the front, a tall arched opening at the base for a tealight, an angular white handle on the right, and a fondue fork with a brown handle and long steel tines that clips into a slot in the handle"
+      },
+      "laptop": {
+        "desc": "an open dark space-grey laptop with a black keyboard, its screen lit with a perfectly flat, uniform, pure chroma-key green (#00FF00) from edge to edge, no picture, no interface, no reflection"
+      },
+      "candle": {
+        "desc": "a round amber-orange glass candle jar with a lit candle flickering inside, glowing warm orange"
+      },
+      "board": {
+        "desc": "an oval light-wood serving board loaded with two chocolate chip cookies on the left, a pile of round milk-chocolate balls, three white marshmallows in the middle, halved red strawberries and golden waffle pieces on the right"
+      },
+      "torch": {
+        "desc": "a small black pocket butane torch lighter"
+      },
+      "bag": {
+        "desc": "a plain glossy red foil chocolate sharing bag with no text or logo, torn open at the top"
+      },
+      "headboard": {
+        "desc": "a tall upholstered oatmeal-linen bed headboard with plump white and sage pillows and a chunky cream knitted throw"
+      },
+      "bedlamp": {
+        "desc": "a bedside table lamp with a pleated cream shade glowing warm amber"
+      },
+      "tray": {
+        "desc": "a rectangular light-oak bed tray with short legs and cut-out handles"
+      }
+    },
+    "screens": {},
+    "sets": {
+      "A": {
+        "desc": "evening in a cosy BEDROOM, in bed: a light-oak bed tray standing on a cream duvet, an upholstered headboard with plump pillows behind, a glowing bedside lamp, a dim room lit only by warm amber lamp light and the candle, deep soft shadows, no bright studio light, no red wall, no Christmas tree; vertical phone camera at bed-tray height, slightly above, looking at the mug",
+        "props": [
+          "mug",
+          "laptop",
+          "candle",
+          "tray",
+          "headboard",
+          "bedlamp"
+        ],
+        "layout": "The white fondue mug stands in the centre of the light-oak bed tray, about 38% of the frame width, its rim at about 42% of the height and its base at about 74%, its fondue fork standing in it, the mug empty with its dark brown glazed inside visible. Behind it on the LEFT an open laptop on the duvet seen at an angle: its green screen fills the upper-left (from the left edge to about 45% of the width, 18% to 40% of the height), its dark keyboard behind the mug at 35-45% of the height. Behind, the headboard and pillows fill the upper part of the frame, softly out of focus; the glowing bedside lamp at the top-right edge. The orange glass candle jar stands on the tray just behind the mug right side at about 38-50% of the height. The bed tray and duvet fill the lower half."
+      }
+    }
+  },
+  "fonts": [
+    "TikTok Sans:wght@400;500;600",
+    "Noto Color Emoji"
+  ],
+  "overlays": [
+    {
+      "from": 0,
+      "to": 9.621,
+      "elements": "@caption"
+    }
+  ],
+  "captions": {
+    "caption": [
+      {
+        "type": "text",
+        "x": 265,
+        "y": 306,
+        "text": "Are you free December",
+        "fit": [
+          265,
+          318,
+          814,
+          366
+        ],
+        "font": {
+          "family": "TikTok Sans",
+          "size": 46,
+          "weight": 600,
+          "color": "#ffffff",
+          "lineHeight": 1
+        },
+        "style": "text-shadow:0 1px 3px rgba(0,0,0,.35)"
+      },
+      {
+        "type": "text",
+        "x": 437,
+        "y": 371,
+        "text": "25?",
+        "fit": [
+          437,
+          383,
+          521,
+          420
+        ],
+        "font": {
+          "family": "TikTok Sans",
+          "size": 46,
+          "weight": 600,
+          "color": "#ffffff",
+          "lineHeight": 1
+        },
+        "style": "text-shadow:0 1px 3px rgba(0,0,0,.35)"
+      },
+      {
+        "type": "html",
+        "x": 543,
+        "y": 377,
+        "w": 43,
+        "h": 49,
+        "fit": [
+          543,
+          377,
+          585,
+          425
+        ],
+        "fitMode": "stretch",
+        "html": "<span style=\"font-family:'Noto Color Emoji';font-size:44px;line-height:1;display:inline-block\">🍫</span>"
+      },
+      {
+        "type": "html",
+        "x": 594,
+        "y": 376,
+        "w": 48,
+        "h": 51,
+        "fit": [
+          594,
+          376,
+          641,
+          426
+        ],
+        "fitMode": "stretch",
+        "html": "<span style=\"font-family:'Noto Color Emoji';font-size:44px;line-height:1;display:inline-block\">🎬</span>"
+      }
+    ]
+  },
+  "audio": {
+    "sora": 1
+  },
+  "shots": [
+    {
+      "id": "s1",
+      "set": "A",
+      "start": 0,
+      "end": 2.15,
+      "from": 0,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Handheld view from slightly above, a little further back. The white fondue mug, full to near the rim with glossy melted milk chocolate and a lit tealight glowing in its window, stands at the upper middle (its body from 28% to 62% of the width, the handle to 74%; rim at about 33% of the height, base at about 58%). The oval wooden board fills the BOTTOM HALF in the foreground (from the left edge to 85% of the width, from 55% of the height to the bottom edge), loaded with halved strawberries on the left, a marshmallow at the left edge and golden waffle pieces. A hand from the top-right holds the brown-handled fondue fork pushed into a golden waffle piece lying on the board at the right, about to lift it. The laptop with its dark keyboard and flat chroma-key green screen in the top-left corner behind, the orange candle jar top-right, the upholstered headboard and plump pillows behind, softly out of focus.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "Handheld, one continuous take. 0-0.7 s: the fork lifts the waffle piece off the board and carries it up into the mug while the camera moves closer to the mug. 0.7-2.5 s: it dips the waffle into the melted chocolate and swirls it round, coating it, the camera now close above the mug, the mug big in frame. 2.5-4 s: it keeps swirling the waffle in the chocolate, then lifts it slightly, chocolate dripping.",
+      "screen": {
+        "image": "bible/screen-e1.png"
+      },
+      "speed": 1.8,
+      "push": true,
+      "clip": "clips/s1.v2.mp4",
+      "pick": "manual",
+      "zoom": [
+        1,
+        1.5
+      ],
+      "pan": [
+        -0.5,
+        -1
+      ]
+    },
+    {
+      "id": "s2",
+      "set": "A",
+      "start": 2.15,
+      "end": 2.8,
+      "from": 0.3,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Eye-level front view. The white fondue mug, EMPTY and clean (dark brown glazed inside visible, no chocolate), stands in the centre of the wooden bed tray on a cream duvet, its body about 35% of the frame width (from 27% to 63%, the handle reaching to 76%), rim at about 41% of the height, base at about 74%; its tealight window is empty and dark. The fondue fork stands in the mug. A hand from the right edge holds the mug's handle. The laptop's flat chroma-key green screen in the upper-left behind, the pillows and the glowing bedside lamp in the upper right, the orange candle jar just right of the mug's rim."
+      },
+      "prompt": "The hand sets the empty mug down on the bed tray and keeps lightly holding its handle. Static camera.",
+      "screen": {
+        "image": "bible/screen-e2.png",
+        "anchor": "center"
+      },
+      "clip": "clips/s2.mp4",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "s3",
+      "set": "A",
+      "start": 2.8,
+      "end": 3.9,
+      "from": 0.8,
+      "takes": 3,
+      "keyframe": {
+        "prompt": "Eye-level front view. The white fondue mug in the centre of the wooden bed tray on a cream duvet, its body about 38% of the frame width (from 28% to 66%), rim at about 43% of the height, base at about 76%, already FULL to the brim and heaped above the rim with round milk-chocolate malt balls and chocolate wafer pieces; a few malt balls have already spilled over the rim and lie on the wooden bed tray on a cream duvet around the mug base. The plain red foil bag with NO logo, NO text and no print, tilted steeply down from the top-right corner (occupying the right 35% of the frame and the top 40%), its open end just above the mug, a THICK stream of many malt balls pouring out of it into the mug. The laptop flat chroma-key green screen in the upper-left behind, the orange candle jar right of the mug.",
+        "refs": [
+          "bible/prop-bag.png"
+        ]
+      },
+      "prompt": "One continuous static take. 0-4 s: a THICK, heavy stream of dozens of round milk-chocolate malt balls and wafer pieces keeps pouring out of the tilted plain red bag into the already full mug; the pile overflows, and many balls tumble over the rim, bounce down the white outside of the mug and spill across the wooden bed tray on a cream duvet, rolling around the mug base. Lots of chocolate, a generous spill. Static camera.",
+      "screen": {
+        "image": "bible/screen-e3.png",
+        "anchor": "center"
+      },
+      "speed": 1.6,
+      "clip": "clips/s3.v2.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "s4",
+      "set": "A",
+      "start": 3.9,
+      "end": 4.8667,
+      "from": 0,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Eye-level, close. A BIG left hand enters from the left edge, palm up, filling the left half of the frame (from the left edge to 55% of the width, from 38% to 75% of the height), holding a small metal-cup tealight on its fingertips at about 40% of the height and 45% of the width. From the right edge a small black pocket butane torch lighter, held by a hand at the right edge, points its nozzle at the tealight wick. The WHITE fondue mug stands behind them on the RIGHT, fully visible, NOT covered by the hands or the lighter (the hand and tealight are to the LEFT of the mug and slightly above its rim), about 32% of the frame width (from 35% to 72%), rim at about 46% of the height, base at about 76%, its window empty and dark. The laptop's flat chroma-key green screen in the upper-left behind, the pillows in the upper right, the orange candle jar right of the mug."
+      },
+      "prompt": "The torch lighter clicks and its blue flame lights the tealight's wick; the tealight flame catches and burns steadily. Small handheld movement.",
+      "screen": {
+        "image": "bible/screen-e4.png"
+      },
+      "clip": "clips/s4.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "s5",
+      "set": "A",
+      "start": 4.8667,
+      "end": 5.4,
+      "from": 0,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Close, eye-level. The white fondue mug is BIG in the centre: about 60% of the frame width including the handle (from 30% to 95%), rim at about 27% of the height, base at about 83%, held just above the bed tray by two hands: the right hand holds the mug's body and handle, the left hand from the bottom-left holds a lit tealight at the arched window at the bottom of the mug, pushing it in. The laptop's flat chroma-key green screen in the upper-left behind."
+      },
+      "prompt": "The left hand slides the lit tealight fully into the mug's window and pulls away; the candle glows inside the mug.",
+      "screen": {
+        "image": "bible/screen-e5.png",
+        "anchor": "center"
+      },
+      "clip": "clips/s5.mp4",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "s6",
+      "set": "A",
+      "start": 5.4,
+      "end": 6.3,
+      "from": 0.3,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Front view from slightly above. The white fondue mug in the centre, its body about 40% of the frame width (from 26% to 66%, handle to 93%), rim at about 44% of the height, base at about 79%, filled to near the rim with glossy smooth melted milk chocolate, a lit tealight glowing in its window. A hand from the right holds the brown-handled fondue fork, its prongs in the chocolate. The laptop fills the upper-left behind (its flat chroma-key green screen from the left edge to 55% of the width, top 35% of the height), its dark keyboard behind the mug on the left; the pillows in the upper right."
+      },
+      "prompt": "The hand slowly stirs the melted chocolate with the fondue fork in small circles. Static camera.",
+      "screen": {
+        "image": "bible/screen-e1.png"
+      },
+      "clip": "clips/s6.v2.mp4",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "s7",
+      "set": "A",
+      "start": 6.3,
+      "end": 7.15,
+      "from": 0,
+      "takes": 2,
+      "reverse": true,
+      "keyframe": {
+        "prompt": "Wider view, no hands. The white fondue mug stands centre-right, its body about 25% of the frame width (from 48% to 78%, handle to 92%), rim at about 38% of the height, base at about 65%, filled with melted chocolate, its tealight lit and glowing in its window, the fork resting in it. In the foreground the oval wooden board (from 67% to 97% of the height, spanning the left 85% of the width) loaded with chocolate chip cookies, chocolate balls, marshmallows, halved strawberries and waffle pieces. The laptop's flat chroma-key green screen in the upper-left (from the left edge to 45% of the width, 12% to 35% of the height), the pillows and the glowing bedside lamp in the upper right, the orange candle jar right of the mug.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "The wooden board stays still for half a second, then slides quickly out of the frame towards the bottom-left within half a second, leaving the bare wooden bed tray in front of the mug. The mug stays still. Static camera.",
+      "screen": {
+        "image": "bible/screen-e6.png"
+      },
+      "speed": 3.2,
+      "hold": 0.45,
+      "clip": "clips/s7.v2.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "s8",
+      "set": "A",
+      "start": 7.15,
+      "end": 7.4,
+      "from": 0,
+      "takes": 0,
+      "notes": "the start of s9's take (fork stuck in the marshmallow on the board) with another laptop picture, like the original's short insert",
+      "screen": {
+        "image": "bible/screen-e2.png"
+      },
+      "zoom": 1.25,
+      "pan": [
+        0.6,
+        1
+      ],
+      "framing": "manual",
+      "clip": "clips/s9.mp4"
+    },
+    {
+      "id": "s9",
+      "set": "A",
+      "start": 7.4,
+      "end": 9.621,
+      "from": 0.3,
+      "takes": 3,
+      "keyframe": {
+        "prompt": "Medium view. The white fondue mug stands on the RIGHT side of the frame: its body about 30% of the frame width (its left side at 50% and its right side at 80% of the width, the handle reaching to 95%), its rim at about 38% of the height and its base at about 66% of the height, filled to the VERY BRIM with glossy melted chocolate, a thick drip of chocolate already running down the white outside of the mug below the rim, its tealight lit. The oval wooden board in the foreground spans the full width at 66-93% of the height, directly in front of the mug: chocolate chip cookies on the left, a pile of chocolate balls, marshmallows in the middle, halved strawberries and waffle pieces on the right. A hand from the right edge holds the brown-handled fondue fork low over the BOARD, its prongs stuck into a marshmallow lying on the middle of the board (the fork is NOT in the mug). The laptop's flat chroma-key green screen in the upper-left (from the left edge to 42% of the width, 12% to 33% of the height), the pillows in the upper right.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "One continuous static take, no camera move. 0-0.8 s: the fork lifts the white marshmallow up from the board and moves it over the brim-full mug. 0.8-1.8 s: it pushes the marshmallow straight DOWN INTO the mug until it disappears under the melted chocolate; the chocolate surges up and OVERFLOWS: a big wave of glossy melted chocolate spills over the rim on all sides and pours down the white outside of the mug in thick streams. 1.8-2.3 s: the marshmallow stays under while thick chocolate keeps pouring down the outside of the mug and pools in a puddle on the bed tray around its base. 2.3-3.5 s: it rises slowly straight back up out of the mug, fully coated in glossy brown chocolate, dripping, while the overflow keeps running down the mug into the growing puddle. 3.5-4 s: held still just above the mug. The marshmallow stays on the fork the whole time. Lots of spilled chocolate.",
+      "screen": {
+        "image": "bible/screen-e1.png"
+      },
+      "speed": 1.4,
+      "clip": "clips/s9.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ]
+    }
+  ]
+}
