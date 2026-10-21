@@ -317,3 +317,7 @@ console.log(`cuts ref : ${ref.cuts.join(' ')}`);
 console.log(`cuts mine: ${cuts.join(' ')}`);
 const unmatched = ref.cuts.filter((c) => !cuts.some((m) => Math.abs(m - c) <= 1.5 / fps));
 if (unmatched.length) console.log(`missing/late cuts (> 1.5 frames off): ${unmatched.join(' ')}`);
+// a cut the reference doesn't have is a jump inside a shot (a take whose object teleports, a reversed
+// entrance played too fast): find the shot and retime it ("from"/"speed"/"hold") or pick another take
+const extra = cuts.filter((m) => m > 0.05 && !ref.cuts.some((c) => Math.abs(m - c) <= 1.5 / fps));
+if (extra.length) console.log(`EXTRA cuts (jumps inside a shot): ${extra.map((m) => `${m} (${spec.shots.find((s) => m > s.start && m < s.end)?.id ?? '?'})`).join(' ')}`);
