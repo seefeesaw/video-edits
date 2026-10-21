@@ -4,6 +4,10 @@ Read README.md first. Deliverable: `videos/<name>/out/<name>.mp4` (1080×1920). 
 from `video/`; the capture writes `video/videos/<name>/…` (relative to the repo root). On Windows,
 `node -e` needs Windows-style paths (`C:/dev/…`), not `/c/dev/…`.
 
+**COST RULE (standing user instruction): at most 2 Sora takes per shot, always.** sora.mjs clamps
+`"takes"` to 2 and stops `--more` at 2 takes per shot. Pick the better of the two; if neither works,
+fix the keyframe/prompt and replace both with `--force --only sN` — never generate a 3rd, 4th… take.
+
 ## One-shot recipe (YouTube Short URL → replica)
 
 1. **Review server**: start launch config `slideshow-review` (port 5179). It serves the pipelines and
@@ -150,11 +154,11 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    sides and back while its shape, handle and lettering stay visible (a big overflow can turn the mug
    into a column of chocolate: the product must stay exactly the store's). The KEYFRAME must already
    show the spill under way (streams down the side and a puddle at the base): from a clean brim-full
-   mug Sora mostly just drips the dipped fruit (5 of 6 takes on a brown mug). Make 3 takes; pick the one that keeps
+   mug Sora mostly just drips the dipped fruit (5 of 6 takes on a brown mug). Make the 2 takes; pick the one that keeps
    spilling through the slot and use `from`/`speed` to show the growing spill.
    **Generate**: `node sora.mjs videos/<name>` (up to 2 jobs at once, often ~1 when anything else
-   uses the deployment; ~60–120s each, so ~30 min for 20 takes; background it). `--more N --only sN`
-   adds N takes.
+   uses the deployment; ~60–120s each, so ~30 min for 20 takes; background it). `--more --only sN`
+   adds a take only up to 2 per shot (cost rule); beyond that, `--force --only sN` replaces both.
 6. **Pick, frame, grade, build** (free, no build needed for the first three):
    `node compare.mjs videos/<name> --pick` → `--framing` → `--apply` → `node build.mjs videos/<name>`.
    With device screens, the first `--pick` composites every take (~1-2 min each) — run it in the

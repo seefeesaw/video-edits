@@ -195,13 +195,19 @@ async function main() {
   // clip): { id, set?, prompt (timed actions), seconds, takes?, remixOf?: "<performance id>" }. They
   // land in clips/<id>.mp4 (.vN); shots use them with "takes": 0, "clip": "clips/<id>.mp4", "from".
   const perfShots = (spec.performances || []).map((p) => ({ ...p, start: 0, end: p.seconds, from: 0, seconds: p.seconds }));
+  // COST RULE (the user's standing instruction): never more than 2 takes per shot. "takes" above 2
+  // is clamped, and --more stops at 2 takes in all; to retry a shot, fix its keyframe/prompt and
+  // regenerate its 2 takes with --force --only sN (they replace the old ones).
+  const MAX_TAKES = 2;
   for (const shot of [...perfShots, ...spec.shots]) {
     if (only && !only.includes(shot.id)) continue;
-    const takes = shot.takes ?? 1;
+    const takes = Math.min(shot.takes ?? 1, MAX_TAKES);
+    if ((shot.takes ?? 1) > MAX_TAKES) console.log(`  ${shot.id}: "takes": ${shot.takes} clamped to ${MAX_TAKES} (cost rule)`);
     let n0 = 1;
     if (more) while (fs.existsSync(takeFile(dir, shot.id, n0))) n0++;
-    // --more [N]: N extra takes (default 1) after the existing ones
-    const moreN = more ? Math.max(1, +(argv[argv.indexOf('--more') + 1]) || 1) : 0;
+    // --more [N]: N extra takes (default 1) after the existing ones, never past MAX_TAKES in all
+    const moreN = more ? Math.min(Math.max(1, +(argv[argv.indexOf('--more') + 1]) || 1), MAX_TAKES - (n0 - 1)) : 0;
+    if (more && moreN <= 0) { console.log(`  ${shot.id}: already ${n0 - 1} takes (max ${MAX_TAKES}, cost rule): fix the keyframe/prompt and use --force --only ${shot.id} to replace them`); continue; }
     for (let n = n0; n < n0 + (more ? moreN : takes); n++) {
       const file = takeFile(dir, shot.id, n);
       const rel = path.relative(dir, file);

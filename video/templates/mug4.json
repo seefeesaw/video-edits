@@ -162,7 +162,7 @@
       "end": 3.7,
       "from": 0.6,
       "speed": 1.4,
-      "takes": 3,
+      "takes": 2,
       "keyframe": {
         "prompt": "Eye-level front view. The {{mug}} fondue mug in the centre of the {{surface}}, its body from 28% to 72% of the width, rim at about 48% of the height, base at about 81%, already FULL to the brim and heaped above the rim with round milk-chocolate malt balls; a few malt balls have already spilled over the rim and lie on the {{surface}} around the mug base. The plain red chocolate bag with NO logo, NO text and no print, tilted steeply down from the top-right corner (37-100% of the width, 8-48% of the height), its open end just above the mug, a THICK stream of many malt balls pouring out of it into the mug. The laptop's flat chroma-key green screen in the upper-left behind, a small orange pumpkin left of the mug.",
         "refs": [
@@ -232,7 +232,7 @@
       "from": 0,
       "speed": 1.1,
       "hold": 0.45,
-      "takes": 3,
+      "takes": 2,
       "reverse": true,
       "keyframe": {
         "prompt": "Wider view, no hands. The {{mug}} fondue mug stands centre-right (its body from 48% to 85% of the width, the handle to 96%, rim at about 37% of the height, base at about 65%), filled with melted chocolate, its tealight lit and glowing in its window, the fork resting in it. In the foreground the oval bamboo board (from 66% to 100% of the height, spanning the left 87% of the width) loaded with chocolate chip cookies, round milk-chocolate balls, big white marshmallows and golden waffle pieces. The laptop's flat chroma-key green screen in the upper-left (0-45% of the width, 12-35% of the height), a small orange pumpkin between the laptop and the mug, the gnome pumpkin and the candle jar upper right.",
@@ -252,7 +252,7 @@
       "end": 9.361,
       "from": 0.2,
       "speed": 1.4,
-      "takes": 3,
+      "takes": 2,
       "keyframe": {
         "prompt": "Medium view. The {{mug}} fondue mug stands centre-right (its body from 48% to 85% of the width, the handle to 96%, rim at about 40% of the height, base at about 64%), filled to the VERY BRIM with glossy melted chocolate, chocolate ALREADY OVERFLOWING: two thick glossy streams of melted chocolate already running down the side of the mug from the rim to its base and a small glossy puddle of chocolate already on the surface around its base (the front lettering stays visible), its tealight lit. The oval bamboo board in the foreground spans the full width at 65-94% of the height: chocolate chip cookies on the left, big white marshmallows in the middle, golden waffle pieces on the right. A hand from the right edge holds the {{fork}}-handled fondue fork low over the BOARD, its prongs stuck into a golden waffle piece on the right of the board (the fork is NOT in the mug). The laptop's flat chroma-key green screen in the upper-left (0-45% of the width, 12-35% of the height), the gnome pumpkin and the candle jar upper right.",
         "refs": [

@@ -16,7 +16,7 @@ npm install
 node keyframes.mjs videos/<name>            # first frames with the real product (2 at a time)
 node sora.mjs videos/<name>                 # generate missing shot clips (2 jobs at a time, resumable)
 node sora.mjs videos/<name> --only s3,s5    # specific shots
-node sora.mjs videos/<name> --more --only s3   # add another take (s3.v2.mp4 …)
+node sora.mjs videos/<name> --more --only s3   # add a take, up to 2 per shot (cost rule: never more)
 node sora.mjs videos/<name> --force         # regenerate
 node build.mjs videos/<name> [--frames]     # assemble out/<name>.mp4 (+ one frame per shot)
 ```
