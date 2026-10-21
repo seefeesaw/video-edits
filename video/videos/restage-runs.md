@@ -23,3 +23,4 @@
 | 01 | m3r01-red-vanity | red | dressing table | movie night / season is coming. | one-shot comp 87.0, 7/7 cuts; s7 board static (both takes dropped it on frame 1) |
 | 02 | m3r02-white-floor | white | low floor table | cozy film / season is here. | one-shot comp 86.8, 7/7 cuts; fix: reworded hook lines centred at the original size (the fit box squeezed the shorter line) |
 | 03 | m3r03-brown-bar | brown | black granite breakfast bar | holiday movie / season is back. | one-shot comp 86.3, 7/7 cuts, no fix |
+| 04 | m3r04-red-xmas | red | festive dining table | christmas film / season is coming. | one-shot comp 85.9, 7/7 cuts; s4 keyframe regenerated (no lighter), s7 retimed past two jumps |
