@@ -220,7 +220,7 @@
         "image": "bible/screen-e1.png",
         "anchor": "center"
       },
-      "clip": "clips/s2.mp4",
+      "clip": "clips/s2.v3.mp4",
       "zoom": 1,
       "pan": [
         0,
@@ -228,19 +228,20 @@
       ],
       "grade": {
         "r": [
-          1.538,
-          35.05
+          1.5504,
+          34.7
         ],
         "g": [
-          1.538,
-          35.05
+          1.5504,
+          34.7
         ],
         "b": [
-          1.538,
-          35.05
+          1.5504,
+          34.7
         ],
-        "clip": "clips/s2.mp4"
-      }
+        "clip": "clips/s2.v3.mp4"
+      },
+      "pick": "manual"
     },
     {
       "id": "s3",
@@ -458,7 +459,7 @@
       "screen": {
         "image": "bible/screen-e4.png"
       },
-      "clip": "clips/s8.v2.mp4",
+      "clip": "clips/s8.v5.mp4",
       "pick": "manual",
       "zoom": 1,
       "pan": [
@@ -467,18 +468,18 @@
       ],
       "grade": {
         "r": [
-          1.5882,
-          19.02
+          1.6126,
+          17.9
         ],
         "g": [
-          1.5882,
-          19.02
+          1.6126,
+          17.9
         ],
         "b": [
-          1.5882,
-          19.02
+          1.6126,
+          17.9
         ],
-        "clip": "clips/s8.v2.mp4"
+        "clip": "clips/s8.v5.mp4"
       }
     }
   ]
