@@ -216,17 +216,20 @@
       "set": "A",
       "start": 2.8,
       "end": 3.9,
-      "from": 0.4,
+      "from": 0.8,
       "takes": 2,
       "keyframe": {
-        "prompt": "Eye-level front view. The empty red fondue mug in the centre of the white desk, its body about 38% of the frame width (from 28% to 66%), rim at about 43% of the height, base at about 76%, white inside visible. A plain red foil snack bag with NO logo, NO text and no print, tilted down from the top-right corner (occupying the right 35% of the frame and the top 40%), its open end just above the mug, a few chocolate-covered wafer pieces falling from it into the mug. The laptop's flat chroma-key green screen in the upper-left behind, the orange candle jar right of the mug."
+        "prompt": "Eye-level front view. The red fondue mug in the centre of the white desk, its body about 38% of the frame width (from 28% to 66%), rim at about 43% of the height, base at about 76%, already FULL to the brim and heaped above the rim with round milk-chocolate malt balls and chocolate wafer pieces; a few malt balls have already spilled over the rim and lie on the white desk around the mug base. The plain red foil bag with NO logo, NO text and no print, tilted steeply down from the top-right corner (occupying the right 35% of the frame and the top 40%), its open end just above the mug, a THICK stream of many malt balls pouring out of it into the mug. The laptop flat chroma-key green screen in the upper-left behind, the orange candle jar right of the mug.",
+        "refs": [
+          "bible/prop-bag.png"
+        ]
       },
-      "prompt": "Chocolate wafer pieces and round milk-chocolate balls pour from the tilted plain red bag down into the mug, tumbling in. Static camera.",
+      "prompt": "One continuous static take. 0-4 s: a THICK, heavy stream of dozens of round milk-chocolate malt balls and wafer pieces keeps pouring out of the tilted plain red bag into the already full mug; the pile overflows, and many balls tumble over the rim, bounce down the outside of the mug and spill across the white desk, rolling around the mug base. Lots of chocolate, a generous spill. Static camera.",
       "screen": {
         "image": "bible/screen-e3.png",
         "anchor": "center"
       },
-      "clip": "clips/s3.v2.mp4",
+      "clip": "clips/s3.v4.mp4",
       "zoom": 1,
       "pan": [
         0,
@@ -234,19 +237,21 @@
       ],
       "grade": {
         "r": [
-          1.2824,
-          19.93
+          1.3065,
+          19.48
         ],
         "g": [
-          1.2824,
-          19.93
+          1.3065,
+          19.48
         ],
         "b": [
-          1.2824,
-          19.93
+          1.3065,
+          19.48
         ],
-        "clip": "clips/s3.v2.mp4"
-      }
+        "clip": "clips/s3.v4.mp4"
+      },
+      "pick": "manual",
+      "speed": 1.6
     },
     {
       "id": "s4",
@@ -391,7 +396,7 @@
       "end": 7.4,
       "from": 0,
       "takes": 0,
-      "clip": "clips/s9.mp4",
+      "clip": "clips/s9.v5.mp4",
       "notes": "the start of s9's take (fork stuck in the marshmallow on the board) with another laptop picture, like the original's short insert",
       "screen": {
         "image": "bible/screen-e2.png"
@@ -401,21 +406,6 @@
         0.6,
         1
       ],
-      "grade": {
-        "r": [
-          1.379,
-          -1.35
-        ],
-        "g": [
-          1.379,
-          -1.35
-        ],
-        "b": [
-          1.379,
-          -1.35
-        ],
-        "clip": "clips/s9.mp4"
-      },
       "framing": "manual"
     },
     {
@@ -426,38 +416,23 @@
       "from": 0.3,
       "takes": 2,
       "keyframe": {
-        "prompt": "Medium view. The red fondue mug stands on the RIGHT side of the frame: its body about 30% of the frame width (its left side at 50% and its right side at 80% of the width, the handle reaching to 95%), its rim at about 38% of the height and its base at about 66% of the height, filled with melted chocolate, its tealight lit. The oval wooden board in the foreground spans the full width at 66-93% of the height, directly in front of the mug: chocolate chip cookies on the left, a pile of chocolate balls, marshmallows in the middle, halved strawberries and waffle pieces on the right. A hand from the right edge holds the red-handled fondue fork low over the BOARD, its prongs stuck into a marshmallow lying on the middle of the board (the fork is NOT in the mug). The laptop's flat chroma-key green screen in the upper-left (from the left edge to 42% of the width, 12% to 33% of the height), the bookshelf in the upper right.",
+        "prompt": "Medium view. The red fondue mug stands on the RIGHT side of the frame: its body about 30% of the frame width (its left side at 50% and its right side at 80% of the width, the handle reaching to 95%), its rim at about 38% of the height and its base at about 66% of the height, filled to the VERY BRIM with glossy melted chocolate, a thick drip of chocolate already running down the red outside of the mug below the rim, its tealight lit. The oval wooden board in the foreground spans the full width at 66-93% of the height, directly in front of the mug: chocolate chip cookies on the left, a pile of chocolate balls, marshmallows in the middle, halved strawberries and waffle pieces on the right. A hand from the right edge holds the red-handled fondue fork low over the BOARD, its prongs stuck into a marshmallow lying on the middle of the board (the fork is NOT in the mug). The laptop's flat chroma-key green screen in the upper-left (from the left edge to 42% of the width, 12% to 33% of the height), the bookshelf in the upper right.",
         "refs": [
           "bible/prop-board.png"
         ]
       },
-      "prompt": "One continuous static take, no camera move. 0-0.8 s: the fork lifts the white marshmallow up from the board and moves it over the mug. 0.8-1.8 s: it lowers the marshmallow straight DOWN INTO the mug, through the rim, until the marshmallow disappears completely under the surface of the melted chocolate inside the mug. 1.8-2.3 s: it stays under the chocolate for a moment. 2.3-3.5 s: it rises slowly straight back up out of the mug, now fully coated in glossy brown chocolate, chocolate dripping from it back into the mug. 3.5-4 s: it is held still just above the mug. The marshmallow stays on the fork the whole time.",
+      "prompt": "One continuous static take, no camera move. 0-0.8 s: the fork lifts the white marshmallow up from the board and moves it over the mug. 0.8-1.8 s: it pushes the marshmallow straight DOWN INTO the brim-full mug until it disappears under the melted chocolate; the chocolate rises and SPILLS over the rim, thick glossy chocolate overflowing and running down the red outside of the mug onto the white desk. 1.8-2.3 s: it stays under the chocolate a moment while more chocolate spills down the side of the mug. 2.3-3.5 s: it rises slowly straight back up out of the mug, fully coated in glossy brown chocolate, dripping; chocolate keeps running down the outside of the mug and pools on the desk at its base. 3.5-4 s: it is held still just above the mug. The marshmallow stays on the fork the whole time.",
       "screen": {
         "image": "bible/screen-e1.png"
       },
-      "clip": "clips/s9.mp4",
+      "clip": "clips/s9.v5.mp4",
       "pick": "manual",
       "speed": 1.4,
       "zoom": 1,
       "pan": [
         0,
         0
-      ],
-      "grade": {
-        "r": [
-          1.379,
-          -1.35
-        ],
-        "g": [
-          1.379,
-          -1.35
-        ],
-        "b": [
-          1.379,
-          -1.35
-        ],
-        "clip": "clips/s9.mp4"
-      }
+      ]
     }
   ]
 }

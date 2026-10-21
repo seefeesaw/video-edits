@@ -243,7 +243,9 @@ if (argv.includes('--apply')) {
     if (comp(A, B, g) < comp(A, B)) {
       // a very short shot cut from another shot's take (a jump cut) has too few samples for its own fit:
       // share that shot's grade so the two match instead of jumping in brightness at the cut
-      const twin = spec.shots.find((o) => o !== s && clipOf(o) === clipOf(s) && o.grade);
+      // (only a grade fitted on this same take: a leftover grade from an earlier clip would be ignored
+      // by build.mjs, and two shots must not pass a stale one back and forth)
+      const twin = spec.shots.find((o) => o !== s && clipOf(o) === clipOf(s) && o.grade?.clip === clipOf(s));
       if (twin) { s.grade = { ...twin.grade }; console.log(`grade ${s.id}: shared from ${twin.id} (same take; its own fit hurt comp)`); continue; }
       delete s.grade; console.log(`grade ${s.id}: none (a grade hurts comp ${comp(A, B).toFixed(1)} -> ${comp(A, B, g).toFixed(1)})`); continue;
     }

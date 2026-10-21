@@ -129,6 +129,13 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    prompt spells each beat with times: over the mug → lowered straight DOWN INTO the mug until it
    disappears under the chocolate → stays under a moment → rises out coated, dripping. Check the dip
    frame by frame on the take sheet before building.
+   **Spills** (a brief asks for lots of chocolate so it spills): Sora won't overflow a half-empty mug
+   inside a short slot, so start the keyframe one step from the spill — the mug already heaped / brim
+   full with the first pieces or a first drip already over the rim and on the desk — and prompt the
+   amount and the spill itself ("a THICK, heavy stream of dozens of malt balls… many tumble over the
+   rim and spill across the desk"; "pushes it into the brim-full mug; the chocolate rises and SPILLS
+   over the rim, running down the outside onto the desk"). Make 3 takes; pick the one that keeps
+   spilling through the slot and use `from`/`speed` to show the growing spill.
    **Generate**: `node sora.mjs videos/<name>` (up to 2 jobs at once, often ~1 when anything else
    uses the deployment; ~60–120s each, so ~30 min for 20 takes; background it). `--more N --only sN`
    adds N takes.
