@@ -223,7 +223,9 @@ async function main() {
     if (!w.id) {
       for (let attempt = 0; ; attempt++) {
         try { w.id = await create(w.shot, spec, dir); break; } catch (e) {
-          if (!/HTTP 429/.test(e.message) || attempt > 40) throw e;
+          // rate limits (429) and transient server errors (408 timeout, 5xx) are retried; a create that
+          // timed out never made a job, so resubmitting it costs nothing
+          if (!/HTTP (429|408|5\d\d)/.test(e.message) || attempt > 40) throw e;
           await new Promise((x) => setTimeout(x, 15000));
         }
       }
