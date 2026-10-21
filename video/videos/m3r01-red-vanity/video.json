@@ -92,43 +92,35 @@
     "caption": [
       {
         "type": "text",
-        "x": 419,
+        "x": 0,
         "y": 300,
         "text": "movie night",
-        "fit": [
-          419,
-          308,
-          661,
-          339
-        ],
         "font": {
           "family": "TikTok Sans",
           "size": 42,
           "weight": 500,
           "color": "#ffffff",
-          "lineHeight": 1
+          "lineHeight": 1,
+          "align": "center"
         },
-        "style": "text-shadow:0 1px 3px rgba(0,0,0,.4)"
+        "style": "text-shadow:0 1px 3px rgba(0,0,0,.4)",
+        "w": 1080
       },
       {
         "type": "text",
-        "x": 355,
+        "x": 0,
         "y": 356,
         "text": "season is coming.",
-        "fit": [
-          355,
-          364,
-          723,
-          405
-        ],
         "font": {
           "family": "TikTok Sans",
           "size": 42,
           "weight": 500,
           "color": "#ffffff",
-          "lineHeight": 1
+          "lineHeight": 1,
+          "align": "center"
         },
-        "style": "text-shadow:0 1px 3px rgba(0,0,0,.4)"
+        "style": "text-shadow:0 1px 3px rgba(0,0,0,.4)",
+        "w": 1080
       }
     ]
   },
