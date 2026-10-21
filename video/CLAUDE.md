@@ -104,7 +104,8 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    `speed` (often 1.4-1.8) makes the take's beats land on the reference's (check on `--full` sheets).
    A keyframe drawn mid-action gives a take that skips the reference's opening move. Sora often
    ignores "the camera moves closer": mark such shots `"push": true` and `--framing` adds a push-in
-   zoom `[1, z]` when the take stayed wide (only on marked shots: on static shots the grid also
+   zoom `[1, z]` (kept unless it scores clearly below a static crop: the grid barely sees a centred
+   subject grow, so it can't be asked to prove the push) (only on marked shots: on static shots the grid also
    rewards push-ins that crop the product away). Its pan stays within ±0.5 across; if the product
    sits off-centre, pin it with `"push": {"pan": [x, y]}` and check the shot on `mine-shots.jpg`. A hand in front of the product: gpt-image-2 tends
    to put it over the product, so say where the product stays visible ("the mug fully visible to the

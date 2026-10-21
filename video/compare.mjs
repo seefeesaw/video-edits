@@ -217,8 +217,7 @@ if (argv.includes('--framing')) {
     // "push": true on a shot whose REFERENCE camera moves closer (the subject grows through the shot)
     // while the take stays wide (Sora often ignores "the camera moves closer"): search a push-in zoom
     // [1, z] over the slot. Only on shots marked so: on static shots the grid also rewards push-ins
-    // that crop the product away. ≥1 point over both the uncropped take and the best static crop keeps
-    // it; --max-push caps the end zoom (720p gets soft past ~1.5)
+    // that crop the product away. It is kept unless it scores clearly below the best static crop; --max-push caps the end zoom (720p gets soft past ~1.5)
     const mp = +(arg('--max-push') || 1.5), ks = fr.map((x) => slotK(s, x.t));
     const pushScore = (z1, p) => comp(A, fr.map((x, i) => gridOf(x.px, 1 + (z1 - 1) * ks[i], p)), gg);
     let push = null;
@@ -228,7 +227,9 @@ if (argv.includes('--framing')) {
     if (s.push && fr.length >= 3) for (let z = 1.1; z <= mp + 1e-4; z += 0.1) for (const x of xs) for (const y of ys) {
       const sc = pushScore(z, [x, y]); if (sc > (push?.[0] ?? -1)) push = [sc, [1, +z.toFixed(2)], [+x.toFixed(2), +y.toFixed(2)]];
     }
-    if (push && push[0] - best[0] >= 1 && push[0] - base >= 1) best = push;
+    // the agent saw the reference camera move in, and the grid barely registers it (a centred subject
+    // growing changes few cells): keep the push-in unless it clearly loses to the best static crop
+    if (push && push[0] >= best[0] - 0.5) best = push;
     console.log(`framing ${s.id}: zoom ${JSON.stringify(best[1])} pan [${best[2]}]  comp ${base.toFixed(1)} -> ${best[0].toFixed(1)}`);
     s.zoom = best[1]; s.pan = best[2];
   }
