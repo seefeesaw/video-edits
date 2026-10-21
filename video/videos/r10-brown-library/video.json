@@ -1,0 +1,482 @@
+{
+  "title": "Harry Potter season fondue (brown Meltie mug, library) — restage 10",
+  "source": "https://www.youtube.com/shorts/uMl76XX7epo",
+  "notes": "Restage 10 of shorts/uMl76XX7epo: BROWN variant of the real Meltie Mini Fondue Mug (store photos), the treats on the round mahogany side table (a round mahogany side table beside a worn brown leather wingback armchair in a home library at night, floor-to-ceiling bookshelves behind, a brass floor lamp glowing) instead of the white desk in front of red curtains. Table decor kept (pumpkins, gnome pumpkin, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fantasy stills; plain unbranded red bag; Sora audio.",
+  "size": [
+    1080,
+    1920
+  ],
+  "fps": 60,
+  "duration": 10.961,
+  "soraSize": "720x1280",
+  "compare": {
+    "trim": 0.35,
+    "grade": "luma"
+  },
+  "product": {
+    "name": "Meltie Mug Mini Fondue Mug, brown",
+    "refs": [
+      "assets/product/brown-front.png",
+      "assets/product/brown-lit.png"
+    ],
+    "description": "the BROWN Meltie Mini Fondue Mug exactly as in the product photos: glossy chocolate-brown ceramic body that flares wider at the top, a white interior, 'Chocolate...' in white cursive script with a small white swirl mark on the front, a tall arched opening at the base for a tealight, an angular brown handle on the right with a small round hole, and a fondue fork with a terracotta-brown handle and long steel tines that clips into the handle"
+  },
+  "style": "Cosy autumn movie night at home in the evening, at a LIBRARY SIDE TABLE: everything happens on the round mahogany side table; a dim warm room lit only by warm amber lamp light and the candle, deep soft shadows, no bright studio light, no red curtains. Handheld vertical phone video at table height, shallow depth of field, rich warm autumn colour grade. Hands have long glossy pale-pink manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+  "bible": {
+    "props": {
+      "mug": {
+        "image": "assets/product/brown-front.png",
+        "desc": "the BROWN Meltie Mini Fondue Mug exactly as in the product photos: glossy chocolate-brown ceramic body that flares wider at the top, a white interior, 'Chocolate...' in white cursive script with a small white swirl mark on the front, a tall arched opening at the base for a tealight, an angular brown handle on the right with a small round hole, and a fondue fork with a terracotta-brown handle and long steel tines that clips into the handle"
+      },
+      "laptop": {
+        "desc": "an open dark space-grey laptop with a black keyboard, its screen lit with a perfectly flat, uniform, pure chroma-key green (#00FF00) from edge to edge, no picture, no interface, no reflection"
+      },
+      "candle": {
+        "desc": "a round amber glass candle jar with a lit candle flickering inside, glowing warm orange"
+      },
+      "pumpkins": {
+        "desc": "two small bright-orange decorative pumpkins and a glossy orange ceramic pumpkin topped with a little gnome in a pointed orange hat"
+      },
+      "board": {
+        "desc": "an oval light bamboo serving board loaded with two chocolate chip cookies on the left, a heap of big white marshmallows in the middle and a pile of whole red strawberries on the right"
+      },
+      "torch": {
+        "desc": "a small black pocket butane torch lighter"
+      },
+      "bag": {
+        "desc": "a plain glossy red chocolate sharing bag with no text or logo, torn open at the top"
+      },
+      "armchair": {
+        "desc": "a worn brown leather wingback armchair with brass studs and a tartan throw"
+      },
+      "library": {
+        "desc": "floor-to-ceiling dark wooden bookshelves filled with old books and a brass floor lamp glowing warm"
+      }
+    },
+    "screens": {
+      "e1": {
+        "desc": "a misty medieval stone castle on a cliff above a dark lake at dusk, warm lights in its many windows, cinematic fantasy film still"
+      },
+      "e2": {
+        "desc": "a cosy cluttered old stone cottage interior lit by a fireplace, shelves of potion bottles and old books, cinematic fantasy film still, no people"
+      },
+      "e3": {
+        "desc": "a snowy owl perched on an old wooden window sill of a stone tower at night, candle light inside, cinematic fantasy film still"
+      },
+      "e4": {
+        "desc": "a grand candle-lit great hall with long wooden tables and floating candles under a starry ceiling, cinematic fantasy film still, no people"
+      }
+    },
+    "sets": {
+      "A": {
+        "desc": "evening at home at a cosy LIBRARY SIDE TABLE: a round mahogany side table beside a worn brown leather wingback armchair in a home library at night, floor-to-ceiling bookshelves behind, a brass floor lamp glowing, a dim warm room lit only by warm amber lamp light and the candle, deep soft shadows, no bright studio light, no red curtains; vertical phone camera at table height, slightly above, looking at the mug",
+        "props": [
+          "mug",
+          "laptop",
+          "candle",
+          "pumpkins",
+          "armchair",
+          "library"
+        ],
+        "layout": "The brown fondue mug stands in the centre of the round mahogany side table, about 44% of the frame width, its rim at about 43% of the height and its base at about 77%, its fondue fork standing in it, the mug empty with its white inside visible. Behind it on the LEFT an open laptop on the round mahogany side table seen at an angle: its green screen fills the upper-left (from the left edge to about 48% of the width, 22% to 45% of the height), its dark keyboard behind the mug at 45-55% of the height. On the RIGHT behind the mug the orange ceramic pumpkin with the gnome (upper right, 60-90% of the width, 15-45% of the height) and the amber candle jar beside the mug; one small orange pumpkin on the round mahogany side table between the laptop and the mug. The leather wingback armchair and the floor-to-ceiling bookshelves fill the top, softly out of focus, the glowing brass lamp at the top-right edge; the mahogany table fills the lower half."
+      }
+    }
+  },
+  "fonts": [
+    "TikTok Sans:wght@400;500;600",
+    "Noto Color Emoji"
+  ],
+  "overlays": [
+    {
+      "from": 0,
+      "to": 10.961,
+      "elements": "@caption"
+    }
+  ],
+  "captions": {
+    "caption": [
+      {
+        "type": "text",
+        "x": 231,
+        "y": 330,
+        "text": "When it's cozy blanket weather and",
+        "fit": [
+          231,
+          341,
+          846,
+          370
+        ],
+        "font": {
+          "family": "TikTok Sans",
+          "size": 40,
+          "weight": 500,
+          "color": "#ffffff",
+          "lineHeight": 1
+        },
+        "style": "text-shadow:0 1px 3px rgba(0,0,0,.4)"
+      },
+      {
+        "type": "text",
+        "x": 276,
+        "y": 381,
+        "text": "time for Harry Potter season",
+        "fit": [
+          276,
+          392,
+          802,
+          431
+        ],
+        "font": {
+          "family": "TikTok Sans",
+          "size": 40,
+          "weight": 500,
+          "color": "#ffffff",
+          "lineHeight": 1
+        },
+        "style": "text-shadow:0 1px 3px rgba(0,0,0,.4)"
+      },
+      {
+        "type": "html",
+        "x": 448,
+        "y": 436,
+        "w": 182,
+        "h": 34,
+        "fit": [
+          448,
+          436,
+          629,
+          469
+        ],
+        "fitMode": "stretch",
+        "html": "<span style=\"font-family:'Noto Color Emoji';font-size:32px;line-height:1;display:inline-block;white-space:nowrap\">🧶🍂🪄✨</span>"
+      }
+    ]
+  },
+  "audio": {
+    "sora": 1
+  },
+  "shots": [
+    {
+      "id": "s1",
+      "set": "A",
+      "start": 0,
+      "end": 2.45,
+      "from": 0,
+      "speed": 1.6,
+      "takes": 2,
+      "push": true,
+      "keyframe": {
+        "prompt": "Handheld view from slightly above, a little further back. The brown fondue mug, full to near the rim with glossy melted milk chocolate and a lit tealight glowing in its window, stands at the upper middle (its body from 36% to 72% of the width, the handle to 80%; rim at about 25% of the height, base at about 59%). The oval bamboo board fills the BOTTOM-LEFT in the foreground (from the left edge to 100% of the width, from 55% to 95% of the height), loaded with big white marshmallows on the left and whole red strawberries on the right. A hand from the right holds the terracotta-handled fondue fork pushed into a strawberry on the board, about to lift it. The laptop with its flat chroma-key green screen in the top-left corner behind, the amber candle jar top-right, the leather armchair and library shelves behind.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "Handheld, one continuous take. 0-0.7 s: the fork lifts the strawberry off the board and carries it up into the mug while the camera moves closer to the mug. 0.7-2.5 s: it dips the strawberry into the melted chocolate and turns it, coating it, the camera now close above the mug, the mug BIG in frame. 2.5-4 s: it lifts the strawberry slightly out of the chocolate, fully coated and dripping.",
+      "screen": {
+        "image": "bible/screen-e2.png"
+      },
+      "clip": "clips/s1.mp4",
+      "pick": "manual",
+      "zoom": [
+        1,
+        1.5
+      ],
+      "pan": [
+        -0.5,
+        -1
+      ],
+      "grade": {
+        "r": [
+          1.8078,
+          40.82
+        ],
+        "g": [
+          1.8078,
+          40.82
+        ],
+        "b": [
+          1.8078,
+          40.82
+        ],
+        "clip": "clips/s1.mp4"
+      }
+    },
+    {
+      "id": "s2",
+      "set": "A",
+      "start": 2.45,
+      "end": 3.35,
+      "from": 0,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Eye-level front view. The brown fondue mug, EMPTY and clean (white inside visible, no chocolate), stands in the centre of the round mahogany side table, its body about 44% of the frame width (from 41% to 85% including the handle), rim at about 43% of the height, base at about 77%; its tealight window is empty and dark. A hand from the right edge holds the mug's handle. The laptop's flat chroma-key green screen in the upper-left behind (0-48% of the width, 22-45% of the height), a small orange pumpkin on the round mahogany side table left of the mug, the gnome pumpkin in the upper right."
+      },
+      "prompt": "The hand sets the EMPTY mug down on the round mahogany side table and keeps lightly holding its handle. The mug stays empty: no chocolate, no candle, its tealight window stays empty and dark. Static camera.",
+      "screen": {
+        "image": "bible/screen-e1.png",
+        "anchor": "center"
+      },
+      "hold": 0.65,
+      "clip": "clips/s2.mp4",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.7665,
+          41.72
+        ],
+        "g": [
+          1.7665,
+          41.72
+        ],
+        "b": [
+          1.7665,
+          41.72
+        ],
+        "clip": "clips/s2.mp4"
+      }
+    },
+    {
+      "id": "s3",
+      "set": "A",
+      "start": 3.35,
+      "end": 4.75,
+      "from": 0.6,
+      "speed": 1.4,
+      "takes": 3,
+      "keyframe": {
+        "prompt": "Eye-level front view. The brown fondue mug in the centre of the round mahogany side table, its body from 28% to 72% of the width, rim at about 48% of the height, base at about 81%, already FULL to the brim and heaped above the rim with round milk-chocolate malt balls; a few malt balls have already spilled over the rim and lie on the round mahogany side table around the mug base. The plain red chocolate bag with NO logo, NO text and no print, tilted steeply down from the top-right corner (37-100% of the width, 8-48% of the height), its open end just above the mug, a THICK stream of many malt balls pouring out of it into the mug. The laptop's flat chroma-key green screen in the upper-left behind, a small orange pumpkin left of the mug.",
+        "refs": [
+          "bible/prop-bag.png"
+        ]
+      },
+      "prompt": "One continuous static take. 0-4 s: a THICK, heavy stream of dozens of round milk-chocolate malt balls keeps pouring out of the tilted plain red bag into the already full mug; the pile overflows, and many balls tumble over the rim, bounce down the outside of the mug and spill across the round mahogany side table, rolling around the mug base. Lots of chocolate, a generous spill. Static camera.",
+      "screen": {
+        "image": "bible/screen-e3.png",
+        "anchor": "center"
+      },
+      "clip": "clips/s3.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.8397,
+          60.04
+        ],
+        "g": [
+          1.8397,
+          60.04
+        ],
+        "b": [
+          1.8397,
+          60.04
+        ],
+        "clip": "clips/s3.mp4"
+      }
+    },
+    {
+      "id": "s4",
+      "set": "A",
+      "start": 4.75,
+      "end": 5.6167,
+      "from": 0.15,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Eye-level, close. A BIG left hand enters from the left edge, palm up (from the left edge to 48% of the width, from 40% to 65% of the height), holding a small metal-cup tealight at about 45% of the height and 40% of the width. From the right edge a small black pocket butane torch lighter, held by a hand at the right edge (48-100% of the width, 45-70% of the height), points its nozzle at the tealight wick. The brown fondue mug, heaped with malt balls, stands behind them on the RIGHT, fully visible, NOT covered by the hands or the lighter (its body from 50% to 85% of the width, rim at about 45%, base at about 81% of the height). The laptop's flat chroma-key green screen in the upper-left behind, the gnome pumpkin upper right.",
+        "refs": [
+          "bible/prop-torch.png"
+        ]
+      },
+      "prompt": "The torch lighter clicks and its blue flame lights the tealight's wick; the tealight flame catches and burns steadily. The mug behind stays as it is: its tealight window stays empty and dark. Small handheld movement.",
+      "screen": {
+        "image": "bible/screen-e4.png"
+      },
+      "clip": "clips/s4.v2.mp4",
+      "pick": "manual",
+      "zoom": 1.15,
+      "pan": [
+        -1,
+        -0.75
+      ],
+      "grade": {
+        "r": [
+          1.7713,
+          41.66
+        ],
+        "g": [
+          1.7713,
+          41.66
+        ],
+        "b": [
+          1.7713,
+          41.66
+        ],
+        "clip": "clips/s4.v2.mp4"
+      }
+    },
+    {
+      "id": "s5",
+      "set": "A",
+      "start": 5.6167,
+      "end": 6.35,
+      "from": 0,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Close, eye-level. The brown fondue mug heaped above the rim with round milk-chocolate malt balls stands in the centre (its body from 30% to 80% of the width including the handle, rim at about 40% of the height, base at about 75%); the right hand holds its handle; the left hand from the bottom-left holds a lit tealight at the arched window at the bottom of the mug (43-59% of the width, about 67% of the height), pushing it in. The laptop's flat chroma-key green screen in the upper-left behind, a small orange pumpkin at the left."
+      },
+      "prompt": "The left hand slides the lit tealight fully into the mug's window and pulls away; the candle glows inside the mug.",
+      "screen": {
+        "image": "bible/screen-e2.png",
+        "anchor": "center"
+      },
+      "clip": "clips/s5.v2.mp4",
+      "zoom": 1.15,
+      "pan": [
+        -1,
+        -0.75
+      ],
+      "grade": {
+        "r": [
+          1.7529,
+          42.71
+        ],
+        "g": [
+          1.7529,
+          42.71
+        ],
+        "b": [
+          1.7529,
+          42.71
+        ],
+        "clip": "clips/s5.v2.mp4"
+      }
+    },
+    {
+      "id": "s6",
+      "set": "A",
+      "start": 6.35,
+      "end": 7.6,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Close, from slightly above. The brown fondue mug held by two hands in the centre (its body from 28% to 74% of the width, rim at about 47% of the height, base at about 83%), filled to near the rim with glossy smooth melted milk chocolate, the tealight glowing in its window; the left hand holds the mug's body from the left, the right hand holds the terracotta-handled fondue fork in the chocolate. The laptop's flat chroma-key green screen in the upper-left behind (0-50% of the width, 5-30% of the height), a small orange pumpkin at the left, the gnome pumpkin upper right."
+      },
+      "prompt": "The right hand slowly stirs the melted chocolate with the fondue fork in small circles while the left hand holds the mug. Gentle handheld movement.",
+      "screen": {
+        "image": "bible/screen-e1.png"
+      },
+      "clip": "clips/s6.v2.mp4",
+      "zoom": 1.15,
+      "pan": [
+        -1,
+        -1
+      ],
+      "grade": {
+        "r": [
+          1.6789,
+          45.58
+        ],
+        "g": [
+          1.6789,
+          45.58
+        ],
+        "b": [
+          1.6789,
+          45.58
+        ],
+        "clip": "clips/s6.v2.mp4"
+      }
+    },
+    {
+      "id": "s7",
+      "set": "A",
+      "start": 7.6,
+      "end": 8.5,
+      "from": 0.1,
+      "speed": 1.45,
+      "hold": 0.45,
+      "takes": 3,
+      "reverse": true,
+      "keyframe": {
+        "prompt": "Wider view, no hands. The brown fondue mug stands centre-right (its body from 48% to 85% of the width, the handle to 96%, rim at about 37% of the height, base at about 65%), filled with melted chocolate, its tealight lit and glowing in its window, the fork resting in it. In the foreground the oval bamboo board (from 66% to 100% of the height, spanning the left 87% of the width) loaded with chocolate chip cookies, big white marshmallows and whole red strawberries. The laptop's flat chroma-key green screen in the upper-left (0-45% of the width, 12-35% of the height), a small orange pumpkin between the laptop and the mug, the gnome pumpkin and the candle jar upper right.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "The bamboo board slides quickly out of the frame towards the bottom within half a second, leaving the bare round mahogany side table in front of the mug. The mug stays still. Static camera.",
+      "screen": {
+        "image": "bible/screen-e3.png"
+      },
+      "clip": "clips/s7.v3.mp4",
+      "pick": "manual",
+      "zoom": 1.15,
+      "pan": [
+        -0.75,
+        -0.75
+      ],
+      "grade": {
+        "r": [
+          1.8819,
+          28.6
+        ],
+        "g": [
+          1.8819,
+          28.6
+        ],
+        "b": [
+          1.8819,
+          28.6
+        ],
+        "clip": "clips/s7.v3.mp4"
+      }
+    },
+    {
+      "id": "s8",
+      "set": "A",
+      "start": 8.5,
+      "end": 10.961,
+      "from": 0.2,
+      "speed": 1.4,
+      "takes": 3,
+      "keyframe": {
+        "prompt": "Medium view. The brown fondue mug stands centre-right (its body from 48% to 85% of the width, the handle to 96%, rim at about 40% of the height, base at about 64%), filled to the VERY BRIM with glossy melted chocolate, chocolate ALREADY OVERFLOWING: two thick glossy streams of melted chocolate already running down the side of the mug from the rim to its base and a small glossy puddle of chocolate already on the surface around its base (the front lettering stays visible), its tealight lit. The oval bamboo board in the foreground spans the full width at 65-94% of the height: chocolate chip cookies on the left, big white marshmallows in the middle, whole red strawberries on the right. A hand from the right edge holds the terracotta-handled fondue fork low over the BOARD, its prongs stuck into a strawberry on the right of the board (the fork is NOT in the mug). The laptop's flat chroma-key green screen in the upper-left (0-45% of the width, 12-35% of the height), the gnome pumpkin and the candle jar upper right.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "One continuous static take, no camera move. 0-0.8 s: the fork lifts the strawberry up from the board and moves it over the brim-full mug. 0.8-1.8 s: it pushes the strawberry straight DOWN INTO the mug until it disappears under the melted chocolate; the chocolate rises over the rim and spills: three or four thick glossy streams run down the sides of the mug and a growing puddle of melted chocolate spreads on the round mahogany side table around its base, clearly visible. 1.8-2.3 s: the strawberry stays under while the streams keep running into the puddle. 2.3-3.5 s: it rises slowly straight back up out of the mug, fully coated in glossy chocolate, dripping into the puddle. 3.5-4 s: held still just above the mug. The strawberry stays on the fork the whole time. The spill is clearly visible as streams and a big puddle, while the mug's shape, its handle and the 'Chocolate...' lettering on its front stay clearly visible: the streams run down the sides, not over the front.",
+      "screen": {
+        "image": "bible/screen-e4.png"
+      },
+      "clip": "clips/s8.v7.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.5359,
+          25.9
+        ],
+        "g": [
+          1.5359,
+          25.9
+        ],
+        "b": [
+          1.5359,
+          25.9
+        ],
+        "clip": "clips/s8.v7.mp4"
+      }
+    }
+  ]
+}
