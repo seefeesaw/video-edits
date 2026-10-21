@@ -10,7 +10,7 @@ fix the pipeline + template; commit and push.
 | # | Short | status |
 |---|---|---|
 | 1 | shorts/uMl76XX7epo "I love this mug!!" | done: 10/10 restages (r01–r10), see restage-runs.md |
-| 2 | shorts/Su66AMPolD0 "you + me?" | captured (videos/mug3-ref), template templates/mug3.json, restages next |
+| 2 | shorts/Su66AMPolD0 "you + me?" | done: 10/10 restages (m3r01–m3r10), see restage-runs.md |
 | 3 | shorts/4XYjIGbDhUs | ON HOLD (user: wait for go-ahead) — captured, templates/mug4.json ready |
 | 4 | shorts/OVixY3FfJKs | ON HOLD — captured, templates/mug5.json ready |
 | 5 | shorts/IAS9KcHV4cI | ON HOLD — capture saved to videos/mug6-ref (template not built) |
