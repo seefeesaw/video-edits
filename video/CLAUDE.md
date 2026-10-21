@@ -142,7 +142,9 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    rim and spill across the desk"; for melted chocolate "the chocolate surges up and OVERFLOWS: a big
    wave spills over the rim on all sides and pours down the outside of the mug in thick streams…
    pools in a puddle around its base… Lots of spilled chocolate" — a milder "spills over the rim"
-   gives only the keyframe's drip). Make 3 takes; pick the one that keeps
+   gives only the keyframe's drip) — and keep the PRODUCT recognisable: say the streams run down the
+   sides and back while its shape, handle and lettering stay visible (a big overflow can turn the mug
+   into a column of chocolate: the product must stay exactly the store's). Make 3 takes; pick the one that keeps
    spilling through the slot and use `from`/`speed` to show the growing spill.
    **Generate**: `node sora.mjs videos/<name>` (up to 2 jobs at once, often ~1 when anything else
    uses the deployment; ~60–120s each, so ~30 min for 20 takes; background it). `--more N --only sN`
