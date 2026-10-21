@@ -9,8 +9,9 @@
 //   node compare.mjs videos/<name> --pick      score every take of every shot (s1.mp4, s1.v2.mp4 …)
 //        after a fair per-take colour match and set each shot's "clip" to the best one
 //   node compare.mjs videos/<name> --choose s1=v2,s4=1   set takes chosen by eye (locked: "pick": "manual")
-//   node compare.mjs videos/<name> --framing   search crop zoom (1–1.15, --max-zoom N) and pan per shot
-//        and write "zoom"/"pan". A crop is kept only if it gains ≥1 point (the colour grid can be
+//   node compare.mjs videos/<name> --framing   search crop zoom (1–1.15, --max-zoom N) and pan per shot,
+//        and, on shots with "push": true (the reference camera moves in), a push-in zoom [1, z]
+//        (z ≤ 1.5, --max-push N), and write "zoom"/"pan". A crop is kept only if it gains ≥1 point (the colour grid can be
 //        fooled into cropping away set pieces); shots with "framing": "manual" are left alone
 //   node compare.mjs videos/<name> --apply     fit a per-channel grade (gain/offset matching the
 //        reference's mean and contrast) from the clip + framing and write it to "grade". Idempotent:
@@ -119,8 +120,14 @@ const comp = (A, B, gg = gradeArr()) => {
   A.forEach((a, k) => { const cd = cellDiffs(a, B[k], gg); for (const i of keptCells(cd)) { d += cd[i]; n++; } });
   return 100 - (100 * d) / n / 255;
 };
-const zoomOf = (s) => (Array.isArray(s.zoom) ? s.zoom[0] : s.zoom ?? 1);
-const panOf = (s) => (s.pan ? (Array.isArray(s.pan[0]) ? s.pan[0] : s.pan) : [0, 0]);
+// a shot's crop at reference time t: zoom/pan may animate linearly over the slot, as build.mjs does
+const slotK = (s, t) => Math.max(0, Math.min(1, (t - s.start) / (s.end - s.start)));
+const zoomAt = (s, t) => (Array.isArray(s.zoom) ? s.zoom[0] + (s.zoom[1] - s.zoom[0]) * slotK(s, t) : s.zoom ?? 1);
+const panAt = (s, t) => {
+  if (!s.pan) return [0, 0];
+  if (!Array.isArray(s.pan[0])) return s.pan;
+  const k = slotK(s, t); return [0, 1].map((j) => s.pan[0][j] + (s.pan[1][j] - s.pan[0][j]) * k);
+};
 // cuts inside the span of a clip that a shot uses (clip seconds), found like the capture finds them
 function innerCuts(s, clip) {
   const speed = s.speed ?? 1, from = s.from ?? 0, len = (s.end - s.start) * speed, w = 54, h = 96, fsz = w * h * 3;
@@ -206,7 +213,19 @@ if (argv.includes('--framing')) {
       const sc = score(z, [x, y]); if (sc > best[0]) best = [sc, +z.toFixed(2), [+x.toFixed(2), +y.toFixed(2)]];
     }
     if (best[0] - base < 2) best = [base, 1, [0, 0]];
-    console.log(`framing ${s.id}: zoom ${best[1]} pan [${best[2]}]  comp ${base.toFixed(1)} -> ${best[0].toFixed(1)}`);
+    // "push": true on a shot whose REFERENCE camera moves closer (the subject grows through the shot)
+    // while the take stays wide (Sora often ignores "the camera moves closer"): search a push-in zoom
+    // [1, z] over the slot. Only on shots marked so: on static shots the grid also rewards push-ins
+    // that crop the product away. ≥1 point over both the uncropped take and the best static crop keeps
+    // it; --max-push caps the end zoom (720p gets soft past ~1.5)
+    const mp = +(arg('--max-push') || 1.5), ks = fr.map((x) => slotK(s, x.t));
+    const pushScore = (z1, p) => comp(A, fr.map((x, i) => gridOf(x.px, 1 + (z1 - 1) * ks[i], p)), gg);
+    let push = null;
+    if (s.push && fr.length >= 3) for (let z = 1.1; z <= mp + 1e-4; z += 0.1) for (let x = -1; x <= 1.001; x += 0.25) for (let y = -1; y <= 1.001; y += 0.25) {
+      const sc = pushScore(z, [x, y]); if (sc > (push?.[0] ?? -1)) push = [sc, [1, +z.toFixed(2)], [+x.toFixed(2), +y.toFixed(2)]];
+    }
+    if (push && push[0] - best[0] >= 1 && push[0] - base >= 1) best = push;
+    console.log(`framing ${s.id}: zoom ${JSON.stringify(best[1])} pan [${best[2]}]  comp ${base.toFixed(1)} -> ${best[0].toFixed(1)}`);
     s.zoom = best[1]; s.pan = best[2];
   }
   save();
@@ -218,7 +237,7 @@ if (argv.includes('--apply')) {
   for (const s of tuned) {
     const fr = clipFrames(s);
     if (!fr.length) continue;
-    const A = fr.map((x) => x.ref), B = fr.map((x) => gridOf(x.px, zoomOf(s), panOf(s))), g = fitGrade(A, B);
+    const A = fr.map((x) => x.ref), B = fr.map((x) => gridOf(x.px, zoomAt(s, x.t), panAt(s, x.t))), g = fitGrade(A, B);
     // the grid score mixes composition and colour, so a grade that fixes a big brightness/warmth gap
     // can cost a little comp; keep it unless it clearly hurts
     if (comp(A, B, g) < comp(A, B)) {

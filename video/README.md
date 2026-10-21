@@ -181,6 +181,7 @@ original reference frames) at least daily while a series is in production, or re
                              // +x shows more of the right (content moves left), +y shows more of
                              // the bottom (content moves up); only has an effect with zoom > 1
       "framing": "manual",   // compare.mjs --framing leaves this shot's zoom/pan alone
+      "push": true,          // the reference camera moves in: --framing may set a push-in zoom [1, z]
       "reverse": true,       // play the used span backwards (keyframe = first frame, so generate
                              // "X leaves" and reverse it for "X enters the frame")
       "filter": "hflip",     // extra ffmpeg video filters, appended after the grade

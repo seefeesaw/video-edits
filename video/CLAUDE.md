@@ -99,11 +99,19 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    shows the start state (waffle on the board, camera further back), the prompt times every beat
    ("0-0.7 s: lifts it into the mug while the camera moves closer; 0.7-2.5 s: dips and swirls"), and
    `speed` (often 1.4-1.8) makes the take's beats land on the reference's (check on `--full` sheets).
-   A keyframe drawn mid-action gives a take that skips the reference's opening move.
+   A keyframe drawn mid-action gives a take that skips the reference's opening move. Sora often
+   ignores "the camera moves closer": mark such shots `"push": true` and `--framing` adds a push-in
+   zoom `[1, z]` when the take stayed wide (only on marked shots: on static shots the grid also
+   rewards push-ins that crop the product away). A hand in front of the product: gpt-image-2 tends
+   to put it over the product, so say where the product stays visible ("the mug fully visible to the
+   RIGHT of the hand, not covered by it") and check the keyframe.
    For "X enters the frame" shots, describe the frame with X
-   in place, prompt X leaving QUICKLY ("slides out within half a second"), and set `"reverse": true`;
-   Sora's exits are slow, so set `from` near 0 and `speed` so X is in place by the reference's
-   moment (reversed, the slot plays clip `from + len·speed` back down to `from`). `node keyframes.mjs videos/<name>`; Read
+   in place, prompt X holding still and THEN leaving quickly ("the board stays still for half a
+   second, then slides quickly out of the frame within half a second"), and set `"reverse": true`.
+   Reversed, the slot plays clip `from + len·speed` back down to `from`, so the held half-second
+   becomes X resting in place at the end of the shot; "right away" makes X move from the first frame
+   and the reversed shot never shows it settled. Set `from` near 0 and `speed` so X arrives by the
+   reference's moment (check on `--full`). `node keyframes.mjs videos/<name>`; Read
    the `assets/keyframes/<id>.720x1280.png` files (what Sora gets: the model's 2:3 image minus 8% on
    each side) and compare them with ref-shots.jpg (object size and position!) before spending Sora
    time — regenerate a keyframe with `--force --only sN` rather than fixing it later with zoom.
