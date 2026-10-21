@@ -12,3 +12,4 @@
 | 05 | r05-red-floor | red | floor picnic on a rug | When the rain starts and it feels / like it's Harry Potter season | one-shot comp 87.7, 7/7 cuts; fix: sora.mjs retries HTTP 408/5xx on create (a timeout dropped a take) |
 | 06 | r06-white-nook | white | breakfast nook | When the first frost hits and it's / suddenly Harry Potter season | one-shot comp 88.4 (extra cut in s7: Sora took the board away on frame 1 in both takes); fix: 2 more s7 takes, template now makes 3 s7 takes |
 | 07 | r07-brown-ottoman | brown | ottoman tray | When the candles come out and it's / officially Harry Potter season | one-shot comp 86.6 (spill invisible on the brown mug, bigger spills buried it); fix: s8 prompt asks for streams + a puddle, front lettering visible |
+| 08 | r08-red-attic | red | attic loft desk | When autumn finally arrives and / it's Harry Potter season again | one-shot comp 88.4, 7/7 cuts, no fix (3rd s7 take used; new spill wording worked) |
