@@ -1,0 +1,23 @@
+{
+  "title": "Christmas movie fondue (brown Meltie mug, city apartment) — restage 09",
+  "notes": "Restage 09 of shorts/Su66AMPolD0 (\"you + me?\"): BROWN variant of the real Meltie Mini Fondue Mug (store photos), the treats on the smoked-glass coffee table (a smoked-glass coffee table in a modern apartment at night, a floor-to-ceiling window with blurred city lights behind, a grey bouclé armchair at the side) instead of the white desk in front of a red curtain and a Christmas tree. Table decor kept (gnome pumpkin, pumpkins, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fictional holiday-film stills (no children, no real film footage); plain unbranded red bag; Sora audio.",
+  "variant": "brown",
+  "reference": "videos/mug3-ref",
+  "hook": [
+    "holiday film",
+    "season is here.",
+    ""
+  ],
+  "setting": {
+    "surface": "smoked-glass coffee table",
+    "behind": "the dark city-lights window of the apartment behind",
+    "style": "Cosy Christmas movie night at home in the evening, at a CITY APARTMENT GLASS TABLE: everything happens on the smoked-glass coffee table; a dim warm room lit only by warm lamp light and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree. Handheld vertical phone video at table height, shallow depth of field, rich warm colour grade. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy CITY APARTMENT GLASS TABLE: a smoked-glass coffee table in a modern apartment at night, a floor-to-ceiling window with blurred city lights behind, a grey bouclé armchair at the side, a dim warm room lit only by warm lamp light and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The tall window with blurred warm city lights fills the top, softly out of focus, a grey bouclé armchair at the side; the glass table fills the lower half.",
+    "props": {
+      "cityview": {
+        "desc": "a floor-to-ceiling apartment window at night with softly blurred warm city lights and a grey bouclé armchair"
+      }
+    }
+  }
+}

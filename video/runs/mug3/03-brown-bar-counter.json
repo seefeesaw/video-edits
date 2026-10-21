@@ -1,0 +1,23 @@
+{
+  "title": "Christmas movie fondue (brown Meltie mug, bar counter) — restage 03",
+  "notes": "Restage 03 of shorts/Su66AMPolD0 (\"you + me?\"): BROWN variant of the real Meltie Mini Fondue Mug (store photos), the treats on the black granite breakfast bar (a black granite breakfast bar in a dark modern kitchen at night, leather bar stools at the side, matte black cabinets and a warm under-cabinet light strip behind) instead of the white desk in front of a red curtain and a Christmas tree. Table decor kept (gnome pumpkin, pumpkins, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fictional holiday-film stills (no children, no real film footage); plain unbranded red bag; Sora audio.",
+  "variant": "brown",
+  "reference": "videos/mug3-ref",
+  "hook": [
+    "holiday movie",
+    "season is back.",
+    ""
+  ],
+  "setting": {
+    "surface": "black granite breakfast bar",
+    "behind": "the bar stools and dark kitchen behind",
+    "style": "Cosy Christmas movie night at home in the evening, at a KITCHEN BAR COUNTER: everything happens on the black granite breakfast bar; a dim warm room lit only by warm under-cabinet light strips and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree. Handheld vertical phone video at table height, shallow depth of field, rich warm colour grade. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy KITCHEN BAR COUNTER: a black granite breakfast bar in a dark modern kitchen at night, leather bar stools at the side, matte black cabinets and a warm under-cabinet light strip behind, a dim warm room lit only by warm under-cabinet light strips and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The matte black cabinets with a warm light strip fill the top, softly out of focus, a leather bar stool at the side; the granite bar fills the lower half.",
+    "props": {
+      "kitchenbar": {
+        "desc": "matte black kitchen cabinets with a warm glowing under-cabinet light strip and two tan leather bar stools"
+      }
+    }
+  }
+}

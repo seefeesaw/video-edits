@@ -1,0 +1,23 @@
+{
+  "title": "Christmas movie fondue (brown Meltie mug, media room) — restage 06",
+  "notes": "Restage 06 of shorts/Su66AMPolD0 (\"you + me?\"): BROWN variant of the real Meltie Mini Fondue Mug (store photos), the treats on the walnut console table (a walnut console table in a dark home media room at night, a big charcoal velvet sofa with throw pillows behind, warm LED strip glow along the ceiling) instead of the white desk in front of a red curtain and a Christmas tree. Table decor kept (gnome pumpkin, pumpkins, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fictional holiday-film stills (no children, no real film footage); plain unbranded red bag; Sora audio.",
+  "variant": "brown",
+  "reference": "videos/mug3-ref",
+  "hook": [
+    "snowy night",
+    "season is coming.",
+    ""
+  ],
+  "setting": {
+    "surface": "walnut console table",
+    "behind": "the big dark sofa of the media room behind",
+    "style": "Cosy Christmas movie night at home in the evening, at a MEDIA ROOM CONSOLE: everything happens on the walnut console table; a dim warm room lit only by a warm LED ceiling strip and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree. Handheld vertical phone video at table height, shallow depth of field, rich warm colour grade. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy MEDIA ROOM CONSOLE: a walnut console table in a dark home media room at night, a big charcoal velvet sofa with throw pillows behind, warm LED strip glow along the ceiling, a dim warm room lit only by a warm LED ceiling strip and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The big charcoal sofa with throw pillows fills the top, softly out of focus, a warm ceiling glow above; the walnut console fills the lower half.",
+    "props": {
+      "mediasofa": {
+        "desc": "a big charcoal velvet sofa with mustard and cream throw pillows, a warm LED strip glowing along the ceiling"
+      }
+    }
+  }
+}

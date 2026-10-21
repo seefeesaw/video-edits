@@ -1,0 +1,23 @@
+{
+  "title": "Christmas movie fondue (red Meltie mug, boho) — restage 10",
+  "notes": "Restage 10 of shorts/Su66AMPolD0 (\"you + me?\"): RED variant of the real Meltie Mini Fondue Mug (store photos), the treats on the round rattan side table (a round rattan side table in a boho living room at night, a macramé wall hanging, trailing plants and a woven pendant lamp glowing behind) instead of the white desk in front of a red curtain and a Christmas tree. Table decor kept (gnome pumpkin, pumpkins, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fictional holiday-film stills (no children, no real film footage); plain unbranded red bag; Sora audio.",
+  "variant": "red",
+  "reference": "videos/mug3-ref",
+  "hook": [
+    "fireside movie",
+    "season is coming.",
+    ""
+  ],
+  "setting": {
+    "surface": "round rattan side table",
+    "behind": "the boho living room with macramé and plants behind",
+    "style": "Cosy Christmas movie night at home in the evening, at a BOHO RATTAN SIDE TABLE: everything happens on the round rattan side table; a dim warm room lit only by a woven pendant lamp and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree. Handheld vertical phone video at table height, shallow depth of field, rich warm colour grade. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy BOHO RATTAN SIDE TABLE: a round rattan side table in a boho living room at night, a macramé wall hanging, trailing plants and a woven pendant lamp glowing behind, a dim warm room lit only by a woven pendant lamp and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The macramé wall hanging, trailing plants and the woven pendant fill the top, softly out of focus; the rattan table fills the lower half.",
+    "props": {
+      "boho": {
+        "desc": "a cream macramé wall hanging, trailing pothos plants on shelves and a woven seagrass pendant lamp glowing warm"
+      }
+    }
+  }
+}

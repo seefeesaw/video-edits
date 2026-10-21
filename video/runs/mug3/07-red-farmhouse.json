@@ -1,0 +1,23 @@
+{
+  "title": "Christmas movie fondue (red Meltie mug, farmhouse) — restage 07",
+  "notes": "Restage 07 of shorts/Su66AMPolD0 (\"you + me?\"): RED variant of the real Meltie Mini Fondue Mug (store photos), the treats on the rustic farmhouse kitchen table (a rustic distressed-pine farmhouse kitchen table at night, open wooden shelves with enamel mugs and jars, a deep cream sink and a hanging iron lantern behind) instead of the white desk in front of a red curtain and a Christmas tree. Table decor kept (gnome pumpkin, pumpkins, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fictional holiday-film stills (no children, no real film footage); plain unbranded red bag; Sora audio.",
+  "variant": "red",
+  "reference": "videos/mug3-ref",
+  "hook": [
+    "festive film",
+    "season is back.",
+    ""
+  ],
+  "setting": {
+    "surface": "rustic farmhouse kitchen table",
+    "behind": "the farmhouse kitchen with open shelves behind",
+    "style": "Cosy Christmas movie night at home in the evening, at a FARMHOUSE KITCHEN TABLE: everything happens on the rustic farmhouse kitchen table; a dim warm room lit only by a hanging iron lantern and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree. Handheld vertical phone video at table height, shallow depth of field, rich warm colour grade. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy FARMHOUSE KITCHEN TABLE: a rustic distressed-pine farmhouse kitchen table at night, open wooden shelves with enamel mugs and jars, a deep cream sink and a hanging iron lantern behind, a dim warm room lit only by a hanging iron lantern and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The farmhouse shelves with enamel mugs and the iron lantern fill the top, softly out of focus; the pine table fills the lower half.",
+    "props": {
+      "farmhouse": {
+        "desc": "rustic open wooden kitchen shelves with white enamel mugs and glass jars, a deep cream farmhouse sink and a black iron lantern glowing"
+      }
+    }
+  }
+}

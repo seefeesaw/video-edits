@@ -1,0 +1,23 @@
+{
+  "title": "Christmas movie fondue (white Meltie mug, bed bench) — restage 05",
+  "notes": "Restage 05 of shorts/Su66AMPolD0 (\"you + me?\"): WHITE variant of the real Meltie Mini Fondue Mug (store photos), the treats on the upholstered bench at the foot of the bed (a cream upholstered bench at the foot of a bed at night, a white duvet with chunky knitted blankets and pillows behind, a brass bedside lamp glowing) instead of the white desk in front of a red curtain and a Christmas tree. Table decor kept (gnome pumpkin, pumpkins, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fictional holiday-film stills (no children, no real film footage); plain unbranded red bag; Sora audio.",
+  "variant": "white",
+  "reference": "videos/mug3-ref",
+  "hook": [
+    "home movie",
+    "season is here.",
+    ""
+  ],
+  "setting": {
+    "surface": "upholstered bench at the foot of the bed",
+    "behind": "the bed and knitted blankets behind",
+    "style": "Cosy Christmas movie night at home in the evening, at a BENCH AT THE FOOT OF THE BED: everything happens on the upholstered bench at the foot of the bed; a dim warm room lit only by a warm bedside lamp and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree. Handheld vertical phone video at tray height, shallow depth of field, rich warm colour grade. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy BENCH AT THE FOOT OF THE BED: a cream upholstered bench at the foot of a bed at night, a white duvet with chunky knitted blankets and pillows behind, a brass bedside lamp glowing, a dim warm room lit only by a warm bedside lamp and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree; vertical phone camera at tray height, slightly above, looking at the mug",
+    "layoutTail": "The bed with its duvet, pillows and knitted blankets fills the top, softly out of focus; the cream bench fills the lower half.",
+    "props": {
+      "bedblankets": {
+        "desc": "a bed with a white duvet, plump pillows and chunky cream knitted blankets, a brass bedside lamp glowing warm"
+      }
+    }
+  }
+}

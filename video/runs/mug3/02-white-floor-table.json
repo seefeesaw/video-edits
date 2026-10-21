@@ -1,0 +1,23 @@
+{
+  "title": "Christmas movie fondue (white Meltie mug, floor table) — restage 02",
+  "notes": "Restage 02 of shorts/Su66AMPolD0 (\"you + me?\"): WHITE variant of the real Meltie Mini Fondue Mug (store photos), the treats on the low wooden floor table (a low dark-wood floor table on a woven rug in a living room at night, big floor cushions around it, a round paper lantern glowing and a bamboo plant behind) instead of the white desk in front of a red curtain and a Christmas tree. Table decor kept (gnome pumpkin, pumpkins, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fictional holiday-film stills (no children, no real film footage); plain unbranded red bag; Sora audio.",
+  "variant": "white",
+  "reference": "videos/mug3-ref",
+  "hook": [
+    "cozy film",
+    "season is here.",
+    ""
+  ],
+  "setting": {
+    "surface": "low wooden floor table",
+    "behind": "the floor cushions and paper lantern behind",
+    "style": "Cosy Christmas movie night at home in the evening, at a LOW FLOOR TABLE: everything happens on the low wooden floor table; a dim warm room lit only by a warm paper lantern and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree. Handheld vertical phone video at table height, shallow depth of field, rich warm colour grade. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy LOW FLOOR TABLE: a low dark-wood floor table on a woven rug in a living room at night, big floor cushions around it, a round paper lantern glowing and a bamboo plant behind, a dim warm room lit only by a warm paper lantern and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The floor cushions, the bamboo plant and the glowing paper lantern fill the top, softly out of focus; the low wooden table fills the lower half.",
+    "props": {
+      "floorcushions": {
+        "desc": "big linen floor cushions in rust and cream on a woven jute rug, a tall bamboo plant and a round white paper lantern glowing warm"
+      }
+    }
+  }
+}

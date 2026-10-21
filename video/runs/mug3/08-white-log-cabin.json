@@ -1,0 +1,23 @@
+{
+  "title": "Christmas movie fondue (white Meltie mug, log cabin) — restage 08",
+  "notes": "Restage 08 of shorts/Su66AMPolD0 (\"you + me?\"): WHITE variant of the real Meltie Mini Fondue Mug (store photos), the treats on the rough-hewn log coffee table (a rough-hewn log coffee table in a log cabin living room at night, honey-coloured log walls, a red plaid armchair and a lantern glowing behind) instead of the white desk in front of a red curtain and a Christmas tree. Table decor kept (gnome pumpkin, pumpkins, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fictional holiday-film stills (no children, no real film footage); plain unbranded red bag; Sora audio.",
+  "variant": "white",
+  "reference": "videos/mug3-ref",
+  "hook": [
+    "cozy movie",
+    "season is coming.",
+    ""
+  ],
+  "setting": {
+    "surface": "rough-hewn log coffee table",
+    "behind": "the log cabin wall and plaid armchair behind",
+    "style": "Cosy Christmas movie night at home in the evening, at a LOG CABIN COFFEE TABLE: everything happens on the rough-hewn log coffee table; a dim warm room lit only by a glowing lantern and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree. Handheld vertical phone video at table height, shallow depth of field, rich warm colour grade. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy LOG CABIN COFFEE TABLE: a rough-hewn log coffee table in a log cabin living room at night, honey-coloured log walls, a red plaid armchair and a lantern glowing behind, a dim warm room lit only by a glowing lantern and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The honey log walls and the red plaid armchair fill the top, softly out of focus, a lantern glowing; the log coffee table fills the lower half.",
+    "props": {
+      "cabin": {
+        "desc": "honey-coloured log cabin walls, a red buffalo-plaid armchair and a black lantern with a candle glowing"
+      }
+    }
+  }
+}

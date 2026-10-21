@@ -1,0 +1,23 @@
+{
+  "title": "Christmas movie fondue (red Meltie mug, vanity) — restage 01",
+  "notes": "Restage 01 of shorts/Su66AMPolD0 (\"you + me?\"): RED variant of the real Meltie Mini Fondue Mug (store photos), the treats on the white dressing table (a white dressing table in a bedroom at night, a big round mirror with warm bulb lights around it, a velvet stool and a perfume tray at the side) instead of the white desk in front of a red curtain and a Christmas tree. Table decor kept (gnome pumpkin, pumpkins, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fictional holiday-film stills (no children, no real film footage); plain unbranded red bag; Sora audio.",
+  "variant": "red",
+  "reference": "videos/mug3-ref",
+  "hook": [
+    "movie night",
+    "season is coming.",
+    ""
+  ],
+  "setting": {
+    "surface": "white dressing table",
+    "behind": "the round vanity mirror and bedroom behind",
+    "style": "Cosy Christmas movie night at home in the evening, at a DRESSING TABLE: everything happens on the white dressing table; a dim warm room lit only by warm vanity-mirror bulbs and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree. Handheld vertical phone video at table height, shallow depth of field, rich warm colour grade. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy DRESSING TABLE: a white dressing table in a bedroom at night, a big round mirror with warm bulb lights around it, a velvet stool and a perfume tray at the side, a dim warm room lit only by warm vanity-mirror bulbs and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The round mirror with its warm bulbs fills the top, softly out of focus, the bedroom beyond; the white dressing table fills the lower half.",
+    "props": {
+      "mirror": {
+        "desc": "a big round dressing-table mirror framed with warm glowing globe bulbs, a dusty-pink velvet stool and a small brass perfume tray"
+      }
+    }
+  }
+}

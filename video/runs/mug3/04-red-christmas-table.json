@@ -1,0 +1,23 @@
+{
+  "title": "Christmas movie fondue (red Meltie mug, christmas table) — restage 04",
+  "notes": "Restage 04 of shorts/Su66AMPolD0 (\"you + me?\"): RED variant of the real Meltie Mini Fondue Mug (store photos), the treats on the oak dining table with a green garland runner (an oak dining table with a green pine garland runner and gold candlesticks in a dining room at night, a sideboard with candles and a lit garland behind) instead of the white desk in front of a red curtain and a Christmas tree. Table decor kept (gnome pumpkin, pumpkins, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fictional holiday-film stills (no children, no real film footage); plain unbranded red bag; Sora audio.",
+  "variant": "red",
+  "reference": "videos/mug3-ref",
+  "hook": [
+    "christmas film",
+    "season is coming.",
+    ""
+  ],
+  "setting": {
+    "surface": "oak dining table with a green garland runner",
+    "behind": "the dining room with a lit garland and candles behind",
+    "style": "Cosy Christmas movie night at home in the evening, at a FESTIVE DINING TABLE: everything happens on the oak dining table with a green garland runner; a dim warm room lit only by warm candles and garland lights and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree. Handheld vertical phone video at table height, shallow depth of field, rich warm colour grade. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy FESTIVE DINING TABLE: an oak dining table with a green pine garland runner and gold candlesticks in a dining room at night, a sideboard with candles and a lit garland behind, a dim warm room lit only by warm candles and garland lights and the candle, deep soft shadows, no bright studio light, no red curtains, no Christmas tree; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The sideboard with candles and the lit garland fill the top, softly out of focus; the oak table with its pine garland fills the lower half.",
+    "props": {
+      "garland": {
+        "desc": "a green pine garland with warm fairy lights and gold candlesticks with lit tall candles on a dark sideboard"
+      }
+    }
+  }
+}
