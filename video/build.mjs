@@ -271,9 +271,14 @@ export async function build(dir, opts = {}) {
     // exact frame count per slot (from the slot's start/end frame indices), so cuts never drift.
     // "reverse": true plays the used span backwards (a keyframe is always the clip's FIRST frame, so
     // for "X enters the frame" shots, generate X leaving and reverse it). "filter": extra ffmpeg filters.
+    // "hold": N seconds at the end of the slot freeze the last frame shown — for a reversed entrance
+    // ("X slides into place") whose take started moving at once, so X settles by the reference's moment
+    // and stays put (Sora ignores "stay still first"); the moving part is the slot minus the hold.
     const nf = Math.round(shot.end * fps) - Math.round(shot.start * fps);
+    const nh = Math.min(nf - 1, Math.round((shot.hold ?? 0) * fps));
     const rev = shot.reverse ? ',reverse' : '';
-    vf.push(`[${i}:v]trim=start=${from}:duration=${(dur * speed + 1).toFixed(3)},setpts=(PTS-STARTPTS)/${speed},fps=${fps},trim=end_frame=${nf},setpts=PTS-STARTPTS${rev},${frameFilter(shot, W, H, dur)},setsar=1${lut}${shot.filter ? ',' + shot.filter : ''}[v${i}]`);
+    const hold = nh > 0 ? `,tpad=stop_mode=clone:stop=${nh}` : '';
+    vf.push(`[${i}:v]trim=start=${from}:duration=${(dur * speed + 1).toFixed(3)},setpts=(PTS-STARTPTS)/${speed},fps=${fps},trim=end_frame=${nf - nh},setpts=PTS-STARTPTS${rev}${hold},${frameFilter(shot, W, H, dur)},setsar=1${lut}${shot.filter ? ',' + shot.filter : ''}[v${i}]`);
     if (soraAudio) af.push(`[${i}:a]atrim=start=${from}:duration=${(dur * speed).toFixed(3)},asetpts=PTS-STARTPTS,${speed !== 1 ? `atempo=${speed},` : ''}aresample=48000,apad,atrim=duration=${dur.toFixed(3)}${shot.reverse ? ',areverse' : ''}[a${i}]`);
     labels.push(soraAudio ? `[v${i}][a${i}]` : `[v${i}]`);
   });

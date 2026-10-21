@@ -55,8 +55,9 @@ const sd = (x, m) => Math.sqrt(x.reduce((p, q) => p + (q - m) ** 2, 0) / x.lengt
 
 // time in the source clip that lands at output time t (same mapping as build.mjs)
 const clipTime = (s, t) => {
-  const speed = s.speed ?? 1, from = s.from ?? 0, k = t - s.start;
-  return from + (s.reverse ? s.end - s.start - k : k) * speed;
+  // the moving part of the slot ("hold" freezes its last frame for the rest, as build.mjs does)
+  const speed = s.speed ?? 1, from = s.from ?? 0, len = s.end - s.start - (s.hold ?? 0), k = Math.min(t - s.start, len);
+  return from + (s.reverse ? len - k : k) * speed;
 };
 // raw clip frames (SW×SH RGB) at every reference sample inside the shot
 const clipFrames = (s, clip = clipOf(s)) => samplesOf(s).map(([t, hex]) => {

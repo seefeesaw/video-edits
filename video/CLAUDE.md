@@ -106,12 +106,13 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    to put it over the product, so say where the product stays visible ("the mug fully visible to the
    RIGHT of the hand, not covered by it") and check the keyframe.
    For "X enters the frame" shots, describe the frame with X
-   in place, prompt X holding still and THEN leaving quickly ("the board stays still for half a
-   second, then slides quickly out of the frame within half a second"), and set `"reverse": true`.
-   Reversed, the slot plays clip `from + len·speed` back down to `from`, so the held half-second
-   becomes X resting in place at the end of the shot; "right away" makes X move from the first frame
-   and the reversed shot never shows it settled. Set `from` near 0 and `speed` so X arrives by the
-   reference's moment (check on `--full`). `node keyframes.mjs videos/<name>`; Read
+   in place, prompt X leaving quickly ("slides quickly out of the frame within half a second"), and
+   set `"reverse": true`. Sora starts the exit on the first frames whatever the prompt says, so the
+   reversed shot only settles on its last frame: set `"hold": <s>` (the slot's last s seconds freeze
+   the final frame) with `from: 0` and `speed` so the moving part covers the take's exit — e.g. the
+   board settles 0.4 s into a 0.85 s slot and the take empties by 0.7 s: `"speed": 1.75, "hold": 0.45`
+   (check on `--full`). Reversed, the moving part plays clip `from + (len − hold)·speed` back down to
+   `from`. `node keyframes.mjs videos/<name>`; Read
    the `assets/keyframes/<id>.720x1280.png` files (what Sora gets: the model's 2:3 image minus 8% on
    each side) and compare them with ref-shots.jpg (object size and position!) before spending Sora
    time — regenerate a keyframe with `--force --only sN` rather than fixing it later with zoom.
@@ -133,8 +134,10 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    inside a short slot, so start the keyframe one step from the spill — the mug already heaped / brim
    full with the first pieces or a first drip already over the rim and on the desk — and prompt the
    amount and the spill itself ("a THICK, heavy stream of dozens of malt balls… many tumble over the
-   rim and spill across the desk"; "pushes it into the brim-full mug; the chocolate rises and SPILLS
-   over the rim, running down the outside onto the desk"). Make 3 takes; pick the one that keeps
+   rim and spill across the desk"; for melted chocolate "the chocolate surges up and OVERFLOWS: a big
+   wave spills over the rim on all sides and pours down the outside of the mug in thick streams…
+   pools in a puddle around its base… Lots of spilled chocolate" — a milder "spills over the rim"
+   gives only the keyframe's drip). Make 3 takes; pick the one that keeps
    spilling through the slot and use `from`/`speed` to show the growing spill.
    **Generate**: `node sora.mjs videos/<name>` (up to 2 jobs at once, often ~1 when anything else
    uses the deployment; ~60–120s each, so ~30 min for 20 takes; background it). `--more N --only sN`
