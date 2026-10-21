@@ -27,3 +27,4 @@
 | 05 | m3r05-white-bench | white | bench at the foot of the bed | home movie / season is here. | one-shot comp 86.6, 7/7 cuts, no fix |
 | 06 | m3r06-brown-media | brown | media-room console | snowy night / season is coming. | one-shot comp 86.3, 7/7 cuts, no fix |
 | 07 | m3r07-red-farm | red | farmhouse kitchen table | festive film / season is back. | one-shot comp 85.9, 7/7 cuts; fix: s4 both takes replaced with a 'lit within half a second' prompt (neither lit the tealight); s2 holds its first 0.1 s (candle appeared at 0.15 s) |
+| 08 | m3r08-white-cabin | white | log-cabin coffee table | cozy movie / season is coming. | one-shot comp 87.8, 7/7 cuts, no fix |
