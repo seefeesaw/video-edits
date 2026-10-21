@@ -208,7 +208,7 @@
           "bible/prop-torch.png"
         ]
       },
-      "prompt": "The torch lighter clicks and its blue flame lights the tealight's wick; the tealight flame catches and burns steadily. The mug behind stays as it is: its tealight window stays empty and dark. Small handheld movement.",
+      "prompt": "The torch lighter clicks and its blue flame touches the tealight's wick at once; within half a second the tealight is LIT: a small steady yellow candle flame burns on the tealight in the palm for the rest of the take, clearly visible. The mug behind stays as it is: its tealight window stays empty and dark. Small handheld movement.",
       "screen": {
         "image": "bible/screen-e4.png"
       }

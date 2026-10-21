@@ -26,3 +26,4 @@
 | 04 | m3r04-red-xmas | red | festive dining table | christmas film / season is coming. | one-shot comp 85.9, 7/7 cuts; s4 keyframe regenerated (no lighter), s7 retimed past two jumps |
 | 05 | m3r05-white-bench | white | bench at the foot of the bed | home movie / season is here. | one-shot comp 86.6, 7/7 cuts, no fix |
 | 06 | m3r06-brown-media | brown | media-room console | snowy night / season is coming. | one-shot comp 86.3, 7/7 cuts, no fix |
+| 07 | m3r07-red-farm | red | farmhouse kitchen table | festive film / season is back. | one-shot comp 85.9, 7/7 cuts; fix: s4 both takes replaced with a 'lit within half a second' prompt (neither lit the tealight); s2 holds its first 0.1 s (candle appeared at 0.15 s) |
