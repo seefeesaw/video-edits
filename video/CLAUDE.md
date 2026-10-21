@@ -116,7 +116,10 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    reversed shot only settles on its last frame: set `"hold": <s>` (the slot's last s seconds freeze
    the final frame) with `from: 0` and `speed` so the moving part covers the take's exit — e.g. the
    board settles 0.4 s into a 0.85 s slot and the take empties by 0.7 s: `"speed": 1.75, "hold": 0.45`
-   (check on `--full`). Reversed, the moving part plays clip `from + (len − hold)·speed` back down to
+   (check on `--full`). `hold` also rescues a take whose start is right but which then adds
+   something the reference doesn't have (Sora lights a candle in an EMPTY mug whatever the prompt
+   says): play the clean start and freeze it (`"from": 0, "hold": 0.65` on a static shot).
+   Reversed, the moving part plays clip `from + (len − hold)·speed` back down to
    `from`. `node keyframes.mjs videos/<name>`; Read
    the `assets/keyframes/<id>.720x1280.png` files (what Sora gets: the model's 2:3 image minus 8% on
    each side) and compare them with ref-shots.jpg (object size and position!) before spending Sora

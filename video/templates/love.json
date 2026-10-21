@@ -163,7 +163,7 @@
       "set": "A",
       "start": 2.45,
       "end": 3.35,
-      "from": 0.2,
+      "from": 0,
       "takes": 2,
       "keyframe": {
         "prompt": "Eye-level front view. The {{mug}} fondue mug, EMPTY and clean ({{inside}} inside visible, no chocolate), stands in the centre of the {{surface}}, its body about 44% of the frame width (from 41% to 85% including the handle), rim at about 43% of the height, base at about 77%; its tealight window is empty and dark. A hand from the right edge holds the mug's handle. The laptop's flat chroma-key green screen in the upper-left behind (0-48% of the width, 22-45% of the height), a small orange pumpkin on the {{surface}} left of the mug, the gnome pumpkin in the upper right."
@@ -172,7 +172,8 @@
       "screen": {
         "image": "bible/screen-e1.png",
         "anchor": "center"
-      }
+      },
+      "hold": 0.65
     },
     {
       "id": "s3",
@@ -207,7 +208,7 @@
           "bible/prop-torch.png"
         ]
       },
-      "prompt": "The torch lighter clicks and its blue flame lights the tealight's wick; the tealight flame catches and burns steadily. Small handheld movement.",
+      "prompt": "The torch lighter clicks and its blue flame lights the tealight's wick; the tealight flame catches and burns steadily. The mug behind stays as it is: its tealight window stays empty and dark. Small handheld movement.",
       "screen": {
         "image": "bible/screen-e4.png"
       }
