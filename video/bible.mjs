@@ -8,7 +8,8 @@
 //     "sets":  { "A": { "desc": "<place, camera, lighting>", "props": ["jar", "pot", …],
 //                        "layout": "<where each prop stands in the first frame>" } }
 //   }
-//   node bible.mjs videos/<name> [--only jar,A] [--force]
+//   node bible.mjs videos/<name> [--only jar,A] [--force] [--adopt]
+//   (--adopt: record images copied in from another video, after checking them on bible-sheet.jpg)
 //
 // 1. props: one product-style image per prop (gpt-image-2) → bible/prop-<id>.png
 // 2. sets:  a PEOPLE-FREE start frame of each set with its props in place, made as an edit that takes
@@ -34,12 +35,27 @@ const bdir = path.join(dir, 'bible');
 fs.mkdirSync(bdir, { recursive: true });
 const NO = 'No people, no hands, no faces anywhere. No added text, labels, logos, brand names or watermark (lettering printed on a reference product stays exactly as in its photo).';
 
+// bible/made.json records the prompt each image was made from: an image whose prompt changed (a prop
+// re-described, or an image copied from another video whose prop looks different) is made again
+// instead of silently reused; an image without a record (copied in) is reused with a warning
+const madeFile = path.join(bdir, 'made.json');
+const made = fs.existsSync(madeFile) ? JSON.parse(fs.readFileSync(madeFile, 'utf8')) : {};
 // jobs run through the slideshow's gpt-image-2 generator (generations, or edits when refs are given)
 function run(jobs) {
-  const todo = jobs.filter((j) => force || !fs.existsSync(path.join(bdir, j.out)));
+  const todo = jobs.filter((j) => {
+    const f = path.join(bdir, j.out);
+    if (force || !fs.existsSync(f)) return true;
+    // --adopt: the images on disk were checked on bible-sheet.jpg and are right: record them as made
+    if (made[j.out] === undefined && argv.includes('--adopt')) { made[j.out] = j.prompt; fs.writeFileSync(madeFile, JSON.stringify(made, null, 2)); return false; }
+    if (made[j.out] === undefined) { console.warn(`warning: ${j.out} has no record of what it shows (copied from another video?): check it matches "${j.desc}" or run --force --only ${j.id.replace(/^(prop|screen|set)-/, '')}`); return false; }
+    if (made[j.out] !== j.prompt) { console.log(`${j.out}: its description changed; making it again`); fs.rmSync(f); return true; }
+    return false;
+  });
   if (!todo.length) return;
-  fs.writeFileSync(path.join(bdir, 'post.json'), JSON.stringify({ title: 'bible', slides: [], generate: todo }, null, 2));
+  fs.writeFileSync(path.join(bdir, 'post.json'), JSON.stringify({ title: 'bible', slides: [], generate: todo.map(({ desc, ...j }) => j) }, null, 2));
   execFileSync('node', [path.join(ROOT, '..', 'slideshow', 'generate.mjs'), bdir, ...(force ? ['--force'] : [])], { stdio: 'inherit' });
+  for (const j of todo) if (fs.existsSync(path.join(bdir, j.out))) made[j.out] = j.prompt;
+  fs.writeFileSync(madeFile, JSON.stringify(made, null, 2));
 }
 
 const props = Object.entries(bible.props || {}).filter(([id]) => !only || only.includes(id));
@@ -49,7 +65,7 @@ for (const [id, p] of props) if (p.image) {
   if (force || !fs.existsSync(out)) execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', path.join(dir, p.image), out]);
 }
 run(props.filter(([, p]) => !p.image).map(([id, p]) => ({
-  id: `prop-${id}`, out: `prop-${id}.png`, size: '1024x1024', quality: 'high', variants: 1,
+  id: `prop-${id}`, out: `prop-${id}.png`, size: '1024x1024', quality: 'high', variants: 1, desc: p.desc,
   prompt: `Photorealistic product photo of exactly one object, centred on a plain light-grey studio background, soft even light, whole object visible: ${p.desc}. ${NO}`,
 })));
 
@@ -57,7 +73,7 @@ run(props.filter(([, p]) => !p.image).map(([id, p]) => ({
 // people are fine here); fictional scenes, never stills of a real show
 const screens = Object.entries(bible.screens || {}).filter(([id]) => !only || only.includes(id));
 run(screens.map(([id, p]) => ({
-  id: `screen-${id}`, out: `screen-${id}.png`, size: '1536x1024', quality: 'high', variants: 1,
+  id: `screen-${id}`, out: `screen-${id}.png`, size: '1536x1024', quality: 'high', variants: 1, desc: p.desc,
   prompt: `A single full-frame still from a fictional cinematic TV drama, widescreen, filmic grade, no letterbox bars: ${p.desc}. Original ADULT characters (no children or teenagers: the safety filter blocks them) who do not resemble any real actor. No text, subtitles, logos or watermark.`,
 })));
 
@@ -67,7 +83,7 @@ run(sets.map(([id, s]) => {
   const missing = ps.filter(([pid, p]) => !p || !fs.existsSync(path.join(bdir, `prop-${pid}.png`))).map(([pid]) => pid);
   if (missing.length) throw new Error(`set ${id}: props without an image: ${missing.join(', ')} (define them in bible.props; run bible.mjs)`);
   return {
-    id: `set-${id}`, out: `set-${id}.png`, size: '1024x1536', quality: 'high', variants: 1,
+    id: `set-${id}`, out: `set-${id}.png`, size: '1024x1536', quality: 'high', variants: 1, desc: s.desc,
     refs: ps.map(([pid]) => `prop-${pid}.png`),
     prompt: `Photorealistic first frame of a vertical phone video, the empty set before the person steps in: ${s.desc}. ${s.layout || ''} The objects in it are EXACTLY the reference objects (same shape, proportions, colour, material, caps and handles): ${ps.map(([pid, p]) => `${pid}: ${p.desc}`).join('; ')}. The image will be cropped to 9:16 by cutting 8% off the left and right edges: keep everything important inside the central area. ${NO}`,
   };

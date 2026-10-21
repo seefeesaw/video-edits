@@ -59,7 +59,10 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    `bible.sets` (give the set frame the main object's size in the DOMINANT shot; every shot's
    keyframe prompt then states its own size, which overrides the set's scale — wide shots smaller).
    A prop whose `desc` is word for word the same as in an earlier replica: copy that replica's
-   `bible/prop-<id>.png` first (bible.mjs skips images that exist; ~2 min saved per prop). Then
+   `bible/prop-<id>.png` first (~2 min saved per prop) — ONLY then: a board copied from another Short
+   showed the wrong snacks in every keyframe. bible.mjs records the prompt behind each image in
+   `bible/made.json` and remakes an image whose prompt changed; a copied image has no record and is
+   reused with a warning: check it on `bible-sheet.jpg`, then `node bible.mjs videos/<name> --adopt`. Then
    run `node bible.mjs` (gpt-image-2 often takes 2-6 min per image; budget ~20 min for 8 keyframes), and Read
    `bible/bible-sheet.jpg` before any Sora time. Performances then use `"startFrom": "set"` and their
    prompt starts with the person stepping in (0-1 s). Pick takes with people by
