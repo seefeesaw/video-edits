@@ -244,7 +244,15 @@ async function main() {
       const w = queue.shift();
       // forget a job only when Sora says it failed; on a network error keep its id so a re-run
       // resumes it instead of paying for a new one
-      try { await runOne(w); } catch (e) { failed.push(e); console.error(e.message); if (e instanceof JobFailed && pending[w.rel]) { delete pending[w.rel]; saveJobs(); } }
+      try { await runOne(w); } catch (e) {
+        if (e instanceof JobFailed && pending[w.rel]) { delete pending[w.rel]; saveJobs(); }
+        // the input check is flaky: a hands-only keyframe blocked as people-in-user-uploads often
+        // passes on the next try (a blocked job costs nothing), so resubmit twice before giving up
+        if (e instanceof JobFailed && /people-in-user-uploads/.test(e.message) && w.shot && (w.blocked = (w.blocked || 0) + 1) <= 2) {
+          console.log(`  ${w.rel}: blocked by the input check; resubmitting (${w.blocked}/2)`); w.id = null; queue.push(w); continue;
+        }
+        failed.push(e); console.error(e.message);
+      }
     }
   }));
   if (failed.length) { console.error(`${failed.length} job(s) did not finish (see above); re-run the same command to resume`); process.exit(1); }

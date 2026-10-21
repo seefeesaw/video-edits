@@ -13,8 +13,12 @@
 const NAME = 'my-video';
 (() => {
   // the Shorts page can hold several <video> elements (preloaded neighbours): use the active player's,
-  // else the one that has loaded media
-  const v = () => document.querySelector('#shorts-player video') || [...document.querySelectorAll('video')].find((e) => e.readyState >= 1 && e.videoWidth) || document.querySelector('video');
+  // else the one that has loaded media. YouTube can swap the player's <video> mid-capture (e.g. its
+  // ?themeRefresh=1 re-render right after navigation): the capture pins its element (PIN) while
+  // that element stays in the page with its media; a new one is only picked once it has metadata
+  let PIN = null;
+  const ok = (e) => e && e.isConnected && e.readyState >= 1 && Number.isFinite(e.duration) && e.duration > 0;
+  const v = () => (ok(PIN) ? PIN : (PIN = [document.querySelector('#shorts-player video'), ...document.querySelectorAll('video')].find(ok) || PIN || document.querySelector('video')));
   // seek and wait for 'seeked' (fires even when the page is hidden, unlike rAF/rVFC); the frame is
   // drawable at once. No setTimeout on this path: hidden tabs clamp timers to ~1s, which turned a
   // 1-minute scan into 10+ minutes.
@@ -22,7 +26,8 @@ const NAME = 'my-video';
   // through the player API, re-pause before every seek, and check the seek landed: a scan reading
   // stale frames silently loses every cut after that point.
   const player = () => document.querySelector('#shorts-player') || document.querySelector('.html5-video-player');
-  const seekOnce = (t) => new Promise((res) => {
+  const seekOnce = (t) => new Promise((res, rej) => {
+    if (!Number.isFinite(t)) return rej(new Error(`asked to seek to ${t}: the video's duration was lost (player swapped?); reload the Short and paste again`));
     const el = v(); let done = false;
     if (!el.paused) { try { player().pauseVideo(); } catch {} el.pause(); }
     const fin = () => { if (done) return; done = true; el.removeEventListener('seeked', fin); res(); };
@@ -31,6 +36,7 @@ const NAME = 'my-video';
   let misses = 0;
   const seek = async (t) => {
     for (let k = 0; k < 4; k++) {
+      if (!ok(v())) await ready();
       await seekOnce(t);
       if (v().paused && Math.abs(v().currentTime - t) < 0.02) return;
     }
@@ -40,6 +46,12 @@ const NAME = 'my-video';
     try { player().pauseVideo(); } catch {}
     v().pause(); v().muted = true; misses = 0;
     try { (document.querySelector('#shorts-player') || document.querySelector('.html5-video-player')).setPlaybackQualityRange('hd1080', 'hd1080'); } catch {}
+  };
+  // pasted right after navigation (or after a quality switch) the player may not have loaded metadata
+  // yet (duration NaN): wait for it, since seeks to a non-finite time would throw
+  const ready = async () => {
+    for (let k = 0; k < 150 && !ok(v()); k++) await new Promise((r) => setTimeout(r, 200));
+    if (!ok(v())) throw new Error('the video never loaded (duration unknown): reload the Short and paste again');
   };
   const raw = (w, h) => { const c = new OffscreenCanvas(w, h); const g = c.getContext('2d', { willReadFrequently: true }); g.drawImage(v(), 0, 0, w, h); return g.getImageData(0, 0, w, h).data; };
   const GW = 9, GH = 16;
@@ -57,9 +69,9 @@ const NAME = 'my-video';
     // source fps comes from the spacing of real frame changes. A cut is a change that is large in
     // absolute terms or a strong local peak (catches soft jump cuts inside one setup).
     async cuts() {
-      prep(); const el = v(); const pts = []; let prev = null;
+      prep(); const el = v(); const D = this.D || el.duration; const pts = []; let prev = null;
       // a scan that sees no frame changes for >1.5s while the video plainly moves is broken: checked below
-      for (let t = 0; t < el.duration - 0.01; t += 1 / 60) {
+      for (let t = 0; t < D - 0.01; t += 1 / 60) {
         await seek(+t.toFixed(4)); const d = raw(54, 96);
         if (prev) {
           let s = 0; for (let i = 0; i < d.length; i += 4) s += Math.abs(d[i] - prev[i]) + Math.abs(d[i + 1] - prev[i + 1]) + Math.abs(d[i + 2] - prev[i + 2]);
@@ -82,7 +94,7 @@ const NAME = 'my-video';
       // a cut seen at two consecutive steps (half-frame landing) counts once
       const cuts = out.filter((t, i) => i === 0 || t - out[i - 1] > 0.05);
       const last = pts.length ? pts[pts.length - 1][0] : 0;
-      if (el.duration - last > 1.5) throw new Error(`no frame changes after ${last}s of ${el.duration.toFixed(2)}s: the scan read stale frames; reload the Short and paste again`);
+      if (D - last > 1.5) throw new Error(`no frame changes after ${last}s of ${D.toFixed(2)}s: the scan read stale frames; reload the Short and paste again`);
       return { fps, cuts };
     },
     async capture(step = 0.25) {
@@ -92,18 +104,17 @@ const NAME = 'my-video';
       try { return await this._capture(step); } finally { window.__ytcapBusy = false; }
     },
     async _capture(step) {
-      // pasted right after navigation the player may not have loaded metadata yet (duration NaN):
-      // wait for it (seeks to a non-finite time would throw)
-      for (let k = 0; k < 100 && !(v() && Number.isFinite(v().duration) && v().duration > 0); k++) await new Promise((r) => setTimeout(r, 200));
-      if (!Number.isFinite(v()?.duration)) throw new Error('the video never loaded (duration unknown): reload the Short and paste again');
-      prep(); const samples = [];
-      for (let t = 0.05; t < v().duration - 0.02; t += step) { await seek(+t.toFixed(3)); samples.push([+t.toFixed(3), grid()]); }
+      await ready();
+      // prep() asks for 1080p, which makes the player reload its media source: the duration reads NaN
+      // until that settles, so wait again before reading it
+      prep(); await new Promise((r) => setTimeout(r, 1500)); await ready(); const samples = []; const D = (this.D = v().duration);
+      for (let t = 0.05; t < D - 0.02; t += step) { await seek(+t.toFixed(3)); samples.push([+t.toFixed(3), grid()]); }
       const { fps, cuts } = await this.cuts();
-      const bounds = [0, ...cuts, v().duration];
+      const bounds = [0, ...cuts, D];
       const mids = bounds.slice(1).map((b, i) => +((bounds[i] + b) / 2).toFixed(3));
       const shots = await this.sheetDataUrl(mids);
-      const every = await this.sheetDataUrl(Array.from({ length: Math.floor(v().duration / 0.5) }, (_, i) => +(0.1 + i * 0.5).toFixed(2)), 180);
-      return JSON.stringify({ source: location.href.split('?')[0], title: document.title.replace(/ - YouTube$/, ''), duration: +v().duration.toFixed(3), size: [v().videoWidth, v().videoHeight], sourceFps: fps, grid: [GW, GH], step, cuts, shotMidpoints: mids, sheets: { shots, every }, samples });
+      const every = await this.sheetDataUrl(Array.from({ length: Math.floor(D / 0.5) }, (_, i) => +(0.1 + i * 0.5).toFixed(2)), 180);
+      return JSON.stringify({ source: location.href.split('?')[0], title: document.title.replace(/ - YouTube$/, ''), duration: +D.toFixed(3), size: [v().videoWidth, v().videoHeight], sourceFps: fps, grid: [GW, GH], step, cuts, shotMidpoints: mids, sheets: { shots, every }, samples });
     },
     // contact sheet (JPEG data URL) of frames at the given times, 4 per row, labelled
     async sheetDataUrl(times, w = 270) {

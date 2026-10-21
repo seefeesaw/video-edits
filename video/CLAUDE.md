@@ -19,8 +19,9 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    `window.__ytcapError` in the tab (it fails loudly when the player won't stay paused or seeks
    don't land; reload the Short and paste again). Reusing a reference captured for another video: copy its `reference.json` AND its
    `out/ref-shots.jpg` + `out/ref-every.jpg` (git-ignored; reference.json only points at them).
-   The capture waits for the player to load (pasting right after navigation used to fail with
-   "non-finite" seeks) and ignores fast handheld motion (a fork whipped from board to mug changes a lot
+   The capture waits for the player to load and again after its own 1080p switch (which reloads the
+   media source: the duration reads NaN for a moment; that used to fail with "non-finite" seeks), pins
+   the <video> it started on, and ignores fast handheld motion (a fork whipped from board to mug changes a lot
    on BOTH sides of its biggest frame; an edit is one big change). If a 'shot' is under ~0.2 s, check it
    frame by frame (`ytcap.sheetDataUrl([...times])`) before treating it as a cut.
    Check `reference.json`: `cuts`, `sourceFps`,
@@ -56,7 +57,9 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    **Continuity bible first** (README "Continuity bible"): list every prop that must not change with
    exact words in `bible.props`, each set with its props and their first-frame layout in
    `bible.sets` (give the set frame the main object's size in the DOMINANT shot; every shot's
-   keyframe prompt then states its own size, which overrides the set's scale — wide shots smaller),
+   keyframe prompt then states its own size, which overrides the set's scale — wide shots smaller).
+   A prop whose `desc` is word for word the same as in an earlier replica: copy that replica's
+   `bible/prop-<id>.png` first (bible.mjs skips images that exist; ~2 min saved per prop). Then
    run `node bible.mjs` (gpt-image-2 often takes 2-6 min per image; budget ~20 min for 8 keyframes), and Read
    `bible/bible-sheet.jpg` before any Sora time. Performances then use `"startFrom": "set"` and their
    prompt starts with the person stepping in (0-1 s). Pick takes with people by
@@ -91,8 +94,16 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    room, the same props and the exact product (give shot-specific props via `keyframe.refs`, e.g.
    `["bible/prop-torch.png"]`). Pick the variant's photos by the image's `variant_ids`/`alt`; crop
    multi-product lifestyle photos to the right variant.
-   The keyframe is the clip's FIRST frame: for "X enters the frame" shots, describe the frame with X
-   in place, prompt X leaving, and set `"reverse": true`. `node keyframes.mjs videos/<name>`; Read
+   The keyframe is the clip's FIRST frame: draw the reference shot's FIRST moment, not its midpoint.
+   When the action starts elsewhere (the fork lifts a waffle off the board, then dips it), the keyframe
+   shows the start state (waffle on the board, camera further back), the prompt times every beat
+   ("0-0.7 s: lifts it into the mug while the camera moves closer; 0.7-2.5 s: dips and swirls"), and
+   `speed` (often 1.4-1.8) makes the take's beats land on the reference's (check on `--full` sheets).
+   A keyframe drawn mid-action gives a take that skips the reference's opening move.
+   For "X enters the frame" shots, describe the frame with X
+   in place, prompt X leaving QUICKLY ("slides out within half a second"), and set `"reverse": true`;
+   Sora's exits are slow, so set `from` near 0 and `speed` so X is in place by the reference's
+   moment (reversed, the slot plays clip `from + len·speed` back down to `from`). `node keyframes.mjs videos/<name>`; Read
    the `assets/keyframes/<id>.720x1280.png` files (what Sora gets: the model's 2:3 image minus 8% on
    each side) and compare them with ref-shots.jpg (object size and position!) before spending Sora
    time — regenerate a keyframe with `--force --only sN` rather than fixing it later with zoom.
@@ -102,7 +113,8 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    bible set ("dim room, deep red light, deep shadows, no bright studio light") and Read every
    keyframe against ref-shots.jpg; regenerate the ones that miss with `--force --only sN`. Sora rejects
    input frames showing people or faces (`moderation_blocked: people-in-user-uploads`), including
-   on screens: hands only. A screen that must show a specific picture (a streaming app, an episode, a
+   on screens: hands only. The check is flaky on hands-only keyframes (the same frame passes on the
+   next try): sora.mjs resubmits a blocked take twice before reporting it. A screen that must show a specific picture (a streaming app, an episode, a
    UI) is a GREEN screen in the bible prop and keyframes, and gets the picture per shot via
    `"screen"` after Sora (README "Device screens"); otherwise screens show scenery/abstract light.
    **Dips**: Sora skips a dip (the marshmallow jumps from plain to coated above the mug) unless the
