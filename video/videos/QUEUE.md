@@ -7,8 +7,8 @@ fix the pipeline + template; commit and push.
 
 | # | Short | status |
 |---|---|---|
-| 1 | shorts/uMl76XX7epo "I love this mug!!" | 10/10 restages done (r01–r10), r10 fix in progress |
-| 2 | shorts/Su66AMPolD0 "you + me?" | capturing (videos/mug3-ref) |
+| 1 | shorts/uMl76XX7epo "I love this mug!!" | done: 10/10 restages (r01–r10), see restage-runs.md |
+| 2 | shorts/Su66AMPolD0 "you + me?" | captured (videos/mug3-ref), template templates/mug3.json, restages next |
 | 3 | shorts/4XYjIGbDhUs | queued |
 | 4 | shorts/OVixY3FfJKs | queued |
 | 5 | shorts/IAS9KcHV4cI | queued |

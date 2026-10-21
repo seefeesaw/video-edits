@@ -148,7 +148,9 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
    pools in a puddle around its base… Lots of spilled chocolate" — a milder "spills over the rim"
    gives only the keyframe's drip) — and keep the PRODUCT recognisable: say the streams run down the
    sides and back while its shape, handle and lettering stay visible (a big overflow can turn the mug
-   into a column of chocolate: the product must stay exactly the store's). Make 3 takes; pick the one that keeps
+   into a column of chocolate: the product must stay exactly the store's). The KEYFRAME must already
+   show the spill under way (streams down the side and a puddle at the base): from a clean brim-full
+   mug Sora mostly just drips the dipped fruit (5 of 6 takes on a brown mug). Make 3 takes; pick the one that keeps
    spilling through the slot and use `from`/`speed` to show the growing spill.
    **Generate**: `node sora.mjs videos/<name>` (up to 2 jobs at once, often ~1 when anything else
    uses the deployment; ~60–120s each, so ~30 min for 20 takes; background it). `--more N --only sN`
