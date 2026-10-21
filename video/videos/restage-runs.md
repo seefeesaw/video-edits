@@ -15,3 +15,9 @@
 | 08 | r08-red-attic | red | attic loft desk | When autumn finally arrives and / it's Harry Potter season again | one-shot comp 88.4, 7/7 cuts, no fix (3rd s7 take used; new spill wording worked) |
 | 09 | r09-white-sunroom | white | sunroom side table | When the nights get longer and it / feels like Harry Potter season | one-shot comp 91.2 (best), 7/7 cuts; fix: --pick skips takes with no green screen (crashed), s7 retimed off a jump (EXTRA cut) |
 | 10 | r10-brown-library | brown | library side table | When it's cozy blanket weather and / time for Harry Potter season | one-shot comp 87.9 (last dip didn't spill); fix: s8 keyframe already overflowing (streams + puddle) → comp 87.8 with a clear spill |
+
+# Restage runs of shorts/Su66AMPolD0 ("you + me?") — 2 takes per shot
+
+| # | video | variant | setting | hook | result |
+|---|---|---|---|---|---|
+| 01 | m3r01-red-vanity | red | dressing table | movie night / season is coming. | one-shot comp 87.0, 7/7 cuts; s7 board static (both takes dropped it on frame 1) |
