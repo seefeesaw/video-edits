@@ -38,10 +38,15 @@ const parse = (hex) => Array.from({ length: hex.length / 2 }, (_, i) => parseInt
 const samplesOf = (s) => ref.samples.filter(([t]) => t >= s.start + 0.03 && t < s.end - 0.03);
 const clipOf = (s) => s.clip || `clips/${s.id}.mp4`;
 // shots with a "screen" are scored on their takes WITH the screen composited (build.mjs screenClip)
-const composited = {};
+const composited = {}, noScreen = new Set();
 for (const s of spec.shots.filter((x) => x.screen && fs.existsSync(path.join(dir, 'clips')))) {
   const takes = fs.readdirSync(path.join(dir, 'clips')).filter((f) => f === `${s.id}.mp4` || (f.startsWith(`${s.id}.v`) && f.endsWith('.mp4')));
-  for (const c of new Set([...takes.map((f) => `clips/${f}`), clipOf(s)])) composited[`${s.id}|${c}`] = await screenClip(spec, dir, s, c);
+  for (const c of new Set([...takes.map((f) => `clips/${f}`), clipOf(s)])) {
+    // a take whose device screen isn't green (Sora drew a picture on it, or framed the device out)
+    // can't get the screen composited: --pick skips it instead of the whole run failing on it
+    try { composited[`${s.id}|${c}`] = await screenClip(spec, dir, s, c); }
+    catch (e) { if (!/no green screen/.test(e.message)) throw e; noScreen.add(`${s.id}|${c}`); console.log(`  ${s.id}: ${c} has no green screen: skipped by --pick`); }
+  }
 }
 const seen = (s, clip) => composited[`${s.id}|${clip}`] || clip;
 const save = () => fs.writeFileSync(path.join(dir, 'video.json'), JSON.stringify(spec, null, 2) + '\n');
@@ -173,7 +178,7 @@ if (argv.includes('--pick')) {
     if (s.pick === 'manual') { console.log(`pick ${s.id}: manual, kept ${s.clip}`); continue; }
     const takes = fs.readdirSync(path.join(dir, 'clips')).filter((f) => f === `${s.id}.mp4` || (f.startsWith(`${s.id}.v`) && f.endsWith('.mp4')));
     if (!takes.length) continue;
-    const scored = takes.map((f) => {
+    const scored = takes.filter((f) => !noScreen.has(`${s.id}|clips/${f}`)).map((f) => {
       const fr = clipFrames(s, `clips/${f}`), A = fr.map((x) => x.ref), B = fr.map((x) => gridOf(x.px));
       // Sora sometimes edits a clip (wide → close → wide): a cut inside the used span is a cut the
       // reference doesn't have, so such takes lose 10 points
