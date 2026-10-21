@@ -71,6 +71,9 @@ says the screen is flat chroma-key green; the picture is composited after Sora p
 "screen": { "clip": "assets/screen/scene.mp4", "from": 12.5, "ui": "player_s2" }
 ```
 
+A glossy or glass surface reflects the green screen: add `"despill": true` to that shot's `"screen"`
+to take the green glow out of the whole frame (off by default — it also drains real greens like plants).
+
 build.mjs keys the largest green blob of each take (a Christmas tree elsewhere is ignored; the box is
 unioned over the clip), cover-fits the rendered screen into it (anchored at the top, since a mug in
 front hides the bottom; a device cut by the frame edge shows the picture's side that faces into

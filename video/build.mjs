@@ -201,7 +201,9 @@ export async function screenClip(spec, dir, shot, clip) {
   const srcIn = scr.clip ? ['-stream_loop', '-1', '-ss', String(scr.from ?? 0), '-i', path.join(dir, scr.clip), ...(uiPng ? ['-loop', '1', '-i', uiPng] : [])] : ['-loop', '1', '-i', still];
   const srcChain = scr.clip ? `[1:v]fps=${(spec.fps || 30)},scale=${sw}:${sh}:force_original_aspect_ratio=increase,crop=${sw}:${sh}${uiPng ? '[sv];[sv][2:v]overlay=0:0,' : ','}${fit}` : `[1:v]${fit}`;
   ff(['-i', src, ...srcIn, '-filter_complex',
-    `[0:v]split[base][c];[c]crop=${bw}:${bh}:${x0}:${y0},chromakey=${keyHex}:0.16:0.06,despill=type=green[fg];` +
+    // "despill": true removes the screen's green glow from the rest of the frame too (a glass or glossy
+    // table reflects the green screen); off by default, since it also drains real greens (plants)
+    `[0:v]split[b0][c];[b0]${scr.despill ? 'format=gbrp,despill=type=green:mix=0.6:expand=0.2,format=yuv420p' : 'null'}[base];[c]crop=${bw}:${bh}:${x0}:${y0},chromakey=${keyHex}:0.16:0.06,despill=type=green[fg];` +
     `${srcChain},format=yuva420p[s];` +
     `[s][fg]overlay=0:0[box];[base][box]overlay=${x0}:${y0}:shortest=1[v]`,
     '-map', '[v]', '-map', '0:a?', '-t', len.toFixed(3), '-c:v', 'libx264', '-crf', '14', '-preset', 'fast', '-pix_fmt', 'yuv420p', '-c:a', 'copy', out]);
