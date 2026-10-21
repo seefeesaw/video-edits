@@ -1,0 +1,26 @@
+{
+  "title": "Harry Potter season fondue (brown Meltie mug, kitchen island) — restage 01",
+  "notes": "Restage 01 of shorts/uMl76XX7epo: BROWN variant of the real Meltie Mini Fondue Mug (store photos), the treats on the white marble kitchen island counter (a white marble kitchen island counter in a kitchen at night, sage-green shaker cabinets and open shelves with jars behind, two glass pendant lights glowing above) instead of the white desk in front of red curtains. Table decor kept (pumpkins, gnome pumpkin, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fantasy stills; plain unbranded red bag; Sora audio.",
+  "variant": "brown",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When the air turns crisp and it's",
+    "finally Harry Potter season",
+    "🍁⚡🕯️✨"
+  ],
+  "setting": {
+    "surface": "white marble kitchen island counter",
+    "behind": "the dim kitchen cabinets and glass pendant lights behind",
+    "style": "Cosy autumn movie night at home in the evening, at a KITCHEN ISLAND: everything happens on the white marble kitchen island counter; a dim warm room lit only by warm amber pendant light and the candle, deep soft shadows, no bright studio light, no red curtains. Handheld vertical phone video at table height, shallow depth of field, rich warm autumn colour grade. Hands have long glossy pale-pink manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy KITCHEN ISLAND: a white marble kitchen island counter in a kitchen at night, sage-green shaker cabinets and open shelves with jars behind, two glass pendant lights glowing above, a dim warm room lit only by warm amber pendant light and the candle, deep soft shadows, no bright studio light, no red curtains; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The sage-green kitchen cabinets and shelves fill the top, softly out of focus, a glowing glass pendant at the top-right edge; the marble counter fills the lower half.",
+    "props": {
+      "cabinets": {
+        "desc": "sage-green shaker kitchen cabinets with brass knobs and an open oak shelf of glass jars and stacked cups"
+      },
+      "pendant": {
+        "desc": "a small clear glass globe pendant light glowing warm amber"
+      }
+    }
+  }
+}

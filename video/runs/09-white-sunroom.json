@@ -1,0 +1,23 @@
+{
+  "title": "Harry Potter season fondue (white Meltie mug, sunroom) — restage 09",
+  "notes": "Restage 09 of shorts/uMl76XX7epo: WHITE variant of the real Meltie Mini Fondue Mug (store photos), the treats on the round marble-top side table (a round marble-top side table in a sunroom at night, dark glass walls with the night outside, big potted palms and ferns, a wicker armchair, warm string lights) instead of the white desk in front of red curtains. Table decor kept (pumpkins, gnome pumpkin, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fantasy stills; plain unbranded red bag; Sora audio.",
+  "variant": "white",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When the nights get longer and it",
+    "feels like Harry Potter season",
+    "🌙🍂⚡✨"
+  ],
+  "setting": {
+    "surface": "round marble-top side table",
+    "behind": "the dark glass walls and potted plants of the sunroom behind",
+    "style": "Cosy autumn movie night at home in the evening, at a SUNROOM SIDE TABLE: everything happens on the round marble-top side table; a dim warm room lit only by warm string lights and a lantern and the candle, deep soft shadows, no bright studio light, no red curtains. Handheld vertical phone video at table height, shallow depth of field, rich warm autumn colour grade. Hands have long glossy pale-pink manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy SUNROOM SIDE TABLE: a round marble-top side table in a sunroom at night, dark glass walls with the night outside, big potted palms and ferns, a wicker armchair, warm string lights, a dim warm room lit only by warm string lights and a lantern and the candle, deep soft shadows, no bright studio light, no red curtains; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The dark glass sunroom walls, potted palms and warm string lights fill the top, softly out of focus; the marble side table fills the lower half.",
+    "props": {
+      "sunroom": {
+        "desc": "dark night glass sunroom walls with big potted palms and ferns, a wicker armchair and warm string lights"
+      }
+    }
+  }
+}

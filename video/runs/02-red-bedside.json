@@ -1,0 +1,26 @@
+{
+  "title": "Harry Potter season fondue (red Meltie mug, bedside) — restage 02",
+  "notes": "Restage 02 of shorts/uMl76XX7epo: RED variant of the real Meltie Mini Fondue Mug (store photos), the treats on the walnut bedside table (a walnut bedside table next to a bed at night, a tall grey upholstered headboard with linen pillows and a knitted throw beside it, a brass bedside lamp with a pleated shade glowing) instead of the white desk in front of red curtains. Table decor kept (pumpkins, gnome pumpkin, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fantasy stills; plain unbranded red bag; Sora audio.",
+  "variant": "red",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When it's cold outside and it feels",
+    "like Harry Potter season again",
+    "🍂🦉🕯️✨"
+  ],
+  "setting": {
+    "surface": "walnut bedside table",
+    "behind": "the upholstered headboard and pillows behind",
+    "style": "Cosy autumn movie night at home in the evening, at a BEDSIDE TABLE: everything happens on the walnut bedside table; a dim warm room lit only by warm amber bedside-lamp light and the candle, deep soft shadows, no bright studio light, no red curtains. Handheld vertical phone video at table height, shallow depth of field, rich warm autumn colour grade. Hands have long glossy pale-pink manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy BEDSIDE TABLE: a walnut bedside table next to a bed at night, a tall grey upholstered headboard with linen pillows and a knitted throw beside it, a brass bedside lamp with a pleated shade glowing, a dim warm room lit only by warm amber bedside-lamp light and the candle, deep soft shadows, no bright studio light, no red curtains; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The grey upholstered headboard and pillows fill the top, softly out of focus, the glowing bedside lamp at the top-right edge; the walnut bedside table fills the lower half.",
+    "props": {
+      "headboard": {
+        "desc": "a tall grey upholstered bed headboard with plump linen pillows and a chunky oatmeal knitted throw"
+      },
+      "bedlamp": {
+        "desc": "a brass bedside table lamp with a pleated cream shade glowing warm amber"
+      }
+    }
+  }
+}

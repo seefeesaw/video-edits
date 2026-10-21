@@ -1,0 +1,26 @@
+{
+  "title": "Harry Potter season fondue (brown Meltie mug, ottoman) — restage 07",
+  "notes": "Restage 07 of shorts/uMl76XX7epo: BROWN variant of the real Meltie Mini Fondue Mug (store photos), the treats on the wooden tray on a round tufted ottoman (a wooden tray on a round tufted mustard velvet ottoman in front of a big grey sectional sofa in a family room at night, cushions and a throw on the sofa, a floor lamp glowing) instead of the white desk in front of red curtains. Table decor kept (pumpkins, gnome pumpkin, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fantasy stills; plain unbranded red bag; Sora audio.",
+  "variant": "brown",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When the candles come out and it's",
+    "officially Harry Potter season",
+    "🕯️🍂🦉✨"
+  ],
+  "setting": {
+    "surface": "wooden tray on a round tufted ottoman",
+    "behind": "the grey sectional sofa behind",
+    "style": "Cosy autumn movie night at home in the evening, at a OTTOMAN TRAY: everything happens on the wooden tray on a round tufted ottoman; a dim warm room lit only by warm amber floor-lamp light and the candle, deep soft shadows, no bright studio light, no red curtains. Handheld vertical phone video at tray height, shallow depth of field, rich warm autumn colour grade. Hands have long glossy pale-pink manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy OTTOMAN TRAY: a wooden tray on a round tufted mustard velvet ottoman in front of a big grey sectional sofa in a family room at night, cushions and a throw on the sofa, a floor lamp glowing, a dim warm room lit only by warm amber floor-lamp light and the candle, deep soft shadows, no bright studio light, no red curtains; vertical phone camera at tray height, slightly above, looking at the mug",
+    "layoutTail": "The grey sectional sofa with cushions fills the top, softly out of focus, the glowing floor lamp at the top-right edge; the tray on the mustard ottoman fills the lower half.",
+    "props": {
+      "ottoman": {
+        "desc": "a round tufted mustard-yellow velvet ottoman with a round wooden tray on top"
+      },
+      "sectional": {
+        "desc": "a big grey fabric sectional sofa with rust and cream cushions and a knitted throw"
+      }
+    }
+  }
+}

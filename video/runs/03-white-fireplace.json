@@ -1,0 +1,23 @@
+{
+  "title": "Harry Potter season fondue (white Meltie mug, fireplace) — restage 03",
+  "notes": "Restage 03 of shorts/uMl76XX7epo: WHITE variant of the real Meltie Mini Fondue Mug (store photos), the treats on the reclaimed-wood coffee table (a reclaimed-wood coffee table in a living room at night, a stone fireplace with a crackling log fire and a wooden mantel with candles behind) instead of the white desk in front of red curtains. Table decor kept (pumpkins, gnome pumpkin, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fantasy stills; plain unbranded red bag; Sora audio.",
+  "variant": "white",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When the evenings get darker and",
+    "it's Harry Potter season at last",
+    "🌙🪄🍂✨"
+  ],
+  "setting": {
+    "surface": "reclaimed-wood coffee table",
+    "behind": "the glowing stone fireplace behind",
+    "style": "Cosy autumn movie night at home in the evening, at a FIRESIDE COFFEE TABLE: everything happens on the reclaimed-wood coffee table; a dim warm room lit only by warm firelight and the candle, deep soft shadows, no bright studio light, no red curtains. Handheld vertical phone video at table height, shallow depth of field, rich warm autumn colour grade. Hands have long glossy pale-pink manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy FIRESIDE COFFEE TABLE: a reclaimed-wood coffee table in a living room at night, a stone fireplace with a crackling log fire and a wooden mantel with candles behind, a dim warm room lit only by warm firelight and the candle, deep soft shadows, no bright studio light, no red curtains; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The stone fireplace with its log fire fills the top, softly out of focus, candles on the mantel; the coffee table fills the lower half.",
+    "props": {
+      "fireplace": {
+        "desc": "a grey stone fireplace with a crackling log fire and a rustic wooden mantel with pillar candles"
+      }
+    }
+  }
+}

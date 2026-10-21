@@ -166,3 +166,14 @@ from `video/`; the capture writes `video/videos/<name>/…` (relative to the rep
 8. Targets: every reference cut matched (0 missing), caption fit ≤2px, every shot's
    subject/action/framing matching the side-by-side, mean comp ≥ 85. Pixel-perfect is impossible
    for regenerated footage.
+
+## Restaging (the same video again: another variant, another setting, another hook)
+
+`node tools/restage.mjs templates/<video>.json videos/<name> runs/<run>.json --from videos/<previous>`
+fills a template (the latest fixed spec of that video with `{{mug}} {{MUG}} {{fork}} {{inside}}
+{{surface}} {{behind}} {{layoutTail}} {{hook1}} {{hook2}} {{emoji}} …` placeholders) from a run file
+(variant, setting words + its bible props, reworded hook), copies the variant's store photos from
+`products/meltie/<variant>/`, the reference and its sheets, and the previous restage's identical prop
+and screen images with their `made.json` records. Then the one-shot recipe from `bible.mjs` on. When a
+one-shot run needs a fix, fix the pipeline AND the template, so the next restage starts from it.
+`templates/love.json` is shorts/uMl76XX7epo; `runs/01…10-*.json` are its queued restages.

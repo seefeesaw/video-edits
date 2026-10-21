@@ -1,0 +1,26 @@
+{
+  "title": "Harry Potter season fondue (brown Meltie mug, library) — restage 10",
+  "notes": "Restage 10 of shorts/uMl76XX7epo: BROWN variant of the real Meltie Mini Fondue Mug (store photos), the treats on the round mahogany side table (a round mahogany side table beside a worn brown leather wingback armchair in a home library at night, floor-to-ceiling bookshelves behind, a brass floor lamp glowing) instead of the white desk in front of red curtains. Table decor kept (pumpkins, gnome pumpkin, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fantasy stills; plain unbranded red bag; Sora audio.",
+  "variant": "brown",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When it's cozy blanket weather and",
+    "time for Harry Potter season",
+    "🧶🍂🪄✨"
+  ],
+  "setting": {
+    "surface": "round mahogany side table",
+    "behind": "the leather armchair and library shelves behind",
+    "style": "Cosy autumn movie night at home in the evening, at a LIBRARY SIDE TABLE: everything happens on the round mahogany side table; a dim warm room lit only by warm amber lamp light and the candle, deep soft shadows, no bright studio light, no red curtains. Handheld vertical phone video at table height, shallow depth of field, rich warm autumn colour grade. Hands have long glossy pale-pink manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy LIBRARY SIDE TABLE: a round mahogany side table beside a worn brown leather wingback armchair in a home library at night, floor-to-ceiling bookshelves behind, a brass floor lamp glowing, a dim warm room lit only by warm amber lamp light and the candle, deep soft shadows, no bright studio light, no red curtains; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The leather wingback armchair and the floor-to-ceiling bookshelves fill the top, softly out of focus, the glowing brass lamp at the top-right edge; the mahogany table fills the lower half.",
+    "props": {
+      "armchair": {
+        "desc": "a worn brown leather wingback armchair with brass studs and a tartan throw"
+      },
+      "library": {
+        "desc": "floor-to-ceiling dark wooden bookshelves filled with old books and a brass floor lamp glowing warm"
+      }
+    }
+  }
+}

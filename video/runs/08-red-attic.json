@@ -1,0 +1,23 @@
+{
+  "title": "Harry Potter season fondue (red Meltie mug, attic) — restage 08",
+  "notes": "Restage 08 of shorts/uMl76XX7epo: RED variant of the real Meltie Mini Fondue Mug (store photos), the treats on the whitewashed pine desk (a whitewashed pine desk in a cosy attic loft at night, a sloped white wood-panelled ceiling with a dark skylight, a string of warm fairy lights along the beams) instead of the white desk in front of red curtains. Table decor kept (pumpkins, gnome pumpkin, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fantasy stills; plain unbranded red bag; Sora audio.",
+  "variant": "red",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When autumn finally arrives and",
+    "it's Harry Potter season again",
+    "🍁🪄🕯️✨"
+  ],
+  "setting": {
+    "surface": "whitewashed pine desk",
+    "behind": "the sloped attic ceiling and dark skylight behind",
+    "style": "Cosy autumn movie night at home in the evening, at a ATTIC LOFT DESK: everything happens on the whitewashed pine desk; a dim warm room lit only by warm fairy lights and a small lamp and the candle, deep soft shadows, no bright studio light, no red curtains. Handheld vertical phone video at table height, shallow depth of field, rich warm autumn colour grade. Hands have long glossy pale-pink manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy ATTIC LOFT DESK: a whitewashed pine desk in a cosy attic loft at night, a sloped white wood-panelled ceiling with a dark skylight, a string of warm fairy lights along the beams, a dim warm room lit only by warm fairy lights and a small lamp and the candle, deep soft shadows, no bright studio light, no red curtains; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The sloped wood-panelled attic ceiling with the dark skylight and fairy lights fills the top, softly out of focus; the pine desk fills the lower half.",
+    "props": {
+      "attic": {
+        "desc": "a sloped white wood-panelled attic ceiling with exposed beams, a dark skylight window and a string of warm fairy lights"
+      }
+    }
+  }
+}

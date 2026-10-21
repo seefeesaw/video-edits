@@ -1,0 +1,23 @@
+{
+  "title": "Harry Potter season fondue (red Meltie mug, floor rug) — restage 05",
+  "notes": "Restage 05 of shorts/uMl76XX7epo: RED variant of the real Meltie Mini Fondue Mug (store photos), the treats on the low wooden tray on a fluffy cream rug (a low wooden tray on a fluffy cream shag rug on the living-room floor at night, the front of a caramel leather sofa with cushions and a throw just behind, fairy lights on the wall) instead of the white desk in front of red curtains. Table decor kept (pumpkins, gnome pumpkin, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fantasy stills; plain unbranded red bag; Sora audio.",
+  "variant": "red",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When the rain starts and it feels",
+    "like it's Harry Potter season",
+    "🌧️🕯️🪄✨"
+  ],
+  "setting": {
+    "surface": "low wooden tray on a fluffy cream rug",
+    "behind": "the sofa front and cushions behind",
+    "style": "Cosy autumn movie night at home in the evening, at a FLOOR PICNIC: everything happens on the low wooden tray on a fluffy cream rug; a dim warm room lit only by warm fairy lights and a lamp and the candle, deep soft shadows, no bright studio light, no red curtains. Handheld vertical phone video at tray height, shallow depth of field, rich warm autumn colour grade. Hands have long glossy pale-pink manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy FLOOR PICNIC: a low wooden tray on a fluffy cream shag rug on the living-room floor at night, the front of a caramel leather sofa with cushions and a throw just behind, fairy lights on the wall, a dim warm room lit only by warm fairy lights and a lamp and the candle, deep soft shadows, no bright studio light, no red curtains; vertical phone camera at tray height, slightly above, looking at the mug",
+    "layoutTail": "The caramel sofa front with its cushions and throw fills the top, softly out of focus, warm fairy lights above; the tray on the fluffy rug fills the lower half.",
+    "props": {
+      "rugsofa": {
+        "desc": "a fluffy cream shag rug in front of a caramel leather sofa with plump cushions and a knitted throw, warm fairy lights on the wall above"
+      }
+    }
+  }
+}

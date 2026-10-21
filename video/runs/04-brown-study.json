@@ -1,0 +1,26 @@
+{
+  "title": "Harry Potter season fondue (brown Meltie mug, study) — restage 04",
+  "notes": "Restage 04 of shorts/uMl76XX7epo: BROWN variant of the real Meltie Mini Fondue Mug (store photos), the treats on the dark walnut writing desk (a dark walnut writing desk in a home study at night, tall dark bookshelves full of old books behind, a green glass banker's lamp glowing) instead of the white desk in front of red curtains. Table decor kept (pumpkins, gnome pumpkin, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fantasy stills; plain unbranded red bag; Sora audio.",
+  "variant": "brown",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When sweater weather hits and it's",
+    "officially Harry Potter season",
+    "🧣🍂🪄✨"
+  ],
+  "setting": {
+    "surface": "dark walnut writing desk",
+    "behind": "the tall bookshelves of the study behind",
+    "style": "Cosy autumn movie night at home in the evening, at a STUDY DESK: everything happens on the dark walnut writing desk; a dim warm room lit only by warm amber desk-lamp light and the candle, deep soft shadows, no bright studio light, no red curtains. Handheld vertical phone video at table height, shallow depth of field, rich warm autumn colour grade. Hands have long glossy pale-pink manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy STUDY DESK: a dark walnut writing desk in a home study at night, tall dark bookshelves full of old books behind, a green glass banker's lamp glowing, a dim warm room lit only by warm amber desk-lamp light and the candle, deep soft shadows, no bright studio light, no red curtains; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The tall bookshelves fill the top, softly out of focus, the glowing green banker's lamp at the top-right edge; the walnut desk fills the lower half.",
+    "props": {
+      "bookshelves": {
+        "desc": "tall dark wooden bookshelves filled with old leather-bound and cloth books"
+      },
+      "bankerslamp": {
+        "desc": "a brass banker's desk lamp with a green glass shade glowing warm"
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "title": "Harry Potter season fondue (white Meltie mug, breakfast nook) — restage 06",
+  "notes": "Restage 06 of shorts/uMl76XX7epo: WHITE variant of the real Meltie Mini Fondue Mug (store photos), the treats on the round oak breakfast table (a round oak breakfast table in a kitchen nook at night, a built-in bench with checked cushions and a tall dark window streaked with rain behind, a rattan pendant glowing above) instead of the white desk in front of red curtains. Table decor kept (pumpkins, gnome pumpkin, candle jar, laptop). Reworded hook. The pour and the last dip spill on purpose (brief). Laptop: generated fantasy stills; plain unbranded red bag; Sora audio.",
+  "variant": "white",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When the first frost hits and it's",
+    "suddenly Harry Potter season",
+    "❄️🍂⚡✨"
+  ],
+  "setting": {
+    "surface": "round oak breakfast table",
+    "behind": "the dark rainy kitchen window behind",
+    "style": "Cosy autumn movie night at home in the evening, at a BREAKFAST NOOK: everything happens on the round oak breakfast table; a dim warm room lit only by warm rattan-pendant light and the candle, deep soft shadows, no bright studio light, no red curtains. Handheld vertical phone video at table height, shallow depth of field, rich warm autumn colour grade. Hands have long glossy pale-pink manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos.",
+    "setDesc": "evening at home at a cosy BREAKFAST NOOK: a round oak breakfast table in a kitchen nook at night, a built-in bench with checked cushions and a tall dark window streaked with rain behind, a rattan pendant glowing above, a dim warm room lit only by warm rattan-pendant light and the candle, deep soft shadows, no bright studio light, no red curtains; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The dark rainy window and the bench cushions fill the top, softly out of focus, the glowing rattan pendant at the top edge; the oak table fills the lower half.",
+    "props": {
+      "nookbench": {
+        "desc": "a built-in kitchen nook bench with blue-and-cream checked cushions below a tall dark window streaked with rain"
+      },
+      "rattan": {
+        "desc": "a woven rattan pendant lamp glowing warm amber"
+      }
+    }
+  }
+}
