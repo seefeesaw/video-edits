@@ -46,6 +46,8 @@ for (const takesOf of takesList) {
   const s = spec.shots.find((x) => x.id === takesOf) || (perf && { ...perf, start: 0, end: perf.seconds, from: 0 });
   if (!s) throw new Error(`no shot or performance ${takesOf}`);
   const takes = fs.readdirSync(path.join(dir, 'clips')).filter((f) => f === `${s.id}.mp4` || (f.startsWith(`${s.id}.v`) && f.endsWith('.mp4')));
+  // a shot still generating (or cut from another shot's take): say so and go on with the other shots
+  if (!takes.length) { console.log(`${s.id}: no takes in clips/ yet${s.takes === 0 ? ` (it uses ${s.clip}: sheet that shot instead)` : ''}`); continue; }
   // --full: the whole take (to retime "from"), not just the span the shot uses
   const full = argv.includes('--full');
   const clipLen = (f) => +execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', path.join(dir, 'clips', f)]).toString().trim();
