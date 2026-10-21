@@ -170,6 +170,31 @@
       "prompt": "Handheld, one continuous take. 0-0.7 s: the fork lifts the strawberry off the board and carries it up into the mug while the camera moves closer to the mug. 0.7-2.5 s: it dips the strawberry into the melted chocolate and turns it, coating it, the camera now close above the mug, the mug BIG in frame. 2.5-4 s: it lifts the strawberry slightly out of the chocolate, fully coated and dripping.",
       "screen": {
         "image": "bible/screen-e2.png"
+      },
+      "clip": "clips/s1.mp4",
+      "pick": "manual",
+      "zoom": [
+        1,
+        1.5
+      ],
+      "pan": [
+        -0.5,
+        -1
+      ],
+      "grade": {
+        "r": [
+          1.3345,
+          27.92
+        ],
+        "g": [
+          1.3345,
+          27.92
+        ],
+        "b": [
+          1.3345,
+          27.92
+        ],
+        "clip": "clips/s1.mp4"
       }
     },
     {
@@ -187,7 +212,28 @@
         "image": "bible/screen-e1.png",
         "anchor": "center"
       },
-      "hold": 0.65
+      "hold": 0.65,
+      "clip": "clips/s2.mp4",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.603,
+          34.89
+        ],
+        "g": [
+          1.603,
+          34.89
+        ],
+        "b": [
+          1.603,
+          34.89
+        ],
+        "clip": "clips/s2.mp4"
+      }
     },
     {
       "id": "s3",
@@ -207,6 +253,28 @@
       "screen": {
         "image": "bible/screen-e3.png",
         "anchor": "center"
+      },
+      "clip": "clips/s3.v2.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.7542,
+          30.93
+        ],
+        "g": [
+          1.7542,
+          30.93
+        ],
+        "b": [
+          1.7542,
+          30.93
+        ],
+        "clip": "clips/s3.v2.mp4"
       }
     },
     {
@@ -225,6 +293,28 @@
       "prompt": "The torch lighter clicks and its blue flame lights the tealight's wick; the tealight flame catches and burns steadily. The mug behind stays as it is: its tealight window stays empty and dark. Small handheld movement.",
       "screen": {
         "image": "bible/screen-e4.png"
+      },
+      "clip": "clips/s4.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.7588,
+          31.92
+        ],
+        "g": [
+          1.7588,
+          31.92
+        ],
+        "b": [
+          1.7588,
+          31.92
+        ],
+        "clip": "clips/s4.mp4"
       }
     },
     {
@@ -241,6 +331,27 @@
       "screen": {
         "image": "bible/screen-e2.png",
         "anchor": "center"
+      },
+      "clip": "clips/s5.mp4",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.2428,
+          35.75
+        ],
+        "g": [
+          1.2428,
+          35.75
+        ],
+        "b": [
+          1.2428,
+          35.75
+        ],
+        "clip": "clips/s5.mp4"
       }
     },
     {
@@ -256,6 +367,27 @@
       "prompt": "The right hand slowly stirs the melted chocolate with the fondue fork in small circles while the left hand holds the mug. Gentle handheld movement.",
       "screen": {
         "image": "bible/screen-e1.png"
+      },
+      "clip": "clips/s6.v2.mp4",
+      "zoom": 1.15,
+      "pan": [
+        -1,
+        -1
+      ],
+      "grade": {
+        "r": [
+          1.4447,
+          32.64
+        ],
+        "g": [
+          1.4447,
+          32.64
+        ],
+        "b": [
+          1.4447,
+          32.64
+        ],
+        "clip": "clips/s6.v2.mp4"
       }
     },
     {
@@ -277,6 +409,28 @@
       "prompt": "The bamboo board slides quickly out of the frame towards the bottom within half a second, leaving the bare reclaimed-wood coffee table in front of the mug. The mug stays still. Static camera.",
       "screen": {
         "image": "bible/screen-e3.png"
+      },
+      "clip": "clips/s7.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.6771,
+          12.99
+        ],
+        "g": [
+          1.6771,
+          12.99
+        ],
+        "b": [
+          1.6771,
+          12.99
+        ],
+        "clip": "clips/s7.mp4"
       }
     },
     {
@@ -296,6 +450,28 @@
       "prompt": "One continuous static take, no camera move. 0-0.8 s: the fork lifts the strawberry up from the board and moves it over the brim-full mug. 0.8-1.8 s: it pushes the strawberry straight DOWN INTO the mug until it disappears under the melted chocolate; the chocolate surges up and OVERFLOWS: a big wave of glossy melted chocolate spills over the rim on all sides and pours down the SIDES of the white outside of the mug in thick streams. 1.8-2.3 s: the strawberry stays under while thick chocolate keeps pouring down the outside of the mug and pools in a puddle on the reclaimed-wood coffee table around its base. 2.3-3.5 s: it rises slowly straight back up out of the mug, fully coated in glossy chocolate, dripping, while the overflow keeps running down the mug into the growing puddle. 3.5-4 s: held still just above the mug. The strawberry stays on the fork the whole time. Lots of spilled chocolate, yet the mug's shape, its handle and the 'Chocolate...' lettering on its front stay clearly visible: the streams run down the sides and the back, not over the front.",
       "screen": {
         "image": "bible/screen-e4.png"
+      },
+      "clip": "clips/s8.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.2765,
+          19.84
+        ],
+        "g": [
+          1.2765,
+          19.84
+        ],
+        "b": [
+          1.2765,
+          19.84
+        ],
+        "clip": "clips/s8.mp4"
       }
     }
   ]
