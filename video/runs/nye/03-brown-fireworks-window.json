@@ -1,0 +1,24 @@
+{
+  "title": "New Year's Eve fondue (brown Meltie mug, fireworks window) — NYE 03",
+  "notes": "New Year's Eve restage 03 of the \"I love this mug!!\" Short (shorts/uMl76XX7epo): BROWN variant of the real Meltie Mini Fondue Mug (store photos), on the small round marble table by a tall window (a small round white marble table by a tall dark window on New Year's Eve, distant golden fireworks bursting over the city lights outside). New Year's Eve decor instead of pumpkins; reworded NYE hook. The pour and the last dip spill on purpose. Laptop: generated fictional New Year's film stills (no real footage); plain unbranded red bag; no brand labels on bottles; Sora audio.",
+  "brand": "meltie",
+  "variant": "brown",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When the fireworks start and",
+    "it's the last night of the year",
+    "🎇🌃✨"
+  ],
+  "setting": {
+    "surface": "small round marble table by a tall window",
+    "behind": "the tall window with distant city fireworks behind",
+    "style": "Festive New Year's Eve night at home, at a FIREWORKS WINDOW TABLE: everything happens on the small round marble table by a tall window; a dim festive room lit only by the glow of distant fireworks and a small lamp and the candle, deep soft shadows, no bright studio light. Handheld vertical phone video at table height, shallow depth of field, rich warm gold-and-black party colour grade with sparkle. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos, no readable numbers.",
+    "setDesc": "New Year's Eve night at home at a FIREWORKS WINDOW TABLE: a small round white marble table by a tall dark window on New Year's Eve, distant golden fireworks bursting over the city lights outside, a dim festive room lit only by the glow of distant fireworks and a small lamp and the candle, deep soft shadows, no bright studio light; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The tall dark window with distant golden fireworks over the city fills the top, softly out of focus; the marble table fills the lower half.",
+    "props": {
+      "fireworks": {
+        "desc": "a tall dark window with distant golden fireworks bursting over twinkling city lights at night"
+      }
+    }
+  }
+}

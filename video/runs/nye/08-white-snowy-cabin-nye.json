@@ -1,0 +1,24 @@
+{
+  "title": "New Year's Eve fondue (white Meltie mug, snowy cabin nye) — NYE 08",
+  "notes": "New Year's Eve restage 08 of the \"I love this mug!!\" Short (shorts/uMl76XX7epo): WHITE variant of the real Meltie Mini Fondue Mug (store photos), on the rustic pine table (a rustic pine table in a snowy cabin on New Year's Eve, a frosty window with snow outside, gold string lights and a small paper \"Happy New Year\" garland without letters (plain gold stars)). New Year's Eve decor instead of pumpkins; reworded NYE hook. The pour and the last dip spill on purpose. Laptop: generated fictional New Year's film stills (no real footage); plain unbranded red bag; no brand labels on bottles; Sora audio.",
+  "brand": "meltie",
+  "variant": "white",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When it’s snowing on New Year’s Eve and",
+    "we’re staying in for fondue",
+    "❄️🎆🍫"
+  ],
+  "setting": {
+    "surface": "rustic pine table",
+    "behind": "the frosty cabin window and gold lights behind",
+    "style": "Festive New Year's Eve night at home, at a SNOWY CABIN NEW YEAR: everything happens on the rustic pine table; a dim festive room lit only by gold string lights and a stove glow and the candle, deep soft shadows, no bright studio light. Handheld vertical phone video at table height, shallow depth of field, rich warm gold-and-black party colour grade with sparkle. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos, no readable numbers.",
+    "setDesc": "New Year's Eve night at home at a SNOWY CABIN NEW YEAR: a rustic pine table in a snowy cabin on New Year's Eve, a frosty window with snow outside, gold string lights and a small paper \"Happy New Year\" garland without letters (plain gold stars), a dim festive room lit only by gold string lights and a stove glow and the candle, deep soft shadows, no bright studio light; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The frosty cabin window with snow outside and the gold star garland fill the top, softly out of focus; the pine table fills the lower half.",
+    "props": {
+      "cabinwindow": {
+        "desc": "a frosty cabin window with falling snow outside, gold string lights and a garland of plain gold paper stars"
+      }
+    }
+  }
+}

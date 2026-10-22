@@ -1,0 +1,24 @@
+{
+  "title": "New Year's Eve fondue (red Meltie mug, silver bar cart) — NYE 07",
+  "notes": "New Year's Eve restage 07 of the \"I love this mug!!\" Short (shorts/uMl76XX7epo): RED variant of the real Meltie Mini Fondue Mug (store photos), on the mirrored bar cart top (a gold mirrored bar cart on New Year's Eve, glass shelves with crystal glasses and plain unlabelled bottles, silver balloons and fairy lights behind). New Year's Eve decor instead of pumpkins; reworded NYE hook. The pour and the last dip spill on purpose. Laptop: generated fictional New Year's film stills (no real footage); plain unbranded red bag; no brand labels on bottles; Sora audio.",
+  "brand": "meltie",
+  "variant": "red",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When the clock hits eleven and",
+    "it's time for the last treat of the year",
+    "🕚🍫✨"
+  ],
+  "setting": {
+    "surface": "mirrored bar cart top",
+    "behind": "the glass shelves and party lights behind",
+    "style": "Festive New Year's Eve night at home, at a BAR CART CORNER: everything happens on the mirrored bar cart top; a dim festive room lit only by fairy lights and the candle, deep soft shadows, no bright studio light. Handheld vertical phone video at table height, shallow depth of field, rich warm gold-and-black party colour grade with sparkle. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos, no readable numbers.",
+    "setDesc": "New Year's Eve night at home at a BAR CART CORNER: a gold mirrored bar cart on New Year's Eve, glass shelves with crystal glasses and plain unlabelled bottles, silver balloons and fairy lights behind, a dim festive room lit only by fairy lights and the candle, deep soft shadows, no bright studio light; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The glass shelves with crystal glasses, the silver balloons and fairy lights fill the top, softly out of focus; the mirrored bar cart top fills the lower half.",
+    "props": {
+      "barcart": {
+        "desc": "a gold bar cart with glass shelves of crystal glasses and plain unlabelled bottles, silver balloons and fairy lights behind"
+      }
+    }
+  }
+}

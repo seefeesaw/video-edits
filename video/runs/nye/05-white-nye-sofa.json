@@ -1,0 +1,24 @@
+{
+  "title": "New Year's Eve fondue (white Meltie mug, nye sofa) — NYE 05",
+  "notes": "New Year's Eve restage 05 of the \"I love this mug!!\" Short (shorts/uMl76XX7epo): WHITE variant of the real Meltie Mini Fondue Mug (store photos), on the wooden tray on a velvet sofa (a wooden tray on a deep green velvet sofa on New Year's Eve, cushions, a faux-fur throw and silver tinsel garland on the wall behind). New Year's Eve decor instead of pumpkins; reworded NYE hook. The pour and the last dip spill on purpose. Laptop: generated fictional New Year's film stills (no real footage); plain unbranded red bag; no brand labels on bottles; Sora audio.",
+  "brand": "meltie",
+  "variant": "white",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When everyone’s out partying and",
+    "I'm in with my fondue mug",
+    "🛋️🍫🎉"
+  ],
+  "setting": {
+    "surface": "wooden tray on a velvet sofa",
+    "behind": "the velvet sofa cushions and silver tinsel behind",
+    "style": "Festive New Year's Eve night at home, at a NEW YEAR NIGHT IN ON THE SOFA: everything happens on the wooden tray on a velvet sofa; a dim festive room lit only by warm fairy lights and the candle, deep soft shadows, no bright studio light. Handheld vertical phone video at tray height, shallow depth of field, rich warm gold-and-black party colour grade with sparkle. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos, no readable numbers.",
+    "setDesc": "New Year's Eve night at home at a NEW YEAR NIGHT IN ON THE SOFA: a wooden tray on a deep green velvet sofa on New Year's Eve, cushions, a faux-fur throw and silver tinsel garland on the wall behind, a dim festive room lit only by warm fairy lights and the candle, deep soft shadows, no bright studio light; vertical phone camera at tray height, slightly above, looking at the mug",
+    "layoutTail": "The green velvet sofa back, cushions and the silver tinsel garland fill the top, softly out of focus; the tray on the sofa seat fills the lower half.",
+    "props": {
+      "velvetsofa": {
+        "desc": "a deep green velvet sofa with cushions and a faux-fur throw, a silver tinsel garland on the wall above"
+      }
+    }
+  }
+}

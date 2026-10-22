@@ -1,0 +1,24 @@
+{
+  "title": "New Year's Eve fondue (red Meltie mug, kitchen midnight) — NYE 10",
+  "notes": "New Year's Eve restage 10 of the \"I love this mug!!\" Short (shorts/uMl76XX7epo): RED variant of the real Meltie Mini Fondue Mug (store photos), on the black slate kitchen counter (a black slate kitchen counter at midnight on New Year's Eve, dark navy cabinets, a brass wall clock with both hands near twelve and confetti on the counter). New Year's Eve decor instead of pumpkins; reworded NYE hook. The pour and the last dip spill on purpose. Laptop: generated fictional New Year's film stills (no real footage); plain unbranded red bag; no brand labels on bottles; Sora audio.",
+  "brand": "meltie",
+  "variant": "red",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When the clock strikes twelve and",
+    "the first bite of the year is fondue",
+    "🕛🎉🍫"
+  ],
+  "setting": {
+    "surface": "black slate kitchen counter",
+    "behind": "the dark kitchen with a midnight clock behind",
+    "style": "Festive New Year's Eve night at home, at a MIDNIGHT KITCHEN COUNTER: everything happens on the black slate kitchen counter; a dim festive room lit only by under-cabinet lights and the candle, deep soft shadows, no bright studio light. Handheld vertical phone video at table height, shallow depth of field, rich warm gold-and-black party colour grade with sparkle. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos, no readable numbers.",
+    "setDesc": "New Year's Eve night at home at a MIDNIGHT KITCHEN COUNTER: a black slate kitchen counter at midnight on New Year's Eve, dark navy cabinets, a brass wall clock with both hands near twelve and confetti on the counter, a dim festive room lit only by under-cabinet lights and the candle, deep soft shadows, no bright studio light; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The dark navy cabinets and the brass wall clock near twelve fill the top, softly out of focus; the slate counter fills the lower half.",
+    "props": {
+      "midnightclock": {
+        "desc": "dark navy kitchen cabinets with brass handles and a brass wall clock with both hands near twelve"
+      }
+    }
+  }
+}

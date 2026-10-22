@@ -1,0 +1,24 @@
+{
+  "title": "New Year's Eve fondue (white Meltie mug, champagne coffee table) — NYE 02",
+  "notes": "New Year's Eve restage 02 of the \"I love this mug!!\" Short (shorts/uMl76XX7epo): WHITE variant of the real Meltie Mini Fondue Mug (store photos), on the smoked-oak coffee table (a smoked-oak coffee table on New Year's Eve with an ice bucket holding a champagne bottle with a plain gold foil top and no label, two coupe glasses, and a cream sofa behind). New Year's Eve decor instead of pumpkins; reworded NYE hook. The pour and the last dip spill on purpose. Laptop: generated fictional New Year's film stills (no real footage); plain unbranded red bag; no brand labels on bottles; Sora audio.",
+  "brand": "meltie",
+  "variant": "white",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When the year is almost over and",
+    "the countdown starts at home",
+    "🥂⏳🎉"
+  ],
+  "setting": {
+    "surface": "smoked-oak coffee table",
+    "behind": "the sofa and sparkler glow behind",
+    "style": "Festive New Year's Eve night at home, at a CHAMPAGNE COFFEE TABLE: everything happens on the smoked-oak coffee table; a dim festive room lit only by warm candlelight and a soft gold lamp and the candle, deep soft shadows, no bright studio light. Handheld vertical phone video at table height, shallow depth of field, rich warm gold-and-black party colour grade with sparkle. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos, no readable numbers.",
+    "setDesc": "New Year's Eve night at home at a CHAMPAGNE COFFEE TABLE: a smoked-oak coffee table on New Year's Eve with an ice bucket holding a champagne bottle with a plain gold foil top and no label, two coupe glasses, and a cream sofa behind, a dim festive room lit only by warm candlelight and a soft gold lamp and the candle, deep soft shadows, no bright studio light; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The cream sofa and the ice bucket with the champagne bottle fill the top, softly out of focus; the coffee table fills the lower half.",
+    "props": {
+      "champagne": {
+        "desc": "a silver ice bucket holding a dark champagne bottle with a plain gold foil top and no label, and two crystal coupe glasses"
+      }
+    }
+  }
+}

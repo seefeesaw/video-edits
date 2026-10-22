@@ -1,0 +1,12 @@
+PREP videos/nye01-red-countdown 8
+PREP videos/nye02-white-champagne 8
+PREP videos/nye03-brown-fireworks 8
+PREP videos/nye04-red-gold 8
+PREP videos/nye05-white-nye 8
+PREP videos/nye06-brown-rooftop 8
+PREP videos/nye07-red-silver 8
+runs/nye/prep.sh: line 11: cd: videos/nye08-white-snowy/assets/keyframes: No such file or directory
+PREP videos/nye08-white-snowy 0
+PREP videos/nye09-brown-glitter 8
+PREP videos/nye10-red-kitchen 8
+ALLPREP

@@ -1,0 +1,82 @@
+{
+  "clips/s1.mp4": {
+    "id": "video_6ada6f2463f881908a94ee1e9be97baa",
+    "at": "2026-10-22T20:17:50.248Z",
+    "expiresAt": 1792786597
+  },
+  "clips/s1.v2.mp4": {
+    "id": "video_6ada6f23ff0481908aaf7da18f053dfb",
+    "at": "2026-10-22T20:18:07.344Z",
+    "expiresAt": 1792786596
+  },
+  "clips/s2.mp4": {
+    "id": "video_6ada6f7174c8819097d17afc8bb5d227",
+    "at": "2026-10-22T20:19:07.956Z",
+    "expiresAt": 1792786674
+  },
+  "clips/s2.v2.mp4": {
+    "id": "video_6ada6fa49aa88190bc863ef8ed8a7615",
+    "at": "2026-10-22T20:20:04.516Z",
+    "expiresAt": 1792786731
+  },
+  "clips/s3.mp4": {
+    "id": "video_6ada6fe644ac8190a63748218b3949d5",
+    "at": "2026-10-22T20:21:04.747Z",
+    "expiresAt": 1792786791
+  },
+  "clips/s3.v2.mp4": {
+    "id": "video_6ada701dda3c8190badb76001bf01f02",
+    "at": "2026-10-22T20:21:58.216Z",
+    "expiresAt": 1792786846
+  },
+  "clips/s4.mp4": {
+    "id": "video_6ada705d8a7c8190aec0b80fb85dfb71",
+    "at": "2026-10-22T20:23:04.865Z",
+    "expiresAt": 1792786910
+  },
+  "clips/s4.v2.mp4": {
+    "id": "video_6ada709963c481909f0f2f135002dcbc",
+    "at": "2026-10-22T20:23:58.547Z",
+    "expiresAt": 1792786969
+  },
+  "clips/s5.mp4": {
+    "id": "video_6ada70cd485c8190b71bffd1dc882c81",
+    "at": "2026-10-22T20:24:59.860Z",
+    "expiresAt": 1792787022
+  },
+  "clips/s5.v2.mp4": {
+    "id": "video_6ada710b14888190b21ffcc760dc7059",
+    "at": "2026-10-22T20:25:58.012Z",
+    "expiresAt": 1792787083
+  },
+  "clips/s6.mp4": {
+    "id": "video_6ada7149ffa881909c12c634af9b03b4",
+    "at": "2026-10-22T20:26:58.993Z",
+    "expiresAt": 1792787146
+  },
+  "clips/s6.v2.mp4": {
+    "id": "video_6ada717e61148190b28fa6187cab81aa",
+    "at": "2026-10-22T20:27:53.201Z",
+    "expiresAt": 1792787199
+  },
+  "clips/s7.mp4": {
+    "id": "video_6ada71c3c800819083cb6ceb93e6e95b",
+    "at": "2026-10-22T20:29:05.206Z",
+    "expiresAt": 1792787268
+  },
+  "clips/s7.v2.mp4": {
+    "id": "video_6ada71f9cf90819086a24859460d078a",
+    "at": "2026-10-22T20:29:56.496Z",
+    "expiresAt": 1792787322
+  },
+  "clips/s8.mp4": {
+    "id": "video_6ada7235c05481908de8ae1d7f91f4aa",
+    "at": "2026-10-22T20:30:56.981Z",
+    "expiresAt": 1792787382
+  },
+  "clips/s8.v2.mp4": {
+    "id": "video_6ada726dfe6481908c765b73d6bdd2d3",
+    "at": "2026-10-22T20:31:54.629Z",
+    "expiresAt": 1792787438
+  }
+}

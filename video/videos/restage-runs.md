@@ -30,3 +30,11 @@
 | 08 | m3r08-white-cabin | white | log-cabin coffee table | cozy movie / season is coming. | one-shot comp 87.8, 7/7 cuts, no fix |
 | 09 | m3r09-brown-city | brown | smoked-glass table, city apartment | holiday film / season is here. | one-shot comp 85.4, 7/7 cuts; fix: screen "despill" (the glass table reflected the green screen) |
 | 10 | m3r10-red-boho | red | boho rattan side table | fireside movie / season is coming. | one-shot comp 86.0, 7/7 cuts, no fix |
+
+# New Year's Eve restages of shorts/uMl76XX7epo (templates/nye.json, runs/nye/) — 2 takes per shot
+
+| # | video | variant | setting | hook | result |
+|---|---|---|---|---|---|
+| 01 | nye01-red-countdown | red | countdown party table | When it's almost midnight and it's / officially fondue o'clock | one-shot comp 86.0, 7/7 cuts; s4 from 1.4 (both takes lit the tealight late, ~1.2 s) |
+| 02 | nye02-white-champagne | white | champagne coffee table | When the year is almost over and / the countdown starts at home | one-shot comp 88.2, 7/7 cuts, no fix (s7 v2: v1 emptied the board before it left) |
+| 03 | nye03-brown-fireworks | brown | marble table by a fireworks window | When the fireworks start and / it's the last night of the year | one-shot comp 90.1, 7/7 cuts, no fix |

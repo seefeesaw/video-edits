@@ -1,0 +1,24 @@
+{
+  "title": "New Year's Eve fondue (red Meltie mug, gold dining) — NYE 04",
+  "notes": "New Year's Eve restage 04 of the \"I love this mug!!\" Short (shorts/uMl76XX7epo): RED variant of the real Meltie Mini Fondue Mug (store photos), on the black dining table with a gold sequin runner (a black dining table with a gold sequin runner on New Year's Eve, tall gold candelabras with lit taper candles and a dark charcoal wall behind). New Year's Eve decor instead of pumpkins; reworded NYE hook. The pour and the last dip spill on purpose. Laptop: generated fictional New Year's film stills (no real footage); plain unbranded red bag; no brand labels on bottles; Sora audio.",
+  "brand": "meltie",
+  "variant": "red",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When it’s New Year’s Eve and",
+    "the best plans are at home",
+    "🕯️🥂🎆"
+  ],
+  "setting": {
+    "surface": "black dining table with a gold sequin runner",
+    "behind": "the gold candelabra and black wall behind",
+    "style": "Festive New Year's Eve night at home, at a GOLD NEW YEAR DINNER TABLE: everything happens on the black dining table with a gold sequin runner; a dim festive room lit only by tall taper candles and the candle, deep soft shadows, no bright studio light. Handheld vertical phone video at table height, shallow depth of field, rich warm gold-and-black party colour grade with sparkle. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos, no readable numbers.",
+    "setDesc": "New Year's Eve night at home at a GOLD NEW YEAR DINNER TABLE: a black dining table with a gold sequin runner on New Year's Eve, tall gold candelabras with lit taper candles and a dark charcoal wall behind, a dim festive room lit only by tall taper candles and the candle, deep soft shadows, no bright studio light; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The gold candelabras with lit tapers against the dark charcoal wall fill the top, softly out of focus; the black table with its gold sequin runner fills the lower half.",
+    "props": {
+      "candelabra": {
+        "desc": "tall gold candelabras with lit ivory taper candles in front of a dark charcoal wall"
+      }
+    }
+  }
+}

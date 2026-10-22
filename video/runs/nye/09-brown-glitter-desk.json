@@ -1,0 +1,24 @@
+{
+  "title": "New Year's Eve fondue (brown Meltie mug, glitter desk) — NYE 09",
+  "notes": "New Year's Eve restage 09 of the \"I love this mug!!\" Short (shorts/uMl76XX7epo): BROWN variant of the real Meltie Mini Fondue Mug (store photos), on the white desk sprinkled with gold glitter (a white desk on New Year's Eve sprinkled with gold glitter, a shimmering gold sequin wall backdrop and gold star balloons behind). New Year's Eve decor instead of pumpkins; reworded NYE hook. The pour and the last dip spill on purpose. Laptop: generated fictional New Year's film stills (no real footage); plain unbranded red bag; no brand labels on bottles; Sora audio.",
+  "brand": "meltie",
+  "variant": "brown",
+  "reference": "videos/mug-love-ref",
+  "hook": [
+    "When the new year is minutes away",
+    "and the fondue is melting",
+    "✨🌟🥂"
+  ],
+  "setting": {
+    "surface": "white desk sprinkled with gold glitter",
+    "behind": "the gold sequin backdrop behind",
+    "style": "Festive New Year's Eve night at home, at a GLITTER DESK NEW YEAR: everything happens on the white desk sprinkled with gold glitter; a dim festive room lit only by warm golden lamp light and the candle, deep soft shadows, no bright studio light. Handheld vertical phone video at table height, shallow depth of field, rich warm gold-and-black party colour grade with sparkle. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos, no readable numbers.",
+    "setDesc": "New Year's Eve night at home at a GLITTER DESK NEW YEAR: a white desk on New Year's Eve sprinkled with gold glitter, a shimmering gold sequin wall backdrop and gold star balloons behind, a dim festive room lit only by warm golden lamp light and the candle, deep soft shadows, no bright studio light; vertical phone camera at table height, slightly above, looking at the mug",
+    "layoutTail": "The shimmering gold sequin backdrop and gold star balloons fill the top, softly out of focus; the white desk fills the lower half.",
+    "props": {
+      "sequinwall": {
+        "desc": "a shimmering gold sequin wall backdrop with gold star-shaped balloons"
+      }
+    }
+  }
+}
