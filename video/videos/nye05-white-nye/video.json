@@ -1,0 +1,430 @@
+{
+  "title": "New Year's Eve fondue (white Meltie mug, nye sofa) — NYE 05",
+  "source": "https://www.youtube.com/shorts/uMl76XX7epo",
+  "notes": "New Year's Eve restage 05 of the \"I love this mug!!\" Short (shorts/uMl76XX7epo): WHITE variant of the real Meltie Mini Fondue Mug (store photos), on the wooden tray on a velvet sofa (a wooden tray on a deep green velvet sofa on New Year's Eve, cushions, a faux-fur throw and silver tinsel garland on the wall behind). New Year's Eve decor instead of pumpkins; reworded NYE hook. The pour and the last dip spill on purpose. Laptop: generated fictional New Year's film stills (no real footage); plain unbranded red bag; no brand labels on bottles; Sora audio.",
+  "size": [
+    1080,
+    1920
+  ],
+  "fps": 60,
+  "duration": 10.961,
+  "soraSize": "720x1280",
+  "compare": {
+    "trim": 0.35,
+    "grade": "luma"
+  },
+  "product": {
+    "name": "Meltie Mug Mini Fondue Mug, white",
+    "refs": [
+      "assets/product/white-front.png",
+      "assets/product/white-lit.jpg"
+    ],
+    "description": "the WHITE Meltie Mini Fondue Mug exactly as in the product photos: glossy off-white ceramic body that flares wider at the top, a glossy dark chocolate-brown glazed interior, 'Chocolate...' in brown cursive script with a small brown swirl mark on the front, a tall arched opening at the base for a tealight, an angular white handle on the right, and a fondue fork with a brown handle and long steel tines that clips into a slot in the handle"
+  },
+  "style": "Festive New Year's Eve night at home, at a NEW YEAR NIGHT IN ON THE SOFA: everything happens on the wooden tray on a velvet sofa; a dim festive room lit only by warm fairy lights and the candle, deep soft shadows, no bright studio light. Handheld vertical phone video at tray height, shallow depth of field, rich warm gold-and-black party colour grade with sparkle. Hands have long glossy deep-red manicured nails. The laptop screen is always flat chroma-key green. No on-screen text, no logos, no readable numbers.",
+  "bible": {
+    "props": {
+      "mug": {
+        "image": "assets/product/white-front.png",
+        "desc": "the WHITE Meltie Mini Fondue Mug exactly as in the product photos: glossy off-white ceramic body that flares wider at the top, a glossy dark chocolate-brown glazed interior, 'Chocolate...' in brown cursive script with a small brown swirl mark on the front, a tall arched opening at the base for a tealight, an angular white handle on the right, and a fondue fork with a brown handle and long steel tines that clips into a slot in the handle"
+      },
+      "laptop": {
+        "desc": "an open dark space-grey laptop with a black keyboard, its screen lit with a perfectly flat, uniform, pure chroma-key green (#00FF00) from edge to edge, no picture, no interface, no reflection"
+      },
+      "candle": {
+        "desc": "a round amber glass candle jar with a lit candle flickering inside, glowing warm orange"
+      },
+      "board": {
+        "desc": "an oval light bamboo serving board loaded with two chocolate chip cookies on the left, a heap of big white marshmallows in the middle and a pile of whole red strawberries on the right"
+      },
+      "torch": {
+        "desc": "a small black pocket butane torch lighter"
+      },
+      "bag": {
+        "desc": "a plain glossy red chocolate sharing bag with no text or logo, torn open at the top"
+      },
+      "party": {
+        "desc": "New Year's Eve table decorations: a small gold disco ball, a gold glitter party hat and scattered gold and silver confetti stars"
+      },
+      "velvetsofa": {
+        "desc": "a deep green velvet sofa with cushions and a faux-fur throw, a silver tinsel garland on the wall above"
+      }
+    },
+    "screens": {
+      "e1": {
+        "desc": "golden fireworks bursting over a city skyline at midnight on New Year's Eve, reflected in a river, cinematic film still, no people"
+      },
+      "e2": {
+        "desc": "a cosy living room on New Year's Eve with gold balloons, streamers and a big wall clock near midnight, warm cinematic film still, no people"
+      },
+      "e3": {
+        "desc": "two adult friends in their thirties in party outfits laughing and clinking champagne glasses under gold string lights, cinematic film still"
+      },
+      "e4": {
+        "desc": "a snowy city street at night strung with festive gold lights and confetti on the pavement, cinematic film still, no people"
+      }
+    },
+    "sets": {
+      "A": {
+        "desc": "New Year's Eve night at home at a NEW YEAR NIGHT IN ON THE SOFA: a wooden tray on a deep green velvet sofa on New Year's Eve, cushions, a faux-fur throw and silver tinsel garland on the wall behind, a dim festive room lit only by warm fairy lights and the candle, deep soft shadows, no bright studio light; vertical phone camera at tray height, slightly above, looking at the mug",
+        "props": [
+          "mug",
+          "laptop",
+          "candle",
+          "party",
+          "velvetsofa"
+        ],
+        "layout": "The white fondue mug stands in the centre of the wooden tray on a velvet sofa, about 44% of the frame width, its rim at about 43% of the height and its base at about 77%, its fondue fork standing in it, the mug empty with its dark brown glazed inside visible. Behind it on the LEFT an open laptop on the wooden tray on a velvet sofa seen at an angle: its green screen fills the upper-left (from the left edge to about 48% of the width, 22% to 45% of the height), its dark keyboard behind the mug at 45-55% of the height. On the RIGHT behind the mug the small gold disco ball and the gold glitter party hat (upper right, 60-90% of the width, 15-45% of the height) and the amber candle jar beside the mug; a few gold confetti stars on the wooden tray on a velvet sofa between the laptop and the mug. The green velvet sofa back, cushions and the silver tinsel garland fill the top, softly out of focus; the tray on the sofa seat fills the lower half."
+      }
+    }
+  },
+  "fonts": [
+    "TikTok Sans:wght@400;500;600",
+    "Noto Color Emoji"
+  ],
+  "overlays": [
+    {
+      "from": 0,
+      "to": 10.961,
+      "elements": "@caption"
+    }
+  ],
+  "captions": {
+    "caption": [
+      {
+        "type": "text",
+        "x": 0,
+        "y": 330,
+        "text": "When everyone’s out partying and",
+        "font": {
+          "family": "TikTok Sans",
+          "size": 40,
+          "weight": 500,
+          "color": "#ffffff",
+          "lineHeight": 1,
+          "align": "center"
+        },
+        "style": "text-shadow:0 1px 3px rgba(0,0,0,.4)",
+        "w": 1080
+      },
+      {
+        "type": "text",
+        "x": 0,
+        "y": 383,
+        "text": "I'm in with my fondue mug",
+        "font": {
+          "family": "TikTok Sans",
+          "size": 40,
+          "weight": 500,
+          "color": "#ffffff",
+          "lineHeight": 1,
+          "align": "center"
+        },
+        "style": "text-shadow:0 1px 3px rgba(0,0,0,.4)",
+        "w": 1080
+      },
+      {
+        "type": "html",
+        "x": 0,
+        "y": 434,
+        "w": 1080,
+        "h": 40,
+        "html": "<span style=\"font-family:'Noto Color Emoji';font-size:32px;line-height:1;display:block;text-align:center;white-space:nowrap\">🛋️🍫🎉</span>"
+      }
+    ]
+  },
+  "audio": {
+    "sora": 1
+  },
+  "shots": [
+    {
+      "id": "s1",
+      "set": "A",
+      "start": 0,
+      "end": 2.45,
+      "from": 0,
+      "speed": 1.6,
+      "takes": 2,
+      "push": true,
+      "keyframe": {
+        "prompt": "Handheld view from slightly above, a little further back. The white fondue mug, full to near the rim with glossy melted milk chocolate and a lit tealight glowing in its window, stands at the upper middle (its body from 36% to 72% of the width, the handle to 80%; rim at about 25% of the height, base at about 59%). The oval bamboo board fills the BOTTOM-LEFT in the foreground (from the left edge to 100% of the width, from 55% to 95% of the height), loaded with big white marshmallows on the left and whole red strawberries on the right. A hand from the right holds the brown-handled fondue fork pushed into a strawberry on the board, about to lift it. The laptop with its flat chroma-key green screen in the top-left corner behind, the amber candle jar top-right, the velvet sofa cushions and silver tinsel behind.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "Handheld, one continuous take. 0-0.7 s: the fork lifts the strawberry off the board and carries it up into the mug while the camera moves closer to the mug. 0.7-2.5 s: it dips the strawberry into the melted chocolate and turns it, coating it, the camera now close above the mug, the mug BIG in frame. 2.5-4 s: it lifts the strawberry slightly out of the chocolate, fully coated and dripping.",
+      "screen": {
+        "image": "bible/screen-e2.png"
+      },
+      "clip": "clips/s1.v2.mp4",
+      "zoom": [
+        1,
+        1.5
+      ],
+      "pan": [
+        -0.25,
+        -1
+      ],
+      "grade": {
+        "r": [
+          1.2269,
+          37.55
+        ],
+        "g": [
+          1.2269,
+          37.55
+        ],
+        "b": [
+          1.2269,
+          37.55
+        ],
+        "clip": "clips/s1.v2.mp4"
+      }
+    },
+    {
+      "id": "s2",
+      "set": "A",
+      "start": 2.45,
+      "end": 3.35,
+      "from": 0,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Eye-level front view. The white fondue mug, EMPTY and clean (dark brown glazed inside visible, no chocolate), stands in the centre of the wooden tray on a velvet sofa, its body about 44% of the frame width (from 41% to 85% including the handle), rim at about 43% of the height, base at about 77%; its tealight window is empty and dark. A hand from the right edge holds the mug's handle. The laptop's flat chroma-key green screen in the upper-left behind (0-48% of the width, 22-45% of the height), gold confetti stars on the wooden tray on a velvet sofa left of the mug, the gold disco ball in the upper right."
+      },
+      "prompt": "The hand sets the EMPTY mug down on the wooden tray on a velvet sofa and keeps lightly holding its handle. The mug stays empty: no chocolate, no candle, its tealight window stays empty and dark. Static camera.",
+      "screen": {
+        "image": "bible/screen-e1.png",
+        "anchor": "center"
+      },
+      "hold": 0.65,
+      "clip": "clips/s2.mp4",
+      "zoom": 1.15,
+      "pan": [
+        -1,
+        0.5
+      ],
+      "grade": {
+        "r": [
+          1.798,
+          47.32
+        ],
+        "g": [
+          1.798,
+          47.32
+        ],
+        "b": [
+          1.798,
+          47.32
+        ],
+        "clip": "clips/s2.mp4"
+      }
+    },
+    {
+      "id": "s3",
+      "set": "A",
+      "start": 3.35,
+      "end": 4.75,
+      "from": 0.6,
+      "speed": 1.4,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Eye-level front view. The white fondue mug in the centre of the wooden tray on a velvet sofa, its body from 28% to 72% of the width, rim at about 48% of the height, base at about 81%, already FULL to the brim and heaped above the rim with round milk-chocolate malt balls; a few malt balls have already spilled over the rim and lie on the wooden tray on a velvet sofa around the mug base. The plain red chocolate bag with NO logo, NO text and no print, tilted steeply down from the top-right corner (37-100% of the width, 8-48% of the height), its open end just above the mug, a THICK stream of many malt balls pouring out of it into the mug. The laptop's flat chroma-key green screen in the upper-left behind, gold confetti stars left of the mug.",
+        "refs": [
+          "bible/prop-bag.png"
+        ]
+      },
+      "prompt": "One continuous static take. 0-4 s: a THICK, heavy stream of dozens of round milk-chocolate malt balls keeps pouring out of the tilted plain red bag into the already full mug; the pile overflows, and many balls tumble over the rim, bounce down the outside of the mug and spill across the wooden tray on a velvet sofa, rolling around the mug base. Lots of chocolate, a generous spill. Static camera.",
+      "screen": {
+        "image": "bible/screen-e3.png",
+        "anchor": "center"
+      },
+      "clip": "clips/s3.v2.mp4",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.6739,
+          34.85
+        ],
+        "g": [
+          1.6739,
+          34.85
+        ],
+        "b": [
+          1.6739,
+          34.85
+        ],
+        "clip": "clips/s3.v2.mp4"
+      }
+    },
+    {
+      "id": "s4",
+      "set": "A",
+      "start": 4.75,
+      "end": 5.6167,
+      "from": 0,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Eye-level, close. A BIG left hand enters from the left edge, palm up (from the left edge to 48% of the width, from 40% to 65% of the height), holding a small metal-cup tealight at about 45% of the height and 40% of the width. From the right edge a small black pocket butane torch lighter, held by a hand at the right edge (48-100% of the width, 45-70% of the height), points its nozzle at the tealight wick. The white fondue mug, heaped with malt balls, stands behind them on the RIGHT, fully visible, NOT covered by the hands or the lighter (its body from 50% to 85% of the width, rim at about 45%, base at about 81% of the height). The laptop's flat chroma-key green screen in the upper-left behind, the gold disco ball upper right.",
+        "refs": [
+          "bible/prop-torch.png"
+        ]
+      },
+      "prompt": "The torch lighter clicks and its blue flame touches the tealight's wick at once; within half a second the tealight is LIT: a small steady yellow candle flame burns on the tealight in the palm for the rest of the take, clearly visible. The mug behind stays as it is: its tealight window stays empty and dark. Small handheld movement.",
+      "screen": {
+        "image": "bible/screen-e4.png"
+      },
+      "clip": "clips/s4.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "s5",
+      "set": "A",
+      "start": 5.6167,
+      "end": 6.35,
+      "from": 0,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Close, eye-level. The white fondue mug heaped above the rim with round milk-chocolate malt balls stands in the centre (its body from 30% to 80% of the width including the handle, rim at about 40% of the height, base at about 75%); the right hand holds its handle; the left hand from the bottom-left holds a lit tealight at the arched window at the bottom of the mug (43-59% of the width, about 67% of the height), pushing it in. The laptop's flat chroma-key green screen in the upper-left behind, gold confetti stars at the left."
+      },
+      "prompt": "The left hand slides the lit tealight fully into the mug's window and pulls away; the candle glows inside the mug.",
+      "screen": {
+        "image": "bible/screen-e2.png",
+        "anchor": "center"
+      },
+      "clip": "clips/s5.mp4",
+      "zoom": 1.15,
+      "pan": [
+        -0.75,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.4405,
+          30.59
+        ],
+        "g": [
+          1.4405,
+          30.59
+        ],
+        "b": [
+          1.4405,
+          30.59
+        ],
+        "clip": "clips/s5.mp4"
+      }
+    },
+    {
+      "id": "s6",
+      "set": "A",
+      "start": 6.35,
+      "end": 7.6,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Close, from slightly above. The white fondue mug held by two hands in the centre (its body from 28% to 74% of the width, rim at about 47% of the height, base at about 83%), filled to near the rim with glossy smooth melted milk chocolate, the tealight glowing in its window; the left hand holds the mug's body from the left, the right hand holds the brown-handled fondue fork in the chocolate. The laptop's flat chroma-key green screen in the upper-left behind (0-50% of the width, 5-30% of the height), gold confetti stars at the left, the gold disco ball upper right."
+      },
+      "prompt": "The right hand slowly stirs the melted chocolate with the fondue fork in small circles while the left hand holds the mug. Gentle handheld movement.",
+      "screen": {
+        "image": "bible/screen-e1.png"
+      },
+      "clip": "clips/s6.mp4",
+      "zoom": 1.15,
+      "pan": [
+        -0.75,
+        -1
+      ],
+      "grade": {
+        "r": [
+          1.5153,
+          41.75
+        ],
+        "g": [
+          1.5153,
+          41.75
+        ],
+        "b": [
+          1.5153,
+          41.75
+        ],
+        "clip": "clips/s6.mp4"
+      }
+    },
+    {
+      "id": "s7",
+      "set": "A",
+      "start": 7.6,
+      "end": 8.5,
+      "from": 0,
+      "speed": 1.1,
+      "hold": 0.45,
+      "takes": 2,
+      "reverse": true,
+      "keyframe": {
+        "prompt": "Wider view, no hands. The white fondue mug stands centre-right (its body from 48% to 85% of the width, the handle to 96%, rim at about 37% of the height, base at about 65%), filled with melted chocolate, its tealight lit and glowing in its window, the fork resting in it. In the foreground the oval bamboo board (from 66% to 100% of the height, spanning the left 87% of the width) loaded with chocolate chip cookies, big white marshmallows and whole red strawberries. The laptop's flat chroma-key green screen in the upper-left (0-45% of the width, 12-35% of the height), gold confetti stars between the laptop and the mug, the gold disco ball and the candle jar upper right.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "The bamboo board slides quickly out of the frame towards the bottom within half a second, leaving the bare wooden tray on a velvet sofa in front of the mug. The mug stays still. Static camera.",
+      "screen": {
+        "image": "bible/screen-e3.png"
+      },
+      "clip": "clips/s7.mp4",
+      "pick": "manual",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "s8",
+      "set": "A",
+      "start": 8.5,
+      "end": 10.961,
+      "from": 0.2,
+      "speed": 1.4,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Medium view. The white fondue mug stands centre-right (its body from 48% to 85% of the width, the handle to 96%, rim at about 40% of the height, base at about 64%), filled to the VERY BRIM with glossy melted chocolate, chocolate ALREADY OVERFLOWING: two thick glossy streams of melted chocolate already running down the side of the mug from the rim to its base and a small glossy puddle of chocolate already on the surface around its base (the front lettering stays visible), its tealight lit. The oval bamboo board in the foreground spans the full width at 65-94% of the height: chocolate chip cookies on the left, big white marshmallows in the middle, whole red strawberries on the right. A hand from the right edge holds the brown-handled fondue fork low over the BOARD, its prongs stuck into a strawberry on the right of the board (the fork is NOT in the mug). The laptop's flat chroma-key green screen in the upper-left (0-45% of the width, 12-35% of the height), the gold disco ball and the candle jar upper right.",
+        "refs": [
+          "bible/prop-board.png"
+        ]
+      },
+      "prompt": "One continuous static take, no camera move. 0-0.8 s: the fork lifts the strawberry up from the board and moves it over the brim-full mug. 0.8-1.8 s: it pushes the strawberry straight DOWN INTO the mug until it disappears under the melted chocolate; the chocolate rises over the rim and spills: three or four thick glossy streams run down the sides of the mug and a growing puddle of melted chocolate spreads on the wooden tray on a velvet sofa around its base, clearly visible. 1.8-2.3 s: the strawberry stays under while the streams keep running into the puddle. 2.3-3.5 s: it rises slowly straight back up out of the mug, fully coated in glossy chocolate, dripping into the puddle. 3.5-4 s: held still just above the mug. The strawberry stays on the fork the whole time. The spill is clearly visible as streams and a big puddle, while the mug's shape, its handle and the 'Chocolate...' lettering on its front stay clearly visible: the streams run down the sides, not over the front.",
+      "screen": {
+        "image": "bible/screen-e4.png"
+      },
+      "clip": "clips/s8.mp4",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "grade": {
+        "r": [
+          1.386,
+          21.01
+        ],
+        "g": [
+          1.386,
+          21.01
+        ],
+        "b": [
+          1.386,
+          21.01
+        ],
+        "clip": "clips/s8.mp4"
+      }
+    }
+  ]
+}

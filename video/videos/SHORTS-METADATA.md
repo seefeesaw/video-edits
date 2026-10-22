@@ -487,3 +487,183 @@ Get the Meltie Mini Fondue Mug: https://meltiemug.com/products/mini-fondue-mug
 ```
 
 **Tags:** chocolate fondue, fondue mug, mini fondue mug, meltie mug, red fondue mug, chocolate fondue at home, movie night snacks, cozy night in, christmas movie night, holiday movies, christmas at home, winter night in, shorts
+
+## nye01-red-countdown
+
+**Title:** It's officially fondue o'clock 🎆🍫
+
+**Description:**
+
+```
+When it's almost midnight on New Year's Eve, the fondue mug comes out.
+
+The red Meltie Mini Fondue Mug at a countdown party table: malt balls in, tealight lit, strawberries dipped and dripping. A mini chocolate fondue in one mug for movie nights, cosy evenings and gifts.
+
+Get the Meltie Mini Fondue Mug: https://meltiemug.com/products/mini-fondue-mug
+
+#fondue #chocolatefondue #newyearseve #newyear #nye #cozyathome #meltiemug #shorts
+```
+
+**Tags:** chocolate fondue, fondue mug, mini fondue mug, meltie mug, red fondue mug, chocolate fondue at home, movie night snacks, cozy night in, new year's eve at home, new years eve snacks, nye night in, midnight countdown treat, shorts
+
+## nye02-white-champagne
+
+**Title:** The countdown starts at home 🥂🍫
+
+**Description:**
+
+```
+Champagne on ice, strawberries and a mug of melted chocolate to end the year.
+
+The white Meltie Mini Fondue Mug on a champagne coffee table: malt balls in, tealight lit, strawberries dipped and dripping. A mini chocolate fondue in one mug for movie nights, cosy evenings and gifts.
+
+Get the Meltie Mini Fondue Mug: https://meltiemug.com/products/mini-fondue-mug
+
+#fondue #chocolatefondue #newyearseve #newyear #nye #cozyathome #meltiemug #shorts
+```
+
+**Tags:** chocolate fondue, fondue mug, mini fondue mug, meltie mug, white fondue mug, chocolate fondue at home, movie night snacks, cozy night in, new year's eve at home, new years eve snacks, nye night in, midnight countdown treat, shorts
+
+## nye03-brown-fireworks
+
+**Title:** Fireworks + chocolate fondue 🎇🍫
+
+**Description:**
+
+```
+The last night of the year: fireworks outside, fondue inside.
+
+The chocolate brown Meltie Mini Fondue Mug by a window full of fireworks: malt balls in, tealight lit, strawberries dipped and dripping. A mini chocolate fondue in one mug for movie nights, cosy evenings and gifts.
+
+Get the Meltie Mini Fondue Mug: https://meltiemug.com/products/mini-fondue-mug
+
+#fondue #chocolatefondue #newyearseve #newyear #nye #cozyathome #meltiemug #shorts
+```
+
+**Tags:** chocolate fondue, fondue mug, mini fondue mug, meltie mug, brown fondue mug, chocolate fondue at home, movie night snacks, cozy night in, new year's eve at home, new years eve snacks, nye night in, midnight countdown treat, shorts
+
+## nye04-red-gold
+
+**Title:** The best New Year plans are at home 🕯️🍫
+
+**Description:**
+
+```
+Candelabras, gold sparkle and chocolate fondue for New Year's Eve.
+
+The red Meltie Mini Fondue Mug at a gold New Year dinner table: malt balls in, tealight lit, strawberries dipped and dripping. A mini chocolate fondue in one mug for movie nights, cosy evenings and gifts.
+
+Get the Meltie Mini Fondue Mug: https://meltiemug.com/products/mini-fondue-mug
+
+#fondue #chocolatefondue #newyearseve #newyear #nye #cozyathome #meltiemug #shorts
+```
+
+**Tags:** chocolate fondue, fondue mug, mini fondue mug, meltie mug, red fondue mug, chocolate fondue at home, movie night snacks, cozy night in, new year's eve at home, new years eve snacks, nye night in, midnight countdown treat, shorts
+
+## nye05-white-nye
+
+**Title:** Staying in for New Year's Eve 🛋️🍫
+
+**Description:**
+
+```
+Everyone's out partying. I'm in with my fondue mug.
+
+The white Meltie Mini Fondue Mug on the velvet sofa: malt balls in, tealight lit, strawberries dipped and dripping. A mini chocolate fondue in one mug for movie nights, cosy evenings and gifts.
+
+Get the Meltie Mini Fondue Mug: https://meltiemug.com/products/mini-fondue-mug
+
+#fondue #chocolatefondue #newyearseve #newyear #nye #cozyathome #meltiemug #shorts
+```
+
+**Tags:** chocolate fondue, fondue mug, mini fondue mug, meltie mug, white fondue mug, chocolate fondue at home, movie night snacks, cozy night in, new year's eve at home, new years eve snacks, nye night in, midnight countdown treat, shorts
+
+## nye06-brown-rooftop
+
+**Title:** My fondue is ready before midnight 🌆🍫
+
+**Description:**
+
+```
+The city counts down and the chocolate is already melting.
+
+The chocolate brown Meltie Mini Fondue Mug by the balcony door: malt balls in, tealight lit, strawberries dipped and dripping. A mini chocolate fondue in one mug for movie nights, cosy evenings and gifts.
+
+Get the Meltie Mini Fondue Mug: https://meltiemug.com/products/mini-fondue-mug
+
+#fondue #chocolatefondue #newyearseve #newyear #nye #cozyathome #meltiemug #shorts
+```
+
+**Tags:** chocolate fondue, fondue mug, mini fondue mug, meltie mug, brown fondue mug, chocolate fondue at home, movie night snacks, cozy night in, new year's eve at home, new years eve snacks, nye night in, midnight countdown treat, shorts
+
+## nye07-red-silver
+
+**Title:** The last treat of the year 🕚🍫
+
+**Description:**
+
+```
+When the clock hits eleven it's time for the last treat of the year.
+
+The red Meltie Mini Fondue Mug on a gold bar cart: malt balls in, tealight lit, strawberries dipped and dripping. A mini chocolate fondue in one mug for movie nights, cosy evenings and gifts.
+
+Get the Meltie Mini Fondue Mug: https://meltiemug.com/products/mini-fondue-mug
+
+#fondue #chocolatefondue #newyearseve #newyear #nye #cozyathome #meltiemug #shorts
+```
+
+**Tags:** chocolate fondue, fondue mug, mini fondue mug, meltie mug, red fondue mug, chocolate fondue at home, movie night snacks, cozy night in, new year's eve at home, new years eve snacks, nye night in, midnight countdown treat, shorts
+
+## nye08-white-snowy
+
+**Title:** Snowy New Year's Eve fondue ❄️🍫
+
+**Description:**
+
+```
+Snow outside, fairy lights inside and fondue for New Year's Eve.
+
+The white Meltie Mini Fondue Mug in a snowy cabin: malt balls in, tealight lit, strawberries dipped and dripping. A mini chocolate fondue in one mug for movie nights, cosy evenings and gifts.
+
+Get the Meltie Mini Fondue Mug: https://meltiemug.com/products/mini-fondue-mug
+
+#fondue #chocolatefondue #newyearseve #newyear #nye #cozyathome #meltiemug #shorts
+```
+
+**Tags:** chocolate fondue, fondue mug, mini fondue mug, meltie mug, white fondue mug, chocolate fondue at home, movie night snacks, cozy night in, new year's eve at home, new years eve snacks, nye night in, midnight countdown treat, shorts
+
+## nye09-brown-glitter
+
+**Title:** Minutes to midnight, fondue melting ✨🍫
+
+**Description:**
+
+```
+The new year is minutes away and the fondue is melting.
+
+The chocolate brown Meltie Mini Fondue Mug on a glitter desk: malt balls in, tealight lit, strawberries dipped and dripping. A mini chocolate fondue in one mug for movie nights, cosy evenings and gifts.
+
+Get the Meltie Mini Fondue Mug: https://meltiemug.com/products/mini-fondue-mug
+
+#fondue #chocolatefondue #newyearseve #newyear #nye #cozyathome #meltiemug #shorts
+```
+
+**Tags:** chocolate fondue, fondue mug, mini fondue mug, meltie mug, brown fondue mug, chocolate fondue at home, movie night snacks, cozy night in, new year's eve at home, new years eve snacks, nye night in, midnight countdown treat, shorts
+
+## nye10-red-kitchen
+
+**Title:** The first bite of the new year 🕛🍫
+
+**Description:**
+
+```
+The clock strikes twelve and the first bite of the year is fondue.
+
+The red Meltie Mini Fondue Mug on the kitchen counter at midnight: malt balls in, tealight lit, strawberries dipped and dripping. A mini chocolate fondue in one mug for movie nights, cosy evenings and gifts.
+
+Get the Meltie Mini Fondue Mug: https://meltiemug.com/products/mini-fondue-mug
+
+#fondue #chocolatefondue #newyearseve #newyear #nye #cozyathome #meltiemug #shorts
+```
+
+**Tags:** chocolate fondue, fondue mug, mini fondue mug, meltie mug, red fondue mug, chocolate fondue at home, movie night snacks, cozy night in, new year's eve at home, new years eve snacks, nye night in, midnight countdown treat, shorts

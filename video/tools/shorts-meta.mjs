@@ -10,7 +10,8 @@ const STORE = 'https://meltiemug.com/products/mini-fondue-mug';
 const COLOUR = { brown: 'chocolate brown', red: 'red', white: 'white' };
 
 // [video, variant, setting (where it happens), title, opening line, theme]
-// theme: gift = Christmas gift / movie night, hp = Harry Potter season, xmas = Christmas movie night
+// theme: gift = Christmas gift / movie night, hp = Harry Potter season, xmas = Christmas movie night,
+// nye = New Year's Eve
 const V = [
   ['gift-red', 'red', 'in a cosy living room', 'The perfect Christmas movie night gift 🍫🎬', 'Are you free December 25? Bring the marshmallows.', 'gift'],
   ['gift-white', 'white', 'on a sitting-room coffee table', 'Movie night, but make it fondue 🍫', 'A whole chocolate fondue in one little mug, right on the coffee table.', 'gift'],
@@ -39,17 +40,29 @@ const V = [
   ['m3r08-white-cabin', 'white', 'on a log cabin coffee table', 'Cozy cabin movie night 🪵🍫', 'Cozy movie season is coming. Cabin, lantern, fondue.', 'xmas'],
   ['m3r09-brown-city', 'brown', 'in a city apartment', 'City lights + chocolate fondue 🌃🍫', 'Holiday film season is here, high above the city.', 'xmas'],
   ['m3r10-red-boho', 'red', 'in a boho living room', 'Fireside movie season 🔥🍫', 'Fireside movie season is coming. Plants, rattan and melted chocolate.', 'xmas'],
+  ['nye01-red-countdown', 'red', 'at a countdown party table', "It's officially fondue o'clock 🎆🍫", "When it's almost midnight on New Year's Eve, the fondue mug comes out.", 'nye'],
+  ['nye02-white-champagne', 'white', 'on a champagne coffee table', 'The countdown starts at home 🥂🍫', 'Champagne on ice, strawberries and a mug of melted chocolate to end the year.', 'nye'],
+  ['nye03-brown-fireworks', 'brown', 'by a window full of fireworks', 'Fireworks + chocolate fondue 🎇🍫', 'The last night of the year: fireworks outside, fondue inside.', 'nye'],
+  ['nye04-red-gold', 'red', 'at a gold New Year dinner table', 'The best New Year plans are at home 🕯️🍫', "Candelabras, gold sparkle and chocolate fondue for New Year's Eve.", 'nye'],
+  ['nye05-white-nye', 'white', 'on the velvet sofa', "Staying in for New Year's Eve 🛋️🍫", "Everyone's out partying. I'm in with my fondue mug.", 'nye'],
+  ['nye06-brown-rooftop', 'brown', 'by the balcony door', 'My fondue is ready before midnight 🌆🍫', 'The city counts down and the chocolate is already melting.', 'nye'],
+  ['nye07-red-silver', 'red', 'on a gold bar cart', 'The last treat of the year 🕚🍫', "When the clock hits eleven it's time for the last treat of the year.", 'nye'],
+  ['nye08-white-snowy', 'white', 'in a snowy cabin', "Snowy New Year's Eve fondue ❄️🍫", "Snow outside, fairy lights inside and fondue for New Year's Eve.", 'nye'],
+  ['nye09-brown-glitter', 'brown', 'on a glitter desk', 'Minutes to midnight, fondue melting ✨🍫', 'The new year is minutes away and the fondue is melting.', 'nye'],
+  ['nye10-red-kitchen', 'red', 'on the kitchen counter at midnight', 'The first bite of the new year 🕛🍫', 'The clock strikes twelve and the first bite of the year is fondue.', 'nye'],
 ];
 
 const THEME_TAGS = {
   gift: ['#christmas', '#christmasgift', '#giftidea', '#movienight'],
   hp: ['#harrypotter', '#fallvibes', '#movienight', '#cozyathome'],
   xmas: ['#christmas', '#holidaymovies', '#movienight', '#cozyathome'],
+  nye: ['#newyearseve', '#newyear', '#nye', '#cozyathome'],
 };
 const THEME_KEYWORDS = {
   gift: ['christmas gift idea', 'christmas movie night', 'gift for her', 'stocking stuffer'],
   hp: ['harry potter season', 'harry potter marathon', 'fall vibes', 'autumn night in'],
   xmas: ['christmas movie night', 'holiday movies', 'christmas at home', 'winter night in'],
+  nye: ["new year's eve at home", 'new years eve snacks', 'nye night in', 'midnight countdown treat'],
 };
 
 const rows = [];
