@@ -14,6 +14,13 @@ from `juice/`; the capture writes `juice/videos/<name>/…` (relative to the rep
 `"takes"` to 2 and stops `--more` at 2 takes per shot. Pick the better of the two; if neither works,
 fix the keyframe/prompt and replace both with `--force --only sN` — never generate a 3rd, 4th… take.
 
+**Quality settings (juice):** sora-2 renders only 720x1280 (the upload check lists 1024x1792 but
+generation rejects it: that needs sora-2-pro, which this Foundry resource doesn't offer; sora.mjs
+refuses it up front). Quality comes from the rest: keyframes are drawn at native 9:16 (1152x2048,
+`keyframeSize` overrides) and only downscaled to Sora's size, and the final encode is set per video with
+`"encode": {"crf": 14, "preset": "slow", "sharpen": 0.4}` (defaults crf 18 / medium / 0). A real upscale
+(Real-ESRGAN) needs a GPU: RunPod is not set up here.
+
 ## One-shot recipe (YouTube Short URL → replica)
 
 1. **Review server**: start launch config `slideshow-review` (port 5179). It serves the pipelines and

@@ -248,6 +248,8 @@ async function previewOverlays(dir) {
 export async function build(dir, opts = {}) {
   const spec = JSON.parse(fs.readFileSync(path.join(dir, 'video.json'), 'utf8'));
   const [W, H] = spec.size || [1080, 1920];
+  // final encode: "encode": {"crf": 18, "preset": "medium", "sharpen": 0} (defaults); higher quality = lower crf, slower preset
+  const enc = { crf: 18, preset: 'medium', sharpen: 0, ...spec.encode };
   const fps = spec.fps || 30;
   const outDir = path.join(dir, 'out');
   fs.mkdirSync(outDir, { recursive: true });
@@ -276,11 +278,14 @@ export async function build(dir, opts = {}) {
     // "hold": N seconds at the end of the slot freeze the last frame shown — for a reversed entrance
     // ("X slides into place") whose take started moving at once, so X settles by the reference's moment
     // and stays put (Sora ignores "stay still first"); the moving part is the slot minus the hold.
+    // "encode": {"sharpen": 0.5} restores edge detail lost in the upscale from Sora's size to 1080x1920
+    // (luma only, small radius: grain and colour stay as they are)
+    const sharpen = enc.sharpen ? `,unsharp=5:5:${enc.sharpen}:5:5:0` : '';
     const nf = Math.round(shot.end * fps) - Math.round(shot.start * fps);
     const nh = Math.min(nf - 1, Math.round((shot.hold ?? 0) * fps));
     const rev = shot.reverse ? ',reverse' : '';
     const hold = nh > 0 ? `,tpad=stop_mode=clone:stop=${nh}` : '';
-    vf.push(`[${i}:v]trim=start=${from}:duration=${(dur * speed + 1).toFixed(3)},setpts=(PTS-STARTPTS)/${speed},fps=${fps},trim=end_frame=${nf - nh},setpts=PTS-STARTPTS${rev}${hold},${frameFilter(shot, W, H, dur)},setsar=1${lut}${shot.filter ? ',' + shot.filter : ''}[v${i}]`);
+    vf.push(`[${i}:v]trim=start=${from}:duration=${(dur * speed + 1).toFixed(3)},setpts=(PTS-STARTPTS)/${speed},fps=${fps},trim=end_frame=${nf - nh},setpts=PTS-STARTPTS${rev}${hold},${frameFilter(shot, W, H, dur)},setsar=1${sharpen}${lut}${shot.filter ? ',' + shot.filter : ''}[v${i}]`);
     if (soraAudio) af.push(`[${i}:a]atrim=start=${from}:duration=${(dur * speed).toFixed(3)},asetpts=PTS-STARTPTS,${speed !== 1 ? `atempo=${speed},` : ''}aresample=48000,apad,atrim=duration=${dur.toFixed(3)}${shot.reverse ? ',areverse' : ''}[a${i}]`);
     labels.push(soraAudio ? `[v${i}][a${i}]` : `[v${i}]`);
   });
@@ -306,7 +311,7 @@ export async function build(dir, opts = {}) {
 
   const out = path.join(outDir, `${name}.mp4`);
   ff([...inputs, '-filter_complex', graph.join(';'), '-map', `[${vlast}]`, ...(alast ? ['-map', `[${alast}]`, '-c:a', 'aac', '-b:a', '192k'] : []),
-    '-t', String(spec.duration ?? spec.shots[n - 1].end), '-r', String(fps), '-c:v', 'libx264', '-preset', 'medium', '-crf', '18', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out]);
+    '-t', String(spec.duration ?? spec.shots[n - 1].end), '-r', String(fps), '-c:v', 'libx264', '-preset', enc.preset, '-crf', String(enc.crf), '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out]);
   console.log(`built ${path.relative(process.cwd(), out)}`);
 
   if (opts.frames) {

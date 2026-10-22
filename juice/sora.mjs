@@ -126,6 +126,9 @@ async function create(shot, spec, dir) {
   // a "screen" shot: the device must stay keyable for build.mjs's composite
   const screenWords = shot.screen && `The device screen stays lit flat, uniform, pure chroma-key green for the whole clip: no picture, no interface, no reflections.${shot.screen.whole ? ' The whole device stays fully inside the frame and uncovered the whole time: static camera, no push-in, no zoom, no pan.' : ''}`;
   fd.set('prompt', [shot.prompt, shot.set && spec.sets?.[shot.set], propWords(spec, shot.set), screenWords, spec.style].filter(Boolean).join('\n\n'));
+  // sora-2 renders only 720x1280 / 1280x720 (the upload check also lists 1024x1792, but generation
+  // rejects it: that size needs sora-2-pro, which this Foundry resource doesn't have)
+  if (!['720x1280', '1280x720'].includes(spec.soraSize || '720x1280') && !/pro/.test(cfg.model || '')) throw new Error(`soraSize ${spec.soraSize} needs sora-2-pro; ${cfg.model} renders 720x1280 or 1280x720`);
   fd.set('size', spec.soraSize || '720x1280');
   fd.set('seconds', String(shot.seconds ?? soraSecondsFor(shot.end - shot.start + (shot.from ?? 0))));
   // "startFrom": "set" — begin from the set's people-free bible frame (bible.mjs): the place and

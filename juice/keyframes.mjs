@@ -36,10 +36,18 @@ export function soraSizedKeyframe(src, size = '720x1280') {
   return out;
 }
 
-async function edit(prompt, refs, bearer) {
+// the keyframe's own size: gpt-image-2 takes any size divisible by 16 (longest edge ≤ 3840), so a 9:16
+// Sora frame is drawn at 9:16 (1152x2048) and only downscaled to Sora's size — no side crop, no upscale
+// (the old 2:3 image lost 16% of its width and was upscaled). "keyframeSize" overrides.
+export const keyframeSize = (spec) => {
+  if (spec.keyframeSize) return spec.keyframeSize;
+  const [w, h] = (spec.soraSize || '720x1280').split('x').map(Number);
+  return Math.abs(w / h - 9 / 16) < 0.01 ? '1152x2048' : '1024x1536';
+};
+async function edit(prompt, refs, bearer, size = '1024x1536') {
   const fd = new FormData();
   fd.set('prompt', prompt);
-  fd.set('size', '1024x1536');
+  fd.set('size', size);
   fd.set('quality', 'high');
   fd.set('n', '1');
   for (const r of refs) fd.append('image[]', new Blob([fs.readFileSync(r)], { type: mime(r) }), path.basename(r));
@@ -89,10 +97,12 @@ async function main() {
       `This is the first frame of a vertical phone video. Photorealistic, no added text or watermark. No people or faces anywhere in the image — only hands and forearms may appear; ${s.screen ? `the device screen is lit flat, uniform, pure chroma-key green (#00FF00) from edge to edge, with no picture, interface, reflection or glare (a picture is composited into it later)${s.screen.whole ? '; the WHOLE device (all four corners of the screen and its frame) is inside the picture, not cut by any edge' : ''}` : 'any screen (laptop, TV, phone) shows scenery, abstract light or a title card, never a person'}.`,
       // the 2:3 image is cover-cropped to 9:16 for Sora (8% off each side), and the model tends to
       // shrink the main object below the stated size
-      'The image will be cropped to 9:16 by cutting 8% off the left and right edges: all positions given as percentages refer to the remaining central area, and nothing important may sit in the outer 8% strips. Object sizes given as percentages are hard requirements: do not draw the main object smaller than stated.',
+      (() => { const [kw, kh] = keyframeSize(spec).split('x').map(Number); return Math.abs(kw / kh - 9 / 16) < 0.01
+        ? 'The image is the full vertical 9:16 frame: positions given as percentages refer to the whole image. Object sizes given as percentages are hard requirements: do not draw the main object smaller than stated. Tack-sharp, high detail, crisp textures.'
+        : 'The image will be cropped to 9:16 by cutting 8% off the left and right edges: all positions given as percentages refer to the remaining central area, and nothing important may sit in the outer 8% strips. Object sizes given as percentages are hard requirements: do not draw the main object smaller than stated.'; })(),
     ].filter(Boolean).join('\n\n');
     const t0 = Date.now();
-    const buf = await edit(prompt, refs, bearer);
+    const buf = await edit(prompt, refs, bearer, keyframeSize(spec));
     fs.mkdirSync(path.dirname(out), { recursive: true });
     fs.writeFileSync(out, buf);
     soraSizedKeyframe(out, spec.soraSize);

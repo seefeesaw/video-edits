@@ -1,0 +1,874 @@
+{
+  "title": "Midnight Violet Loaded Water (HQ)",
+  "source": "https://www.youtube.com/shorts/kvVdacwjIVM",
+  "notes": "Replica of the drink-recipe Short. No real product was given for this video: the store-brand sparkling water bottle of the original is an unbranded \"Concord Grape\" bottle (no brand name or logo), and the tumbler, ice spheres, glitter jar, glass straw and bamboo lid are generic. Same bright white kitchen. Sora audio stands in for the original sound. Each camera setup is one Sora take (2 takes) cut into the original's jump cuts. HQ version: keyframes drawn at native 9:16 (1152x2048) and downscaled to Sora's 720x1280 (sora-2 renders no larger), final encode crf 14 slow with light sharpening.",
+  "size": [
+    1080,
+    1920
+  ],
+  "fps": 60,
+  "duration": 14.521,
+  "soraSize": "720x1280",
+  "style": "Bright, airy vertical phone video in a modern white kitchen in soft daylight: a white marble counter with soft grey veins, white shaker cabinets, a white range hood, a grey herringbone tile backsplash, gold and black accents. Clean, crisp, saturated purple drink. Hands in a periwinkle blue-lavender ribbed-knit sweater with long white manicured nails. ASMR drink-making close-ups, steady camera. No on-screen text, no logos. Shot in 4K detail: tack-sharp focus, crisp condensation and bubbles, glossy ice.",
+  "bible": {
+    "props": {
+      "tumbler": {
+        "desc": "a big 40 oz clear glass travel tumbler: a tall wide straight-sided cylindrical body that steps in to a narrower cylindrical bottom section (to fit a cup holder), flat bottom, NO stem and NO foot, thick clear glass, a big clear glass C-shaped handle on the right, no logo"
+      },
+      "iceballs": {
+        "desc": "smooth glossy round ice balls about 3 cm across frozen from purple grape juice: translucent jewel-like violet to deep purple spheres you can partly see through, perfectly round, no stems (they are ice, not grapes)"
+      },
+      "container": {
+        "desc": "a clear rectangular plastic food storage container with rounded corners"
+      },
+      "bottle": {
+        "desc": "a 1-litre clear plastic sparkling water bottle with a white screw cap and a purple wraparound label with a bunch of grapes and the words \"Concord Grape\" in white, no brand name or logo"
+      },
+      "glitter": {
+        "desc": "a small round clear jar with a black screw lid, filled with shimmering purple edible drink glitter"
+      },
+      "straw": {
+        "desc": "a long clear glass drinking straw"
+      },
+      "lid": {
+        "desc": "a round natural bamboo tumbler lid with a straw hole"
+      }
+    },
+    "sets": {
+      "K": {
+        "desc": "a bright modern white kitchen in soft daylight: a white marble island counter with soft grey veins in the foreground, white shaker cabinets, a white range hood, a grey herringbone tile backsplash, a black pot-filler faucet and gold accents behind, a black range; airy, clean, softly out of focus behind; vertical phone camera at counter height",
+        "props": [
+          "tumbler",
+          "iceballs"
+        ],
+        "layout": "The big empty clear glass travel tumbler with handle (flat stepped base, no stem) stands in the centre of the white marble counter, BIG: about 45% of the frame width, its rim at about 40% of the height and its base at about 88%. The kitchen (cabinets, range hood, herringbone backsplash, pot-filler) fills the background, softly out of focus. A few glossy translucent purple ice balls lie on the counter beside it."
+      }
+    }
+  },
+  "fonts": [
+    "TikTok Sans:wght@300;400;500",
+    "Noto Color Emoji"
+  ],
+  "overlays": [
+    {
+      "from": 0,
+      "to": 2.9,
+      "elements": "@caption"
+    }
+  ],
+  "captions": {
+    "caption": [
+      {
+        "type": "text",
+        "x": 273,
+        "y": 868,
+        "text": "MIDNIGHT VIOLET",
+        "fit": [
+          273,
+          877,
+          810,
+          911
+        ],
+        "font": {
+          "family": "TikTok Sans",
+          "size": 40,
+          "weight": 300,
+          "color": "#ffffff",
+          "lineHeight": 1
+        },
+        "style": "letter-spacing:0.28em;text-shadow:0 1px 3px rgba(0,0,0,.35)"
+      },
+      {
+        "type": "text",
+        "x": 313,
+        "y": 929,
+        "text": "LOADED WATER",
+        "fit": [
+          313,
+          938,
+          767,
+          972
+        ],
+        "font": {
+          "family": "TikTok Sans",
+          "size": 40,
+          "weight": 300,
+          "color": "#ffffff",
+          "lineHeight": 1
+        },
+        "style": "letter-spacing:0.28em;text-shadow:0 1px 3px rgba(0,0,0,.35)"
+      },
+      {
+        "type": "html",
+        "x": 432,
+        "y": 996,
+        "w": 219,
+        "h": 44,
+        "fit": [
+          432,
+          996,
+          650,
+          1039
+        ],
+        "fitMode": "stretch",
+        "html": "<span style=\"font-family:'Noto Color Emoji';font-size:40px;line-height:1;display:inline-block;white-space:nowrap\">💜🫧🧞‍♀️🎆</span>"
+      }
+    ]
+  },
+  "audio": {
+    "sora": 1
+  },
+  "shots": [
+    {
+      "id": "s1",
+      "set": "K",
+      "start": 0,
+      "end": 0.7667,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Eye-level front view at counter height. the clear glass tumbler with handle stands EMPTY in the centre of the white marble counter (its body from 30% to 70% of the frame width with the handle reaching 80%, its rim at about 45% of the height, its base at about 92%), a hand in a periwinkle blue-lavender ribbed-knit sleeve with white manicured nails holding its handle from the right, just setting it down. the bright white kitchen behind (white cabinets, white range hood, grey herringbone tile backsplash, black pot-filler faucet), softly out of focus."
+      },
+      "prompt": "The hand sets the empty glass tumbler down on the marble counter and lets go of the handle. Static camera.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "clip": "clips/s1.v2.mp4",
+      "grade": {
+        "r": [
+          1.2753,
+          -86.28
+        ],
+        "g": [
+          1.0235,
+          -43.77
+        ],
+        "b": [
+          1.0092,
+          -53.37
+        ],
+        "clip": "clips/s1.v2.mp4"
+      }
+    },
+    {
+      "id": "s2",
+      "set": "K",
+      "start": 0.7667,
+      "end": 1.6,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Close view from slightly above. A hand in a periwinkle blue-lavender ribbed-knit sleeve with white nails holds the clear rectangular plastic container tilted toward the camera, completely filled with round glossy translucent purple ice balls that fill most of the frame (the container from 15% to 95% of the width, 20% to 85% of the height); the white marble counter below."
+      },
+      "prompt": "The hand tilts the container of purple ice balls slightly toward the camera; the spheres shift and roll a little. Static camera.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "clip": "clips/s2.v2.mp4"
+    },
+    {
+      "id": "s3",
+      "set": "K",
+      "start": 1.6,
+      "end": 2.05,
+      "from": 0,
+      "takes": 2,
+      "seconds": 4,
+      "keyframe": {
+        "prompt": "Eye-level front view at counter height. the clear glass tumbler with handle stands on the white marble counter in the centre (its body from 28% to 68% of the frame width, rim at about 25% of the height, base at about 85%), its bottom third already filled with glossy translucent purple ice balls; a hand in a periwinkle blue-lavender ribbed-knit sleeve holds its base from the left. From the top-right corner the clear rectangular container is tipped over the tumbler and a stream of round glossy translucent purple ice balls is falling from it into the glass. the bright white kitchen behind (white cabinets, white range hood, grey herringbone tile backsplash, black pot-filler faucet), softly out of focus."
+      },
+      "prompt": "One continuous static take. 0-3 s: a fast, heavy stream of dozens of glossy translucent purple ice balls pours from the tipped clear container down into the glass tumbler, bouncing and stacking, filling the glass quickly from the bottom third ALL THE WAY UP TO THE RIM by 3 seconds. 3-4 s: the last balls heap up slightly above the rim. Static camera.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "push": true,
+      "clip": "clips/s3.mp4",
+      "pick": "manual",
+      "grade": {
+        "r": [
+          1.301,
+          -84.48
+        ],
+        "g": [
+          1.037,
+          -39.96
+        ],
+        "b": [
+          0.948,
+          -33.91
+        ],
+        "clip": "clips/s3.mp4"
+      }
+    },
+    {
+      "id": "s4",
+      "set": "K",
+      "start": 2.05,
+      "end": 2.45,
+      "takes": 0,
+      "clip": "clips/s3.mp4",
+      "from": 0.5,
+      "zoom": 1.1,
+      "pan": [
+        0,
+        0.2
+      ],
+      "framing": "manual",
+      "notes": "jump cut: later in s3's take",
+      "grade": {
+        "r": [
+          1.3065,
+          -89.14
+        ],
+        "g": [
+          1.0447,
+          -45.07
+        ],
+        "b": [
+          0.9244,
+          -31.81
+        ],
+        "clip": "clips/s3.mp4"
+      }
+    },
+    {
+      "id": "s5",
+      "set": "K",
+      "start": 2.45,
+      "end": 2.9,
+      "takes": 0,
+      "clip": "clips/s3.mp4",
+      "from": 1,
+      "zoom": 1.2,
+      "pan": [
+        0,
+        0.1
+      ],
+      "framing": "manual",
+      "notes": "jump cut: later in s3's take",
+      "grade": {
+        "r": [
+          1.4331,
+          -107.63
+        ],
+        "g": [
+          1.1617,
+          -62.41
+        ],
+        "b": [
+          1.0072,
+          -42.63
+        ],
+        "clip": "clips/s3.mp4"
+      }
+    },
+    {
+      "id": "s6",
+      "set": "K",
+      "start": 2.9,
+      "end": 3.3,
+      "takes": 0,
+      "clip": "clips/s3.mp4",
+      "from": 1.6,
+      "zoom": 1.45,
+      "pan": [
+        0,
+        -0.2
+      ],
+      "framing": "manual",
+      "notes": "jump cut: later in s3's take",
+      "grade": {
+        "r": [
+          1.301,
+          -84.48
+        ],
+        "g": [
+          1.037,
+          -39.96
+        ],
+        "b": [
+          0.948,
+          -33.91
+        ],
+        "clip": "clips/s3.mp4"
+      }
+    },
+    {
+      "id": "s7",
+      "set": "K",
+      "start": 3.3,
+      "end": 3.75,
+      "takes": 0,
+      "clip": "clips/s3.mp4",
+      "from": 2.6,
+      "zoom": 1.6,
+      "pan": [
+        0,
+        -0.5
+      ],
+      "framing": "manual",
+      "notes": "jump cut: later in s3's take",
+      "grade": {
+        "r": [
+          1.2115,
+          -64.5
+        ],
+        "g": [
+          0.9602,
+          -27.11
+        ],
+        "b": [
+          0.7591,
+          0.6
+        ],
+        "clip": "clips/s3.mp4"
+      }
+    },
+    {
+      "id": "s8",
+      "set": "K",
+      "start": 3.75,
+      "end": 4.25,
+      "from": 0.2,
+      "takes": 2,
+      "seconds": 4,
+      "keyframe": {
+        "prompt": "Eye-level front view. The 1-litre bottle of CLEAR, colourless sparkling water (the water inside is completely clear like plain water, NOT purple; only the wraparound label is purple) with a white cap and a purple label showing grapes and the words \"Concord Grape\" stands ALONE on the white marble counter in the centre-right (from 45% to 72% of the width, top at about 22%, base at about 82% of the height); NO glass and no other objects on the counter; a hand in a periwinkle blue-lavender ribbed-knit sleeve with white nails rests on the counter beside it from the right. the bright white kitchen behind (white cabinets, white range hood, grey herringbone tile backsplash, black pot-filler faucet), softly out of focus."
+      },
+      "prompt": "Two hands in periwinkle blue-periwinkle blue-lavender ribbed-knit sleeves come in from both sides and frame the bottle with open palms, showing it off; then the right hand unscrews and lifts off the white cap. Static camera.",
+      "zoom": 1.2,
+      "pan": [
+        0.5,
+        0
+      ],
+      "framing": "manual",
+      "clip": "clips/s8.v2.mp4",
+      "pick": "manual",
+      "grade": {
+        "r": [
+          1.1106,
+          -51.8
+        ],
+        "g": [
+          0.8703,
+          -10.15
+        ],
+        "b": [
+          0.9295,
+          -30.09
+        ],
+        "clip": "clips/s8.v2.mp4"
+      }
+    },
+    {
+      "id": "s9",
+      "set": "K",
+      "start": 4.25,
+      "end": 4.95,
+      "takes": 0,
+      "clip": "clips/s8.v2.mp4",
+      "from": 0.8,
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "framing": "manual",
+      "notes": "jump cut: later in s8's take",
+      "grade": {
+        "r": [
+          1.3022,
+          -97.13
+        ],
+        "g": [
+          1.0689,
+          -57.63
+        ],
+        "b": [
+          1.0844,
+          -66.64
+        ],
+        "clip": "clips/s8.v2.mp4"
+      }
+    },
+    {
+      "id": "s10",
+      "set": "K",
+      "start": 4.95,
+      "end": 5.45,
+      "takes": 0,
+      "clip": "clips/s8.v2.mp4",
+      "from": 1.8,
+      "zoom": 1.6,
+      "pan": [
+        0.1,
+        -0.1
+      ],
+      "framing": "manual",
+      "notes": "jump cut: later in s8's take",
+      "grade": {
+        "r": [
+          1.1371,
+          -63.57
+        ],
+        "g": [
+          0.9452,
+          -23.65
+        ],
+        "b": [
+          0.969,
+          -38.94
+        ],
+        "clip": "clips/s8.v2.mp4"
+      }
+    },
+    {
+      "id": "s11",
+      "set": "K",
+      "start": 5.45,
+      "end": 5.95,
+      "takes": 0,
+      "clip": "clips/s8.v2.mp4",
+      "from": 2.6,
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "framing": "manual",
+      "notes": "jump cut: later in s8's take",
+      "grade": {
+        "r": [
+          1.2332,
+          -75.55
+        ],
+        "g": [
+          0.9947,
+          -34.5
+        ],
+        "b": [
+          1.0757,
+          -62.74
+        ],
+        "clip": "clips/s8.v2.mp4"
+      }
+    },
+    {
+      "id": "s12",
+      "set": "K",
+      "start": 5.95,
+      "end": 6.75,
+      "from": 0.2,
+      "takes": 2,
+      "seconds": 4,
+      "keyframe": {
+        "prompt": "Eye-level front view. the clear glass tumbler with handle on the white marble counter in the centre (body from 25% to 70% of the width, rim at about 25% of the height, base at about 88%), filled to the brim with round glossy translucent purple ice balls. From the top-right corner the clear sparkling water bottle with the purple \"Concord Grape\" label is tipped over the glass and a clear stream of sparkling water pours down into it; white fizz is starting at the bottom of the glass. the bright white kitchen behind (white cabinets, white range hood, grey herringbone tile backsplash, black pot-filler faucet), softly out of focus."
+      },
+      "prompt": "One continuous static take. 0-4 s: the sparkling water keeps pouring from the tipped bottle into the glass full of purple ice balls; it fizzes hard, a thick white foam of bubbles rises up between the purple ice balls from the bottom to the top of the glass. Static camera.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "clip": "clips/s12.v2.mp4",
+      "pick": "manual",
+      "grade": {
+        "r": [
+          1.2572,
+          -84.25
+        ],
+        "g": [
+          0.9378,
+          -27.46
+        ],
+        "b": [
+          0.8834,
+          -26.12
+        ],
+        "clip": "clips/s12.v2.mp4"
+      }
+    },
+    {
+      "id": "s13",
+      "set": "K",
+      "start": 6.75,
+      "end": 7.5667,
+      "takes": 0,
+      "clip": "clips/s12.v2.mp4",
+      "from": 1,
+      "zoom": 1.15,
+      "pan": [
+        0,
+        -0.2
+      ],
+      "framing": "manual",
+      "notes": "jump cut: later in s12's take",
+      "grade": {
+        "r": [
+          1.1923,
+          -87.09
+        ],
+        "g": [
+          0.9212,
+          -38.89
+        ],
+        "b": [
+          0.8366,
+          -24.99
+        ],
+        "clip": "clips/s12.v2.mp4"
+      }
+    },
+    {
+      "id": "s14",
+      "set": "K",
+      "start": 7.5667,
+      "end": 8.4,
+      "takes": 0,
+      "clip": "clips/s12.v2.mp4",
+      "from": 2,
+      "zoom": 1.35,
+      "pan": [
+        0,
+        -0.4
+      ],
+      "framing": "manual",
+      "notes": "jump cut: later in s12's take",
+      "grade": {
+        "r": [
+          0.7657,
+          -12.85
+        ],
+        "g": [
+          0.5868,
+          17.19
+        ],
+        "b": [
+          0.5393,
+          27.21
+        ],
+        "clip": "clips/s12.v2.mp4"
+      }
+    },
+    {
+      "id": "s15",
+      "set": "K",
+      "start": 8.4,
+      "end": 9.1667,
+      "takes": 0,
+      "clip": "clips/s12.v2.mp4",
+      "from": 3,
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "framing": "manual",
+      "notes": "jump cut: later in s12's take",
+      "grade": {
+        "r": [
+          1.3301,
+          -116.22
+        ],
+        "g": [
+          1.0163,
+          -62.81
+        ],
+        "b": [
+          0.9144,
+          -45.4
+        ],
+        "clip": "clips/s12.v2.mp4"
+      }
+    },
+    {
+      "id": "s16",
+      "set": "K",
+      "start": 9.1667,
+      "end": 9.9,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Eye-level front view, close. the clear glass tumbler with handle filled with glossy translucent purple ice balls in shimmering translucent lavender-violet sparkling water swirling with fine purple edible glitter, a lighter pinkish-lilac layer at the very bottom stands in the centre behind; two hands in periwinkle blue-periwinkle blue-lavender ribbed-knit sleeves with white nails hold a small round clear jar with a black screw lid, filled with shimmering purple edible drink glitter, up in front of the glass at its middle (the jar from 38% to 62% of the width, about 55% of the height). the bright white kitchen behind (white cabinets, white range hood, grey herringbone tile backsplash, black pot-filler faucet), softly out of focus."
+      },
+      "prompt": "The two hands hold the jar of purple glitter steady in front of the glass, turning it very slightly so the glitter sparkles. Static camera.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "clip": "clips/s16.v2.mp4",
+      "grade": {
+        "r": [
+          1.4245,
+          -107.45
+        ],
+        "g": [
+          1.2059,
+          -70.75
+        ],
+        "b": [
+          1.1063,
+          -69.73
+        ],
+        "clip": "clips/s16.v2.mp4"
+      }
+    },
+    {
+      "id": "s17",
+      "set": "K",
+      "start": 9.9,
+      "end": 10.25,
+      "from": 0.2,
+      "takes": 2,
+      "seconds": 4,
+      "keyframe": {
+        "prompt": "Top-down view straight into the glass tumbler, which fills the frame: round glossy translucent purple ice balls floating in shimmering translucent lavender-violet sparkling water swirling with fine purple edible glitter, a lighter pinkish-lilac layer at the very bottom. A hand in a periwinkle blue-lavender ribbed-knit sleeve with white nails holds the open round jar of shimmering purple edible glitter tilted over the drink at the right; the black lid is held by the other hand at the top-left."
+      },
+      "prompt": "One continuous take from above. 0-1.5 s: the hand tips the open jar and a sparkling shower of fine purple edible glitter falls over the purple ice balls and the drink, the glitter catching the light. 1.5-4 s: a long clear glass straw comes down into the drink and stirs, swirling the glitter into a shimmering lavender-violet whirl full of sparkles. Static camera.",
+      "zoom": 1.2,
+      "pan": [
+        0,
+        0
+      ],
+      "framing": "manual",
+      "clip": "clips/s17.mp4",
+      "pick": "manual"
+    },
+    {
+      "id": "s18",
+      "set": "K",
+      "start": 10.25,
+      "end": 10.9667,
+      "takes": 0,
+      "clip": "clips/s17.mp4",
+      "from": 0.65,
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "framing": "manual",
+      "notes": "jump cut: later in s17's take",
+      "grade": {
+        "r": [
+          1.5196,
+          -112.36
+        ],
+        "g": [
+          1.3387,
+          -80.91
+        ],
+        "b": [
+          0.9553,
+          -16.92
+        ],
+        "clip": "clips/s17.mp4"
+      }
+    },
+    {
+      "id": "s19",
+      "set": "K",
+      "start": 10.9667,
+      "end": 11.8,
+      "takes": 0,
+      "clip": "clips/s17.mp4",
+      "from": 1.7,
+      "zoom": 1.2,
+      "pan": [
+        0,
+        0
+      ],
+      "framing": "manual",
+      "notes": "jump cut: later in s17's take",
+      "grade": {
+        "r": [
+          1.4309,
+          -86.61
+        ],
+        "g": [
+          1.2426,
+          -51.81
+        ],
+        "b": [
+          0.8786,
+          9.61
+        ],
+        "clip": "clips/s17.mp4"
+      }
+    },
+    {
+      "id": "s20",
+      "set": "K",
+      "start": 11.8,
+      "end": 12.35,
+      "from": 0.2,
+      "takes": 2,
+      "keyframe": {
+        "prompt": "Eye-level front view. the clear glass tumbler with handle on the white marble counter in the centre (body from 25% to 70% of the width, rim at about 30% of the height, base at about 90%), full of glossy translucent purple ice balls in shimmering translucent lavender-violet sparkling water swirling with fine purple edible glitter, a lighter pinkish-lilac layer at the very bottom; a hand in a periwinkle blue-lavender ribbed-knit sleeve holds a long clear glass straw that stands in the drink. the bright white kitchen behind (white cabinets, white range hood, grey herringbone tile backsplash, black pot-filler faucet), softly out of focus."
+      },
+      "prompt": "The hand stirs the drink slowly with the glass straw; the lavender-violet water sparkles and swirls with fine glitter and the ice spheres turn. Static camera.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "clip": "clips/s20.v2.mp4",
+      "grade": {
+        "r": [
+          1.3723,
+          -113.22
+        ],
+        "g": [
+          1.0108,
+          -49.58
+        ],
+        "b": [
+          0.9466,
+          -45.78
+        ],
+        "clip": "clips/s20.v2.mp4"
+      }
+    },
+    {
+      "id": "s21",
+      "set": "K",
+      "start": 12.35,
+      "end": 12.95,
+      "takes": 0,
+      "clip": "clips/s20.v2.mp4",
+      "from": 0.65,
+      "zoom": 1.15,
+      "pan": [
+        0,
+        0
+      ],
+      "framing": "manual",
+      "notes": "jump cut: later in s20's take",
+      "grade": {
+        "r": [
+          1.4215,
+          -118.12
+        ],
+        "g": [
+          1.0645,
+          -55.73
+        ],
+        "b": [
+          0.9469,
+          -43.05
+        ],
+        "clip": "clips/s20.v2.mp4"
+      }
+    },
+    {
+      "id": "s22",
+      "set": "K",
+      "start": 12.95,
+      "end": 13.35,
+      "from": 0.2,
+      "takes": 2,
+      "seconds": 4,
+      "keyframe": {
+        "prompt": "Eye-level front view. the clear glass tumbler with handle on the white marble counter in the centre (body from 28% to 68% of the width, rim at about 32% of the height, base at about 90%), full of glossy translucent purple ice balls in shimmering translucent lavender-violet sparkling water swirling with fine purple edible glitter, a lighter pinkish-lilac layer at the very bottom; a hand in a periwinkle blue-lavender ribbed-knit sleeve holds a natural bamboo lid with a straw hole just above the rim. the bright white kitchen behind (white cabinets, white range hood, grey herringbone tile backsplash, black pot-filler faucet), softly out of focus."
+      },
+      "prompt": "One continuous static take. 0-1 s: the hand sets the bamboo lid onto the tumbler. 1-2.5 s: the hand pushes the long clear glass straw down through the lid's straw hole. 2.5-4 s: the hand lets go and leaves the frame; the finished drink stands still.",
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "framing": "manual",
+      "clip": "clips/s22.v2.mp4",
+      "pick": "manual",
+      "grade": {
+        "r": [
+          1.4797,
+          -120.88
+        ],
+        "g": [
+          1.1366,
+          -59.32
+        ],
+        "b": [
+          1.0245,
+          -48
+        ],
+        "clip": "clips/s22.v2.mp4"
+      }
+    },
+    {
+      "id": "s23",
+      "set": "K",
+      "start": 13.35,
+      "end": 13.9,
+      "takes": 0,
+      "clip": "clips/s22.v2.mp4",
+      "from": 1.4,
+      "zoom": 1.2,
+      "pan": [
+        0,
+        -0.5
+      ],
+      "framing": "manual",
+      "notes": "jump cut: later in s22's take",
+      "grade": {
+        "r": [
+          1.2886,
+          -83.11
+        ],
+        "g": [
+          1.0315,
+          -32.15
+        ],
+        "b": [
+          0.9121,
+          -23.61
+        ],
+        "clip": "clips/s22.v2.mp4"
+      }
+    },
+    {
+      "id": "s24",
+      "set": "K",
+      "start": 13.9,
+      "end": 14.521,
+      "takes": 0,
+      "clip": "clips/s22.v2.mp4",
+      "from": 3,
+      "zoom": 1,
+      "pan": [
+        0,
+        0
+      ],
+      "framing": "manual",
+      "notes": "jump cut: later in s22's take",
+      "grade": {
+        "r": [
+          1.4366,
+          -111.04
+        ],
+        "g": [
+          1.1065,
+          -47.82
+        ],
+        "b": [
+          1.0539,
+          -51.52
+        ],
+        "clip": "clips/s22.v2.mp4"
+      }
+    }
+  ],
+  "encode": {
+    "crf": 14,
+    "preset": "slow",
+    "sharpen": 0.4
+  }
+}
