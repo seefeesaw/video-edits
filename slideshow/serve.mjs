@@ -15,19 +15,20 @@ http
     const url = new URL(req.url, 'http://x');
     // CORS so other origins (e.g. a YouTube tab running video/tools/yt-compare.js) can read renders
     res.setHeader('access-control-allow-origin', '*');
-    // /video/... serves the sibling video pipeline (renders, tools)
-    const VROOT = path.join(ROOT, '..', 'video');
-    const isVideo = url.pathname.startsWith('/video/');
-    let p = isVideo ? path.normalize(path.join(VROOT, decodeURIComponent(url.pathname.slice(7)))) : path.normalize(path.join(ROOT, decodeURIComponent(url.pathname)));
-    if (!p.startsWith(isVideo ? VROOT : ROOT)) return res.writeHead(403).end();
+    // /video/... and /juice/... serve the sibling video pipelines (renders, tools)
+    const pipe = ['video', 'juice'].find((d) => url.pathname.startsWith(`/${d}/`));
+    const VROOT = pipe ? path.join(ROOT, '..', pipe) : ROOT;
+    let p = pipe ? path.normalize(path.join(VROOT, decodeURIComponent(url.pathname.slice(pipe.length + 2)))) : path.normalize(path.join(ROOT, decodeURIComponent(url.pathname)));
+    if (!p.startsWith(VROOT)) return res.writeHead(403).end();
     if (url.pathname === '/') p = path.join(ROOT, 'review.html');
-    // POST /api/put?file=<path under slideshow/ or video/> writes the request body. Lets a capture
+    // POST /api/put?file=<path under slideshow/, video/ or juice/> writes the request body. Lets a capture
     // script running in another site's tab hand its JSON to the pipeline (form POST in a new window,
     // since page CSPs usually block fetch to localhost). Only .json files, only inside the repo dirs.
     if (url.pathname === '/api/put') {
       const rel = url.searchParams.get('file') || '';
-      const target = path.normalize(rel.startsWith('video/') ? path.join(ROOT, '..', rel) : path.join(ROOT, rel));
-      const okRoot = target.startsWith(ROOT + path.sep) || target.startsWith(path.join(ROOT, '..', 'video') + path.sep);
+      const sib = ['video/', 'juice/'].some((d) => rel.startsWith(d));
+      const target = path.normalize(sib ? path.join(ROOT, '..', rel) : path.join(ROOT, rel));
+      const okRoot = target.startsWith(ROOT + path.sep) || ['video', 'juice'].some((d) => target.startsWith(path.join(ROOT, '..', d) + path.sep));
       if (!okRoot || !target.endsWith('.json')) return res.writeHead(400).end('bad file');
       let body = '';
       req.on('data', (c) => (body += c));

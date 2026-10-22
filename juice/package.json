@@ -1,0 +1,8 @@
+{
+  "name": "juice",
+  "private": true,
+  "type": "module",
+  "description": "Juice product video pipeline (copy of the video pipeline): video.json spec -> Sora 2 clips -> cuts, overlays, audio -> MP4",
+  "scripts": { "sora": "node sora.mjs", "build": "node build.mjs" },
+  "dependencies": { "puppeteer-core": "24.10.0" }
+}

@@ -7,7 +7,7 @@
 <script>
   // Hand-off for capture scripts running on other sites (YouTube, TikTok), whose CSP blocks fetches
   // to localhost but not navigation. The capture tab navigates here with
-  //   #file=<path under slideshow/ or video/>&back=<url to return to>&data=<urlencoded JSON>
+  //   #file=<path under slideshow/, video/ or juice/>&back=<url to return to>&data=<urlencoded JSON>
   // and this page POSTs the JSON to /api/put, then (optionally) returns to the original page.
   (async () => {
     const h = new URLSearchParams(location.hash.slice(1));

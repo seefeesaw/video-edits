@@ -1,0 +1,12 @@
+node_modules/
+videos/*/clips/round*/
+videos/*/clips/jobs.json
+videos/*/out/frames/
+videos/*/out/*.html
+videos/*/out/overlay*.png
+# reference contact sheets (frames of the original) and side-by-sides
+videos/*/out/*.jpg
+characters/*/anchors/*.mp4
+videos/*/bible/post.json
+videos/*/clips/rejected/
+videos/*/out/_screens/
