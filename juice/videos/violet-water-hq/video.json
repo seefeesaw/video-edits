@@ -38,10 +38,9 @@
       "K": {
         "desc": "a bright modern white kitchen in soft daylight: a white marble island counter with soft grey veins in the foreground, white shaker cabinets, a white range hood, a grey herringbone tile backsplash, a black pot-filler faucet and gold accents behind, a black range; airy, clean, softly out of focus behind; vertical phone camera at counter height",
         "props": [
-          "tumbler",
-          "iceballs"
+          "tumbler"
         ],
-        "layout": "The big empty clear glass travel tumbler with handle (flat stepped base, no stem) stands in the centre of the white marble counter, BIG: about 45% of the frame width, its rim at about 40% of the height and its base at about 88%. The kitchen (cabinets, range hood, herringbone backsplash, pot-filler) fills the background, softly out of focus. A few glossy translucent purple ice balls lie on the counter beside it."
+        "layout": "The big empty clear glass travel tumbler with handle (flat stepped base, no stem) stands in the centre of the white marble counter, BIG: about 45% of the frame width, its rim at about 40% of the height and its base at about 88%. The kitchen (cabinets, range hood, herringbone backsplash, pot-filler) fills the background, softly out of focus. NOTHING else on the counter: no ice balls, no fruit, no props."
       }
     }
   },
@@ -127,7 +126,7 @@
       "from": 0.2,
       "takes": 2,
       "keyframe": {
-        "prompt": "Eye-level front view at counter height. the clear glass tumbler with handle stands EMPTY in the centre of the white marble counter (its body from 30% to 70% of the frame width with the handle reaching 80%, its rim at about 45% of the height, its base at about 92%), a hand in a periwinkle blue-lavender ribbed-knit sleeve with white manicured nails holding its handle from the right, just setting it down. the bright white kitchen behind (white cabinets, white range hood, grey herringbone tile backsplash, black pot-filler faucet), softly out of focus."
+        "prompt": "Eye-level front view at counter height. the clear glass tumbler with handle stands EMPTY in the centre of the white marble counter (its body from 30% to 70% of the frame width with the handle reaching 80%, its rim at about 45% of the height, its base at about 92%), a hand in a periwinkle blue-lavender ribbed-knit sleeve with white manicured nails holding its handle from the right, just setting it down. the bright white kitchen behind (white cabinets, white range hood, grey herringbone tile backsplash, black pot-filler faucet), softly out of focus. Nothing else on the counter: no ice balls, no fruit."
       },
       "prompt": "The hand sets the empty glass tumbler down on the marble counter and lets go of the handle. Static camera.",
       "zoom": 1,
@@ -138,19 +137,29 @@
       "clip": "clips/s1.v2.mp4",
       "grade": {
         "r": [
-          1.2753,
-          -86.28
+          1.0302,
+          -52.9
         ],
         "g": [
-          1.0235,
-          -43.77
+          0.9321,
+          -38.84
         ],
         "b": [
-          1.0092,
-          -53.37
+          0.8606,
+          -36.01
         ],
         "clip": "clips/s1.v2.mp4"
-      }
+      },
+      "state": {
+        "start": "the big clear glass travel tumbler with handle (stepped narrower bottom, flat base) stands EMPTY on the counter; nothing else on the counter.",
+        "end": "the big clear glass travel tumbler with handle (stepped narrower bottom, flat base) stands EMPTY on the counter; the hand lets go."
+      },
+      "framing": "manual",
+      "reality": {
+        "s1.v2.mp4": 8,
+        "s1.mp4": 6
+      },
+      "pick": "manual"
     },
     {
       "id": "s2",
@@ -168,7 +177,11 @@
         0,
         0
       ],
-      "clip": "clips/s2.v2.mp4"
+      "clip": "clips/s2.v2.mp4",
+      "state": {
+        "start": "the clear rectangular container is full of about 40 glossy translucent purple ice balls (each about 3 cm, all the same size), held by a hand.",
+        "end": "the clear rectangular container is still full of about 40 glossy translucent purple ice balls (each about 3 cm, all the same size)."
+      }
     },
     {
       "id": "s3",
@@ -204,6 +217,10 @@
           -33.91
         ],
         "clip": "clips/s3.mp4"
+      },
+      "state": {
+        "start": "the big clear glass travel tumbler with handle (stepped narrower bottom, flat base) holds a few ice balls at the bottom; the container above it holds the rest of the about 40 glossy translucent purple ice balls (each about 3 cm, all the same size).",
+        "end": "the big clear glass travel tumbler with handle (stepped narrower bottom, flat base) is packed to the rim (a few heaped just above it, as when a glass is filled to overflowing) with about 40 glossy translucent purple ice balls (each about 3 cm, all the same size); the container is empty."
       }
     },
     {
@@ -364,6 +381,10 @@
           -30.09
         ],
         "clip": "clips/s8.v2.mp4"
+      },
+      "state": {
+        "start": "the 1-litre bottle of clear sparkling water stands alone on the counter, FULL (water up to the shoulder) and capped (the glass of ice is off-screen).",
+        "end": "the same bottle, still full, with its white cap unscrewed and in the hand."
       }
     },
     {
@@ -492,6 +513,14 @@
           -26.12
         ],
         "clip": "clips/s12.v2.mp4"
+      },
+      "state": {
+        "start": "the big clear glass travel tumbler with handle (stepped narrower bottom, flat base) is packed to the rim (a few heaped just above it, as when a glass is filled to overflowing) with about 40 glossy translucent purple ice balls (each about 3 cm, all the same size) and no liquid; the open bottle, full, starts to pour.",
+        "end": "the big clear glass travel tumbler with handle (stepped narrower bottom, flat base) is still packed to the rim (a few heaped just above it, as when a glass is filled to overflowing) with the same about 40 glossy translucent purple ice balls (each about 3 cm, all the same size); clear sparkling water has filled the gaps between them up to the rim, with white foam; the bottle is lower."
+      },
+      "reality": {
+        "s12.v2.mp4": 8,
+        "s12.mp4": 6
       }
     },
     {
@@ -595,7 +624,7 @@
       "from": 0.2,
       "takes": 2,
       "keyframe": {
-        "prompt": "Eye-level front view, close. the clear glass tumbler with handle filled with glossy translucent purple ice balls in shimmering translucent lavender-violet sparkling water swirling with fine purple edible glitter, a lighter pinkish-lilac layer at the very bottom stands in the centre behind; two hands in periwinkle blue-periwinkle blue-lavender ribbed-knit sleeves with white nails hold a small round clear jar with a black screw lid, filled with shimmering purple edible drink glitter, up in front of the glass at its middle (the jar from 38% to 62% of the width, about 55% of the height). the bright white kitchen behind (white cabinets, white range hood, grey herringbone tile backsplash, black pot-filler faucet), softly out of focus."
+        "prompt": "Eye-level front view, close. the clear glass tumbler with handle PACKED FROM THE BOTTOM TO THE RIM with glossy translucent purple ice balls (no gaps of plain liquid) in shimmering translucent lavender-violet sparkling water swirling with fine purple edible glitter stands in the centre behind; two hands in periwinkle blue-periwinkle blue-lavender ribbed-knit sleeves with white nails hold a small round clear jar with a black screw lid, filled with shimmering purple edible drink glitter, up in front of the glass at its middle (the jar from 38% to 62% of the width, about 55% of the height). the bright white kitchen behind (white cabinets, white range hood, grey herringbone tile backsplash, black pot-filler faucet), softly out of focus."
       },
       "prompt": "The two hands hold the jar of purple glitter steady in front of the glass, turning it very slightly so the glitter sparkles. Static camera.",
       "zoom": 1,
@@ -603,22 +632,31 @@
         0,
         0
       ],
-      "clip": "clips/s16.v2.mp4",
+      "clip": "clips/s16.mp4",
       "grade": {
         "r": [
-          1.4245,
-          -107.45
+          1.3342,
+          -93.96
         ],
         "g": [
-          1.2059,
-          -70.75
+          1.1348,
+          -60.7
         ],
         "b": [
-          1.1063,
-          -69.73
+          1.0295,
+          -51.91
         ],
-        "clip": "clips/s16.v2.mp4"
-      }
+        "clip": "clips/s16.mp4"
+      },
+      "state": {
+        "start": "the big clear glass travel tumbler with handle (stepped narrower bottom, flat base) packed to the rim (a few heaped just above it, as when a glass is filled to overflowing) with the same about 40 glossy translucent purple ice balls (each about 3 cm, all the same size) in clear sparkling water up to the rim; two hands hold the closed glitter jar in front of it.",
+        "end": "the same, unchanged; the glitter jar is still closed."
+      },
+      "reality": {
+        "s16.mp4": 10,
+        "s16.v2.mp4": 10
+      },
+      "pick": "manual"
     },
     {
       "id": "s17",
@@ -629,7 +667,7 @@
       "takes": 2,
       "seconds": 4,
       "keyframe": {
-        "prompt": "Top-down view straight into the glass tumbler, which fills the frame: round glossy translucent purple ice balls floating in shimmering translucent lavender-violet sparkling water swirling with fine purple edible glitter, a lighter pinkish-lilac layer at the very bottom. A hand in a periwinkle blue-lavender ribbed-knit sleeve with white nails holds the open round jar of shimmering purple edible glitter tilted over the drink at the right; the black lid is held by the other hand at the top-left."
+        "prompt": "Top-down view straight into the glass tumbler, which fills the frame: round glossy translucent purple ice balls floating in shimmering translucent lavender-violet sparkling water swirling with fine purple edible glitter. A hand in a periwinkle blue-lavender ribbed-knit sleeve with white nails holds the open round jar of shimmering purple edible glitter tilted over the drink at the right; the black lid is held by the other hand at the top-left."
       },
       "prompt": "One continuous take from above. 0-1.5 s: the hand tips the open jar and a sparkling shower of fine purple edible glitter falls over the purple ice balls and the drink, the glitter catching the light. 1.5-4 s: a long clear glass straw comes down into the drink and stirs, swirling the glitter into a shimmering lavender-violet whirl full of sparkles. Static camera.",
       "zoom": 1.2,
@@ -638,8 +676,31 @@
         0
       ],
       "framing": "manual",
-      "clip": "clips/s17.mp4",
-      "pick": "manual"
+      "clip": "clips/s17.v2.mp4",
+      "pick": "manual",
+      "state": {
+        "start": "seen from straight above: the top of the big clear glass travel tumbler with handle (stepped narrower bottom, flat base), packed with the same ice balls in clear water up to the rim; the glitter jar is opened.",
+        "end": "seen from above: the same packed ice balls, glitter sprinkled in and stirred with the glass straw so the water between the balls shimmers lavender."
+      },
+      "reality": {
+        "s17.v2.mp4": 6,
+        "s17.mp4": 5
+      },
+      "grade": {
+        "r": [
+          1.3059,
+          -58.14
+        ],
+        "g": [
+          1.0288,
+          -14.27
+        ],
+        "b": [
+          0.9668,
+          -6.45
+        ],
+        "clip": "clips/s17.v2.mp4"
+      }
     },
     {
       "id": "s18",
@@ -647,7 +708,7 @@
       "start": 10.25,
       "end": 10.9667,
       "takes": 0,
-      "clip": "clips/s17.mp4",
+      "clip": "clips/s17.v2.mp4",
       "from": 0.65,
       "zoom": 1,
       "pan": [
@@ -658,18 +719,18 @@
       "notes": "jump cut: later in s17's take",
       "grade": {
         "r": [
-          1.5196,
-          -112.36
+          1.2998,
+          -61.78
         ],
         "g": [
-          1.3387,
-          -80.91
+          1.2044,
+          -47.42
         ],
         "b": [
-          0.9553,
-          -16.92
+          0.8661,
+          10.55
         ],
-        "clip": "clips/s17.mp4"
+        "clip": "clips/s17.v2.mp4"
       }
     },
     {
@@ -678,7 +739,7 @@
       "start": 10.9667,
       "end": 11.8,
       "takes": 0,
-      "clip": "clips/s17.mp4",
+      "clip": "clips/s17.v2.mp4",
       "from": 1.7,
       "zoom": 1.2,
       "pan": [
@@ -689,18 +750,18 @@
       "notes": "jump cut: later in s17's take",
       "grade": {
         "r": [
-          1.4309,
-          -86.61
+          1.322,
+          -77.33
         ],
         "g": [
-          1.2426,
-          -51.81
+          1.1758,
+          -58.3
         ],
         "b": [
-          0.8786,
-          9.61
+          0.801,
+          10.97
         ],
-        "clip": "clips/s17.mp4"
+        "clip": "clips/s17.v2.mp4"
       }
     },
     {
@@ -708,10 +769,10 @@
       "set": "K",
       "start": 11.8,
       "end": 12.35,
-      "from": 0.2,
+      "from": 0.05,
       "takes": 2,
       "keyframe": {
-        "prompt": "Eye-level front view. the clear glass tumbler with handle on the white marble counter in the centre (body from 25% to 70% of the width, rim at about 30% of the height, base at about 90%), full of glossy translucent purple ice balls in shimmering translucent lavender-violet sparkling water swirling with fine purple edible glitter, a lighter pinkish-lilac layer at the very bottom; a hand in a periwinkle blue-lavender ribbed-knit sleeve holds a long clear glass straw that stands in the drink. the bright white kitchen behind (white cabinets, white range hood, grey herringbone tile backsplash, black pot-filler faucet), softly out of focus."
+        "prompt": "Eye-level front view. the clear glass tumbler with handle on the white marble counter in the centre (body from 25% to 70% of the width, rim at about 30% of the height, base at about 90%), PACKED FROM THE BOTTOM TO THE RIM with glossy translucent purple ice balls (no gaps of plain liquid) in shimmering translucent lavender-violet sparkling water swirling with fine purple edible glitter; a hand in a periwinkle blue-lavender ribbed-knit sleeve holds a long clear glass straw that stands in the drink. the bright white kitchen behind (white cabinets, white range hood, grey herringbone tile backsplash, black pot-filler faucet), softly out of focus."
       },
       "prompt": "The hand stirs the drink slowly with the glass straw; the lavender-violet water sparkles and swirls with fine glitter and the ice spheres turn. Static camera.",
       "zoom": 1,
@@ -719,22 +780,31 @@
         0,
         0
       ],
-      "clip": "clips/s20.v2.mp4",
+      "clip": "clips/s20.mp4",
       "grade": {
         "r": [
-          1.3723,
-          -113.22
+          1.1923,
+          -75.95
         ],
         "g": [
-          1.0108,
-          -49.58
+          1.0261,
+          -53.31
         ],
         "b": [
-          0.9466,
-          -45.78
+          0.889,
+          -37.04
         ],
-        "clip": "clips/s20.v2.mp4"
-      }
+        "clip": "clips/s20.mp4"
+      },
+      "state": {
+        "start": "the big clear glass travel tumbler with handle (stepped narrower bottom, flat base) packed to the rim (a few heaped just above it, as when a glass is filled to overflowing) with the same about 40 glossy translucent purple ice balls (each about 3 cm, all the same size) in evenly shimmering lavender water (no layers), the glass straw standing in it.",
+        "end": "the same; the straw is stirred once; nothing else changes."
+      },
+      "reality": {
+        "s20.mp4": 6,
+        "s20.v2.mp4": 5
+      },
+      "pick": "manual"
     },
     {
       "id": "s21",
@@ -742,7 +812,7 @@
       "start": 12.35,
       "end": 12.95,
       "takes": 0,
-      "clip": "clips/s20.v2.mp4",
+      "clip": "clips/s20.mp4",
       "from": 0.65,
       "zoom": 1.15,
       "pan": [
@@ -753,18 +823,18 @@
       "notes": "jump cut: later in s20's take",
       "grade": {
         "r": [
-          1.4215,
-          -118.12
+          1.2951,
+          -91.87
         ],
         "g": [
-          1.0645,
-          -55.73
+          1.1188,
+          -67.59
         ],
         "b": [
-          0.9469,
-          -43.05
+          0.9319,
+          -43.96
         ],
-        "clip": "clips/s20.v2.mp4"
+        "clip": "clips/s20.mp4"
       }
     },
     {
@@ -776,9 +846,9 @@
       "takes": 2,
       "seconds": 4,
       "keyframe": {
-        "prompt": "Eye-level front view. the clear glass tumbler with handle on the white marble counter in the centre (body from 28% to 68% of the width, rim at about 32% of the height, base at about 90%), full of glossy translucent purple ice balls in shimmering translucent lavender-violet sparkling water swirling with fine purple edible glitter, a lighter pinkish-lilac layer at the very bottom; a hand in a periwinkle blue-lavender ribbed-knit sleeve holds a natural bamboo lid with a straw hole just above the rim. the bright white kitchen behind (white cabinets, white range hood, grey herringbone tile backsplash, black pot-filler faucet), softly out of focus."
+        "prompt": "Eye-level front view. the big clear glass travel tumbler with handle (stepped narrower bottom, flat base) on the white marble counter in the centre (body from 28% to 68% of the width, rim at about 32% of the height, base at about 90%), PACKED FROM THE BOTTOM TO THE RIM with glossy translucent purple ice balls (no gaps of plain liquid) in evenly shimmering lavender water; the long clear glass straw stands upright in the drink, sticking up about 10 cm above the rim; a hand in a periwinkle blue-lavender ribbed-knit sleeve holds the natural bamboo lid just above the rim with the straw already threaded through the lid's straw hole. the bright white kitchen behind, softly out of focus."
       },
-      "prompt": "One continuous static take. 0-1 s: the hand sets the bamboo lid onto the tumbler. 1-2.5 s: the hand pushes the long clear glass straw down through the lid's straw hole. 2.5-4 s: the hand lets go and leaves the frame; the finished drink stands still.",
+      "prompt": "One continuous static take. 0-1.2 s: the hand lowers the bamboo lid down along the straw and presses it onto the rim of the tumbler; the straw stays standing in the drink, coming up through the lid's hole the whole time. 1.2-2.5 s: the hand pushes the straw a little further down through the hole. 2.5-4 s: the hand lets go and leaves the frame; the finished drink stands still with the straw sticking up through the lid. The ice balls stay packed and do not move.",
       "zoom": 1,
       "pan": [
         0,
@@ -789,18 +859,26 @@
       "pick": "manual",
       "grade": {
         "r": [
-          1.4797,
-          -120.88
+          1.4033,
+          -114.15
         ],
         "g": [
-          1.1366,
-          -59.32
+          1.0471,
+          -53.23
         ],
         "b": [
-          1.0245,
-          -48
+          0.9499,
+          -42.59
         ],
         "clip": "clips/s22.v2.mp4"
+      },
+      "state": {
+        "start": "the big clear glass travel tumbler with handle (stepped narrower bottom, flat base) packed to the rim (a few heaped just above it, as when a glass is filled to overflowing) with the same ~40 ice balls in evenly shimmering lavender water; the glass straw stands in the drink; a hand holds the bamboo lid above the rim with the straw through its hole.",
+        "end": "the bamboo lid rests on the heaped ice balls at the rim of the big clear glass travel tumbler with handle (stepped narrower bottom, flat base); the same glass straw sticks up through its hole; the same packed ice balls and lavender water to the rim."
+      },
+      "reality": {
+        "s22.v2.mp4": 4,
+        "s22.mp4": 2
       }
     },
     {
@@ -820,16 +898,16 @@
       "notes": "jump cut: later in s22's take",
       "grade": {
         "r": [
-          1.2886,
-          -83.11
+          1.2536,
+          -82.01
         ],
         "g": [
-          1.0315,
-          -32.15
+          0.9718,
+          -32.53
         ],
         "b": [
-          0.9121,
-          -23.61
+          0.897,
+          -28.2
         ],
         "clip": "clips/s22.v2.mp4"
       }
@@ -851,16 +929,16 @@
       "notes": "jump cut: later in s22's take",
       "grade": {
         "r": [
-          1.4366,
-          -111.04
+          1.3,
+          -88.43
         ],
         "g": [
-          1.1065,
-          -47.82
+          0.9967,
+          -35.26
         ],
         "b": [
-          1.0539,
-          -51.52
+          0.9566,
+          -39.67
         ],
         "clip": "clips/s22.v2.mp4"
       }
@@ -870,5 +948,11 @@
     "crf": 14,
     "preset": "slow",
     "sharpen": 0.4
-  }
+  },
+  "physics": [
+    "There are exactly about 40 glossy translucent purple ice balls (each about 3 cm, all the same size) in this video: first in the clear container, then all poured into the glass, where they stay packed from the bottom to the rim (a few heaped just above it) for the rest of the video — the glass never holds fewer, smaller or bigger balls.",
+    "Ice floats: once water fills the glass, the packed ice balls may lift slightly together as one block (leaving a thin water layer at the very bottom) or stay where the heap holds them; both are real. What must never happen: balls disappearing, multiplying, shrinking, growing or spreading apart.",
+    "The sparkling water is clear and colourless and fizzes with white foam while it is poured. The purple glitter, once sprinkled and stirred, shimmers through the water and tints it lavender; some glitter sparkles at the top, as glitter does.",
+    "The bottle is the only source of water: it is full and capped before it is opened, and its level drops only while it pours."
+  ]
 }

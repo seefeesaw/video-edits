@@ -21,6 +21,21 @@ refuses it up front). Quality comes from the rest: keyframes are drawn at native
 `"encode": {"crf": 14, "preset": "slow", "sharpen": 0.4}` (defaults crf 18 / medium / 0). A real upscale
 (Real-ESRGAN) needs a GPU: RunPod is not set up here.
 
+**REALITY RULE (standing user instruction): everything in the video must be physically possible and
+consistent, so it doesn't look AI-generated.** Ice poured into a glass stays in it (same count, same
+size); a level only changes while something is poured; labels, glasses and lids never morph; hands are
+real hands. Each camera setup is a separate generation and does not know what the others showed, so:
+- every keyframed shot gets `"state": {"start": "…", "end": "…"}` naming each container's contents
+  (counts, levels, open/closed, what is in which hand); a shot's start = the previous shot's end.
+  Video-specific laws go in top-level `"physics": [...]` (e.g. "the ~40 ice balls stay packed to the
+  rim for the rest of the video"). lib/reality.mjs adds the universal rules + the state to every
+  keyframe and Sora prompt;
+- `node reality.mjs videos/<name> --lint` (free) before Sora: states present, jump cuts never rewind a take;
+- `node reality.mjs videos/<name> --takes sN` ranks a setup's takes for physics violations (use with the
+  action check when picking);
+- `node reality.mjs videos/<name>` after the build checks the whole chain shot by shot with the vision
+  model (out/reality.json; exits 1 on a "high" violation). Fix every "high" one before delivering.
+
 ## One-shot recipe (YouTube Short URL → replica)
 
 1. **Review server**: start launch config `slideshow-review` (port 5179). It serves the pipelines and

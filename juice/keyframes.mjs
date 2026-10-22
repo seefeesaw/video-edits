@@ -18,6 +18,7 @@ import path from 'node:path';
 import { execSync, execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { greenBox, wholeDeviceIssue } from './build.mjs';
+import { realityText } from './lib/reality.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, '..', 'slideshow', 'foundry.json'), 'utf8'));
@@ -90,6 +91,9 @@ async function main() {
     const refs = [...(product.refs || []), ...bibleRefs, ...(s.keyframe.refs || [])].slice(0, 10).map((r) => path.join(dir, r));
     const prompt = [
       s.keyframe.prompt,
+      // the shot's exact physical state (counts, levels, open/closed) + the hard reality rules, so every
+      // first frame continues the previous shot's end instead of re-imagining the scene
+      realityText(spec, s, { still: true }),
       set ? `The place is EXACTLY the set reference image (same room, furniture, wall colours, lighting and props in the same places), only the camera distance/angle and the action change as described. Sizes and positions stated for THIS shot override the scale of the set image (a wide shot shows the product smaller than the set image does). Props must look exactly like their reference images: ${(set.props || []).map((p) => `${p}: ${spec.bible.props[p].desc}`).join('; ')}.` : '',
       spec.style,
       product.refs?.length ? `The product in the reference image(s) — ${product.name || 'the product'}${product.description ? `: ${product.description}` : ''} — must appear exactly as photographed: same shape, proportions, colour, glaze, lettering and handle. Do not redesign it.` : '',
